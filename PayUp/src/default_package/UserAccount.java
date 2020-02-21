@@ -45,20 +45,22 @@ public class UserAccount {
 		
 		try { 
 			
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database",true)));
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
 			wr.println(userName + "\t" + password);
 				
 			wr.close();	
 			} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
+		Login();
 		
 	}
 	
-	public static boolean Login() {
+	public static void Login() {
 		int lineNumber = 0;
 		String[] xaxis = new String[100];
 		String[] yaxis = new String[100];
+		boolean j = false;
 		
 		System.out.println("Please input your username:");
 		userName = userInput2.nextLine();
@@ -84,19 +86,20 @@ public class UserAccount {
 		String[] Finalxaxis = new String[lineNumber];
 		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
 		String[] Finalyaxis = new String[lineNumber];
-		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
 		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
-		
-		for (int i = 0; i < lineNumber; lineNumber++) {
+		for ( int k = 0; k < lineNumber; k++) {
+			System.out.println(Finalxaxis[k]);
+			System.out.println(Finalyaxis[k]);	
+		}
+		for (int i = 0; i < lineNumber; i++) {
 			if (userName == Finalxaxis[i] && password == Finalyaxis[i]) {
-				return true;
+				j = true;
 			} else {
-				return false;
+				System.out.println("You are not logged in");
 			}
 		}
-		
-	}
+		System.out.println(j);
 }
-
+}
 
 
