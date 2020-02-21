@@ -35,15 +35,17 @@ public class UserAccount {
 	}
 	
 	public static void Register() {
+		
+		int lineNumber = 0;
 
-
+		System.out.println("Register to PayUp");
 		System.out.println("Please choose a username:");
 		userName = userInput2.nextLine();
 		System.out.println("Please choose a password:");
 		password = userInput2.nextLine();
 		
 		
-		try { 
+		try { //This is for Registrating the users
 			
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
 			wr.println(userName + "\t" + password);
@@ -52,6 +54,26 @@ public class UserAccount {
 			} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
+		
+		
+		try { //This is for creating the object
+			
+			String sCurrentLine;
+			String[] uCurrent = new String [2];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+				System.out.println("This file does not exist");
+		}
+		UserAccount[] Users;
+		Users = new UserAccount[100];
+		for (int count1 = 0; count1 < lineNumber; lineNumber++ ) {
+			Users[count1] = new UserAccount();
+		}
+		
 		Login();
 		
 	}
@@ -62,6 +84,7 @@ public class UserAccount {
 		String[] yaxis = new String[100];
 		boolean j = false;
 		
+		System.out.println("Login into PayUp");
 		System.out.println("Please input your username:");
 		userName = userInput2.nextLine();
 		System.out.println("Please input your password:");
@@ -87,10 +110,7 @@ public class UserAccount {
 		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
 		String[] Finalyaxis = new String[lineNumber];
 		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
-		for ( int k = 0; k < lineNumber; k++) {
-			System.out.println(Finalxaxis[k]);
-			System.out.println(Finalyaxis[k]);	
-		}
+		
 		for (int i = 0; i < lineNumber; i++) {
 			if (userName == Finalxaxis[i] && password == Finalyaxis[i]) {
 				j = true;
@@ -99,6 +119,9 @@ public class UserAccount {
 			}
 		}
 		System.out.println(j);
+		if (j = true) {
+			splitExpense();
+		}
 }
 }
 
