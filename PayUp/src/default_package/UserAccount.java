@@ -8,6 +8,7 @@ public class UserAccount {
 	static String userName;
 	static String password;
 	static Scanner userInput1 = new Scanner(System.in);
+	static Scanner userInput2 = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -35,19 +36,17 @@ public class UserAccount {
 	
 	public static void Register() {
 
-		String UserN_PassW;
-		
+
 		System.out.println("Please choose a username:");
-		userName = userInput1.nextLine();
+		userName = userInput2.nextLine();
 		System.out.println("Please choose a password:");
-		password = userInput1.nextLine();
+		password = userInput2.nextLine();
 		
-		UserN_PassW = userName + "\t" + password;
 		
 		try { 
 			
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database",true)));
-			wr.println(UserN_PassW);
+			wr.println(userName + "\t" + password);
 				
 			wr.close();	
 			} catch (IOException e) {
@@ -62,9 +61,9 @@ public class UserAccount {
 		String[] yaxis = new String[100];
 		
 		System.out.println("Please input your username:");
-		userName = userInput1.nextLine();
+		userName = userInput2.nextLine();
 		System.out.println("Please input your password:");
-		password = userInput1.nextLine();
+		password = userInput2.nextLine();
 		
 		try {
 			String sCurrentLine;
@@ -89,7 +88,7 @@ public class UserAccount {
 		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
 		
 		for (int i = 0; i < lineNumber; lineNumber++) {
-			if ( userName == Finalxaxis[i] && password == Finalyaxis[i]) {
+			if (userName == Finalxaxis[i] && password == Finalyaxis[i]) {
 				return true;
 			} else {
 				return false;
@@ -98,5 +97,6 @@ public class UserAccount {
 		
 	}
 }
+
 
 
