@@ -4,14 +4,15 @@ import java.util.*;
 
 
 public class UserAccount {
-	private int userId;
 	static String userName;
 	private static String password;
 	private static String typeOfAccount;
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
 	static Scanner userInput3 = new Scanner(System.in);
-	int userID = 0;
+	private static int userID;
+	static UserAccount[] UserAcc = new UserAccount[100];
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -47,23 +48,25 @@ public class UserAccount {
 		userName = userInput2.nextLine();
 		System.out.println("Please choose a password:");
 		password = userInput2.nextLine();
-		
-		//UserAccount newUser = new User(userName, password);
-		
-		
-		try { //This is for Registrating the users
+			
+		try { //This is for Registration of the users
 			
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
 			wr.println(userName + "\t" + password + "\t" + typeOfAccount + "\t" + userID);
-			
+			userID++;
 			wr.close();	
 			} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
-		userID++;	
+		UserAcc("Sjoerd", "Hoi");
 		Login();	
 	}
 	
+	public static void UserAcc (String userName, String password) {
+		String name = userName;
+		String passw = password;
+		
+	}
 	public static boolean Login() {
 		int lineNumber = 0;
 		String[] xaxis = new String[100];
@@ -104,7 +107,7 @@ public class UserAccount {
 			} 
 		}
 		return j;
-}
+	}
 }
 
 
