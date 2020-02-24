@@ -43,7 +43,7 @@ public class UserAccount {
 		System.out.println("Please choose a password:");
 		password = userInput2.nextLine();
 		
-		//User newUser = new User(userName, password);
+		//UserAccount newUser = new User(userName, password);
 		
 		
 		try { //This is for Registrating the users
@@ -61,7 +61,7 @@ public class UserAccount {
 		
 	}
 	
-	public static void Login() {
+	public static boolean Login() {
 		int lineNumber = 0;
 		String[] xaxis = new String[100];
 		String[] yaxis = new String[100];
@@ -100,10 +100,7 @@ public class UserAccount {
 				break;
 			} 
 		}
-		
-		//if (j = true) {
-		//	splitExpense();
-		//}
+		return j;
 }
 }
 
