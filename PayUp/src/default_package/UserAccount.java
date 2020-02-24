@@ -4,11 +4,12 @@ import java.util.*;
 
 
 public class UserAccount {
-	int userId;
+	private int userId;
 	static String userName;
-	static String password;
+	private static String password;
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -35,14 +36,14 @@ public class UserAccount {
 	}
 	
 	public static void Register() {
-		
-		int lineNumber = 0;
 
 		System.out.println("Register to PayUp");
 		System.out.println("Please choose a username:");
 		userName = userInput2.nextLine();
 		System.out.println("Please choose a password:");
 		password = userInput2.nextLine();
+		
+		//User newUser = new User(userName, password);
 		
 		
 		try { //This is for Registrating the users
@@ -54,25 +55,7 @@ public class UserAccount {
 			} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
-		
-		
-		try { //This is for creating the object
-			
-			String sCurrentLine;
-			String[] uCurrent = new String [2];
-			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-			while ((sCurrentLine = myFile.readLine()) != null) {
-				lineNumber++;
-			}
-			myFile.close(); 
-		}catch (IOException e) {
-				System.out.println("This file does not exist");
-		}
-		UserAccount[] Users;
-		Users = new UserAccount[100];
-		for (int count1 = 0; count1 < lineNumber; lineNumber++ ) {
-			Users[count1] = new UserAccount();
-		}
+
 		
 		Login();
 		
@@ -112,17 +95,17 @@ public class UserAccount {
 		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
 		
 		for (int i = 0; i < lineNumber; i++) {
-			if (userName == Finalxaxis[i] && password == Finalyaxis[i]) {
+			if (userName.equals(Finalxaxis[i]) && password.equals(Finalyaxis[i])) {
 				j = true;
-			} else {
-				System.out.println("You are not logged in");
-			}
+				break;
+			} 
 		}
-		System.out.println(j);
-		if (j = true) {
-			splitExpense();
-		}
+		
+		//if (j = true) {
+		//	splitExpense();
+		//}
 }
 }
+
 
 
