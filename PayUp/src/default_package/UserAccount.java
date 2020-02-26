@@ -81,14 +81,14 @@ public class UserAccount {
 		System.out.println("Do you want to register as a (R) Regular User or (A) Admin?");
 		char typeOfAccount = userInput3.next().charAt(0);
 		System.out.println("Please choose a username:");
-		String userName = userInput2.nextLine();
+		String Un = userInput2.nextLine();
 		System.out.println("Please choose a password:");
-		String password = userInput2.nextLine();
+		String Pw = userInput2.nextLine();
 
 		try { //This is for Registration of the users
 
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
-			wr.println(userName + "\t" + password + "\t" + typeOfAccount + "\t" + userID);
+			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + userID);
 			userID++;
 			wr.close();	
 		} catch (IOException e) {
@@ -103,12 +103,15 @@ public class UserAccount {
 		String[] xaxis = new String[100];
 		String[] yaxis = new String[100];
 		boolean j = false;
+		String Un;
+		String Pw;
+				
 
 		System.out.println("Login into PayUp");
 		System.out.println("Please input your username:");
-		userName = userInput2.nextLine();
+		Un = userInput2.nextLine();
 		System.out.println("Please input your password:");
-		password = userInput2.nextLine();
+		Pw = userInput2.nextLine();
 
 		try {
 			String sCurrentLine;
@@ -132,7 +135,7 @@ public class UserAccount {
 		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
 
 		for (int i = 0; i < lineNumber; i++) {
-			if (userName.equals(Finalxaxis[i]) && password.equals(Finalyaxis[i])) {
+			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
 				j = true;
 				System.out.println("Login successful");
 				break;
