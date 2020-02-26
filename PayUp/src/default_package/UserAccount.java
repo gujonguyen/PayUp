@@ -72,10 +72,31 @@ public class UserAccount {
 		Login();	
 	}
 	
-	public static void UserAcc (String userName, String password) {
-		String name = userName;
-		String passw = password;
+	public UserAccount[] readfile() {
 		
+		int lineNumber = 0;
+		String[] xaxis = new String[100];
+		String[] yaxis = new String[100];
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [2];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
+
+				xaxis[lineNumber] = uCurrent[0];
+				yaxis[lineNumber] = uCurrent[1];
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+				System.out.println("This file does not exist");
+		}
+		
+		String[] UserAccount = new String[lineNumber];
+		System.arraycopy(UserAccount, 0, Finalxaxis, 0, lineNumber);
+		
+		return UserAccount[];	
 	}
 	public static boolean Login() {
 		int lineNumber = 0;
