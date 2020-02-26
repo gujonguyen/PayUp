@@ -9,10 +9,8 @@ import java.util.Scanner;
 public class AdministratorAccount extends UserAccount{
 	private final String username = "admin";
 	private final String password = "admin";
-	private int lineNumber;
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
-	private static String line;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -20,9 +18,11 @@ public class AdministratorAccount extends UserAccount{
 		int adminChoice = getAdminChoice();
 		switch (adminChoice) {
 		case 1:
+			viewUsers();
+		case 2:
 			RemoveUsers();
 			break;
-		case 2:
+		case 3:
 			RemoveList();
 			break;
 		}
@@ -45,38 +45,51 @@ public class AdministratorAccount extends UserAccount{
 	public String getPassword() {
 		return password;
 	}
+	String filename = "temp.txt";
 
-	public static String[] RemoveUsers() {
-		int lineNumber = 0;
+	public static void viewUsers() {
+		int i = 0;
 		String[] xAxis = new String[100];
+		String[] yAxis = new String[100];
+		System.out.println("");
+		System.out.println("The list of users on PayUp");
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Username:");
+		System.out.println("----------------------------------------------------------------");
 		
-		System.out.println("Choose a user from the list you wish to remove from PayUp:");
-		System.out.println("----------------------------------------------------------------");
-		System.out.println(" Username");
-		System.out.println("----------------------------------------------------------------");
-
 		try {
 			String sCurrentLine;
 			String[] uCurrentLine = new String[2];
 			BufferedReader br = new BufferedReader (new FileReader ("User_database.txt"));
+			
 			while ((sCurrentLine = br.readLine()) != null) {
-				uCurrentLine = sCurrentLine.split("\t");
-				xAxis[lineNumber] = (uCurrentLine[0]);
-				lineNumber++;
+				uCurrentLine = sCurrentLine.split(",");
+				xAxis[i] = (uCurrentLine[0]);
+				yAxis[i] = (uCurrentLine[0]);
+				i++;
+			}
+			
+			for(int k = 0; k<5; k++) {
+				System.out.println(xAxis[k]);
 			}
 			br.close();
 		} catch (IOException e) {
 			System.out.println("The file does not exist!");
 		}
-		String[] username = new String [lineNumber];
-		System.arraycopy(xAxis, 0, username, 0, lineNumber);
-		return username;
+		String[] username = new String [i];
+		System.arraycopy(xAxis, 0, username, 0, i);
+		return;
+	}
+
+	public static void RemoveUsers() {
+	System.out.println("Input a username you wish to remove:");
+	String userName = userInput2.nextLine();
+	
 	}
 	
-
-				
-	public static void RemoveList() {
-
+		public static void RemoveList() {
+			
+			
+		}
 	}
 
-}
