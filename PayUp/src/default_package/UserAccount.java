@@ -25,16 +25,21 @@ public class UserAccount {
 		case 2:
 		Login();
 		break;
+		case 3:
+		AdminLogin();
+		break;
 		}
 		}
 		// This method asks and returns what the user wants to do
 		
 	public static int getUserChoice(){
-		System.out.println("What do you wan to do?");
+		System.out.println("Welcome to your PayUp homepage!");
+		System.out.println("What do you wish to do?");
 		System.out.println("(1) Register your account");
-		System.out.println("(2) Login into account");
+		System.out.println("(2) Login as a regular account");
+		System.out.println("(3) Login as an administrator ");
 		System.out.println("****************************************************************");
-		System.out.print("Please enter your choice (1 or 2): ");
+		System.out.print("Please enter your choice (1, 2 or 3): ");	
 		return userInput1.nextInt();
 	}
 	
@@ -48,6 +53,11 @@ public class UserAccount {
 		userName = userInput2.nextLine();
 		System.out.println("Please choose a password:");
 		password = userInput2.nextLine();
+		
+		//UserAccount newUser = new User(userName, password);
+	
+		System.out.println("You are now registered as a member at PayUp!");
+		System.out.println("");
 			
 		try { //This is for Registration of the users
 			
