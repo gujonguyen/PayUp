@@ -1,37 +1,44 @@
 package default_package;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-public class Expense {
-	static String expenseName;
-	static String expenseDate;
-	static double amount;
-	List belongsToList = new List(); //every expense needs to belong to a list
-	List [] participants = new List[2];
-	UserAccount[] temp = UserAccount.readFile();
 
-	public static double splitExpense() {
+public class UserAccount {
+	String userName;
+	String password;
+	String typeOfAccount;
+	static Scanner userInput1 = new Scanner(System.in);
+	static Scanner userInput2 = new Scanner(System.in);
+	static Scanner userInput3 = new Scanner(System.in);
+	int userID = 0;
+
+	public UserAccount(String name, String pass, String role, int count) {
+		userName = name;
+		password = pass;
+		typeOfAccount = role;
+		userID = count;
+		
+	}
+
+	public static UserAccount[] readFile() {
 		int lineNumber = 0;
-		String[] c1 = new String[100];
-		String[] c2 = new String[100];
-		String[] c3 = new String[100];
-		String[] c4 = new String[100];
-		String[] c5 = new String[100];
-		double tempSum = 0;
+		String[] aaxis = new String[100];
+		String[] baxis = new String[100];
+		String[] caxis = new String[100];
+		String[] daxis = new String[100];
+		
 		try {
 			String sCurrentLine;
-			String[] uCurrent = new String [5];
-			BufferedReader myFile = new BufferedReader (new FileReader("Expense_database.txt")); 
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				c1[lineNumber] = uCurrent[0];
-				c2[lineNumber] = uCurrent[1];
-				c3[lineNumber] = uCurrent[2];
-				c4[lineNumber] = uCurrent[3];
-				c5[lineNumber] = uCurrent[4];
+				aaxis[lineNumber] = uCurrent[0];
+				baxis[lineNumber] = uCurrent[1];
+				caxis[lineNumber] = uCurrent[2];
+				daxis[lineNumber] = uCurrent[3];
+				
 				lineNumber++;
 			}
 			myFile.close(); 
@@ -39,30 +46,119 @@ public class Expense {
 			System.out.println("This file does not exist");
 		}
 
-		String[] Finalc1 = new String[lineNumber];
-		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
-		String[] Finalc2 = new String[lineNumber];
-		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-		String[] Finalc3 = new String[lineNumber];
-		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
-		String[] Finalc4 = new String[lineNumber];
-		System.arraycopy(c4, 0, Finalc4, 0, lineNumber);
-		String[] Finalc5 = new String[lineNumber];
-		System.arraycopy(c5, 0, Finalc5, 0, lineNumber);
+		String[] Finalaaxis = new String[lineNumber];
+		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
+		String[] Finalbaxis = new String[lineNumber];
+		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
+		String[] Finalcaxis = new String[lineNumber];
+		System.arraycopy(caxis, 0, Finalcaxis, 0, lineNumber);
+		String[] Finaldaxis = new String[lineNumber];
+		System.arraycopy(daxis, 0, Finaldaxis, 0, lineNumber);
 		
-		double[] amount = new double[Finalc3.length];
-		for (int i = 0; i < Finalc3.length; i++) {
-			amount[i] = Double.parseDouble(Finalc3[i]);
-		}
+		UserAccount user[] = new UserAccount[Finalaaxis.length];
 		
-		for (int i = 0; i < Finalc1.length; i++) {
-			if (UserAccount.userName.equals(Finalc5[i])) {
-				tempSum += amount [i]/2;
-			}
-			else {
-				tempSum -= amount [i]/2;
-			}
+		for (int i = 0; i < Finalaaxis.length; i++) {
+			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i], Finaldaxis[i]);
+		}		
+		return user;
+	}
+	
+	public UserAccount() {
+		int userChoice = getUserChoice();
+		switch (userChoice) {
+		case 1:
+			Register();
+			break;
+		case 2:
+			Login();
+			break;
 		}
-		return tempSum;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new UserAccount();
+
+		
+	}
+	// This method asks and returns what the user wants to do
+
+	public static int getUserChoice(){
+		System.out.println("What do you wan to do?");
+		System.out.println("(1) Register your account");
+		System.out.println("(2) Login into account");
+		System.out.println("****************************************************************");
+		System.out.print("Please enter your choice (1 or 2): ");
+		return userInput1.nextInt();
+	}
+
+	public void Register() {
+		int UserID = 0;
+		
+		
+		System.out.println("Register to PayUp");
+		System.out.println("Do you want to register as a (R) Regular User or (A) Admin?");
+		String typeOfAccount = userInput3.nextLine();
+		System.out.println("Please choose a username:");
+		String Un = userInput2.nextLine();
+		System.out.println("Please choose a password:");
+		String Pw = userInput2.nextLine();
+
+		try { //This is for Registration of the users
+
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
+			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + UserID);
+			UserID++;
+			wr.close();	
+		} catch (IOException e) {
+			System.out.println("I/O error when writing on file");
+		}
+		getUserChoice();	
+	}
+
+	
+	public boolean Login() {
+		int lineNumber = 0;
+		String[] xaxis = new String[100];
+		String[] yaxis = new String[100];
+		boolean j = false;
+		String Un;
+		String Pw;
+				
+
+		System.out.println("Login into PayUp");
+		System.out.println("Please input your username:");
+		Un = userInput2.nextLine();
+		System.out.println("Please input your password:");
+		Pw = userInput2.nextLine();
+
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [2];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
+
+				xaxis[lineNumber] = uCurrent[0];
+				yaxis[lineNumber] = uCurrent[1];
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not exist");
+		}
+
+		String[] Finalxaxis = new String[lineNumber];
+		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
+		String[] Finalyaxis = new String[lineNumber];
+		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
+
+		for (int i = 0; i < lineNumber; i++) {
+			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
+				j = true;
+				System.out.println("Login successful");
+				break;
+			} 
+		}
+		return j;
 	}
 }
