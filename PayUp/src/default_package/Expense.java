@@ -10,6 +10,7 @@ public class Expense {
 	static double amount;
 	List belongsToList = new List(); //every expense needs to belong to a list
 	List [] participants = new List[2];
+	UserAccount[] temp = UserAccount.readFile();
 
 	public static double splitExpense() {
 		int lineNumber = 0;
