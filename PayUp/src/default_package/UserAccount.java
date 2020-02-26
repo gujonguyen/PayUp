@@ -10,7 +10,7 @@ public class UserAccount {
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
 	static Scanner userInput3 = new Scanner(System.in);
-	static int userID = 1;
+	int userID = 0;
 
 	public UserAccount(String name, String pass) {
 		userName = name;
@@ -51,9 +51,7 @@ public class UserAccount {
 		return user;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public UserAccount() {
 		int userChoice = getUserChoice();
 		switch (userChoice) {
 		case 1:
@@ -63,6 +61,12 @@ public class UserAccount {
 			Login();
 			break;
 		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new UserAccount();
+
+		
 	}
 	// This method asks and returns what the user wants to do
 
@@ -75,8 +79,10 @@ public class UserAccount {
 		return userInput1.nextInt();
 	}
 
-	public static void Register() {
-
+	public void Register() {
+		int UserID = 0;
+		
+		
 		System.out.println("Register to PayUp");
 		System.out.println("Do you want to register as a (R) Regular User or (A) Admin?");
 		char typeOfAccount = userInput3.next().charAt(0);
@@ -88,8 +94,8 @@ public class UserAccount {
 		try { //This is for Registration of the users
 
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
-			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + userID);
-			userID++;
+			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + UserID);
+			UserID++;
 			wr.close();	
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
@@ -98,7 +104,7 @@ public class UserAccount {
 	}
 
 	
-	public static boolean Login() {
+	public boolean Login() {
 		int lineNumber = 0;
 		String[] xaxis = new String[100];
 		String[] yaxis = new String[100];
