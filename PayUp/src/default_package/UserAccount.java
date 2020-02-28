@@ -12,11 +12,18 @@ import java.util.*;
 		static Scanner userInput2 = new Scanner(System.in);
 		static Scanner userInput3 = new Scanner(System.in);
 		int userID = 0;
+		String loggedUser;
 
 	public UserAccount(String name, String pass, String role) {
 		userName = name;
 		password = pass;
 		typeOfAccount = role;
+		
+	}
+	
+	public UserAccount(String loggedInUser) {
+		userName = loggedInUser;
+		
 		
 	}
 
@@ -57,19 +64,21 @@ import java.util.*;
 		
 		UserAccount user[] = new UserAccount[Finalaaxis.length];
 		
-		for (int i = 0; i < Finalaaxis.length; i++) {//creates the object and returns it to the constructor
+		for (int i = 0; i < Finalaaxis.length; i++) {
 			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i]);
 		}		
 		return user;
 	}
 	
 	public UserAccount() {
+		
 		int userChoice = getUserChoice();
 		switch (userChoice) {
 		case 1:
 			Register();
 		case 2:
 			Login();
+			
 		}
 	}
 	public static void main(String[] args) {
@@ -114,11 +123,11 @@ import java.util.*;
 	}
 
 	
-	public boolean Login() {
+	public Boolean Login() {
 		int lineNumber = 0;
+		boolean j = false;
 		String[] xaxis = new String[100];
 		String[] yaxis = new String[100];
-		boolean j = false;
 		String Un;
 		String Pw;
 				
@@ -152,16 +161,25 @@ import java.util.*;
 
 		for (int i = 0; i < lineNumber; i++) {
 			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
-				j = true;
 				System.out.println("Login successful");
+				j = true;
 				break;
-			} 
+			}
 		}
+		Un = loggedUser;
+		
 		return j;
 	}
 	
+	public UserAccount[] passUserName() {
+		UserAccount loggedInUser[] = new UserAccount[1];
+		
+		loggedInUser[0] = new UserAccount(loggedUser);
+		return loggedInUser;
+	}
 	
-	public int readfile1() {//increments the user ID
+	
+	public int readfile1() {
 		int lineNumber = 0;
 		try {
 			String sCurrentLine;
