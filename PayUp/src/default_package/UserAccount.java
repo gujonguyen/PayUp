@@ -6,31 +6,39 @@ import java.util.*;
 public class UserAccount {
 	String userName;
 	String password;
-	char typeOfAccount;
+	String typeOfAccount;
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
 	static Scanner userInput3 = new Scanner(System.in);
 	int userID = 0;
 
-	public UserAccount(String name, String pass) {
+	public UserAccount(String name, String pass, String role, int count) {
 		userName = name;
 		password = pass;
+		typeOfAccount = role;
+		userID = count;
+		
 	}
 
 	public static UserAccount[] readFile() {
 		int lineNumber = 0;
-		String[] xaxis = new String[100];
-		String[] yaxis = new String[100];
+		String[] aaxis = new String[100];
+		String[] baxis = new String[100];
+		String[] caxis = new String[100];
+		int[] daxis = new int[100];
 		
 		try {
 			String sCurrentLine;
-			String[] uCurrent = new String [2];
+			String[] uCurrent = new String [4];
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				xaxis[lineNumber] = uCurrent[0];
-				yaxis[lineNumber] = uCurrent[1];
+				aaxis[lineNumber] = uCurrent[0];
+				baxis[lineNumber] = uCurrent[1];
+				caxis[lineNumber] = uCurrent[2];
+				daxis[lineNumber] = Integer.parseInt(uCurrent[3]);
+				
 				lineNumber++;
 			}
 			myFile.close(); 
@@ -38,15 +46,19 @@ public class UserAccount {
 			System.out.println("This file does not exist");
 		}
 
-		String[] Finalxaxis = new String[lineNumber];
-		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
-		String[] Finalyaxis = new String[lineNumber];
-		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
+		String[] Finalaaxis = new String[lineNumber];
+		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
+		String[] Finalbaxis = new String[lineNumber];
+		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
+		String[] Finalcaxis = new String[lineNumber];
+		System.arraycopy(caxis, 0, Finalcaxis, 0, lineNumber);
+		int[] Finaldaxis = new int[lineNumber];
+		System.arraycopy(daxis, 0, Finaldaxis, 0, lineNumber);
 		
-		UserAccount user[] = new UserAccount[Finalxaxis.length];
+		UserAccount user[] = new UserAccount[Finalaaxis.length];
 		
-		for (int i = 0; i < Finalxaxis.length; i++) {
-			user[i] = new UserAccount(Finalxaxis[i], Finalyaxis[i]);
+		for (int i = 0; i < Finalaaxis.length; i++) {
+			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i], Finaldaxis[i]);
 		}		
 		return user;
 	}
@@ -85,7 +97,7 @@ public class UserAccount {
 		
 		System.out.println("Register to PayUp");
 		System.out.println("Do you want to register as a (R) Regular User or (A) Admin?");
-		char typeOfAccount = userInput3.next().charAt(0);
+		String typeOfAccount = userInput3.nextLine();
 		System.out.println("Please choose a username:");
 		String Un = userInput2.nextLine();
 		System.out.println("Please choose a password:");
@@ -150,3 +162,4 @@ public class UserAccount {
 		return j;
 	}
 }
+
