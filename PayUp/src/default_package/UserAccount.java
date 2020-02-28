@@ -68,10 +68,8 @@ public class UserAccount {
 		switch (userChoice) {
 		case 1:
 			Register();
-			break;
 		case 2:
 			Login();
-			break;
 		}
 	}
 	public static void main(String[] args) {
