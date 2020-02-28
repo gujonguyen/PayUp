@@ -12,21 +12,14 @@ import java.util.*;
 		static Scanner userInput2 = new Scanner(System.in);
 		static Scanner userInput3 = new Scanner(System.in);
 		int userID = 0;
-		static String loggedUser;
+		
 
 	public UserAccount(String name, String pass, String role) {
 		userName = name;
 		password = pass;
-		typeOfAccount = role;
-		
+		typeOfAccount = role;	
 	}
 	
-	public UserAccount(String loggedInUser) {
-		userName = loggedInUser;
-		
-		
-	}
-
 	public static UserAccount[] readFile() {
 		int lineNumber = 0;
 		String[] aaxis = new String[100];
@@ -77,8 +70,8 @@ import java.util.*;
 		case 1:
 			Register();
 		case 2:
-			Login();
-			List.directToChoice();
+			String curretUser = Login();
+			List.directToChoice(curretUser);
 			break;
 			}
 		}
@@ -126,14 +119,13 @@ import java.util.*;
 	}
 
 	
-	public Boolean Login() {
+	public String Login() {
 		int lineNumber = 0;
-		boolean j = false;
 		String[] xaxis = new String[100];
 		String[] yaxis = new String[100];
 		String Un;
 		String Pw;
-				
+		String currentUser = null;		
 
 		System.out.println("Login into PayUp");
 		System.out.println("Please input your username:");
@@ -165,20 +157,12 @@ import java.util.*;
 		for (int i = 0; i < lineNumber; i++) {
 			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
 				System.out.println("Login successful");
-				j = true;
+				currentUser = Un;
 				break;
 			}
 		}
-		Un = loggedUser;
-		
-		return j;
+		return currentUser;
 	}
-	
-	public static UserAccount passUserName() {
-		UserAccount loggedInUser = new UserAccount(loggedUser);
-		return loggedInUser;
-	}
-	
 	
 	public int readfile1() {
 		int lineNumber = 0;
@@ -195,6 +179,7 @@ import java.util.*;
 		return lineNumber;
 	}
 }
+
 
 
 
