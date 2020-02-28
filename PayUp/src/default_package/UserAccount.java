@@ -12,7 +12,7 @@ import java.util.*;
 		static Scanner userInput2 = new Scanner(System.in);
 		static Scanner userInput3 = new Scanner(System.in);
 		int userID = 0;
-		String loggedUser;
+		static String loggedUser;
 
 	public UserAccount(String name, String pass, String role) {
 		userName = name;
@@ -78,9 +78,11 @@ import java.util.*;
 			Register();
 		case 2:
 			Login();
-			
+			List.directToChoice();
+			break;
+			}
 		}
-	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new UserAccount();
@@ -119,7 +121,8 @@ import java.util.*;
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}
-		Login();	
+		Login();
+		
 	}
 
 	
@@ -171,10 +174,8 @@ import java.util.*;
 		return j;
 	}
 	
-	public UserAccount[] passUserName() {
-		UserAccount loggedInUser[] = new UserAccount[1];
-		
-		loggedInUser[0] = new UserAccount(loggedUser);
+	public static UserAccount passUserName() {
+		UserAccount loggedInUser = new UserAccount(loggedUser);
 		return loggedInUser;
 	}
 	
@@ -194,3 +195,7 @@ import java.util.*;
 		return lineNumber;
 	}
 }
+
+
+
+
