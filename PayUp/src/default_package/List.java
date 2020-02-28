@@ -8,17 +8,16 @@ public class List {
 	String listName;
 	int listID;
 	UserAccount[] temp = UserAccount.readFile();
-	UserAccount temp1 = UserAccount.passUserName();
 
-	public static void directToChoice() {
-		new List();
+	public static void directToChoice(String currentUser) {
+		new List(currentUser);
 	}
 	
-	public List() {
+	public List(String currentUser) {
 		int userChoice = getUserChoice1();
 		switch (userChoice) {
 		case 1:
-			createList();
+			createList(currentUser);
 		case 2:
 			viewList();
 		}
@@ -48,9 +47,10 @@ public class List {
 			
 	}
 	
-	public void createList() {
+	public void createList(String currentUser) {
 		System.out.println("How do you want to name the list? ");
-		String listName = userInput1.nextLine();
+		String listName = userInput2.nextLine();
+		String cUser = currentUser;
 		
 		String aUser;
 		
@@ -60,19 +60,17 @@ public class List {
 		//String[] addedUser = new String[amountOfUsers + 1];
 		
 		System.out.println("What user do you want to add to your list? ");
-		aUser = userInput1.nextLine();
+		aUser = userInput2.nextLine();
 			//if (temp[i].userName != aUser) {
 			//	System.out.print("User does not exist");
 			//}
 			//addedUser[i] = aUser;
 		
-		String loggedInUser = temp1.userName;
-		
 		try { //This is for Registration of the users
 
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("list_database.txt",true)));
 			wr.println(listName); 
-			wr.println(loggedInUser + "\n" + aUser);
+			wr.println(cUser + "\n" + aUser);
 			
 			
 			wr.close();	
@@ -106,6 +104,8 @@ public class List {
 		for (int i = 0; i < lineNumber; i++) {
 		System.out.println(xaxis[i] + "\n" + yaxis[i]);
 		}
+		
+		
 		
 	}
 }
