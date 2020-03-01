@@ -78,8 +78,8 @@ public class List {
 		try { //This is for Registration of the users
 			
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database" + fileCount + ".txt",true)));
-			wr.println(listName); 
-			wr.println(cUser + "\n" + aUser);
+			wr.println("List Name: " + listName + "\t List Creator: " + cUser + "\t List Member: " + aUser);
+			wr.println("List ID\tExpense Name\tExpense Amount\tExpense Date\tUser Name");
 			wr.close();
 			
 		} catch (IOException e) {
