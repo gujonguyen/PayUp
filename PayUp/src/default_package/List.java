@@ -36,7 +36,7 @@ public class List {
 	public int getUserChoice1() {
 		System.out.println("****************************************************************");
 		System.out.println("****************************************************************");
-		System.out.println("************\t\t What do you want to do? \t\t**********");
+		System.out.println("************\t What do you want to do? \t**********");
 		System.out.println("****************************************************************");
 		System.out.println("****************************************************************");
 		System.out.println("");
@@ -68,15 +68,18 @@ public class List {
 			//}
 			//addedUser[i] = aUser;
 		
+		File directory = new File("C:\\Users\\sjoerd97\\eclipse-workspace");
+	    int fileCount = directory.list().length;
+	    
+	    fileCount = fileCount - 8;
+		
 		try { //This is for Registration of the users
-			for (int l = 0; l < 2; l++) {
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database" + l + ".txt",true)));
+			
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database" + fileCount + ".txt",true)));
 			wr.println(listName); 
 			wr.println(cUser + "\n" + aUser);
-			
-			
 			wr.close();
-			}
+			
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}	
