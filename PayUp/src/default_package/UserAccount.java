@@ -72,8 +72,19 @@ import java.util.*;
 		case 1:
 			Register();
 		case 2:
-			String curretUser = Login();
-			List.directToChoice(curretUser);
+			String currentUser = Login();
+			for (int i = 0; i < readFile().length; i++) {
+				if (readFile()[i].userName.equals(currentUser)) {
+					if (readFile()[i].typeOfAccount.equals("r")) {
+						System.out.println("You are logged in as a regular user!");
+						// Link to regular user menu in regular user class
+					}
+					else {
+						System.out.println("You are logged in as an admin user!");
+						// Link to admin user menu in regular user class
+					}
+				}
+			}
 			break;
 			}
 		}
