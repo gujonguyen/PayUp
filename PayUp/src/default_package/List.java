@@ -7,10 +7,17 @@ public class List {
 	static Scanner userInput2 = new Scanner(System.in);
 	String listName;
 	int listID;
+	String date;
 	UserAccount[] temp = UserAccount.readFile();
 
 	public static void directToChoice(String currentUser) {
 		new List(currentUser);
+	}
+	
+	public List(String listNamec, int listIDc, String datec) {
+		listName = listNamec;
+		listID = listIDc;
+		date = datec;
 	}
 	
 	public List(String currentUser) {
@@ -41,11 +48,6 @@ public class List {
 
 	}
 	
-	public List(String name, int count) {
-		listName = name;
-		listID = count;
-			
-	}
 	
 	public void createList(String currentUser) {
 		System.out.println("How do you want to name the list? ");
@@ -67,13 +69,14 @@ public class List {
 			//addedUser[i] = aUser;
 		
 		try { //This is for Registration of the users
-
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("list_database.txt",true)));
+			for (int l = 0; l < 2; l++) {
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database" + l + ".txt",true)));
 			wr.println(listName); 
 			wr.println(cUser + "\n" + aUser);
 			
 			
-			wr.close();	
+			wr.close();
+			}
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}	
@@ -89,7 +92,7 @@ public class List {
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [2];
-			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			BufferedReader myFile = new BufferedReader (new FileReader("list_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
