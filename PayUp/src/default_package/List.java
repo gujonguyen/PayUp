@@ -14,7 +14,7 @@ public class List {
 		new List(currentUser);
 	}
 	
-	public List(String listNamec, int listIDc,) {
+	public List(String listNamec, int listIDc) {
 		listName = listNamec;
 		listID = listIDc;
 		//date = datec;
