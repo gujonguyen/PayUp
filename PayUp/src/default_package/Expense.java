@@ -1,18 +1,52 @@
 package default_package;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class Expense {
-	static String expenseName;
-	static String expenseDate;
-	static double amount;
-	List belongsToList = new List(); //every expense needs to belong to a list
-	List [] participants = new List[2];
+	static Scanner userInput1 = new Scanner(System.in); //for int
+	static Scanner userInput2 = new Scanner(System.in); // for string
+	static Scanner userInput3 = new Scanner(System.in); // for double
+	String expenseName;
+	String expenseDate;
+	double amount;
 	UserAccount[] temp = UserAccount.readFile();
-		
+	int expenseId;
+	String dummyname;
+	
+	public Expense(int id, String name, double amount, String date, String whoPaid) {
+		expenseId = id;
+		expenseName = name;
+		this.amount = amount;
+		expenseDate = date;
+		dummyname = whoPaid;
+	}
 
+	public static void createExpense() {
+		System.out.println("How many expenses do you want to add? ");
+		int counter = userInput1.nextInt();
+		for (int i = 0; i < counter; i++) {
+			System.out.println("Please choose the list ID of the list this expense belongs to: ");
+			String listId = userInput2.nextLine();
+			System.out.println("Please choose an expense name: ");
+			String expenseName = userInput2.nextLine();
+			System.out.println("Please choose the expense ammount: ");
+			Double amount = userInput3.nextDouble();
+			System.out.println("Please choose the expense date: ");
+			String expenseDate = userInput2.nextLine();
+			System.out.println("Who paid for this expense? ");
+			String userName = userInput2.nextLine();
+			
+			try {
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database" + listId + ".txt", true)));
+				wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + expenseDate + "\t" + userName);
+				wr.close();	
+			} catch (IOException e) {
+				System.out.println("I/O error when writing on file");
+			}
+		}
+	}
+	
+	
 	public static double splitExpense() {
 		int lineNumber = 0;
 		String[] c1 = new String[100];
@@ -50,12 +84,12 @@ public class Expense {
 		System.arraycopy(c4, 0, Finalc4, 0, lineNumber);
 		String[] Finalc5 = new String[lineNumber];
 		System.arraycopy(c5, 0, Finalc5, 0, lineNumber);
-		
+
 		double[] amount = new double[Finalc3.length];
 		for (int i = 0; i < Finalc3.length; i++) {
 			amount[i] = Double.parseDouble(Finalc3[i]);
 		}
-		
+
 		for (int i = 0; i < Finalc1.length; i++) {
 			if (UserAccount.userName.equals(Finalc5[i])) {
 				tempSum += amount [i]/2;
