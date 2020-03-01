@@ -14,10 +14,10 @@ public class List {
 		new List(currentUser);
 	}
 	
-	public List(String listNamec, int listIDc, String datec) {
+	public List(String listNamec, int listIDc,) {
 		listName = listNamec;
 		listID = listIDc;
-		date = datec;
+		//date = datec;
 	}
 	
 	public List(String currentUser) {
@@ -25,8 +25,10 @@ public class List {
 		switch (userChoice) {
 		case 1:
 			createList(currentUser);
+			break;
 		case 2:
 			viewList();
+			break;
 		}
 		if (userChoice > 2) {
 			System.out.println("Your choice is invalid");
@@ -49,7 +51,7 @@ public class List {
 	}
 	
 	
-	public void createList(String currentUser) {
+	public static List[] createList(String currentUser) {
 		System.out.println("How do you want to name the list? ");
 		String listName = userInput2.nextLine();
 		String cUser = currentUser;
@@ -82,6 +84,12 @@ public class List {
 			
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
+		}	
+		
+		List listObjectArray[] = new List[fileCount + 1];
+		
+		for (int i = 0; i < fileCount + 1; i++) {
+			listObjectArray[i] = new List(listName, fileCount);
 		}	
 	}
 	
