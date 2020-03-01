@@ -15,9 +15,9 @@ public class List {
 		new List(currentUser);
 	}
 	
-	public List(String listNamec, int listIDc) {
-		listName = listNamec;
+	public List(int listIDc, String listNamec) {
 		listID = listIDc;
+		listName = listNamec;
 		//date = datec;
 	}
 	
@@ -52,7 +52,7 @@ public class List {
 	}
 	
 	
-	public static List[] createList(String currentUser) {
+	public static void createList(String currentUser) {
 		System.out.println("How do you want to name the list? ");
 		String listName = userInput2.nextLine();
 		String cUser = currentUser;
@@ -78,7 +78,7 @@ public class List {
 		
 		try { //This is for Registration of the users
 			
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database" + fileCount + ".txt",true)));
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + fileCount + ".txt",true)));
 			wr.println("List Name: " + listName + "\t List Creator: " + cUser + "\t List Member: " + aUser);
 			wr.println("List ID\tExpense Name\tExpense Amount\tExpense Date\tUser Name");
 			wr.close();
@@ -87,12 +87,50 @@ public class List {
 			System.out.println("I/O error when writing on file");
 		}	
 		
-		List listObjectArray[] = new List[fileCount + 1];
+		try { 
+			
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
+			wr.println("List ID: " + fileCount + "\t List Name" + listName);
+			wr.close();
+			
+		} catch (IOException e) {
+			System.out.println("I/O error when writing on file");
+		}	
 		
-		for (int i = 0; i < fileCount + 1; i++) {
-			listObjectArray[i] = new List(listName, fileCount);
+	}
+	
+	public static List[] readFile(){
+		int lineNumber = 0;
+		int [] aaxis = new int[100];
+		String [] baxis = new String[100];
+		
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [3];
+			BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
+
+				aaxis[lineNumber] = Integer.parseInt(uCurrent[0]);
+				baxis[lineNumber] = uCurrent[1];
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not exist");
 		}
-		return listObjectArray;
+
+		int [] Finalaaxis = new int[lineNumber];
+		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
+		String[] Finalbaxis = new String[lineNumber];
+		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
+		
+		List listArray[] = new List[Finalaaxis.length];
+		
+		for (int i = 0; i < Finalaaxis.length; i++) {
+			listArray[i] = new List(Finalaaxis[i], Finalbaxis[i]);
+		}		
+		return listArray;
 	}
 	
 	public void viewList() {
