@@ -2,143 +2,115 @@ package default_package;
 import java.io.*;
 import java.util.*;
 
+public class List {
+	static Scanner userInput1 = new Scanner(System.in);
+	static Scanner userInput2 = new Scanner(System.in);
+	String listName;
+	int listID;
+	String date;
+	UserAccount[] temp = UserAccount.readFile();
 
-	public class UserAccount {
-		String userName;
-		String password;
-		String typeOfAccount;
-		static int noOfUsers;
-		static Scanner userInput1 = new Scanner(System.in);
-		static Scanner userInput2 = new Scanner(System.in);
-		static Scanner userInput3 = new Scanner(System.in);
-		int userID = 0;
-		
-
-	public UserAccount(String name, String pass, String role) {
-		userName = name;
-		password = pass;
-		typeOfAccount = role;	
+	public static void directToChoice(String currentUser) {
+		new List(currentUser);
 	}
 	
-	public static UserAccount[] readFile() {
-		int lineNumber = 0;
-		String[] aaxis = new String[100];
-		String[] baxis = new String[100];
-		String[] caxis = new String[100];
-		int[] daxis = new int[100];
-		
-		try {
-			String sCurrentLine;
-			String[] uCurrent = new String [4];
-			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-			while ((sCurrentLine = myFile.readLine()) != null) {
-				uCurrent = sCurrentLine.split("\t");
-
-				aaxis[lineNumber] = uCurrent[0];
-				baxis[lineNumber] = uCurrent[1];
-				caxis[lineNumber] = uCurrent[2];
-				daxis[lineNumber] = Integer.parseInt(uCurrent[3]);
-				
-				lineNumber++;
-			}
-			myFile.close(); 
-		}catch (IOException e) {
-			System.out.println("This file does not exist");
-		}
-
-		String[] Finalaaxis = new String[lineNumber];
-		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
-		String[] Finalbaxis = new String[lineNumber];
-		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
-		String[] Finalcaxis = new String[lineNumber];
-		System.arraycopy(caxis, 0, Finalcaxis, 0, lineNumber);
-		int[] Finaldaxis = new int[lineNumber];
-		System.arraycopy(daxis, 0, Finaldaxis, 0, lineNumber);
-		
-		
-		UserAccount user[] = new UserAccount[Finalaaxis.length];
-		
-		for (int i = 0; i < Finalaaxis.length; i++) {
-			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i]);
-		}	
-			
-		return user;
+	public List(String listNamec, int listIDc) {
+		listName = listNamec;
+		listID = listIDc;
+		//date = datec;
 	}
 	
-	public UserAccount() {
-		
-		int userChoice = getUserChoice();
+	public List(String currentUser) {
+		int userChoice = getUserChoice1();
 		switch (userChoice) {
 		case 1:
-			Register();
-		case 2:
-			String curretUser = Login();
-			List.directToChoice(curretUser);
+			createList(currentUser);
 			break;
-			}
+		case 2:
+			viewList();
+			break;
 		}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new UserAccount();
-
-		
+		if (userChoice > 2) {
+			System.out.println("Your choice is invalid");
+		}
 	}
-	// This method asks and returns what the user wants to do
 
-	public static int getUserChoice(){
-		System.out.println("What do you wan to do?");
-		System.out.println("(1) Register your account");
-		System.out.println("(2) Login into account");
+	public int getUserChoice1() {
+		System.out.println("****************************************************************");
+		System.out.println("****************************************************************");
+		System.out.println("************\t What do you want to do? \t**********");
+		System.out.println("****************************************************************");
+		System.out.println("****************************************************************");
+		System.out.println("");
+		System.out.println("(1) Create new list");
+		System.out.println("(2) View List");
 		System.out.println("****************************************************************");
 		System.out.print("Please enter your choice (1 or 2): ");
-		return userInput1.nextInt();
+		return userInput1.nextInt();	// gets either 1 or 2 from the user
+
 	}
-
-	public void Register() {
-
-		noOfUsers = readfile1();
+	
+	
+	public static List[] createList(String currentUser) {
+		System.out.println("How do you want to name the list? ");
+		String listName = userInput2.nextLine();
+		String cUser = currentUser;
 		
-		System.out.println("Register to PayUp");
-		System.out.println("Do you want to register as a (R) Regular User or (A) Admin?");
-		String typeOfAccount = userInput3.nextLine();
-		System.out.println("Please choose a username:");
-		String Un = userInput2.nextLine();
-		System.out.println("Please choose a password:");
-		String Pw = userInput2.nextLine();
-
+		String aUser;
+		
+		//System.out.println("How many users do you want to add to the list? ");
+		//int amountOfUsers = userInput1.nextInt();
+		
+		//String[] addedUser = new String[amountOfUsers + 1];
+		
+		System.out.println("What user do you want to add to your list? ");
+		aUser = userInput2.nextLine();
+			//if (temp[i].userName != aUser) {
+			//	System.out.print("User does not exist");
+			//}
+			//addedUser[i] = aUser;
+		
+		File directory = new File("C:\\Users\\sjoerd97\\eclipse-workspace");
+	    int fileCount = directory.list().length;
+	    
+	    fileCount = fileCount - 8;
+		
 		try { //This is for Registration of the users
-
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
-			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + noOfUsers);
 			
-			wr.close();	
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database" + fileCount + ".txt",true)));
+			wr.println(listName); 
+			wr.println(cUser + "\n" + aUser);
+			wr.close();
+			
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
-		}
-		Login();
+		}	
 		
+		List listObjectArray[] = new List[fileCount + 1];
+		
+		for (int i = 0; i < fileCount + 1; i++) {
+			listObjectArray[i] = new List(listName, fileCount);
+		}	
 	}
-
 	
-	public String Login() {
-		int lineNumber = 0;
+	public void viewList() {
+		
 		String[] xaxis = new String[100];
 		String[] yaxis = new String[100];
-		String Un;
-		String Pw;
-		String currentUser = null;		
-
-		System.out.println("Login into PayUp");
-		System.out.println("Please input your username:");
-		Un = userInput2.nextLine();
-		System.out.println("Please input your password:");
-		Pw = userInput2.nextLine();
-
+		int lineNumber = 0;
+		
+		System.out.println("What list do you want to view? ");
+		String viewList = userInput2.nextLine();
+		
+		//for (int z = 0; z < fileCount; z++) {
+		//	if (viewList.equals(listObjectArray[z]){
+				
+		//	}
+		//}
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [2];
-			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			BufferedReader myFile = new BufferedReader (new FileReader("list_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
@@ -150,34 +122,11 @@ import java.util.*;
 		}catch (IOException e) {
 			System.out.println("This file does not exist");
 		}
-
-		String[] Finalxaxis = new String[lineNumber];
-		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
-		String[] Finalyaxis = new String[lineNumber];
-		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
-
 		for (int i = 0; i < lineNumber; i++) {
-			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
-				System.out.println("Login successful");
-				currentUser = Un;
-				break;
-			}
+		System.out.println(xaxis[i] + "\n" + yaxis[i]);
 		}
-		return currentUser;
-	}
-	
-	public int readfile1() {
-		int lineNumber = 0;
-		try {
-			String sCurrentLine;
-			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-			while ((sCurrentLine = myFile.readLine()) != null) {
-				lineNumber++;
-			}
-			myFile.close(); 
-		}catch (IOException e) {
-			System.out.println("This file does not exist");
-		}
-		return lineNumber;
+		
+		
+		
 	}
 }
