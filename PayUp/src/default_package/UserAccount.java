@@ -55,11 +55,13 @@ import java.util.*;
 		int[] Finaldaxis = new int[lineNumber];
 		System.arraycopy(daxis, 0, Finaldaxis, 0, lineNumber);
 		
+		
 		UserAccount user[] = new UserAccount[Finalaaxis.length];
 		
 		for (int i = 0; i < Finalaaxis.length; i++) {
 			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i]);
-		}		
+		}	
+			
 		return user;
 	}
 	
@@ -179,7 +181,6 @@ import java.util.*;
 		return lineNumber;
 	}
 }
-
 
 
 
