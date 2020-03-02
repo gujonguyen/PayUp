@@ -10,17 +10,20 @@ public class List {
 	String date;
 	UserAccount[] temp1 = UserAccount.readFile();
 	static int fileCount;
+	int[] participantArray;
 
-	public List(int listIDc, String listNamec) {
-		listID = listIDc;
+	public List(String listNamec, int[] participants, int listIDc) {
 		listName = listNamec;
-		//date = datec;
+		participantArray = participants;
+		listID = listIDc;
 	}
 
 	public static List[] readFile(){
 		int lineNumber = 0;
-		int [] aaxis = new int[100];
-		String [] baxis = new String[100];
+		int [] idAxis = new int[100];
+		String [] nameAxis = new String[100];
+		int [][] participantAxis = new int[100][100];
+		String[] nonsplittedString = new String[100];
 
 		try {
 			String sCurrentLine;
@@ -29,69 +32,91 @@ public class List {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				aaxis[lineNumber] = Integer.parseInt(uCurrent[0]);
-				baxis[lineNumber] = uCurrent[1];
+				nameAxis[lineNumber] = uCurrent[0];
+				nonsplittedString[lineNumber] = uCurrent[1];
+				idAxis[lineNumber] = Integer.parseInt(uCurrent[2]);
 				lineNumber++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not exist");
 		}
+		
+		for (int h = 0; h < 3; h++) {
+			participantAxis[lineNumber][h] = Integer.parseInt(nonsplittedString[h].split(","));
+		}
 
-		int [] Finalaaxis = new int[lineNumber];
-		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
-		String[] Finalbaxis = new String[lineNumber];
-		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
+		int [] FinalIDAxis = new int[lineNumber];
+		System.arraycopy(idAxis, 0, FinalIDAxis, 0, lineNumber);
+		String [] FinalNameAxis = new String[lineNumber];
+		System.arraycopy(nameAxis, 0, FinalNameAxis, 0, lineNumber);
+		int [] FinalParticipantAxis = new int[lineNumber];
+		System.arraycopy(participantAxis, 0, FinalParticipantAxis, 0, lineNumber);
 
-		List listArray[] = new List[Finalaaxis.length];
+		List listArray[] = new List[FinalIDAxis.length];
 
-		for (int i = 0; i < Finalaaxis.length; i++) {
-			listArray[i] = new List(Finalaaxis[i], Finalbaxis[i]);
+		for (int i = 0; i < FinalIDAxis.length; i++) {
+			listArray[i] = new List(FinalNameAxis[i], FinalParticipantAxis[i], FinalIDAxis[i]);
 		}		
 		return listArray;
 	}
 
-	public static void createList(String currentUser) {
+	public void createList(int currentUser) {
+
+		int cUser = currentUser;
+		int [] aUser = new int[100];
+		Boolean localBoolean = false;
+		int lineNumber = 0;
+
 		System.out.println("How do you want to name the list? ");
 		String listName = userInput2.nextLine();
-		String cUser = currentUser;
-		String aUser;
 
-		System.out.println("What user do you want to add to your list? ");
-		aUser = userInput2.nextLine();
-		for (int i = 0; i <temp1.length; i++ ) {
-			if (temp1[i].userName != aUser) {
-				System.out.print("User does not exist");
-			} else localBoolean = true;
+		System.out.println("How many users do you want to add?");
+		int amountOfUser = userInput1.nextInt();
+		aUser [0] = cUser;
+
+		for(int n = 1; n < amountOfUser + 1; n++) {
+			System.out.println("What is the userID of the user that you want to add to your list? ");
+			aUser[n] = userInput1.nextInt();
+			for (int i = 0; i <temp1.length; i++ ) {
+				if (temp1[i].userID != aUser[i]) {
+					System.out.print("User does not exist");
+				} else localBoolean = true;
+			}
 		}
-		
-		if (localBoolean = true) {
-		
-		File directory = new File("C:\\Users\\sjoerd97\\eclipse-workspace");
-		fileCount = directory.list().length;
-	    
-	   	fileCount = fileCount - 8;
-		
-		try { //This is for Registration of the users
-			
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + fileCount + ".txt",true)));
-			wr.println("List Name: " + listName + "\t List Creator: " + cUser + "\t List Member: " + aUser);
-			wr.println("List ID\tExpense Name\tExpense Amount\tExpense Date\tUser Name");
-			wr.close();
-			
-		} catch (IOException e) {
-			System.out.println("I/O error when writing on file");
-		}	
-		
-		try { 
-			
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
-			wr.println("List ID: " + fileCount + "\t List Name" + listName);
-			wr.close();
-			
-		} catch (IOException e) {
-			System.out.println("I/O error when writing on file");
-		}	
+
+		if (localBoolean == true) {
+
+			try {
+				String sCurrentLine;
+				BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
+				while ((sCurrentLine = myFile.readLine()) != null) {
+					lineNumber++;
+				}
+				myFile.close(); 
+			}catch (IOException e) {
+				System.out.println("This file does not exist");
+			}
+
+			String [] FinalaUser = new String[amountOfUser];
+			System.arraycopy(aUser, 0, FinalaUser, 0, amountOfUser);
+
+			StringBuffer sb = new StringBuffer();
+			for(int i = 0; i < FinalaUser.length; i++) {
+				sb.append(FinalaUser[i] + ", ");
+			}
+			String str = sb.toString();
+
+
+			try { 
+
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
+				wr.println("List ID: " + lineNumber + "\t List Name" + listName + "\t List participants" + str);
+				wr.close();
+
+			} catch (IOException e) {
+				System.out.println("I/O error when writing on file");
+			}	
 		}
 	}
 
@@ -149,18 +174,17 @@ public class List {
 		int ListNumber = userInput2.nextInt();
 		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
 		String confirm = userInput1.nextLine();
-		
+
 		while(confirm.equals("Y")) {
-		try {
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + ListNumber + ".txt",false)));
-			wr.println("This list is now empty." + "\t " + "\t " + "\t " + "\t ");
-			wr.close();
+			try {
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + ListNumber + ".txt",false)));
+				wr.println("This list is now empty." + "\t " + "\t " + "\t " + "\t ");
+				wr.close();
 
-		} catch (IOException e) {
-			System.out.println("I/O error when writing on file");
+			} catch (IOException e) {
+				System.out.println("I/O error when writing on file");
+			}	
 		}
-		}
-
 		//else
 	}
 }
