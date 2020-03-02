@@ -149,7 +149,8 @@ public class List {
 		int ListNumber = userInput2.nextInt();
 		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
 		String confirm = userInput1.nextLine();
-
+		
+		while(confirm.equals("Y")) {
 		try {
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + ListNumber + ".txt",false)));
 			wr.println("This list is now empty." + "\t " + "\t " + "\t " + "\t ");
@@ -157,7 +158,8 @@ public class List {
 
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
-		}	
+		}
+		}
 
 		//else
 	}
