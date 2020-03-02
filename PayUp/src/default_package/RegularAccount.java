@@ -1,4 +1,4 @@
-package PayUp.src.default_package;
+package default_package;
 import java.util.*;
 import java.io.*;
 
@@ -157,7 +157,6 @@ public class RegularAccount extends UserAccount {
 	public static void writeExpenseHistory() {
 		writeExpenseHistory();
 	}
-
-	}
 }
+
 
