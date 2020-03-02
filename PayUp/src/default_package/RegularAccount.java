@@ -1,8 +1,8 @@
-package default_package;
+package PayUp.src.default_package;
 import java.util.*;
 import java.io.*;
 
-public class RegularAccount {
+public class RegularAccount extends UserAccount {
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
 	static Scanner userInput1 = new Scanner(System.in); //for int
@@ -14,38 +14,31 @@ public class RegularAccount {
 		switch (userChoice) {
 		case 1:
 			viewIndividualBalance();
-			break;
 		case 2:
 			createNewList();
-			break;
 		case 3:
 			viewList();
-			break;
 		case 4:
 			deleteList();
-			break;
 		case 5:
 			settleList();
-			break;
 		case 6:
 			addExpenseToList();
-			break;
 		case 7:
 			viewExpenseHistory();
-			break;
 		case 8:
 			writeExpenseHistory();
-			break;
 		case 0:
 			Logout();
-		default:
-			System.out.println("--------------------------------------------------------");
-			System.out.println("Please enter a valid choice.");
-			System.out.println("--------------------------------------------------------");
-			getUserChoice();
+			break;
 	}
 }
 	
+	private static void Logout() {
+		System.out.println("You are successfully logged out");
+		
+	}
+
 	public static int getUserChoice() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("You are logged in as a Regular user!");
@@ -71,17 +64,52 @@ public class RegularAccount {
 	}
 	
 	public static void createNewList() {
-
+		//you should be able to add user list to viewlist method
+				//public void addUserToList() { 
+		
+				//same for allocating expense to user
+				//public void allocateExpensetoUser() {
 	}
 	
 	public static void viewList() {
 		viewList();
+		//you should be able to add user list to viewlist method
+		//public void addUserToList() { 
+
+		//same for allocating expense to user
+		//public void allocateExpensetoUser() {
 	}
+
 	public static void deleteList() {
 		deleteList();
 	}
 	public static void settleList() {
 		settleList();
+	}
+	
+	public static void addExpenseToList() {
+		System.out.println("How many expenses do you want to add? ");
+		int counter = userInput1.nextInt();
+		for (int i = 0; i < counter; i++) {
+			System.out.println("Please choose the list ID of the list this expense belongs to: ");
+			List.listId = userInput1.nextInt();
+			System.out.println("Please choose an expense name: ");
+			Expense.expenseName = userInput2.nextLine();
+			System.out.println("Please choose the expense ammount: ");
+			Expense.amount = userInput3.nextDouble();
+			System.out.println("Please choose the expense date: ");
+			Expense.expenseDate = userInput2.nextLine();
+			System.out.println("Who paid for this expense? ");
+			UserAccount.userName = userInput2.nextLine();
+
+			try {
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt", true)));
+				wr.println(List.listId + "\t" + Expense.expenseName + "\t" + Expense.amount + "\t" + Expense.expenseDate + "\t" + UserAccount.userName);
+				wr.close();	
+			} catch (IOException e) {
+				System.out.println("I/O error when writing on file");
+			}
+		}
 	}
 	
 	public static void viewExpenseHistory() {
@@ -129,41 +157,7 @@ public class RegularAccount {
 	public static void writeExpenseHistory() {
 		writeExpenseHistory();
 	}
-	public void addUserToList() {
 
-	}
-	public static void addExpenseToList() {
-
-		System.out.println("How many expenses do you want to add? ");
-		int counter = userInput1.nextInt();
-		for (int i = 0; i < counter; i++) {
-			System.out.println("Please choose the list ID of the list this expense belongs to: ");
-			List.listId = userInput1.nextInt();
-			System.out.println("Please choose an expense name: ");
-			Expense.expenseName = userInput2.nextLine();
-			System.out.println("Please choose the expense ammount: ");
-			Expense.amount = userInput3.nextDouble();
-			System.out.println("Please choose the expense date: ");
-			Expense.expenseDate = userInput2.nextLine();
-			System.out.println("Who paid for this expense? ");
-			UserAccount.userName = userInput2.nextLine();
-
-			try {
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt", true)));
-				wr.println(List.listId + "\t" + Expense.expenseName + "\t" + Expense.amount + "\t" + Expense.expenseDate + "\t" + UserAccount.userName);
-				wr.close();	
-			} catch (IOException e) {
-				System.out.println("I/O error when writing on file");
-			}
-		}
-	}
-	public void allocateExpensetoUser() {
-
-	}
-	
-	public static void Logout () {
-		System.out.println("You are logged out");
-		UserAccount.getUserChoice();
 	}
 }
 
