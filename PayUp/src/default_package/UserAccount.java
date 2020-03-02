@@ -3,9 +3,9 @@ import java.io.*;
 import java.util.*;
 
 public class UserAccount {
-	String userName;
-	String password;
-	String typeOfAccount;
+	private String userName;
+	private String password;
+	private String typeOfAccount;
 	static int noOfUsers;
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
@@ -85,9 +85,8 @@ public class UserAccount {
 			}	
 		case 3:
 			Exit();
-		default:
-			System.out.print("Please enter a valid choice.");
 		}
+
 	}
 
 	public static void main(String[] args) {
@@ -96,7 +95,7 @@ public class UserAccount {
 	}
 	// This method asks and returns what the user wants to do
 
-	public static int getUserChoice(){
+	private static int getUserChoice(){
 			System.out.println("--------------------------------------------------------");
 			System.out.println("\t\t Welcome to PayUp! ");
 			System.out.println("\n What do you wish to?");   
@@ -110,7 +109,7 @@ public class UserAccount {
 		}
 	
 
-	public void Register() {
+	protected void Register() {
 		
 		noOfUsers = readfile1();
 		//first: register 
@@ -138,7 +137,7 @@ public class UserAccount {
 		}
 	}
 
-	public static String Login() {
+	protected static String Login() {
 		//second: login
 		int lineNumber = 0;
 		String[] xaxis = new String[100];
@@ -186,13 +185,13 @@ public class UserAccount {
 		return currentUser;
 	}
 
-	private String Exit() {
+	protected String Exit() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("	Thank you for visiting PayUp!");
 		return null;
 	}
 
-	public int readfile1() {
+	private int readfile1() {
 		int lineNumber = 0;
 		try {
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
@@ -217,7 +216,6 @@ public class UserAccount {
 	}
 
 }
-
 
 
 
