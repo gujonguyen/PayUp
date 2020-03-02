@@ -17,6 +17,8 @@ public class AdministratorAccount extends UserAccount {
 		case 3:
 			UserAccount.Exit();
 			break;
+		default:
+			System.out.print("Please enter a valid choice.");
 		}
 	}
 
