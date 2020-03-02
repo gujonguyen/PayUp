@@ -11,99 +11,17 @@ public class List {
 	UserAccount[] temp1 = UserAccount.readFile();
 	static int fileCount;
 
-	public static void directToChoice(String currentUser) {
-		new List(currentUser);
-	}
-	
 	public List(int listIDc, String listNamec) {
 		listID = listIDc;
 		listName = listNamec;
 		//date = datec;
 	}
-	
-	public List(String currentUser) {
-		int userChoice = getUserChoice1();
-		switch (userChoice) {
-		case 1:
-			createList(currentUser);
-			break;
-		case 2:
-			viewList();
-			break;
-		}
-		if (userChoice > 2) {
-			System.out.println("Your choice is invalid");
-		}
-	}
 
-	public int getUserChoice1() {
-		System.out.println("****************************************************************");
-		System.out.println("****************************************************************");
-		System.out.println("************\t What do you want to do? \t**********");
-		System.out.println("****************************************************************");
-		System.out.println("****************************************************************");
-		System.out.println("");
-		System.out.println("(1) Create new list");
-		System.out.println("(2) View List");
-		System.out.println("****************************************************************");
-		System.out.print("Please enter your choice (1 or 2): ");
-		return userInput1.nextInt();	// gets either 1 or 2 from the user
-
-	}
-	
-	
-	public static void createList(String currentUser) {
-		System.out.println("How do you want to name the list? ");
-		String listName = userInput2.nextLine();
-		String cUser = currentUser;
-		
-		String aUser;
-		
-		//System.out.println("How many users do you want to add to the list? ");
-		//int amountOfUsers = userInput1.nextInt();
-		
-		//String[] addedUser = new String[amountOfUsers + 1];
-		
-		System.out.println("What user do you want to add to your list? ");
-		aUser = userInput2.nextLine();
-			//if (temp[i].userName != aUser) {
-			//	System.out.print("User does not exist");
-			//}
-			//addedUser[i] = aUser;
-		
-		File directory = new File("C:\\Users\\sjoerd97\\eclipse-workspace");
-	    fileCount = directory.list().length;
-	    
-	    fileCount = fileCount - 8;
-		
-		try { //This is for Registration of the users
-			
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + fileCount + ".txt",true)));
-			wr.println("List Name: " + listName + "\t List Creator: " + cUser + "\t List Member: " + aUser);
-			wr.println("List ID\tExpense Name\tExpense Amount\tExpense Date\tUser Name");
-			wr.close();
-			
-		} catch (IOException e) {
-			System.out.println("I/O error when writing on file");
-		}	
-		
-		try { 
-			
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
-			wr.println("List ID: " + fileCount + "\t List Name" + listName);
-			wr.close();
-			
-		} catch (IOException e) {
-			System.out.println("I/O error when writing on file");
-		}	
-		
-	}
-	
 	public static List[] readFile(){
 		int lineNumber = 0;
 		int [] aaxis = new int[100];
 		String [] baxis = new String[100];
-		
+
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [3];
@@ -124,51 +42,116 @@ public class List {
 		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
 		String[] Finalbaxis = new String[lineNumber];
 		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
-		
+
 		List listArray[] = new List[Finalaaxis.length];
-		
+
 		for (int i = 0; i < Finalaaxis.length; i++) {
 			listArray[i] = new List(Finalaaxis[i], Finalbaxis[i]);
 		}		
 		return listArray;
 	}
-	
-	public void viewList() {
-		
-		String[] aaxis = new String[100];
-		String[] baxis = new String[100];
-		String[] caxis = new String[100];
+
+	public static void createList(String currentUser) {
+		System.out.println("How do you want to name the list? ");
+		String listName = userInput2.nextLine();
+		String cUser = currentUser;
+		String aUser;
+
+		System.out.println("What user do you want to add to your list? ");
+		aUser = userInput2.nextLine();
+
+		File directory = new File("D:\\Program Files\\Eclipse\\workspace\\PayUp");
+		fileCount = directory.list().length;
+
+		fileCount = fileCount - 8;
+
+		try { //This creates the individual lists per user to be filled with expenses.
+
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + fileCount + ".txt",true)));
+			wr.println("List Name: " + listName + "\t List Creator: " + cUser + "\t List Member: " + aUser + "/t " + "/t ");
+			wr.println("List ID\tExpense Name\tExpense Amount\tExpense Date\tUser Name");
+			wr.close();
+
+		} catch (IOException e) {
+			System.out.println("I/O error when writing on file");
+		}	
+
+		try { //This creates the database to be used for object creation.
+
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
+			wr.println("List ID: " + fileCount + "\t List Name" + listName);
+			wr.close();
+
+		} catch (IOException e) {
+			System.out.println("I/O error when writing on file");
+		}	
+
+	}
+
+	public static void viewList() {
+
 		int lineNumber = 0;
-		
+		String[] c1 = new String[100];
+		String[] c2 = new String[100];
+		String[] c3 = new String[100];
+		String[] c4 = new String[100];
+		String[] c5 = new String[100];
+
 		System.out.println("What list do you want to view? ");
 		int viewList = userInput2.nextInt();
-			try {
-				String sCurrentLine;
-				String[] uCurrent = new String [4];
-				BufferedReader myFile = new BufferedReader (new FileReader("list_database" + viewList + ".txt")); 
-				while ((sCurrentLine = myFile.readLine()) != null) {
-						uCurrent = sCurrentLine.split("\t");
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("List_" + viewList + ".txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
 
-						aaxis[lineNumber] = uCurrent[0];
-						baxis[lineNumber] = uCurrent[1];
-						caxis[lineNumber] = uCurrent[2];
-						lineNumber++;
-				}
-				myFile.close(); 
-				}catch (IOException e) {
-					System.out.println("This file does not exist");
-				}
-				
-		String[] Finalaaxis = new String[lineNumber];
-		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
-		String[] Finalbaxis = new String[lineNumber];
-		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
-		String[] Finalcaxis = new String[lineNumber];
-		System.arraycopy(caxis, 0, Finalcaxis, 0, lineNumber);
-		
-		for (int i = 0; i < lineNumber; i++) {
-		System.out.println(Finalaaxis[i] + "\t" + Finalbaxis[i] + "\t" + Finalcaxis[i]);
+				c1[lineNumber] = uCurrent[0];
+				c2[lineNumber] = uCurrent[1];
+				c3[lineNumber] = uCurrent[2];
+				c4[lineNumber] = uCurrent[3];
+				c5[lineNumber] = uCurrent[4];
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not exist");
+		}
+
+		String[] Finalc1 = new String[lineNumber];
+		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
+		String[] Finalc2 = new String[lineNumber];
+		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
+		String[] Finalc3 = new String[lineNumber];
+		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
+		String[] Finalc4 = new String[lineNumber];
+		System.arraycopy(c4, 0, Finalc4, 0, lineNumber);
+		String[] Finalc5 = new String[lineNumber];
+		System.arraycopy(c5, 0, Finalc5, 0, lineNumber);
+
+		System.out.println(Finalc1[0] + "\t" + Finalc2[0] + "\t" + Finalc3[0] + "\t" + Finalc4[0] + "\t" + Finalc5[0]);
+		System.out.println("--------------------------------------------------------");
+		System.out.println(Finalc1[1] + "\t" + Finalc2[1] + "\t" + Finalc3[1] + "\t" + Finalc4[1] + "\t" + Finalc5[1]);
+		for (int i = 2; i < lineNumber; i++) {
+			System.out.println(Finalc1[i] + "\t" + Finalc2[i] + "\t\t" + Finalc3[i] + "\t\t" + Finalc4[i] + "\t" + Finalc5[i]);
 		}	
 	}
-}
 
+	public static void deleteList() {
+		System.out.println("Enter the list ID of the list you want to delete.");
+		int ListNumber = userInput2.nextInt();
+		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
+		String confirm = userInput1.nextLine();
+
+		try {
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + ListNumber + ".txt",false)));
+			wr.println("This list is now empty." + "\t " + "\t " + "\t " + "\t ");
+			wr.close();
+
+		} catch (IOException e) {
+			System.out.println("I/O error when writing on file");
+		}	
+
+		//else
+	}
+}
