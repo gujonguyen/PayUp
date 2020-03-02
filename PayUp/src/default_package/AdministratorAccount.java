@@ -9,6 +9,16 @@ public class AdministratorAccount extends UserAccount {
 	static Scanner userInput1 = new Scanner(System.in);
 	private static String removeUser;
 	
+	public static void userChoiceList() {
+		switch (userChoice) {
+		case 1:
+		
+			break;
+		case 2:
+			
+		}
+	}
+	
 	static void AdminInterface() {
 
 		while(true){
