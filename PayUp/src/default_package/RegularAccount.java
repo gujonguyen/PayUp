@@ -2,40 +2,46 @@ package default_package;
 import java.util.*;
 import java.io.*;
 
-public class RegularAccount extends UserAccount {
-	static Scanner my_scan = new Scanner(System.in);
+public class RegularAccount extends UserAccount{
 	static Scanner my_scanINT = new Scanner(System.in); 
-	static Scanner userInput1 = new Scanner(System.in); //for int
-	static Scanner userInput2 = new Scanner(System.in); // for string
-	static Scanner userInput3 = new Scanner(System.in); // for double
-	static int userChoice = getUserChoice();
+	static Scanner userInput2 = new Scanner(System.in); //for strings
+	static Scanner userInput3 = new Scanner(System.in); //for doubles
 
-	public static void userChoiceList() {
+	public void userChoiceList() {
+		int userChoice = getUserChoice();
 		switch (userChoice) {
 		case 1:
-			viewIndividualBalance();
-		case 2:
 			createNewList();
-		case 3:
+			break;
+		case 2:
 			viewList();
+			break;
+		case 3:
+			viewIndividualBalance();
+			break;
 		case 4:
 			deleteList();
+			break;
 		case 5:
 			settleList();
+			break;
 		case 6:
 			addExpenseToList();
+			break;
 		case 7:
 			viewExpenseHistory();
+			break;
 		case 8:
 			writeExpenseHistory();
+			break;
 		case 0:
-			Logout();
 			break;
 	}
 }
 	
-	private static void Logout() {
+	public static void logout() {
 		System.out.println("You are successfully logged out");
+
 		
 	}
 
@@ -45,9 +51,9 @@ public class RegularAccount extends UserAccount {
 		System.out.println("What do you want to do?");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("");
-		System.out.println("(1) View individual balance");
-		System.out.println("(2) Create a new list");
-		System.out.println("(3) View your lists");
+		System.out.println("(1) Create a new list");
+		System.out.println("(2) View a list");
+		System.out.println("(3) View individual balance");
 		System.out.println("(4) Delete a list");
 		System.out.println("(5) Settle a list");
 		System.out.println("(6) Add Expense To List");
@@ -56,7 +62,7 @@ public class RegularAccount extends UserAccount {
 		System.out.println("(0) Logout");
 		System.out.println("--------------------------------------------------------");
 		System.out.print("You want to: ");
-		return my_scanINT.nextInt();	// user choice 
+		return my_scanINT.nextInt();	//get user choice 
 	}
 
 	public static void viewIndividualBalance() {
@@ -64,7 +70,7 @@ public class RegularAccount extends UserAccount {
 	}
 	
 	public static void createNewList() {
-		//you should be able to add user list to viewlist method
+		//you should be able to add user list to viewList method
 				//public void addUserToList() { 
 		
 				//same for allocating expense to user
@@ -73,7 +79,7 @@ public class RegularAccount extends UserAccount {
 	
 	public static void viewList() {
 		viewList();
-		//you should be able to add user list to viewlist method
+		//you should be able to add user list to viewList method
 		//public void addUserToList() { 
 
 		//same for allocating expense to user
@@ -89,7 +95,7 @@ public class RegularAccount extends UserAccount {
 	
 	public static void addExpenseToList() {
 		System.out.println("How many expenses do you want to add? ");
-		int counter = userInput1.nextInt();
+		int counter = my_scanINT.nextInt();
 		for (int i = 0; i < counter; i++) {
 			System.out.println("Please choose the list ID of the list this expense belongs to: ");
 			List.listId = userInput1.nextInt();
