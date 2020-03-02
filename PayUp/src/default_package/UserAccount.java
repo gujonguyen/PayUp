@@ -3,10 +3,10 @@ import java.io.*;
 import java.util.*;
 
 public class UserAccount {
-	private String userName;
-	private String password;
-	private String typeOfAccount;
-	private static int noOfUsers;
+	String userName;
+	String password;
+	String typeOfAccount;
+	static int noOfUsers;
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
 	static Scanner userInput3 = new Scanner(System.in);
@@ -75,7 +75,7 @@ public class UserAccount {
 			for (int i = 0; i < readFile().length; i++) {
 				if (readFile()[i].userName.equals(currentUser)) {
 					if (readFile()[i].typeOfAccount.equals("r")) {
-						RegularAccount.userChoiceList();
+						List.deleteList();
 					}
 					else {
 						AdministratorAccount.AdminInterface();
@@ -85,8 +85,11 @@ public class UserAccount {
 			}	
 		case 3:
 			Exit();
+			break;
+		default:
+			System.out.print("Please enter a valid choice.");
 		}
-
+		
 	}
 
 	public static void main(String[] args) {
@@ -95,7 +98,7 @@ public class UserAccount {
 	}
 	// This method asks and returns what the user wants to do
 
-	private static int getUserChoice(){
+	public static int getUserChoice(){
 			System.out.println("--------------------------------------------------------");
 			System.out.println("\t\t Welcome to PayUp! ");
 			System.out.println("\n What do you wish to?");   
@@ -109,7 +112,7 @@ public class UserAccount {
 		}
 	
 
-	protected void Register() {
+	public void Register() {
 		
 		noOfUsers = readfile1();
 		//first: register 
@@ -137,7 +140,7 @@ public class UserAccount {
 		}
 	}
 
-	protected static String Login() {
+	public static String Login() {
 		//second: login
 		int lineNumber = 0;
 		String[] xaxis = new String[100];
@@ -185,13 +188,12 @@ public class UserAccount {
 		return currentUser;
 	}
 
-	protected String Exit() {
+	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("	Thank you for visiting PayUp!");
-		return null;
 	}
 
-	private int readfile1() {
+	public int readfile1() {
 		int lineNumber = 0;
 		try {
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
@@ -216,6 +218,3 @@ public class UserAccount {
 	}
 
 }
-
-
-
