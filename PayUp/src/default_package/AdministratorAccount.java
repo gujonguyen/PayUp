@@ -1,25 +1,33 @@
 package default_package;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class AdministratorAccount extends UserAccount {
 	static Scanner userInput1 = new Scanner(System.in);
-	private static String removeUser;
-	
-	public static void userChoiceList() {
+
+	public void userChoiceList() {
+		int userChoice = AdminInterface();
 		switch (userChoice) {
 		case 1:
-		
+			removeUser();
 			break;
 		case 2:
-			
+			removeList();
+			break;
+		case 3:
+			UserAccount.exit();
+			break;
+
 		}
 	}
-	
-	static void AdminInterface() {
+
+	static int AdminInterface() {
 
 		while(true){
 			System.out.println("--------------------------------------------------------");
@@ -32,51 +40,86 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("(0) Logout");
 			System.out.println("--------------------------------------------------------");
 			System.out.print("Please enter your choice: ");
-			int userChoice = my_scanINT.nextInt();
-			if(userChoice==1){
-				int i = 0;
-				String[] xAxis = new String[100];
-				String[] yAxis = new String[100];
-				System.out.println("");
-				System.out.println("The list of users on PayUp");
-				System.out.println("----------------------------------------------------------------");
-
-				try {
-					String sCurrentLine;
-					String[] uCurrentLine = new String[2];
-					BufferedReader br = new BufferedReader (new FileReader ("User_database.txt"));
-					
-					while ((sCurrentLine = br.readLine()) != null) {
-						uCurrentLine = sCurrentLine.split("\t");
-						xAxis[i] = (uCurrentLine[0]);
-						yAxis[i] = (uCurrentLine[0]);
-						i++;
-					}
-
-					for(int k = 0; k<i; k++) {
-						System.out.println(xAxis[k]);
-					}
-					br.close();
-				} catch (IOException e) {
-					System.out.println("The file does not exist!");
-				}
-				String[] username = new String [i];
-				System.arraycopy(xAxis, 0, username, 0, i);
-				System.out.println("Which user do you wish to remove?");
-				setRemoveUser(userInput1.nextLine());
-				return;		
-			}
-			else if(userChoice==2){System.out.println("Remove lists"); break;}
-			else if(userChoice==0){System.out.println("You are logged out"); break;}
-			else System.out.println("Please enter valid choice");
+			return  my_scanINT.nextInt();
 		}
+	}	
+
+	private void removeUser() {
+		int lineNumber = 0;
+		boolean localBoolean = false;
+		String[] aAxis = new String[100];
+		String[] bAxis = new String[100];
+		String[] cAxis = new String[100];
+		String[] dAxis = new String[100];
+		System.out.println("");
+		System.out.println("The list of users on PayUp");
+		System.out.println("----------------------------------------------------------------");
+
+		try {
+			String sCurrentLine;
+			String[] uCurrentLine = new String[4];
+			BufferedReader br = new BufferedReader (new FileReader ("User_database.txt"));
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				uCurrentLine = sCurrentLine.split("\t");
+				aAxis[lineNumber] = (uCurrentLine[0]);
+				bAxis[lineNumber] = (uCurrentLine[1]);
+				cAxis[lineNumber] = (uCurrentLine[2]);
+				dAxis[lineNumber] = (uCurrentLine[3]);
+				lineNumber++;
+			}
+
+
+			br.close();
+		} catch (IOException e) {
+			System.out.println("The file does not exist!");
+		}
+
+		String[] Finalaaxis = new String[lineNumber];
+		System.arraycopy(aAxis, 0, Finalaaxis, 0, lineNumber);
+		String[] Finalbaxis = new String[lineNumber];
+		System.arraycopy(bAxis, 0, Finalbaxis, 0, lineNumber);
+		String[] Finalcaxis = new String[lineNumber];
+		System.arraycopy(cAxis, 0, Finalcaxis, 0, lineNumber);
+		String[] Finaldaxis = new String[lineNumber];
+		System.arraycopy(dAxis, 0, Finaldaxis, 0, lineNumber);
+
+		for(int k = 0; k < lineNumber; k++) {
+			System.out.println(aAxis[k]);
+		}
+
+		System.out.println("Which user do you wish to remove?");
+		String localRemovedUser = userInput1.nextLine() ;
+
+		for (int v = 0; 0 < lineNumber; v++) {
+			if (localRemovedUser.equals(Finalaaxis[v])) {
+				Finalaaxis[v] = "Deleted user";
+				Finalbaxis[v] = "N/A";
+				Finalcaxis[v] = "N/A";
+				Finaldaxis[v] = "N/A";
+				localBoolean = true;
+			}
+		}
+
+		while (localBoolean = true) {
+			try { 
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database",false)));
+				for (int b = 0; b < lineNumber; b++) {
+					wr.println(Finalaaxis[b] + "\t" + Finalbaxis[b] + "\t" + Finalcaxis[b] + "\t" + Finaldaxis[b]);	
+				}
+				wr.close();
+			}catch (IOException e) {
+				System.out.println("I/O error when writing on file");
+			}
+		}
+
 	}
 
-	public static String getRemoveUser() {
-		return removeUser;
+	private static void removeList() {
+		List.viewList();
 	}
 
-	public static void setRemoveUser(String removeUser) {
-		AdministratorAccount.removeUser = removeUser;
-	}
+
+
 }
+
