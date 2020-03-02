@@ -6,7 +6,7 @@ public class UserAccount {
 	private String userName;
 	private String password;
 	private String typeOfAccount;
-	static int noOfUsers;
+	private static int noOfUsers;
 	static Scanner userInput1 = new Scanner(System.in);
 	static Scanner userInput2 = new Scanner(System.in);
 	static Scanner userInput3 = new Scanner(System.in);
