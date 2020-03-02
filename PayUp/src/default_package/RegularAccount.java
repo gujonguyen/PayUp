@@ -1,52 +1,70 @@
-package default_package;
+package default_pac2;
 import java.util.*;
 import java.io.*;
 
-public class RegularAccount extends UserAccount {
+public class RegularAccount {
+	static Scanner my_scan = new Scanner(System.in);
+	static Scanner my_scanINT = new Scanner(System.in); 
+	static Scanner userInput1 = new Scanner(System.in); //for int
+	static Scanner userInput2 = new Scanner(System.in); // for string
+	static Scanner userInput3 = new Scanner(System.in); // for double
+	static int userChoice = getUserChoice();
+	
+	static void RegularInterface() {
 
-	public RegularAccount() {
-		int userChoice = RegUserChoice();
-		switch (userChoice) {
-		case 1:
-			createList();
-		case 2:
-			viewList();
-		case 3:
-			addExpenseToList();
-		case 4:
-			viewIndividualBalance();
-		case 5:
-			viewExpenseHistory();
-		case 6:
-			settleList();
-		case 7:
-			deleteList();
+		while(true){
+			System.out.println("--------------------------------------------------------");
+			System.out.println("Please select from the menu option below");
+			System.out.println("(1) View your balance");
+			System.out.println("(2) View your lists");
+			System.out.println("(3) Create a new list");
+			System.out.println("(4) Delete a list");
+			System.out.println("(5) Settle a list");
+			System.out.println("(6) View Expense History");
+			System.out.println("(7) Write Expense History");
+			System.out.println("(0) Logout");
+			System.out.println("--------------------------------------------------------");
+			System.out.print("You want to: ");
+			int userChoice = my_scanINT.nextInt();
+			if(userChoice==1){
+				System.out.println("Your total expense balance is: ");
+			}
+			else if(userChoice==0){System.out.println("You are logged out"); break;}
+			else System.out.println("Pleasse enter valid choice");
 		}
 	}
-	
-	public static int RegUserChoice() {
-		System.out.println("\tWelcome to PayUp! What would you like to do?");
-		System.out.println("");
-		System.out.println("****************************************************************");
-		System.out.println("");
-		System.out.println("(1) create a new list or view an excisting list");
-		System.out.println("(2) add expense to a list");
-		System.out.println("(3) view the individual balance");
-		System.out.println("(4) view the expense history");
-		System.out.println("(5) settle a list");
-		System.out.println("(6) delete a list");
-		System.out.println("");
-		System.out.println("****************************************************************");
-		System.out.println("");
-		System.out.print("\tPlease enter your preferred choice: ");
-		return userInput1.nextInt();	// gets the preferred choice from the user
+
+
+	public static void userChoiceList() {
+		switch (userChoice) {
+		case 1:
+			addExpenseToList();
+			break;
+		case 2:
+			viewExpenseHistory();
+		}
 	}
 
-	public static void createOrViewList() {
-		List.getUserChoice1();
+	public static int getUserChoice() {
+		System.out.println("--------------------------------------------------------");
+		System.out.println("You are logged in as a Regular user!");
+		System.out.println(" What do you want to do?");
+		System.out.println("****************************************************************");
+		System.out.println("");
+		System.out.println("(1) addExpenseToList");
+		System.out.println("(2) viewIndividualBalance");
+		System.out.println("****************************************************************");
+		System.out.print("Please enter your choice (1 or 2): ");
+		return userInput1.nextInt();	// gets either 1 or 2 from the user
+	}
+
+	public static void createNewList() {
+
+	}
+	public static void viewList() {
+		viewList();
 	}
 	public void deleteList() {
-		
 		deleteList();
 	}
 	public void settleList() {
@@ -91,12 +109,12 @@ public class RegularAccount extends UserAccount {
 		System.arraycopy(c4, 0, Finalc4, 0, lineNumber);
 		String[] Finalc5 = new String[lineNumber];
 		System.arraycopy(c5, 0, Finalc5, 0, lineNumber);
-
+		
 		for (int i = 0; i < Finalc1.length; i++) {
 			System.out.printf("%s\t%s\t%s\t%s\t%s\n", Finalc1[i], Finalc2[i], Finalc3[i], Finalc4[i], Finalc5[i]);
 		}
 	}
-
+	
 	public void writeExpenseHistory() {
 		writeExpenseHistory();
 	}
@@ -118,7 +136,7 @@ public class RegularAccount extends UserAccount {
 			Expense.expenseDate = userInput2.nextLine();
 			System.out.println("Who paid for this expense? ");
 			UserAccount.userName = userInput2.nextLine();
-
+			
 			try {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt", true)));
 				wr.println(List.listId + "\t" + Expense.expenseName + "\t" + Expense.amount + "\t" + Expense.expenseDate + "\t" + UserAccount.userName);
