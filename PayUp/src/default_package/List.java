@@ -59,33 +59,40 @@ public class List {
 
 		System.out.println("What user do you want to add to your list? ");
 		aUser = userInput2.nextLine();
-
-		File directory = new File("D:\\Program Files\\Eclipse\\workspace\\PayUp");
+		for (int i = 0; i <temp1.length; i++ ) {
+			if (temp1[i].userName != aUser) {
+				System.out.print("User does not exist");
+			} else localBoolean = true;
+		}
+		
+		if (localBoolean = true) {
+		
+		File directory = new File("C:\\Users\\sjoerd97\\eclipse-workspace");
 		fileCount = directory.list().length;
-
-		fileCount = fileCount - 8;
-
-		try { //This creates the individual lists per user to be filled with expenses.
-
+	    
+	   	fileCount = fileCount - 8;
+		
+		try { //This is for Registration of the users
+			
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + fileCount + ".txt",true)));
-			wr.println("List Name: " + listName + "\t List Creator: " + cUser + "\t List Member: " + aUser + "/t " + "/t ");
+			wr.println("List Name: " + listName + "\t List Creator: " + cUser + "\t List Member: " + aUser);
 			wr.println("List ID\tExpense Name\tExpense Amount\tExpense Date\tUser Name");
 			wr.close();
-
+			
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}	
-
-		try { //This creates the database to be used for object creation.
-
+		
+		try { 
+			
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
 			wr.println("List ID: " + fileCount + "\t List Name" + listName);
 			wr.close();
-
+			
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}	
-
+		}
 	}
 
 	public static void viewList() {
