@@ -85,8 +85,9 @@ public class UserAccount {
 			}	
 		case 3:
 			Exit();
+		default:
+			System.out.print("Please enter a valid choice.");
 		}
-
 	}
 
 	public static void main(String[] args) {
