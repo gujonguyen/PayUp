@@ -15,10 +15,11 @@ public class UserAccount {
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
 
-	public UserAccount(String name, String pass, String role) {
+	public UserAccount(String name, String pass, String role, int id) {
 		userName = name;
 		password = pass;
-		typeOfAccount = role;	
+		typeOfAccount = role;
+		userID = id;
 	}
 
 	public static UserAccount[] readFile() {
@@ -59,7 +60,7 @@ public class UserAccount {
 		UserAccount user[] = new UserAccount[Finalaaxis.length];
 
 		for (int i = 0; i < Finalaaxis.length; i++) {
-			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i]);
+			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i], Finaldaxis[i]);
 		}	
 
 		return user;
@@ -110,7 +111,6 @@ public class UserAccount {
 			System.out.print("Enter your option: ");
 			return my_scanINT.nextInt();
 		}
-	
 
 	public void Register() {
 		
