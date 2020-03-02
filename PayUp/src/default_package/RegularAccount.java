@@ -1,4 +1,4 @@
-package default_pac2;
+package default_package;
 import java.util.*;
 import java.io.*;
 
@@ -9,70 +9,81 @@ public class RegularAccount {
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	static Scanner userInput3 = new Scanner(System.in); // for double
 	static int userChoice = getUserChoice();
-	
-	static void RegularInterface() {
-
-		while(true){
-			System.out.println("--------------------------------------------------------");
-			System.out.println("Please select from the menu option below");
-			System.out.println("(1) View your balance");
-			System.out.println("(2) View your lists");
-			System.out.println("(3) Create a new list");
-			System.out.println("(4) Delete a list");
-			System.out.println("(5) Settle a list");
-			System.out.println("(6) View Expense History");
-			System.out.println("(7) Write Expense History");
-			System.out.println("(0) Logout");
-			System.out.println("--------------------------------------------------------");
-			System.out.print("You want to: ");
-			int userChoice = my_scanINT.nextInt();
-			if(userChoice==1){
-				System.out.println("Your total expense balance is: ");
-			}
-			else if(userChoice==0){System.out.println("You are logged out"); break;}
-			else System.out.println("Pleasse enter valid choice");
-		}
-	}
-
 
 	public static void userChoiceList() {
 		switch (userChoice) {
 		case 1:
-			addExpenseToList();
+			viewIndividualBalance();
 			break;
 		case 2:
+			createNewList();
+			break;
+		case 3:
+			viewList();
+			break;
+		case 4:
+			deleteList();
+			break;
+		case 5:
+			settleList();
+			break;
+		case 6:
+			addExpenseToList();
+			break;
+		case 7:
 			viewExpenseHistory();
-		}
+			break;
+		case 8:
+			writeExpenseHistory();
+			break;
+		case 0:
+			Logout();
+		default:
+			System.out.println("--------------------------------------------------------");
+			System.out.println("Please enter a valid choice.");
+			System.out.println("--------------------------------------------------------");
+			getUserChoice();
 	}
-
+}
+	
 	public static int getUserChoice() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("You are logged in as a Regular user!");
-		System.out.println(" What do you want to do?");
-		System.out.println("****************************************************************");
+		System.out.println("What do you want to do?");
+		System.out.println("--------------------------------------------------------");
 		System.out.println("");
-		System.out.println("(1) addExpenseToList");
-		System.out.println("(2) viewIndividualBalance");
-		System.out.println("****************************************************************");
-		System.out.print("Please enter your choice (1 or 2): ");
-		return userInput1.nextInt();	// gets either 1 or 2 from the user
+		System.out.println("(1) View individual balance");
+		System.out.println("(2) Create a new list");
+		System.out.println("(3) View your lists");
+		System.out.println("(4) Delete a list");
+		System.out.println("(5) Settle a list");
+		System.out.println("(6) Add Expense To List");
+		System.out.println("(7) View Expense History");
+		System.out.println("(8) Write Expense History");
+		System.out.println("(0) Logout");
+		System.out.println("--------------------------------------------------------");
+		System.out.print("You want to: ");
+		return my_scanINT.nextInt();	// user choice 
 	}
 
-	public static void createNewList() {
-
-	}
-	public static void viewList() {
-		viewList();
-	}
-	public void deleteList() {
-		deleteList();
-	}
-	public void settleList() {
-		settleList();
-	}
 	public static void viewIndividualBalance() {
 		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "€");
 	}
+	
+	public static void createNewList() {
+
+	}
+	
+	public static void viewList() {
+		viewList();
+	}
+	public static void deleteList() {
+		deleteList();
+	}
+	public static void settleList() {
+		settleList();
+	}
+	
 	public static void viewExpenseHistory() {
 		int lineNumber = 0;
 		String[] c1 = new String[100];
@@ -109,13 +120,13 @@ public class RegularAccount {
 		System.arraycopy(c4, 0, Finalc4, 0, lineNumber);
 		String[] Finalc5 = new String[lineNumber];
 		System.arraycopy(c5, 0, Finalc5, 0, lineNumber);
-		
+
 		for (int i = 0; i < Finalc1.length; i++) {
 			System.out.printf("%s\t%s\t%s\t%s\t%s\n", Finalc1[i], Finalc2[i], Finalc3[i], Finalc4[i], Finalc5[i]);
 		}
 	}
-	
-	public void writeExpenseHistory() {
+
+	public static void writeExpenseHistory() {
 		writeExpenseHistory();
 	}
 	public void addUserToList() {
@@ -136,7 +147,7 @@ public class RegularAccount {
 			Expense.expenseDate = userInput2.nextLine();
 			System.out.println("Who paid for this expense? ");
 			UserAccount.userName = userInput2.nextLine();
-			
+
 			try {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt", true)));
 				wr.println(List.listId + "\t" + Expense.expenseName + "\t" + Expense.amount + "\t" + Expense.expenseDate + "\t" + UserAccount.userName);
@@ -149,4 +160,10 @@ public class RegularAccount {
 	public void allocateExpensetoUser() {
 
 	}
+	
+	public static void Logout () {
+		System.out.println("You are logged out");
+		UserAccount.getUserChoice();
+	}
 }
+
