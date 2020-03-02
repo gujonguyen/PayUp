@@ -1,152 +1,222 @@
-package default_pac2;
-import java.util.*;
+package default_package;
 import java.io.*;
+import java.util.*;
 
-public class RegularAccount {
+public class UserAccount {
+	String userName;
+	String password;
+	String typeOfAccount;
+	static int noOfUsers;
+	static Scanner userInput1 = new Scanner(System.in);
+	static Scanner userInput2 = new Scanner(System.in);
+	static Scanner userInput3 = new Scanner(System.in);
+	int userID = 0;
+	private String sCurrentLine;
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
-	static Scanner userInput1 = new Scanner(System.in); //for int
-	static Scanner userInput2 = new Scanner(System.in); // for string
-	static Scanner userInput3 = new Scanner(System.in); // for double
-	static int userChoice = getUserChoice();
-	
-	static void RegularInterface() {
 
-		while(true){
-			System.out.println("--------------------------------------------------------");
-			System.out.println("Please select from the menu option below");
-			System.out.println("(1) View your balance");
-			System.out.println("(2) View your lists");
-			System.out.println("(3) Create a new list");
-			System.out.println("(4) Delete a list");
-			System.out.println("(5) Settle a list");
-			System.out.println("(6) View Expense History");
-			System.out.println("(7) Write Expense History");
-			System.out.println("(0) Logout");
-			System.out.println("--------------------------------------------------------");
-			System.out.print("You want to: ");
-			int userChoice = my_scanINT.nextInt();
-			if(userChoice==1){
-				System.out.println("Your total expense balance is: ");
-			}
-			else if(userChoice==0){System.out.println("You are logged out"); break;}
-			else System.out.println("Pleasse enter valid choice");
-		}
+	public UserAccount(String name, String pass, String role) {
+		userName = name;
+		password = pass;
+		typeOfAccount = role;	
 	}
 
-
-	public static void userChoiceList() {
-		switch (userChoice) {
-		case 1:
-			addExpenseToList();
-			break;
-		case 2:
-			viewExpenseHistory();
-		}
-	}
-
-	public static int getUserChoice() {
-		System.out.println("--------------------------------------------------------");
-		System.out.println("You are logged in as a Regular user!");
-		System.out.println(" What do you want to do?");
-		System.out.println("****************************************************************");
-		System.out.println("");
-		System.out.println("(1) addExpenseToList");
-		System.out.println("(2) viewIndividualBalance");
-		System.out.println("****************************************************************");
-		System.out.print("Please enter your choice (1 or 2): ");
-		return userInput1.nextInt();	// gets either 1 or 2 from the user
-	}
-
-	public static void createNewList() {
-
-	}
-	public static void viewList() {
-		viewList();
-	}
-	public void deleteList() {
-		deleteList();
-	}
-	public void settleList() {
-		settleList();
-	}
-	public static void viewIndividualBalance() {
-		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "€");
-	}
-	public static void viewExpenseHistory() {
+	public static UserAccount[] readFile() {
 		int lineNumber = 0;
-		String[] c1 = new String[100];
-		String[] c2 = new String[100];
-		String[] c3 = new String[100];
-		String[] c4 = new String[100];
-		String[] c5 = new String[100];
-		System.out.println("List ID\tExpense Name\tAmount\tDate\tWho paid?");
+		String[] aaxis = new String[100];
+		String[] baxis = new String[100];
+		String[] caxis = new String[100];
+		int[] daxis = new int[100];
+
 		try {
 			String sCurrentLine;
-			String[] uCurrent = new String [5];
-			BufferedReader myFile = new BufferedReader (new FileReader("Expense_database.txt")); 
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				c1[lineNumber] = uCurrent[0];
-				c2[lineNumber] = uCurrent[1];
-				c3[lineNumber] = uCurrent[2];
-				c4[lineNumber] = uCurrent[3];
-				c5[lineNumber] = uCurrent[4];
+				aaxis[lineNumber] = uCurrent[0];
+				baxis[lineNumber] = uCurrent[1];
+				caxis[lineNumber] = uCurrent[2];
+				daxis[lineNumber] = Integer.parseInt(uCurrent[3]);
+
 				lineNumber++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not exist");
 		}
-		String[] Finalc1 = new String[lineNumber];
-		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
-		String[] Finalc2 = new String[lineNumber];
-		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-		String[] Finalc3 = new String[lineNumber];
-		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
-		String[] Finalc4 = new String[lineNumber];
-		System.arraycopy(c4, 0, Finalc4, 0, lineNumber);
-		String[] Finalc5 = new String[lineNumber];
-		System.arraycopy(c5, 0, Finalc5, 0, lineNumber);
+
+		String[] Finalaaxis = new String[lineNumber];
+		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
+		String[] Finalbaxis = new String[lineNumber];
+		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
+		String[] Finalcaxis = new String[lineNumber];
+		System.arraycopy(caxis, 0, Finalcaxis, 0, lineNumber);
+		int[] Finaldaxis = new int[lineNumber];
+		System.arraycopy(daxis, 0, Finaldaxis, 0, lineNumber);
+
+		UserAccount user[] = new UserAccount[Finalaaxis.length];
+
+		for (int i = 0; i < Finalaaxis.length; i++) {
+			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i]);
+		}	
+
+		return user;
+	}
+
+	public UserAccount() {
+		int userChoice = getUserChoice();
+		switch (userChoice) {
+		case 1:
+			Register();
+		case 2:
+			String currentUser = Login();
+			for (int i = 0; i < readFile().length; i++) {
+				if (readFile()[i].userName.equals(currentUser)) {
+					if (readFile()[i].typeOfAccount.equals("r")) {
+						RegularAccount.userChoiceList();
+					}
+					else {
+						AdministratorAccount.AdminInterface();
+					}
+					break;
+				}
+			}	
+		case 3:
+			Exit();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new UserAccount();
+	}
+	// This method asks and returns what the user wants to do
+
+	public static int getUserChoice(){
+			System.out.println("--------------------------------------------------------");
+			System.out.println("\t\t Welcome to PayUp! ");
+			System.out.println("\n What do you wish to?");   
+			System.out.println("--------------------------------------------------------");
+			System.out.println("(1) Register your account");
+			System.out.println("(2) Login into account");
+			System.out.println("(3) Exit");
+			System.out.println("--------------------------------------------------------");
+			System.out.print("Enter your option: ");
+			return my_scanINT.nextInt();
+		}
+	
+
+	public void Register() {
 		
-		for (int i = 0; i < Finalc1.length; i++) {
-			System.out.printf("%s\t%s\t%s\t%s\t%s\n", Finalc1[i], Finalc2[i], Finalc3[i], Finalc4[i], Finalc5[i]);
+		noOfUsers = readfile1();
+		//first: register 
+		System.out.println("--------------------------------------------------------");
+		System.out.println("\t\t Please Register User");
+		System.out.println("--------------------------------------------------------");
+		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
+		String typeOfAccount = userInput3.nextLine();
+		System.out.println("Please choose a username:");
+		String Un = userInput2.nextLine();
+		System.out.println("Please choose a password:");
+		String Pw = userInput2.nextLine();
+		System.out.println("--------------------------------------------------------");
+		System.out.println("\t Thank you for registering to PayUp!");
+		System.out.println("--------------------------------------------------------");
+
+		try { //This is for Registration of the users
+
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
+			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + noOfUsers);
+
+			wr.close();	
+		} catch (IOException e) {
+			System.out.println("I/O error when writing on file");
 		}
 	}
-	
-	public void writeExpenseHistory() {
-		writeExpenseHistory();
-	}
-	public void addUserToList() {
 
-	}
-	public static void addExpenseToList() {
+	public static String Login() {
+		//second: login
+		int lineNumber = 0;
+		String[] xaxis = new String[100];
+		String[] yaxis = new String[100];
+		String Un;
+		String Pw;
+		String currentUser = null;		
 
-		System.out.println("How many expenses do you want to add? ");
-		int counter = userInput1.nextInt();
-		for (int i = 0; i < counter; i++) {
-			System.out.println("Please choose the list ID of the list this expense belongs to: ");
-			List.listId = userInput1.nextInt();
-			System.out.println("Please choose an expense name: ");
-			Expense.expenseName = userInput2.nextLine();
-			System.out.println("Please choose the expense ammount: ");
-			Expense.amount = userInput3.nextDouble();
-			System.out.println("Please choose the expense date: ");
-			Expense.expenseDate = userInput2.nextLine();
-			System.out.println("Who paid for this expense? ");
-			UserAccount.userName = userInput2.nextLine();
-			
-			try {
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt", true)));
-				wr.println(List.listId + "\t" + Expense.expenseName + "\t" + Expense.amount + "\t" + Expense.expenseDate + "\t" + UserAccount.userName);
-				wr.close();	
-			} catch (IOException e) {
-				System.out.println("I/O error when writing on file");
+		System.out.println("--------------------------------------------------------");
+		System.out.println("\t\t Please Login User");
+		System.out.println("--------------------------------------------------------");
+		System.out.println("Please input your username:");
+		Un = userInput2.nextLine();
+		System.out.println("Please input your password:");
+		Pw = userInput2.nextLine();
+
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [2];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
+
+				xaxis[lineNumber] = uCurrent[0];
+				yaxis[lineNumber] = uCurrent[1];
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not exist");
+		}
+
+		String[] Finalxaxis = new String[lineNumber];
+		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
+		String[] Finalyaxis = new String[lineNumber];
+		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
+
+		for (int i = 0; i < lineNumber; i++) {
+			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
+				System.out.println("Login successful");
+				currentUser = Un;
+				break;
 			}
 		}
+		return currentUser;
 	}
-	public void allocateExpensetoUser() {
 
+	private String Exit() {
+		System.out.println("--------------------------------------------------------");
+		System.out.println("	Thank you for visiting PayUp!");
+		return null;
 	}
+
+	public int readfile1() {
+		int lineNumber = 0;
+		try {
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((setsCurrentLine(myFile.readLine())) != null) {
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not exist");
+		}
+		return lineNumber;
+	}
+
+
+	public String getsCurrentLine() {
+		return sCurrentLine;
+	}
+
+	public String setsCurrentLine(String sCurrentLine) {
+		this.sCurrentLine = sCurrentLine;
+		return sCurrentLine;
+	}
+
 }
+
+
+
+
