@@ -1,11 +1,5 @@
 package default_package;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class AdministratorAccount extends UserAccount {
@@ -21,27 +15,24 @@ public class AdministratorAccount extends UserAccount {
 			removeList();
 			break;
 		case 3:
-			UserAccount.exit();
+			UserAccount.Exit();
 			break;
-
 		}
 	}
 
 	static int AdminInterface() {
 
-		while(true){
 			System.out.println("--------------------------------------------------------");
 			System.out.println("Welcome Admin of PayUp!");
 			System.out.println("You are logged in to the Administrator Account!");
 			System.out.println("--------------------------------------------------------");
 			System.out.println("What do you wish to do?");
 			System.out.println("(1) Remove a User from PayUp");
-			System.out.println("(2) Remove Lists");
-			System.out.println("(0) Logout");
+			System.out.println("(2) Remove List");
+			System.out.println("(3) Logout");
 			System.out.println("--------------------------------------------------------");
 			System.out.print("Please enter your choice: ");
 			return  my_scanINT.nextInt();
-		}
 	}	
 
 	private void removeUser() {
@@ -68,7 +59,6 @@ public class AdministratorAccount extends UserAccount {
 				dAxis[lineNumber] = (uCurrentLine[3]);
 				lineNumber++;
 			}
-
 
 			br.close();
 		} catch (IOException e) {
@@ -112,14 +102,9 @@ public class AdministratorAccount extends UserAccount {
 				System.out.println("I/O error when writing on file");
 			}
 		}
-
 	}
 
 	private static void removeList() {
 		List.viewList();
 	}
-
-
-
 }
-
