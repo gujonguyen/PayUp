@@ -46,7 +46,7 @@ public class RegularAccount extends UserAccount{
 	}
 
 	public static int getUserChoice() {
-		System.out.println("--------------------------------------------------------");
+		System.out.println("--------------------------------------------------------");//user interface for regular users
 		System.out.println("You are logged in as a Regular user!");
 		System.out.println("What do you want to do?");
 		System.out.println("--------------------------------------------------------");
@@ -62,7 +62,7 @@ public class RegularAccount extends UserAccount{
 		System.out.println("(0) Logout");
 		System.out.println("--------------------------------------------------------");
 		System.out.print("You want to: ");
-		return my_scanINT.nextInt();	//get user choice 
+		return my_scanINT.nextInt();	//getting user choice 
 	}
 
 	public static void viewIndividualBalance() {
@@ -70,6 +70,7 @@ public class RegularAccount extends UserAccount{
 	}
 	
 	public static void createNewList() {
+		List.createList();
 		//you should be able to add user list to viewList method
 				//public void addUserToList() { 
 		
