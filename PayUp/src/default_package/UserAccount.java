@@ -15,11 +15,10 @@ public class UserAccount {
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
 
-	public UserAccount(String name, String pass, String role, int id) {
+	public UserAccount(String name, String pass, String role) {
 		userName = name;
 		password = pass;
-		typeOfAccount = role;
-		userID = id;
+		typeOfAccount = role;	
 	}
 
 	public static UserAccount[] readFile() {
@@ -60,7 +59,7 @@ public class UserAccount {
 		UserAccount user[] = new UserAccount[Finalaaxis.length];
 
 		for (int i = 0; i < Finalaaxis.length; i++) {
-			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i], Finaldaxis[i]);
+			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i]);
 		}	
 
 		return user;
@@ -71,26 +70,27 @@ public class UserAccount {
 		switch (userChoice) {
 		case 1:
 			Register();
+			break;
 		case 2:
 			String currentUser = Login();
 			for (int i = 0; i < readFile().length; i++) {
 				if (readFile()[i].userName.equals(currentUser)) {
 					if (readFile()[i].typeOfAccount.equals("r")) {
-						List.deleteList();
+						RegularAccount.getUserChoice();
 					}
-					else {
-						AdministratorAccount.AdminInterface();
+					else if (readFile()[i].userName.equals(currentUser)) {
+						if (readFile()[i].typeOfAccount.equals("r")) {
+							AdministratorAccount.AdminInterface();
+						}
 					}
-					break;
 				}
-			}	
+
+			}
+			break;
 		case 3:
 			Exit();
 			break;
-		default:
-			System.out.print("Please enter a valid choice.");
 		}
-		
 	}
 
 	public static void main(String[] args) {
@@ -100,20 +100,21 @@ public class UserAccount {
 	// This method asks and returns what the user wants to do
 
 	public static int getUserChoice(){
-			System.out.println("--------------------------------------------------------");
-			System.out.println("\t\t Welcome to PayUp! ");
-			System.out.println("\n What do you wish to?");   
-			System.out.println("--------------------------------------------------------");
-			System.out.println("(1) Register your account");
-			System.out.println("(2) Login into account");
-			System.out.println("(3) Exit");
-			System.out.println("--------------------------------------------------------");
-			System.out.print("Enter your option: ");
-			return my_scanINT.nextInt();
-		}
+		System.out.println("--------------------------------------------------------");
+		System.out.println("\t\t Welcome to PayUp! ");
+		System.out.println("\n What do you wish to?");   
+		System.out.println("--------------------------------------------------------");
+		System.out.println("(1) Register your account");
+		System.out.println("(2) Login into account");
+		System.out.println("(3) Exit");
+		System.out.println("--------------------------------------------------------");
+		System.out.print("Enter your option: ");
+		return my_scanINT.nextInt();
+	}
+
 
 	public void Register() {
-		
+
 		noOfUsers = readfile1();
 		//first: register 
 		System.out.println("--------------------------------------------------------");
@@ -178,20 +179,30 @@ public class UserAccount {
 		String[] Finalyaxis = new String[lineNumber];
 		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
 
-		for (int i = 0; i < lineNumber; i++) {
+		for (int i = 0; i < lineNumber; i++) {//checking for every line in the user database 
 			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
 				System.out.println("Login successful");
 				currentUser = Un;
 				break;
 			}
+			else //username and password do not match or not found in user database
+				System.out.println("--------------------------------------------------------");
+			System.out.println("Please enter a valid choice.");
+			System.out.println("--------------------------------------------------------");
+			Login();//returns user to login process
+			break;
 		}
+
 		return currentUser;
 	}
 
-	protected static void Exit() {
+
+	private String Exit() {//exit option before login or registration
 		System.out.println("--------------------------------------------------------");
 		System.out.println("	Thank you for visiting PayUp!");
+		return null;
 	}
+
 
 	public int readfile1() {
 		int lineNumber = 0;
@@ -218,3 +229,7 @@ public class UserAccount {
 	}
 
 }
+
+
+
+
