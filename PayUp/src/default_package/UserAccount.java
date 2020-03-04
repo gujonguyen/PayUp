@@ -180,6 +180,11 @@ public class UserAccount {
 				currentUser = Un;
 				break;
 			}
+			else // when user inputs an invalid username or password, is messaged and redirected to login again
+				System.out.println("--------------------------------------------------------");
+				System.out.println("\t Invalid username or password");
+				Login();
+		}
 		}
 		return currentUser;
 	}
