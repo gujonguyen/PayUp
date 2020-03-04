@@ -73,12 +73,11 @@ public class UserAccount {
 			for (int i = 0; i < readFile().length; i++) {
 				if (readFile()[i].userName.equals(currentUser)) {
 					if (readFile()[i].typeOfAccount.equals("R")) {
-						RegularAccount.userChoiceList();
+						new RegularAccount();
 					}
 					else {
-						AdministratorAccount.AdminInterface();
+						new AdministratorAccount();
 					}
-					break;
 				}
 			}	
 		case 3:
@@ -134,6 +133,7 @@ public class UserAccount {
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}
+		new UserAccount();
 	}
 
 	protected static String Login() {
@@ -180,11 +180,6 @@ public class UserAccount {
 				currentUser = Un;
 				break;
 			}
-			else // when user inputs an invalid username or password, is messaged and redirected to login again
-				System.out.println("--------------------------------------------------------");
-				System.out.println("\t Invalid username or password");
-				Login();
-		}
 		}
 		return currentUser;
 	}
