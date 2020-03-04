@@ -12,10 +12,11 @@ public class UserAccount {
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
 
-	public UserAccount(String name, String pass, String role) {
+	public UserAccount(String name, String pass, String role, int uID) {
 		userName = name;
 		password = pass;
 		typeOfAccount = role;
+		userID= uID;
 	}
 
 	public static UserAccount[] readFile() {
@@ -56,7 +57,7 @@ public class UserAccount {
 		UserAccount user[] = new UserAccount[FinalLocalUserName.length];
 
 		for (int i = 0; i < FinalLocalUserName.length; i++) {
-			user[i] = new UserAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i]);
+			user[i] = new UserAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
 		}	
 
 		return user;
@@ -69,9 +70,9 @@ public class UserAccount {
 			Register();
 			
 		case 2:
-			String currentUser = Login();
+			int loggedID = Login();
 			for (int i = 0; i < readFile().length; i++) {
-				if (readFile()[i].userName.equals(currentUser)) {
+				if (readFile()[i].userID == loggedID) {
 					if (readFile()[i].typeOfAccount.equals("R")) {
 						new RegularAccount();
 					}
@@ -83,10 +84,6 @@ public class UserAccount {
 		case 3:
 			Exit();
 			break;
-			default:
-				System.out.println("--------------------------------------------------------");
-				System.out.println("Please enter a valid user choice!");
-				getUserChoice();
 		}
 	}
 
@@ -136,14 +133,16 @@ public class UserAccount {
 		new UserAccount();
 	}
 
-	protected static String Login() {
-		//second: login
+	protected int Login() {
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword = new String[100];
+		String[] LocalRole = new String[100];
+		int[] LocalID = new int[100];
+		int loggedID = 0;
 		String Un;
 		String Pw;
-		String currentUser = null;		
+		int currentUserID = 0;		
 		
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t\t Please Login User");
@@ -152,16 +151,19 @@ public class UserAccount {
 		Un = my_scan.nextLine();
 		System.out.println("Please input your password:");
 		Pw = my_scan.nextLine();
+		
 
 		try {
 			String sCurrentLine;
-			String[] uCurrent = new String [2];
+			String[] uCurrent = new String [4];
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
 				LocalUserName[NumUser] = uCurrent[0];
 				LocalPassword[NumUser] = uCurrent[1];
+				LocalRole[NumUser] = uCurrent[2];
+				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
 				NumUser++;
 			}
 			myFile.close(); 
@@ -175,13 +177,12 @@ public class UserAccount {
 		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
 		for (int i = 0; i < NumUser; i++) {
 			if (Un.equals(FinalLocalUserName[i]) && Pw.equals(FinalLocalPassword[i])) {
+				loggedID = LocalID[i];
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
-				currentUser = Un;
-				break;
 			}
 		}
-		return currentUser;
+		return loggedID;
 	}
 
 	protected static void Exit() {
