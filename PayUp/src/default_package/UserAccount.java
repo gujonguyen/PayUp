@@ -246,7 +246,11 @@ public class UserAccount {
 			else if(UserInput==7) RegularAccount.viewExpenseHistory();
 			else if(UserInput==8) RegularAccount.writeExpenseHistory();
 			else if(UserInput==0) RegularAccount.Logout();
-			else System.out.print("Please enter a valid choice.");
+			else {
+				System.out.println("Please enter a valid choice.");
+				System.out.println("");
+				RegularAccountInterface();
+		}
 	}
 
 	public void AdministratorInterface() {
@@ -263,7 +267,11 @@ public class UserAccount {
 		UserInput = my_scan.nextInt();
 			if(UserInput==1) AdministratorAccount.removeUser();
 			else if(UserInput==2) AdministratorAccount.removeList();
-			else if(UserInput==3) UserAccount.Exit();
-			else System.out.print("Please enter a valid choice.");
+			else if(UserInput==3) AdministratorAccount.Logout();
+			else {
+				System.out.println("Please enter a valid choice.");
+				System.out.println("");
+				AdministratorInterface();
+		}
 	}	
-}
+}	
