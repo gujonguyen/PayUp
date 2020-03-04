@@ -70,7 +70,6 @@ public class UserAccount {
 		switch (userChoice) {
 		case 1:
 			Register();
-			break;
 		case 2:
 			String currentUser = Login();
 			for (int i = 0; i < readFile().length; i++) {
@@ -101,7 +100,7 @@ public class UserAccount {
 
 	public static int getUserChoice(){
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t\t Welcome to PayUp! ");
+		System.out.println("\t Welcome to PayUp! ");
 		System.out.println("\n What do you wish to?");   
 		System.out.println("--------------------------------------------------------");
 		System.out.println("(1) Register your account");
@@ -118,7 +117,7 @@ public class UserAccount {
 		noOfUsers = readfile1();
 		//first: register 
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t\t Please Register User");
+		System.out.println("	Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput3.nextLine();
@@ -127,7 +126,7 @@ public class UserAccount {
 		System.out.println("Please choose a password:");
 		String Pw = userInput2.nextLine();
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t Thank you for registering to PayUp!");
+		System.out.println("	Thank you for registering to PayUp!");
 		System.out.println("--------------------------------------------------------");
 
 		try { //This is for Registration of the users
@@ -151,7 +150,7 @@ public class UserAccount {
 		String currentUser = null;		
 
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t\t Please Login User");
+		System.out.println("	Please Login User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Please input your username:");
 		Un = userInput2.nextLine();
@@ -187,7 +186,7 @@ public class UserAccount {
 			}
 			else //username and password do not match or not found in user database
 				System.out.println("--------------------------------------------------------");
-			System.out.println("Please enter a valid choice.");
+			System.out.println("	Please enter a valid choice.");
 			System.out.println("--------------------------------------------------------");
 			Login();//returns user to login process
 			break;
