@@ -3,13 +3,10 @@ import java.io.*;
 import java.util.*;
 
 public class UserAccount {
-	String userName;
-	String password;
-	String typeOfAccount;
-	static int noOfUsers;
-	static Scanner userInput1 = new Scanner(System.in);
-	static Scanner userInput2 = new Scanner(System.in);
-	static Scanner userInput3 = new Scanner(System.in);
+	protected String userName;
+	private String password;
+	private String typeOfAccount;
+	private static int noOfUsers;
 	int userID = 0;
 	private String sCurrentLine;
 	static Scanner my_scan = new Scanner(System.in);
@@ -17,16 +14,16 @@ public class UserAccount {
 
 	public UserAccount(String name, String pass, String role) {
 		userName = name;
-		password = pass;
-		typeOfAccount = role;	
+		setPassword(pass);
+		typeOfAccount = role;
 	}
 
 	public static UserAccount[] readFile() {
 		int lineNumber = 0;
-		String[] aaxis = new String[100];
-		String[] baxis = new String[100];
-		String[] caxis = new String[100];
-		int[] daxis = new int[100];
+		String[] LocalUserName = new String[100];
+		String[] LocalPassword= new String[100];
+		String[] LocalTypeAccount = new String[100];
+		int[] LocalID = new int[100];
 
 		try {
 			String sCurrentLine;
@@ -35,10 +32,10 @@ public class UserAccount {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				aaxis[lineNumber] = uCurrent[0];
-				baxis[lineNumber] = uCurrent[1];
-				caxis[lineNumber] = uCurrent[2];
-				daxis[lineNumber] = Integer.parseInt(uCurrent[3]);
+				LocalUserName[lineNumber] = uCurrent[0];
+				LocalPassword[lineNumber] = uCurrent[1];
+				LocalTypeAccount[lineNumber] = uCurrent[2];
+				LocalID[lineNumber] = Integer.parseInt(uCurrent[3]);
 
 				lineNumber++;
 			}
@@ -47,19 +44,19 @@ public class UserAccount {
 			System.out.println("This file does not exist");
 		}
 
-		String[] Finalaaxis = new String[lineNumber];
-		System.arraycopy(aaxis, 0, Finalaaxis, 0, lineNumber);
-		String[] Finalbaxis = new String[lineNumber];
-		System.arraycopy(baxis, 0, Finalbaxis, 0, lineNumber);
-		String[] Finalcaxis = new String[lineNumber];
-		System.arraycopy(caxis, 0, Finalcaxis, 0, lineNumber);
-		int[] Finaldaxis = new int[lineNumber];
-		System.arraycopy(daxis, 0, Finaldaxis, 0, lineNumber);
+		String[] FinalLocalUserName = new String[lineNumber];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, lineNumber);
+		String[] FinalLocalPassword = new String[lineNumber];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, lineNumber);
+		String[] FinalLocalTypeAccount = new String[lineNumber];
+		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, lineNumber);
+		int[] FinalLocalID = new int[lineNumber];
+		System.arraycopy(LocalID, 0, FinalLocalID, 0, lineNumber);
 
-		UserAccount user[] = new UserAccount[Finalaaxis.length];
+		UserAccount user[] = new UserAccount[FinalLocalUserName.length];
 
-		for (int i = 0; i < Finalaaxis.length; i++) {
-			user[i] = new UserAccount(Finalaaxis[i], Finalbaxis[i], Finalcaxis[i]);
+		for (int i = 0; i < FinalLocalUserName.length; i++) {
+			user[i] = new UserAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i]);
 		}	
 
 		return user;
@@ -70,25 +67,27 @@ public class UserAccount {
 		switch (userChoice) {
 		case 1:
 			Register();
+			
 		case 2:
 			String currentUser = Login();
 			for (int i = 0; i < readFile().length; i++) {
 				if (readFile()[i].userName.equals(currentUser)) {
 					if (readFile()[i].typeOfAccount.equals("r")) {
-						RegularAccount.getUserChoice();
+						RegularAccount.userChoiceList();
 					}
-					else if (readFile()[i].userName.equals(currentUser)) {
-						if (readFile()[i].typeOfAccount.equals("r")) {
-							AdministratorAccount.AdminInterface();
-						}
+					else {
+						AdministratorAccount.AdminInterface();
 					}
+					break;
 				}
-
-			}
-			break;
+			}	
 		case 3:
 			Exit();
 			break;
+			default:
+				System.out.println("--------------------------------------------------------");
+				System.out.println("Please enter a valid user choice!");
+				getUserChoice();
 		}
 	}
 
@@ -98,9 +97,9 @@ public class UserAccount {
 	}
 	// This method asks and returns what the user wants to do
 
-	public static int getUserChoice(){
+	private static int getUserChoice(){
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t Welcome to PayUp! ");
+		System.out.println("\t\t Welcome to PayUp! ");
 		System.out.println("\n What do you wish to?");   
 		System.out.println("--------------------------------------------------------");
 		System.out.println("(1) Register your account");
@@ -112,21 +111,21 @@ public class UserAccount {
 	}
 
 
-	public void Register() {
+	protected void Register() {
 
 		noOfUsers = readfile1();
 		//first: register 
 		System.out.println("--------------------------------------------------------");
-		System.out.println("	Please Register User");
+		System.out.println("\t\t Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
-		String typeOfAccount = userInput3.nextLine();
+		String typeOfAccount = my_scan.nextLine();
 		System.out.println("Please choose a username:");
-		String Un = userInput2.nextLine();
+		String Un = my_scan.nextLine();
 		System.out.println("Please choose a password:");
-		String Pw = userInput2.nextLine();
+		String Pw = my_scan.nextLine();
 		System.out.println("--------------------------------------------------------");
-		System.out.println("	Thank you for registering to PayUp!");
+		System.out.println("\t Thank you for registering to PayUp!");
 		System.out.println("--------------------------------------------------------");
 
 		try { //This is for Registration of the users
@@ -140,22 +139,22 @@ public class UserAccount {
 		}
 	}
 
-	public static String Login() {
+	protected static String Login() {
 		//second: login
 		int lineNumber = 0;
-		String[] xaxis = new String[100];
-		String[] yaxis = new String[100];
+		String[] LocalUserName = new String[100];
+		String[] LocalPassword = new String[100];
 		String Un;
 		String Pw;
 		String currentUser = null;		
 
 		System.out.println("--------------------------------------------------------");
-		System.out.println("	Please Login User");
+		System.out.println("\t\t Please Login User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Please input your username:");
-		Un = userInput2.nextLine();
+		Un = my_scan.nextLine();
 		System.out.println("Please input your password:");
-		Pw = userInput2.nextLine();
+		Pw = my_scan.nextLine();
 
 		try {
 			String sCurrentLine;
@@ -164,8 +163,8 @@ public class UserAccount {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				xaxis[lineNumber] = uCurrent[0];
-				yaxis[lineNumber] = uCurrent[1];
+				LocalUserName[lineNumber] = uCurrent[0];
+				LocalPassword[lineNumber] = uCurrent[1];
 				lineNumber++;
 			}
 			myFile.close(); 
@@ -173,37 +172,27 @@ public class UserAccount {
 			System.out.println("This file does not exist");
 		}
 
-		String[] Finalxaxis = new String[lineNumber];
-		System.arraycopy(xaxis, 0, Finalxaxis, 0, lineNumber);
-		String[] Finalyaxis = new String[lineNumber];
-		System.arraycopy(yaxis, 0, Finalyaxis, 0, lineNumber);
-
-		for (int i = 0; i < lineNumber; i++) {//checking for every line in the user database 
-			if (Un.equals(Finalxaxis[i]) && Pw.equals(Finalyaxis[i])) {
-				System.out.println("Login successful");
+		String[] FinalLocalUserName = new String[lineNumber];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, lineNumber);
+		String[] FinalLocalPassword = new String[lineNumber];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, lineNumber);
+		for (int i = 0; i < lineNumber; i++) {
+			if (Un.equals(FinalLocalUserName[i]) && Pw.equals(FinalLocalPassword[i])) {
+				System.out.println("--------------------------------------------------------");
+				System.out.println("Login successful, welcome " + Un +"!");
 				currentUser = Un;
 				break;
 			}
-			else //username and password do not match or not found in user database
-				System.out.println("--------------------------------------------------------");
-			System.out.println("	Please enter a valid choice.");
-			System.out.println("--------------------------------------------------------");
-			Login();//returns user to login process
-			break;
 		}
-
 		return currentUser;
 	}
 
-
-	private String Exit() {//exit option before login or registration
+	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("	Thank you for visiting PayUp!");
-		return null;
 	}
 
-
-	public int readfile1() {
+	private int readfile1() {
 		int lineNumber = 0;
 		try {
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
@@ -227,8 +216,15 @@ public class UserAccount {
 		return sCurrentLine;
 	}
 
-}
+	public String getPassword() {
+		return password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+}
 
 
 
