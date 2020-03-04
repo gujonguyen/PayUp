@@ -4,8 +4,8 @@ import java.util.*;
 
 public class UserAccount {
 	protected String userName;
-	private String password;
-	private String typeOfAccount;
+	protected String password;
+	protected String typeOfAccount;
 	private static int noOfUsers;
 	int userID = 0;
 	private String sCurrentLine;
@@ -63,6 +63,36 @@ public class UserAccount {
 		return user;
 	}
 
+	public RegularAccount[] readRegulars() {
+		UserAccount [] allUsers = readFile();
+		RegularAccount [] regulars = new RegularAccount [100];
+		int counterRegulars = 0;
+		for (int i = 0; i < allUsers.length; i++) {
+			if (allUsers[i].typeOfAccount.equals("R")) {
+				regulars [i]  = new RegularAccount(allUsers[i].userName, allUsers[i].password, allUsers[i].typeOfAccount, allUsers[i].userID);
+				counterRegulars ++;
+			}
+		}
+		RegularAccount [] finalRegulars = new RegularAccount[counterRegulars];
+		System.arraycopy(regulars, 0, finalRegulars, 0, counterRegulars);
+		return finalRegulars;
+	}
+	
+	public AdministratorAccount [] readAdmins() {
+		UserAccount [] allUsers = readFile();
+		AdministratorAccount [] admins = new AdministratorAccount [100];
+		int counterAdmins = 0;
+		for (int i = 0; i < allUsers.length; i++) {
+		if (allUsers[i].typeOfAccount.equals("R")) {
+			admins [i]  = new AdministratorAccount(allUsers[i].userName, allUsers[i].password, allUsers[i].typeOfAccount, allUsers[i].userID);
+			counterAdmins ++;
+		}
+	}
+		AdministratorAccount [] finalAdmins = new AdministratorAccount[counterAdmins];
+		System.arraycopy(admins, 0, finalAdmins, 0, counterAdmins);
+		return finalAdmins;
+	}
+	
 	public UserAccount() {
 		int userChoice = getUserChoice();
 		switch (userChoice) {
@@ -71,25 +101,17 @@ public class UserAccount {
 
 		case 2:
 			int loggedID = Login();
-			int lineNumber = readfile1();
+			RegularAccount [] regulars = readRegulars();
+			AdministratorAccount [] admins = readAdmins();
 			
-			System.out.println(readFile()[loggedID].typeOfAccount);
-			
-			
-			
-				if (readFile()[loggedID].typeOfAccount.equals("R")) {
-					System.out.println("hhhhh");
-					RegularAccount regular = new RegularAccount();
-					
-					//RegularAccount.RegularMenu();
-					regular.RegularMenu();
-					
-					
-					}
-					else {
-						AdministratorAccount admin = new AdministratorAccount();
-					}
-			
+			for (int i = 0; i < regulars.length; i++) {
+			if (regulars[i].userID == loggedID) {
+				new RegularAccount();
+			}
+			else {
+				new AdministratorAccount();
+			}
+			}
 			break;
 		case 3:
 			Exit();
@@ -192,7 +214,7 @@ public class UserAccount {
 			}
 		}
 		return loggedID;
-		
+
 	}
 
 	protected static void Exit() {
@@ -213,15 +235,6 @@ public class UserAccount {
 			System.out.println("This file does not exist");
 		}
 		return NumUser;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }
