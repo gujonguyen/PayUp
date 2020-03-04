@@ -19,7 +19,7 @@ public class UserAccount {
 	}
 
 	public static UserAccount[] readFile() {
-		int lineNumber = 0;
+		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword= new String[100];
 		String[] LocalTypeAccount = new String[100];
@@ -32,26 +32,26 @@ public class UserAccount {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				LocalUserName[lineNumber] = uCurrent[0];
-				LocalPassword[lineNumber] = uCurrent[1];
-				LocalTypeAccount[lineNumber] = uCurrent[2];
-				LocalID[lineNumber] = Integer.parseInt(uCurrent[3]);
+				LocalUserName[NumUser] = uCurrent[0];
+				LocalPassword[NumUser] = uCurrent[1];
+				LocalTypeAccount[NumUser] = uCurrent[2];
+				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
 
-				lineNumber++;
+				NumUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not exist");
 		}
 
-		String[] FinalLocalUserName = new String[lineNumber];
-		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, lineNumber);
-		String[] FinalLocalPassword = new String[lineNumber];
-		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, lineNumber);
-		String[] FinalLocalTypeAccount = new String[lineNumber];
-		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, lineNumber);
-		int[] FinalLocalID = new int[lineNumber];
-		System.arraycopy(LocalID, 0, FinalLocalID, 0, lineNumber);
+		String[] FinalLocalUserName = new String[NumUser];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+		String[] FinalLocalPassword = new String[NumUser];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+		String[] FinalLocalTypeAccount = new String[NumUser];
+		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
+		int[] FinalLocalID = new int[NumUser];
+		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 
 		UserAccount user[] = new UserAccount[FinalLocalUserName.length];
 
@@ -72,7 +72,7 @@ public class UserAccount {
 			String currentUser = Login();
 			for (int i = 0; i < readFile().length; i++) {
 				if (readFile()[i].userName.equals(currentUser)) {
-					if (readFile()[i].typeOfAccount.equals("r")) {
+					if (readFile()[i].typeOfAccount.equals("R")) {
 						RegularAccount.userChoiceList();
 					}
 					else {
@@ -110,7 +110,6 @@ public class UserAccount {
 		return my_scanINT.nextInt();
 	}
 
-
 	protected void Register() {
 
 		noOfUsers = readfile1();
@@ -129,10 +128,8 @@ public class UserAccount {
 		System.out.println("--------------------------------------------------------");
 
 		try { //This is for Registration of the users
-
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
 			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + noOfUsers);
-
 			wr.close();	
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
@@ -141,13 +138,13 @@ public class UserAccount {
 
 	protected static String Login() {
 		//second: login
-		int lineNumber = 0;
+		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword = new String[100];
 		String Un;
 		String Pw;
 		String currentUser = null;		
-
+		
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t\t Please Login User");
 		System.out.println("--------------------------------------------------------");
@@ -163,20 +160,20 @@ public class UserAccount {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				LocalUserName[lineNumber] = uCurrent[0];
-				LocalPassword[lineNumber] = uCurrent[1];
-				lineNumber++;
+				LocalUserName[NumUser] = uCurrent[0];
+				LocalPassword[NumUser] = uCurrent[1];
+				NumUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not exist");
 		}
 
-		String[] FinalLocalUserName = new String[lineNumber];
-		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, lineNumber);
-		String[] FinalLocalPassword = new String[lineNumber];
-		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, lineNumber);
-		for (int i = 0; i < lineNumber; i++) {
+		String[] FinalLocalUserName = new String[NumUser];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+		String[] FinalLocalPassword = new String[NumUser];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+		for (int i = 0; i < NumUser; i++) {
 			if (Un.equals(FinalLocalUserName[i]) && Pw.equals(FinalLocalPassword[i])) {
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
@@ -193,19 +190,18 @@ public class UserAccount {
 	}
 
 	private int readfile1() {
-		int lineNumber = 0;
+		int NumUser = 0;
 		try {
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((setsCurrentLine(myFile.readLine())) != null) {
-				lineNumber++;
+				NumUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not exist");
 		}
-		return lineNumber;
+		return NumUser;
 	}
-
 
 	public String getsCurrentLine() {
 		return sCurrentLine;
@@ -225,6 +221,3 @@ public class UserAccount {
 	}
 
 }
-
-
-
