@@ -4,12 +4,11 @@ import java.io.*;
 
 public class RegularAccount extends UserAccount{
 	static Scanner my_scanINT = new Scanner(System.in); 
-	static Scanner userInput1 = new Scanner(System.in); //for INT
 	static Scanner userInput2 = new Scanner(System.in); //for strings
 	static Scanner userInput3 = new Scanner(System.in); //for doubles
 
-	public void userChoiceList() {
-		int userChoice = getUserChoice();
+	public RegularMenu() {
+		int userChoice = getUserChoice1();
 		switch (userChoice) {
 		case 1:
 			createNewList();
@@ -36,17 +35,40 @@ public class RegularAccount extends UserAccount{
 			writeExpenseHistory();
 			break;
 		case 0:
-			Logout();
 			break;
 	}
 }
 	
-	public static void Logout() {
+	
+	
+	public static void logout() {
 		System.out.println("You are successfully logged out");
+
+		
+	}
+
+	public static int getUserChoice1() {
+		System.out.println("--------------------------------------------------------");//user interface for regular users
+		System.out.println("You are logged in as a Regular user!");
+		System.out.println("What do you want to do?");
+		System.out.println("--------------------------------------------------------");
+		System.out.println("");
+		System.out.println("(1) Create a new list");
+		System.out.println("(2) View a list");
+		System.out.println("(3) View individual balance");
+		System.out.println("(4) Delete a list");
+		System.out.println("(5) Settle a list");
+		System.out.println("(6) Add Expense To List");
+		System.out.println("(7) View Expense History");
+		System.out.println("(8) Write Expense History");
+		System.out.println("(0) Logout");
+		System.out.println("--------------------------------------------------------");
+		System.out.print("You want to: ");
+		return my_scanINT.nextInt();	//getting user choice 
 	}
 
 	public static void viewIndividualBalance() {
-		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "â‚¬");
+		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "€");
 	}
 	
 	public static void createNewList() {
