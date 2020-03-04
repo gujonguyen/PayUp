@@ -10,11 +10,11 @@ public class List {
 	String date;
 	UserAccount[] temp1 = UserAccount.readFile();
 	static int fileCount;
-	int[] participantArray;
+	String participants;
 
-	public List(String listNamec, int[] participants, int listIDc) {
+	public List(String listNamec, String participantc, int listIDc) {
 		listName = listNamec;
-		participantArray = participants;
+		participants = participantc;
 		listID = listIDc;
 	}
 
@@ -22,7 +22,7 @@ public class List {
 		int lineNumber = 0;
 		int [] idAxis = new int[100];
 		String [] nameAxis = new String[100];
-		int [][] participantAxis = new int[100][100];
+		String [] participantAxis = new String[100];
 		String[] nonsplittedString = new String[100];
 
 		try {
@@ -42,15 +42,12 @@ public class List {
 			System.out.println("This file does not exist");
 		}
 		
-		for (int h = 0; h < 3; h++) {
-			participantAxis[lineNumber][h] = Integer.parseInt(nonsplittedString[h].split(","));
-		}
 
 		int [] FinalIDAxis = new int[lineNumber];
 		System.arraycopy(idAxis, 0, FinalIDAxis, 0, lineNumber);
 		String [] FinalNameAxis = new String[lineNumber];
 		System.arraycopy(nameAxis, 0, FinalNameAxis, 0, lineNumber);
-		int [] FinalParticipantAxis = new int[lineNumber];
+		String [] FinalParticipantAxis = new String[lineNumber];
 		System.arraycopy(participantAxis, 0, FinalParticipantAxis, 0, lineNumber);
 
 		List listArray[] = new List[FinalIDAxis.length];
