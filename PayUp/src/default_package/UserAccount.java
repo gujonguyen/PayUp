@@ -14,7 +14,7 @@ public class UserAccount {
 
 	public UserAccount(String name, String pass, String role) {
 		userName = name;
-		setPassword(pass);
+		password = pass;
 		typeOfAccount = role;
 	}
 
@@ -192,8 +192,9 @@ public class UserAccount {
 	private int readfile1() {
 		int NumUser = 0;
 		try {
+			String sCurrentLine;
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-			while ((setsCurrentLine(myFile.readLine())) != null) {
+			while ((sCurrentLine = myFile.readLine()) != null) {
 				NumUser++;
 			}
 			myFile.close(); 
@@ -203,14 +204,6 @@ public class UserAccount {
 		return NumUser;
 	}
 
-	public String getsCurrentLine() {
-		return sCurrentLine;
-	}
-
-	public String setsCurrentLine(String sCurrentLine) {
-		this.sCurrentLine = sCurrentLine;
-		return sCurrentLine;
-	}
 
 	public String getPassword() {
 		return password;
@@ -221,3 +214,4 @@ public class UserAccount {
 	}
 
 }
+
