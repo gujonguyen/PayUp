@@ -204,15 +204,5 @@ public class UserAccount {
 		}
 		return NumUser;
 	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 }
 
