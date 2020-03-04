@@ -3,7 +3,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class AdministratorAccount extends UserAccount {
-	static Scanner userInput1 = new Scanner(System.in);
+	static Scanner my_scan = new Scanner(System.in);
+	static Scanner my_scanINT = new Scanner(System.in); 
 
 	public void userChoiceList() {
 		int userChoice = AdminInterface();
@@ -81,10 +82,10 @@ private void removeUser() {
 		}
 
 		System.out.println("Which user do you wish to remove?");
-		String localRemovedUser = userInput1.nextLine() ;
+		String LocalRemovedUser = my_scan.nextLine();
 
 		for (int v = 0; 0 < NumUser; v++) {
-			if (localRemovedUser.equals(FinalLocalUserName[v])) {
+			if (LocalRemovedUser.equals(FinalLocalUserName[v])) {
 				FinalLocalUserName[v] = "Deleted user";
 				FinalLocalPassword[v] = "N/A";
 				FinalLocalTypeAccount[v] = "N/A";
