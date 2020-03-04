@@ -37,13 +37,13 @@ public class AdministratorAccount extends UserAccount {
 			return  my_scanINT.nextInt();
 	}	
 
-	private void removeUser() {
-		int lineNumber = 0;
+private void removeUser() {
+		int NumUser = 0;
 		boolean localBoolean = false;
-		String[] aAxis = new String[100];
-		String[] bAxis = new String[100];
-		String[] cAxis = new String[100];
-		String[] dAxis = new String[100];
+		String[] LocalUserName = new String[100];
+		String[] LocalPassword = new String[100];
+		String[] LocalTypeAccount = new String[100];
+		String[] LocalID = new String[100];
 		System.out.println("");
 		System.out.println("The list of users on PayUp");
 		System.out.println("----------------------------------------------------------------");
@@ -55,11 +55,11 @@ public class AdministratorAccount extends UserAccount {
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				uCurrentLine = sCurrentLine.split("\t");
-				aAxis[lineNumber] = (uCurrentLine[0]);
-				bAxis[lineNumber] = (uCurrentLine[1]);
-				cAxis[lineNumber] = (uCurrentLine[2]);
-				dAxis[lineNumber] = (uCurrentLine[3]);
-				lineNumber++;
+				LocalUserName[NumUser] = (uCurrentLine[0]);
+				LocalPassword [NumUser] = (uCurrentLine[1]);
+				LocalTypeAccount[NumUser] = (uCurrentLine[2]);
+				LocalID[NumUser] = (uCurrentLine[3]);
+				NumUser++;
 			}
 
 			br.close();
@@ -67,28 +67,28 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("The file does not exist!");
 		}
 
-		String[] Finalaaxis = new String[lineNumber];
-		System.arraycopy(aAxis, 0, Finalaaxis, 0, lineNumber);
-		String[] Finalbaxis = new String[lineNumber];
-		System.arraycopy(bAxis, 0, Finalbaxis, 0, lineNumber);
-		String[] Finalcaxis = new String[lineNumber];
-		System.arraycopy(cAxis, 0, Finalcaxis, 0, lineNumber);
-		String[] Finaldaxis = new String[lineNumber];
-		System.arraycopy(dAxis, 0, Finaldaxis, 0, lineNumber);
+		String[] FinalLocalUserName = new String[NumUser];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+		String[] FinalLocalPassword = new String[NumUser];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+		String[] FinalLocalTypeAccount = new String[NumUser];
+		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
+		String[] FinalLocalID = new String[NumUser];
+		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 
-		for(int k = 0; k < lineNumber; k++) {
-			System.out.println(aAxis[k]);
+		for(int k = 0; k < NumUser; k++) {
+			System.out.println(LocalUserName[k]);
 		}
 
 		System.out.println("Which user do you wish to remove?");
 		String localRemovedUser = userInput1.nextLine() ;
 
-		for (int v = 0; 0 < lineNumber; v++) {
-			if (localRemovedUser.equals(Finalaaxis[v])) {
-				Finalaaxis[v] = "Deleted user";
-				Finalbaxis[v] = "N/A";
-				Finalcaxis[v] = "N/A";
-				Finaldaxis[v] = "N/A";
+		for (int v = 0; 0 < NumUser; v++) {
+			if (localRemovedUser.equals(FinalLocalUserName[v])) {
+				FinalLocalUserName[v] = "Deleted user";
+				FinalLocalPassword[v] = "N/A";
+				FinalLocalTypeAccount[v] = "N/A";
+				FinalLocalID[v] = "N/A";
 				localBoolean = true;
 			}
 		}
@@ -96,8 +96,8 @@ public class AdministratorAccount extends UserAccount {
 		while (localBoolean = true) {
 			try { 
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database",false)));
-				for (int b = 0; b < lineNumber; b++) {
-					wr.println(Finalaaxis[b] + "\t" + Finalbaxis[b] + "\t" + Finalcaxis[b] + "\t" + Finaldaxis[b]);	
+				for (int b = 0; b < NumUser; b++) {
+					wr.println(FinalLocalUserName[b] + "\t" + FinalLocalPassword[b] + "\t" + FinalLocalTypeAccount[b] + "\t" + FinalLocalID[b]);	
 				}
 				wr.close();
 			}catch (IOException e) {
