@@ -8,9 +8,9 @@ public class UserAccount {
 	private String typeOfAccount;
 	private static int noOfUsers;
 	int userID = 0;
-	private String sCurrentLine;
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
+	static int UserInput = 0;
 
 	public UserAccount(String name, String pass, String role, int uID) {
 		userName = name;
@@ -59,7 +59,6 @@ public class UserAccount {
 		for (int i = 0; i < FinalLocalUserName.length; i++) {
 			user[i] = new UserAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
 		}	
-
 		return user;
 	}
 
@@ -68,22 +67,27 @@ public class UserAccount {
 		switch (userChoice) {
 		case 1:
 			Register();
-			
+			break;
 		case 2:
 			int loggedID = Login();
 			for (int i = 0; i < readFile().length; i++) {
 				if (readFile()[i].userID == loggedID) {
 					if (readFile()[i].typeOfAccount.equals("R")) {
-						new RegularAccount();
+						RegularAccountInterface();
 					}
 					else {
-						new AdministratorAccount();
+						AdministratorInterface();
 					}
+					break;
 				}
 			}	
 		case 3:
 			Exit();
 			break;
+		default:
+			System.out.println("--------------------------------------------------------");
+			System.out.println("Please enter a valid user choice!");
+			getUserChoice();
 		}
 	}
 
@@ -93,7 +97,7 @@ public class UserAccount {
 	}
 	// This method asks and returns what the user wants to do
 
-	private static int getUserChoice(){
+	protected static int getUserChoice(){
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t\t Welcome to PayUp! ");
 		System.out.println("\n What do you wish to?");   
@@ -134,6 +138,7 @@ public class UserAccount {
 	}
 
 	protected int Login() {
+		//second: login
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword = new String[100];
@@ -142,8 +147,8 @@ public class UserAccount {
 		int loggedID = 0;
 		String Un;
 		String Pw;
-		int currentUserID = 0;		
-		
+		int currentUserID = 0;	
+
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t\t Please Login User");
 		System.out.println("--------------------------------------------------------");
@@ -151,7 +156,6 @@ public class UserAccount {
 		Un = my_scan.nextLine();
 		System.out.println("Please input your password:");
 		Pw = my_scan.nextLine();
-		
 
 		try {
 			String sCurrentLine;
@@ -161,10 +165,11 @@ public class UserAccount {
 				uCurrent = sCurrentLine.split("\t");
 
 				LocalUserName[NumUser] = uCurrent[0];
-				LocalPassword[NumUser] = uCurrent[1];
+				LocalPassword[NumUser] = uCurrent[1];				
 				LocalRole[NumUser] = uCurrent[2];
 				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
-				NumUser++;
+				NumUser++;				
+
 			}
 			myFile.close(); 
 		}catch (IOException e) {
@@ -180,6 +185,7 @@ public class UserAccount {
 				loggedID = LocalID[i];
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
+				break;	
 			}
 		}
 		return loggedID;
@@ -193,9 +199,8 @@ public class UserAccount {
 	private int readfile1() {
 		int NumUser = 0;
 		try {
-			String sCurrentLine;
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-			while ((sCurrentLine = myFile.readLine()) != null) {
+			while ((myFile.readLine()) != null) {
 				NumUser++;
 			}
 			myFile.close(); 
@@ -204,5 +209,59 @@ public class UserAccount {
 		}
 		return NumUser;
 	}
-}
 
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void RegularAccountInterface() {
+		System.out.println("--------------------------------------------------------");//user interface for regular users
+		System.out.println("You are logged in as a Regular user!");
+		System.out.println("What do you want to do?");
+		System.out.println("--------------------------------------------------------");
+		System.out.println("");
+		System.out.println("(1) Create a new list");
+		System.out.println("(2) View a list");
+		System.out.println("(3) View individual balance");
+		System.out.println("(4) Delete a list");
+		System.out.println("(5) Settle a list");
+		System.out.println("(6) Add Expense To List");
+		System.out.println("(7) View Expense History");
+		System.out.println("(8) Write Expense History");
+		System.out.println("(0) Logout");
+		System.out.println("--------------------------------------------------------");
+		System.out.print("You want to: ");
+		UserInput = my_scan.nextInt();
+			if(UserInput==1) RegularAccount.createNewList();
+			else if(UserInput==2) RegularAccount.viewList();
+			else if(UserInput==3) RegularAccount.viewIndividualBalance();
+			else if(UserInput==4) RegularAccount.deleteList();
+			else if(UserInput==5) RegularAccount.settleList();
+			else if(UserInput==6) RegularAccount.addExpenseToList();
+			else if(UserInput==7) RegularAccount.viewExpenseHistory();
+			else if(UserInput==8) RegularAccount.writeExpenseHistory();
+			else if(UserInput==0) RegularAccount.Logout();
+	}
+
+	public void AdministratorInterface() {
+		System.out.println("--------------------------------------------------------");
+		System.out.println("Welcome Admin of PayUp!");
+		System.out.println("You are logged in to the Administrator Account!");
+		System.out.println("--------------------------------------------------------");
+		System.out.println("What do you wish to do?");
+		System.out.println("(1) Remove a User from PayUp");
+		System.out.println("(2) Remove List");
+		System.out.println("(3) Logout");
+		System.out.println("--------------------------------------------------------");
+		System.out.print("Please enter your choice: ");
+		UserInput = my_scan.nextInt();
+			if(UserInput==1) AdministratorAccount.removeUser();
+			else if(UserInput==2) AdministratorAccount.removeList();
+			else if(UserInput==3) UserAccount.Exit();
+	}	
+}
