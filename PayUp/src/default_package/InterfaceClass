@@ -23,9 +23,9 @@ public class InterfaceClass {
 		case 2:
 			String typeOfAccountl = UserAccount.Login();
 			System.out.println(typeOfAccountl);
-			if (typeOfAccountl.equals("R")) {
+			if (typeOfAccountl.equals("R") || typeOfAccountl.equals("r")) {
 				RegularAccount(typeOfAccountl);
-			}
+				}
 			else {
 				AdministratorAccount(typeOfAccountl);
 			}
@@ -38,7 +38,7 @@ public class InterfaceClass {
 
 	private static int getUserChoice1(){
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t\t Welcome to PayUp! ");
+		System.out.println("\t Welcome to PayUp! ");
 		System.out.println("\n What do you wish to?");   
 		System.out.println("--------------------------------------------------------");
 		System.out.println("(1) Register your account");
@@ -52,13 +52,13 @@ public class InterfaceClass {
 	public void RegularAccount(String typeOfAccountc) {
 		typeOfAccount = typeOfAccountc;
 		int userChoice = regularUserInterface();
-		
+
 		if (userChoice < 4) {
 			new List(userChoice);
 		}else {
 			new RegularAccount(userChoice);
 		}
-		
+
 	}
 
 	public static int regularUserInterface() {
