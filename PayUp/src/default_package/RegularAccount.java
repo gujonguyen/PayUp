@@ -6,96 +6,113 @@ public class RegularAccount extends UserAccount{
 	static Scanner my_scanINT = new Scanner(System.in); 
 	static Scanner userInput2 = new Scanner(System.in); //for strings
 	static Scanner userInput3 = new Scanner(System.in); //for doubles
+	String userName;
+	String password;
+	static String role;
+	int id;
+	String typeOfaccount;
+	List[] temp1 = List.readFile();
+	int userChoice;
 
-	public RegularMenu() {
-		int userChoice = getUserChoice1();
-		switch (userChoice) {
-		case 1:
-			createNewList();
-			break;
-		case 2:
-			viewList();
-			break;
-		case 3:
-			viewIndividualBalance();
-			break;
-		case 4:
-			deleteList();
-			break;
-		case 5:
-			settleList();
-			break;
-		case 6:
-			addExpenseToList();
-			break;
-		case 7:
-			viewExpenseHistory();
-			break;
-		case 8:
-			writeExpenseHistory();
-			break;
-		case 0:
-			break;
+	
+
+	public RegularAccount(String nameC, String passwordC, String roleC, int uID ) {
+		userName = nameC;
+		password = passwordC;
+		role = roleC;
+		id = uID;
 	}
-}
 	
-	
-	
-	public static void logout() {
+	public RegularAccount(int userChoicec) {
+	userChoice = userChoicec;
+	switch (userChoice) {
+	case 4:
+		viewIndividualBalance();
+		break;
+	case 5:
+		settleList();
+		break;
+	case 6:
+		addExpenseToList();
+		break;
+	case 7:
+		viewExpenseHistory();
+		break;
+	case 8:
+		writeExpenseHistory();
+		break;
+	case 9:
+		logout();
+		break;
+	}
+	}
+
+	public void logout() {
+		System.out.println("--------------------------------------------------------");
 		System.out.println("You are successfully logged out");
 
-		
+
 	}
 
-	public static int getUserChoice1() {
-		System.out.println("--------------------------------------------------------");//user interface for regular users
-		System.out.println("You are logged in as a Regular user!");
-		System.out.println("What do you want to do?");
-		System.out.println("--------------------------------------------------------");
-		System.out.println("");
-		System.out.println("(1) Create a new list");
-		System.out.println("(2) View a list");
-		System.out.println("(3) View individual balance");
-		System.out.println("(4) Delete a list");
-		System.out.println("(5) Settle a list");
-		System.out.println("(6) Add Expense To List");
-		System.out.println("(7) View Expense History");
-		System.out.println("(8) Write Expense History");
-		System.out.println("(0) Logout");
-		System.out.println("--------------------------------------------------------");
-		System.out.print("You want to: ");
-		return my_scanINT.nextInt();	//getting user choice 
+	public static RegularAccount[] createRegulars() {
+
+		int NumUser = 0;
+		String[] LocalUserName = new String[100];
+		String[] LocalPassword= new String[100];
+		String[] LocalTypeAccount = new String[100];
+		int[] LocalID = new int[100];
+		
+		RegularAccount [] regulars = new RegularAccount [100];
+
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
+
+				LocalUserName[NumUser] = uCurrent[0];
+				LocalPassword[NumUser] = uCurrent[1];
+				LocalTypeAccount[NumUser] = uCurrent[2];
+				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
+
+				NumUser++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not existlol3");
+		}
+		
+		String[] FinalLocalUserName = new String[NumUser];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+		String[] FinalLocalPassword = new String[NumUser];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+		String[] FinalLocalTypeAccount = new String[NumUser];
+		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
+		int[] FinalLocalID = new int[NumUser];
+		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
+		int counterRegulars = 0;
+		for (int i = 0; i < NumUser; i++) {
+		if (FinalLocalTypeAccount[i].equals("R")) {
+			regulars [counterRegulars]  = new RegularAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
+			counterRegulars ++;
+		}
+		}
+
+		return regulars;
 	}
+
+		
 
 	public static void viewIndividualBalance() {
 		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "€");
 	}
-	
-	public static void createNewList() {
-		List.createList();
-		//you should be able to add user list to viewList method
-				//public void addUserToList() { 
-		
-				//same for allocating expense to user
-				//public void allocateExpensetoUser() {
-	}
-	
-	public static void viewList() {
-		viewList();
-		//you should be able to add user list to viewList method
-		//public void addUserToList() { 
 
-		//same for allocating expense to user
-		//public void allocateExpensetoUser() {
-	}
 
-	public static void deleteList() {
-		deleteList();
-	}
 	public static void settleList() {
 		settleList();
 	}
-	
+
 	public static void addExpenseToList() {
 		System.out.println("How many expenses do you want to add? ");
 		int counter = my_scanINT.nextInt();
@@ -120,7 +137,7 @@ public class RegularAccount extends UserAccount{
 			}
 		}
 	}
-	
+
 	public static void viewExpenseHistory() {
 		int lineNumber = 0;
 		String[] c1 = new String[100];
@@ -145,7 +162,7 @@ public class RegularAccount extends UserAccount{
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not exist");
+			System.out.println("This file does not existlol4");
 		}
 		String[] Finalc1 = new String[lineNumber];
 		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
