@@ -99,6 +99,7 @@ public class UserAccount {
 			}
 			else if (loggedID==0) {
 				System.out.println("Invalid username/password! Please enter a valid user credentials");
+				Login();
 				break;
 			}	
 		}
