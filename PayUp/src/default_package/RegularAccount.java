@@ -93,7 +93,7 @@ public class RegularAccount extends UserAccount{
 		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 		int counterRegulars = 0;
 		for (int i = 0; i < NumUser; i++) {
-		if (FinalLocalTypeAccount[i].equals("R")) {
+		if (FinalLocalTypeAccount[i].equals("R") || FinalLocalTypeAccount[i].equals("r")) {
 			regulars [counterRegulars]  = new RegularAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
 			counterRegulars ++;
 		}
