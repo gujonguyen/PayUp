@@ -97,6 +97,10 @@ public class UserAccount {
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
 			}
+			else if (loggedID==0) {
+				System.out.println("Invalid username/password! Please enter a valid user credentials");
+				break;
+			}	
 		}
 		System.out.print("I am locked");
 		System.out.print(role);
@@ -106,7 +110,7 @@ public class UserAccount {
 
 	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\tYou are successfully logged out\t");
+		System.out.println("\tThank you for visiting PayUp!\t");
 	}
 
 	private static int readfile1() {
