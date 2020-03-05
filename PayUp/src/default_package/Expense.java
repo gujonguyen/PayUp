@@ -10,138 +10,112 @@ public class Expense {
 	String expenseDate;
 	double amount;
 	UserAccount[] temp = UserAccount.readFile();
-	List[] temp1 = List.readFile();
 	int expenseId;
 	int listId;
-	String whoPaid;
-	int noOfExpenses;
-	private String sCurrentLine;
-
-	public Expense(int listId, String name, double amount, String date, String whoPaid,int expId) {
+	String dummyName;
+	RegularAccount[] temp1 = RegularAccount.createRegulars();
+	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins();
+	
+	public Expense(int listId, String name, double amount, String date, String whoPaid, int expId) {
 		this.listId = listId;
 		expenseName = name;
 		this.amount = amount;
 		expenseDate = date;
-		this.whoPaid = whoPaid;
+		dummyName = whoPaid;
 		expenseId = expId;
-
+		
 	}
-
+	
 	public static Expense[] readFile() {
-		int lineNumber = 0;
-		int[] c1 = new int[100];
-		String[] c2 = new String[100];
-		double[] c3 = new double[100];
-		String[] c4 = new String[100];
-		String[] c5 = new String[100];
-		int[] c6 = new int[100];
+	int lineNumber = 0;
+	int[] listID = new int[100];
+	String[] expenseName = new String[100];
+	double[] amount = new double[100];
+	String[] expenseDate = new String[100];
+	String[] dummyName = new String[100];
+	int[] expenseID = new int[100];
 
-		try {
-			String sCurrentLine;
-			String[] uCurrent = new String [5];
-			BufferedReader myFile = new BufferedReader (new FileReader("Expense_database.txt")); 
-			while ((sCurrentLine = myFile.readLine()) != null) {
-				uCurrent = sCurrentLine.split("\t");
+	try {
+		String sCurrentLine;
+		String[] uCurrent = new String [5];
+		BufferedReader myFile = new BufferedReader (new FileReader("Expense_database.txt")); 
+		while ((sCurrentLine = myFile.readLine()) != null) {
+			uCurrent = sCurrentLine.split("\t");
 
-				c1[lineNumber] = Integer.parseInt(uCurrent[0]);
-				c2[lineNumber] = uCurrent[1];
-				c3[lineNumber] = Double.parseDouble(uCurrent[2]);
-				c4[lineNumber] = uCurrent[3];
-				c5[lineNumber] = uCurrent[4];
-				c6[lineNumber] = Integer.parseInt(uCurrent[5]);
-				lineNumber++;
-			}
-			myFile.close(); 
-		}catch (IOException e) {
-			System.out.println("This file does not exist");
+			listID[lineNumber] = Integer.parseInt(uCurrent[0]);
+			expenseName[lineNumber] = uCurrent[1];
+			amount[lineNumber] = Double.parseDouble(uCurrent[2]);
+			expenseDate[lineNumber] = uCurrent[3];
+			dummyName[lineNumber] = uCurrent[4];
+			expenseID[lineNumber] = Integer.parseInt(uCurrent[5]);
+			lineNumber++;
 		}
-
-		int[] Finalc1 = new int[lineNumber];
-		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
-		String[] Finalc2 = new String[lineNumber];
-		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-		double[] Finalc3 = new double[lineNumber];
-		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
-		String[] Finalc4 = new String[lineNumber];
-		System.arraycopy(c4, 0, Finalc4, 0, lineNumber);
-		String[] Finalc5 = new String[lineNumber];
-		System.arraycopy(c5, 0, Finalc5, 0, lineNumber);
-		int[] Finalc6 = new int[lineNumber];
-		System.arraycopy(c6, 0, Finalc6, 0, lineNumber);
-
-		Expense expense[] = new Expense[Finalc1.length];
-
-		for (int i = 0; i < Finalc1.length; i++) {
-			expense[i] = new Expense(Finalc1[i], Finalc2[i], Finalc3[i], Finalc4[i], Finalc5[i], Finalc6[i]);
-		}	
-
-		return expense;
+		myFile.close(); 
+	}catch (IOException e) {
+		System.out.println("This file does not exist");
 	}
 
-	public void createExpense(int currentUser) {
-		noOfExpenses = readfile1();
-		int cUser = currentUser;
-		int [] aUser = new int[100];
-		Boolean localBoolean = false;
-		int lineNumber = 0;
-		System.out.println("Please enter the list ID to which this expense belongs?");
-		int listId = userInput1.nextInt();
-		System.out.println("How do you want to name the expense? ");
-		String expenseName = userInput2.nextLine();
-		System.out.println("What is the amount of this expense?");
-		double amount = userInput1.nextInt();
-		System.out.println("What is the date of the expense? ");
-		String expenseDate = userInput2.nextLine();
-		System.out.println("Between how many additional people do you want to split this expense (not counting yourself?");
-		int numberOfParticipants = userInput1.nextInt();
+	int[] FinallistID = new int[lineNumber];
+	System.arraycopy(listID, 0, FinallistID, 0, lineNumber);
+	String[] FinalexpenseName = new String[lineNumber];
+	System.arraycopy(expenseName, 0, FinalexpenseName, 0, lineNumber);
+	double[] Finalamount = new double[lineNumber];
+	System.arraycopy(amount, 0, Finalamount, 0, lineNumber);
+	String[] FinalexpenseDate = new String[lineNumber];
+	System.arraycopy(expenseDate, 0, FinalexpenseDate, 0, lineNumber);
+	String[] FinaldummyName = new String[lineNumber];
+	System.arraycopy(dummyName, 0, FinaldummyName, 0, lineNumber);
+	int[] FinalexpenseID = new int[lineNumber];
+	System.arraycopy(expenseID, 0, FinalexpenseID, 0, lineNumber);
+	
+	Expense expense[] = new Expense[FinallistID.length];
+	
+	for (int i = 0; i < FinallistID.length; i++) {
+		expense[i] = new Expense(FinallistID[i], FinalexpenseName[i], Finalamount[i], FinalexpenseDate[i], FinaldummyName[i], FinalexpenseID[i]);
+	}	
+		
+	return expense;
+}
 
-		for(int n = 0; n < numberOfParticipants; n++) {
-			System.out.println("\"Please enter the user IDs of the people you want to split this expense between (not including yourself):");
-			aUser[n] = userInput1.nextInt();
-			for (int i = 0; i <temp.length; i++ ) {
-				if (temp[i].userID != aUser[i]) {
-					System.out.print("User does not exist");
-				}
+
+	public static void createExpense() {
+		System.out.println("How many expenses do you want to add? ");
+		int counter = userInput1.nextInt();
+		for (int i = 0; i < counter; i++) {
+			System.out.println("Please choose the list ID of the list this expense belongs to: ");
+			String listId = userInput2.nextLine();
+			System.out.println("Please choose an expense name: ");
+			String expenseName = userInput2.nextLine();
+			System.out.println("Please choose the expense ammount: ");
+			Double amount = userInput3.nextDouble();
+			System.out.println("Please choose the expense date: ");
+			String expenseDate = userInput2.nextLine();
+			System.out.println("Who paid for this expense? ");
+			String userName = userInput2.nextLine();
+			
+			try {
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + listId + ".txt", true)));
+				wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + expenseDate + "\t" + userName);
+				wr.close();	
+			} catch (IOException e) {
+				System.out.println("I/O error when writing on file");
 			}
-		}
-
-			try { 
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt",true)));
-				wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + expenseDate + "\t" + cUser + "\t" + aUser + "\t" + noOfExpenses);
+			try {
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt", true)));
+				wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + expenseDate + "\t" + userName);
 				wr.close();
 			} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
-			}	
-		}
-
-	private int readfile1() {
-		int NumExpense = 0;
-		try {
-			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-			while ((setsCurrentLine(myFile.readLine())) != null) {
-				NumExpense++;
 			}
-			myFile.close(); 
-		}catch (IOException e) {
-			System.out.println("This file does not exist");
 		}
-		return NumExpense;
 	}
-
-	public String getsCurrentLine() {
-		return sCurrentLine;
-	}
-
-	public String setsCurrentLine(String sCurrentLine) {
-		this.sCurrentLine = sCurrentLine;
-		return sCurrentLine;
-	}
-
-	public static double splitExpense() {
+	
+	
+	public static double splitExpense(int loggedID) {
 		double tempSum = 0;
-
+		
 		// correct reading code shoud come here
-
+		
 		// calcualtion colde below
 		double[] amount = new double[Finalc3.length];
 		for (int i = 0; i < Finalc3.length; i++) {
