@@ -27,7 +27,7 @@ public class UserAccount {
 
 		noOfUsers = readfile1();
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t\t Please Register User");
+		System.out.println("\t Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccountl = my_scan.nextLine();
@@ -61,7 +61,7 @@ public class UserAccount {
 		String role = "bla";
 
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t\t Please Login User");
+		System.out.println("\t Please Login User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Please input your username:");
 		Un = my_scan.nextLine();
