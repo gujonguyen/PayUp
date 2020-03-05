@@ -3,151 +3,34 @@ import java.io.*;
 import java.util.*;
 
 public class UserAccount {
-	protected String userName;
-	protected String password;
-	protected String typeOfAccount;
-	private static int noOfUsers;
+	String userName;
+	String password;
+	String typeOfAccount;
+	static int noOfUsers;
 	int userID = 0;
 	private String sCurrentLine;
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
-
-	public UserAccount(String name, String pass, String role, int uID) {
-		userName = name;
-		password = pass;
-		typeOfAccount = role;
-		userID= uID;
-	}
-
-	public static UserAccount[] readFile() {
-		int NumUser = 0;
-		String[] LocalUserName = new String[100];
-		String[] LocalPassword= new String[100];
-		String[] LocalTypeAccount = new String[100];
-		int[] LocalID = new int[100];
-
-		try {
-			String sCurrentLine;
-			String[] uCurrent = new String [4];
-			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-			while ((sCurrentLine = myFile.readLine()) != null) {
-				uCurrent = sCurrentLine.split("\t");
-
-				LocalUserName[NumUser] = uCurrent[0];
-				LocalPassword[NumUser] = uCurrent[1];
-				LocalTypeAccount[NumUser] = uCurrent[2];
-				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
-
-				NumUser++;
-			}
-			myFile.close(); 
-		}catch (IOException e) {
-			System.out.println("This file does not exist");
-		}
-
-		String[] FinalLocalUserName = new String[NumUser];
-		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
-		String[] FinalLocalPassword = new String[NumUser];
-		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
-		String[] FinalLocalTypeAccount = new String[NumUser];
-		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
-		int[] FinalLocalID = new int[NumUser];
-		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
-
-		UserAccount user[] = new UserAccount[FinalLocalUserName.length];
-
-		for (int i = 0; i < FinalLocalUserName.length; i++) {
-			user[i] = new UserAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
-		}	
-
-		return user;
-	}
-
-	public RegularAccount[] readRegulars() {
-		UserAccount [] allUsers = readFile();
-		RegularAccount [] regulars = new RegularAccount [100];
-		int counterRegulars = 0;
-		for (int i = 0; i < allUsers.length; i++) {
-			if (allUsers[i].typeOfAccount.equals("R")) {
-				regulars [i]  = new RegularAccount(allUsers[i].userName, allUsers[i].password, allUsers[i].typeOfAccount, allUsers[i].userID);
-				counterRegulars ++;
-			}
-		}
-		RegularAccount [] finalRegulars = new RegularAccount[counterRegulars];
-		System.arraycopy(regulars, 0, finalRegulars, 0, counterRegulars);
-		return finalRegulars;
-	}
+	int userChoice;
 	
-	public AdministratorAccount [] readAdmins() {
-		UserAccount [] allUsers = readFile();
-		AdministratorAccount [] admins = new AdministratorAccount [100];
-		int counterAdmins = 0;
-		for (int i = 0; i < allUsers.length; i++) {
-		if (allUsers[i].typeOfAccount.equals("R")) {
-			admins [i]  = new AdministratorAccount(allUsers[i].userName, allUsers[i].password, allUsers[i].typeOfAccount, allUsers[i].userID);
-			counterAdmins ++;
-		}
-	}
-		AdministratorAccount [] finalAdmins = new AdministratorAccount[counterAdmins];
-		System.arraycopy(admins, 0, finalAdmins, 0, counterAdmins);
-		return finalAdmins;
-	}
 	
-	public UserAccount() {
-		int userChoice = getUserChoice();
-		switch (userChoice) {
-		case 1:
-			Register();
-
-		case 2:
-			int loggedID = Login();
-			RegularAccount [] regulars = readRegulars();
-			AdministratorAccount [] admins = readAdmins();
-			
-			for (int i = 0; i < regulars.length; i++) {
-			if (regulars[i].userID == loggedID) {
-				new RegularAccount();
-			}
-			else {
-				new AdministratorAccount();
-			}
-			}
-			break;
-		case 3:
-			Exit();
-			break;
-		}
+	public UserAccount(int userChoicec) {
+	userChoice = userChoicec;
+	switch (userChoice){
+	case 3:
+		Exit();
+		break;
+	}
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new UserAccount();
-		//UserAccountmy_users
-	}
-	// This method asks and returns what the user wants to do
-
-	private static int getUserChoice(){
-		System.out.println("--------------------------------------------------------");
-		System.out.println("\t\t Welcome to PayUp! ");
-		System.out.println("\n What do you wish to?");   
-		System.out.println("--------------------------------------------------------");
-		System.out.println("(1) Register your account");
-		System.out.println("(2) Login into account");
-		System.out.println("(3) Exit");
-		System.out.println("--------------------------------------------------------");
-		System.out.print("Enter your option: ");
-		return my_scanINT.nextInt();
-	}
-
-	protected void Register() {
+	protected static void Register() {
 
 		noOfUsers = readfile1();
-		//first: register 
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t\t Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
-		String typeOfAccount = my_scan.nextLine();
+		String typeOfAccountl = my_scan.nextLine();
 		System.out.println("Please choose a username:");
 		String Un = my_scan.nextLine();
 		System.out.println("Please choose a password:");
@@ -163,10 +46,10 @@ public class UserAccount {
 		} catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}
-		new UserAccount();
+		new InterfaceClass();
 	}
 
-	protected int Login() {
+	protected static String Login() {
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword = new String[100];
@@ -174,7 +57,8 @@ public class UserAccount {
 		int[] LocalID = new int[100];
 		int loggedID = 0;
 		String Un;
-		String Pw;		
+		String Pw;
+		String role = "bla";
 
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t\t Please Login User");
@@ -199,7 +83,7 @@ public class UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not exist");
+			System.out.println("This file does not existlol1");
 		}
 
 		String[] FinalLocalUserName = new String[NumUser];
@@ -209,20 +93,23 @@ public class UserAccount {
 		for (int i = 0; i < NumUser; i++) {
 			if (Un.equals(FinalLocalUserName[i]) && Pw.equals(FinalLocalPassword[i])) {
 				loggedID = LocalID[i];
+				role = LocalRole[i];
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
 			}
 		}
-		return loggedID;
+		System.out.print("I am locked");
+		System.out.print(role);
+		return role;
 
 	}
 
 	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
-		System.out.println("	Thank you for visiting PayUp!");
+		System.out.println("\tYou are successfully logged out\t");
 	}
 
-	private int readfile1() {
+	private static int readfile1() {
 		int NumUser = 0;
 		try {
 			String sCurrentLine;
@@ -232,7 +119,7 @@ public class UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not exist");
+			System.out.println("This file does not existlol2");
 		}
 		return NumUser;
 	}
