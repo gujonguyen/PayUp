@@ -4,9 +4,24 @@ import java.util.Scanner;
 
 public class AdministratorAccount extends UserAccount {
 	static Scanner userInput1 = new Scanner(System.in);
+	String userName;
+	String password;
+	static String role;
+	int id;
+	String typeOfAccount;
+	List[] temp1 = List.readFile();
+	int userChoice;
+	
+	public AdministratorAccount(String nameC, String passwordC, String roleC, int uID ) {
+			userName = nameC;
+			password = passwordC;
+			role = roleC;
+			id = uID;
 
-	public AdministratorAccount(){
-		int userChoice = AdminInterface();
+	}
+	
+	public AdministratorAccount(int userChoicec) {
+		userChoice = userChoicec;
 		switch (userChoice) {
 		case 1:
 			removeUser();
@@ -14,30 +29,59 @@ public class AdministratorAccount extends UserAccount {
 		case 2:
 			removeList();
 			break;
-		case 3:
-			UserAccount.Exit();
-			break;
-		default:
-			System.out.print("Please enter a valid choice.");
 		}
 	}
+	
 
-	static int AdminInterface() {
+	public static AdministratorAccount [] createAdmins() {
+		int NumUser = 0;
+		String[] LocalUserName = new String[100];
+		String[] LocalPassword= new String[100];
+		String[] LocalTypeAccount = new String[100];
+		int[] LocalID = new int[100];
+		
+		AdministratorAccount [] admins = new AdministratorAccount [100];
 
-			System.out.println("--------------------------------------------------------");
-			System.out.println("Welcome Admin of PayUp!");
-			System.out.println("You are logged in to the Administrator Account!");
-			System.out.println("--------------------------------------------------------");
-			System.out.println("What do you wish to do?");
-			System.out.println("(1) Remove a User from PayUp");
-			System.out.println("(2) Remove List");
-			System.out.println("(3) Logout");
-			System.out.println("--------------------------------------------------------");
-			System.out.print("Please enter your choice: ");
-			return  my_scanINT.nextInt();
-	}	
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
 
-	private void removeUser() {
+				LocalUserName[NumUser] = uCurrent[0];
+				LocalPassword[NumUser] = uCurrent[1];
+				LocalTypeAccount[NumUser] = uCurrent[2];
+				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
+
+				NumUser++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not existlol5");
+		}
+		
+		String[] FinalLocalUserName = new String[NumUser];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+		String[] FinalLocalPassword = new String[NumUser];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+		String[] FinalLocalTypeAccount = new String[NumUser];
+		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
+		int[] FinalLocalID = new int[NumUser];
+		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
+		int counterAdmins = 0;
+		
+		for (int i = 0; i < NumUser; i++) {
+		if (FinalLocalTypeAccount[i].equals("R")) {
+			admins [counterAdmins]  = new AdministratorAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
+			counterAdmins ++;
+		}
+		}
+
+		return admins;
+	}
+	
+	public static void removeUser() {
 		int lineNumber = 0;
 		boolean localBoolean = false;
 		String[] aAxis = new String[100];
@@ -64,7 +108,7 @@ public class AdministratorAccount extends UserAccount {
 
 			br.close();
 		} catch (IOException e) {
-			System.out.println("The file does not exist!");
+			System.out.println("The file does not existlol6");
 		}
 
 		String[] Finalaaxis = new String[lineNumber];
@@ -77,7 +121,7 @@ public class AdministratorAccount extends UserAccount {
 		System.arraycopy(dAxis, 0, Finaldaxis, 0, lineNumber);
 
 		for(int k = 0; k < lineNumber; k++) {
-			System.out.println(aAxis[k]);
+			System.out.println(Finalaaxis[k]);
 		}
 
 		System.out.println("Which user do you wish to remove?");
@@ -85,10 +129,10 @@ public class AdministratorAccount extends UserAccount {
 
 		for (int v = 0; 0 < lineNumber; v++) {
 			if (localRemovedUser.equals(Finalaaxis[v])) {
-				Finalaaxis[v] = "Deleted user";
-				Finalbaxis[v] = "N/A";
-				Finalcaxis[v] = "N/A";
-				Finaldaxis[v] = "N/A";
+				Finalaaxis[v] = "";
+				Finalbaxis[v] = "";
+				Finalcaxis[v] = "";
+				Finaldaxis[v] = "";
 				localBoolean = true;
 			}
 		}
@@ -106,7 +150,7 @@ public class AdministratorAccount extends UserAccount {
 		}
 	}
 
-	private static void removeList() {
+	public static void removeList() {
 		List.viewList();
 	}
 }
