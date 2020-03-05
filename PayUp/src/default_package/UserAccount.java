@@ -96,11 +96,6 @@ public class UserAccount {
 				role = LocalRole[i];
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
-			}
-			else if (loggedID==0) {
-				System.out.println("Invalid username/password! Please enter a valid user credentials");
-				Login();
-				break;
 			}	
 		}
 		System.out.print("I am locked");
