@@ -3,8 +3,9 @@ import java.io.*;
 import java.util.*;
 
 public class List {
-	static Scanner userInput1 = new Scanner(System.in);
-	static Scanner userInput2 = new Scanner(System.in);
+	static Scanner userInput1 = new Scanner(System.in); //for int
+	static Scanner userInput2 = new Scanner(System.in); // for string
+	static Scanner userInput3 = new Scanner(System.in); // for double
 	String listName;
 	int listID;
 	String date;
@@ -75,7 +76,7 @@ public class List {
 		return listArray;
 	}
 
-	public static void createList() {
+	public void createList() {
 
 		int [] aUser = new int[100];
 		Boolean localBoolean = false;
