@@ -11,8 +11,8 @@ public class RegularAccount extends UserAccount{
 	static String role;
 	int id;
 	String typeOfaccount;
-	List[] temp1 = List.readFile();
 	int userChoice;
+	int loggedUserID;
 
 	
 
@@ -22,9 +22,11 @@ public class RegularAccount extends UserAccount{
 
 	}
 	
-	public RegularAccount(int userChoicec) {
+	public RegularAccount(int userChoicec, int loggedUserIDc) {
 	super();
 	userChoice = userChoicec;
+	loggedUserID = loggedUserIDc;
+	
 	switch (userChoice) {
 	case 4:
 		viewIndividualBalance();
@@ -50,8 +52,6 @@ public class RegularAccount extends UserAccount{
 	public void logout() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("You are successfully logged out");
-
-
 	}
 
 	public static RegularAccount[] createRegulars() {
