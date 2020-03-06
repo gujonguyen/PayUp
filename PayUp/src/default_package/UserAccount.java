@@ -5,7 +5,7 @@ import java.util.*;
 public class UserAccount {
 	String userName;
 	String password;
-	String typeOfAccount;
+	static String typeOfAccount;
 	static int noOfUsers;
 	int userID = 0;
 	private String sCurrentLine;
@@ -30,7 +30,7 @@ public class UserAccount {
 		System.out.println("\t Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
-		String typeOfAccountl = my_scan.nextLine();
+		String typeOfAccount = my_scan.nextLine();
 		System.out.println("Please choose a username:");
 		String Un = my_scan.nextLine();
 		System.out.println("Please choose a password:");
@@ -83,7 +83,7 @@ public class UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not existlol1");
+			System.out.println("This file does not exist");
 		}
 
 		String[] FinalLocalUserName = new String[NumUser];
