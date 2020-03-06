@@ -58,7 +58,7 @@ public class UserAccount {
 		int loggedID = 0;
 		String Un;
 		String Pw;
-		String role = "bla";
+		String role = "";
 
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t Please Login User");
@@ -98,10 +98,7 @@ public class UserAccount {
 				System.out.println("Login successful, welcome " + Un +"!");
 			}	
 		}
-		System.out.print("I am locked");
-		System.out.print(role);
 		return role;
-
 	}
 
 	protected static void Exit() {
@@ -119,7 +116,7 @@ public class UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not existlol2");
+			System.out.println("This file does not exist");
 		}
 		return NumUser;
 	}
