@@ -14,44 +14,43 @@ public class RegularAccount extends UserAccount{
 	List[] temp1 = List.readFile();
 	int userChoice;
 
-	
 
 	public RegularAccount(String nameC, String passwordC, String roleC, int uID ) {
+		super(uID);
 		userName = nameC;
 		password = passwordC;
 		role = roleC;
 		id = uID;
 	}
-	
+
 	public RegularAccount(int userChoicec) {
-	userChoice = userChoicec;
-	switch (userChoice) {
-	case 4:
-		viewIndividualBalance();
-		break;
-	case 5:
-		settleList();
-		break;
-	case 6:
-		addExpenseToList();
-		break;
-	case 7:
-		viewExpenseHistory();
-		break;
-	case 8:
-		writeExpenseHistory();
-		break;
-	case 9:
-		logout();
-		break;
-	}
+		super(userChoicec);
+		userChoice = userChoicec;
+		switch (userChoice) {
+		case 4:
+			viewIndividualBalance();
+			break;
+		case 5:
+			settleList();
+			break;
+		case 6:
+			addExpenseToList();
+			break;
+		case 7:
+			viewExpenseHistory();
+			break;
+		case 8:
+			writeExpenseHistory();
+			break;
+		case 9:
+			logout();
+			break;
+		}
 	}
 
 	public void logout() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("You are successfully logged out");
-
-
 	}
 
 	public static RegularAccount[] createRegulars() {
@@ -61,7 +60,7 @@ public class RegularAccount extends UserAccount{
 		String[] LocalPassword= new String[100];
 		String[] LocalTypeAccount = new String[100];
 		int[] LocalID = new int[100];
-		
+
 		RegularAccount [] regulars = new RegularAccount [100];
 
 		try {
@@ -82,7 +81,7 @@ public class RegularAccount extends UserAccount{
 		}catch (IOException e) {
 			System.out.println("This file does not existlol3");
 		}
-		
+
 		String[] FinalLocalUserName = new String[NumUser];
 		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
 		String[] FinalLocalPassword = new String[NumUser];
@@ -93,19 +92,18 @@ public class RegularAccount extends UserAccount{
 		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 		int counterRegulars = 0;
 		for (int i = 0; i < NumUser; i++) {
-		if (FinalLocalTypeAccount[i].equals("R") || FinalLocalTypeAccount[i].equals("r")) {
-			regulars [counterRegulars]  = new RegularAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
-			counterRegulars ++;
+			if (FinalLocalTypeAccount[i].equals("R") || FinalLocalTypeAccount[i].equals("r")) {
+				regulars [counterRegulars]  = new RegularAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
+				counterRegulars ++;
+			}
 		}
-		}
-
 		return regulars;
 	}
 
-		
+
 
 	public static void viewIndividualBalance() {
-		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "€");
+		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "â‚¬");
 	}
 
 
