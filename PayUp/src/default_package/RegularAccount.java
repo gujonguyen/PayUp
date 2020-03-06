@@ -3,9 +3,9 @@ import java.util.*;
 import java.io.*;
 
 public class RegularAccount extends UserAccount{
-	static Scanner my_scanINT = new Scanner(System.in); 
-	static Scanner userInput2 = new Scanner(System.in); //for strings
-	static Scanner userInput3 = new Scanner(System.in); //for doubles
+	static Scanner userInput1 = new Scanner(System.in); //for int
+	static Scanner userInput2 = new Scanner(System.in); // for string
+	static Scanner userInput3 = new Scanner(System.in); // for double
 	String userName;
 	String password;
 	static String role;
@@ -14,43 +14,44 @@ public class RegularAccount extends UserAccount{
 	List[] temp1 = List.readFile();
 	int userChoice;
 
+	
 
-	public RegularAccount(String nameC, String passwordC, String roleC, int uID ) {
-		super(uID);
-		userName = nameC;
-		password = passwordC;
+	public RegularAccount(String nameC, String passwordC, int uID, String roleC ) {
+		super(nameC, passwordC, uID);
 		role = roleC;
-		id = uID;
-	}
 
+	}
+	
 	public RegularAccount(int userChoicec) {
-		super(userChoicec);
-		userChoice = userChoicec;
-		switch (userChoice) {
-		case 4:
-			viewIndividualBalance();
-			break;
-		case 5:
-			settleList();
-			break;
-		case 6:
-			addExpenseToList();
-			break;
-		case 7:
-			viewExpenseHistory();
-			break;
-		case 8:
-			writeExpenseHistory();
-			break;
-		case 9:
-			logout();
-			break;
-		}
+	super();
+	userChoice = userChoicec;
+	switch (userChoice) {
+	case 4:
+		viewIndividualBalance();
+		break;
+	case 5:
+		settleList();
+		break;
+	case 6:
+		addExpenseToList();
+		break;
+	case 7:
+		viewExpenseHistory();
+		break;
+	case 8:
+		writeExpenseHistory();
+		break;
+	case 9:
+		logout();
+		break;
+	}
 	}
 
 	public void logout() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("You are successfully logged out");
+
+
 	}
 
 	public static RegularAccount[] createRegulars() {
@@ -60,7 +61,7 @@ public class RegularAccount extends UserAccount{
 		String[] LocalPassword= new String[100];
 		String[] LocalTypeAccount = new String[100];
 		int[] LocalID = new int[100];
-
+		
 		RegularAccount [] regulars = new RegularAccount [100];
 
 		try {
@@ -81,7 +82,7 @@ public class RegularAccount extends UserAccount{
 		}catch (IOException e) {
 			System.out.println("This file does not existlol3");
 		}
-
+		
 		String[] FinalLocalUserName = new String[NumUser];
 		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
 		String[] FinalLocalPassword = new String[NumUser];
@@ -92,18 +93,19 @@ public class RegularAccount extends UserAccount{
 		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 		int counterRegulars = 0;
 		for (int i = 0; i < NumUser; i++) {
-			if (FinalLocalTypeAccount[i].equals("R") || FinalLocalTypeAccount[i].equals("r")) {
-				regulars [counterRegulars]  = new RegularAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
-				counterRegulars ++;
-			}
+		if (FinalLocalTypeAccount[i].equals("R")) {
+			regulars [counterRegulars]  = new RegularAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalID[i], FinalLocalTypeAccount[i] );
+			counterRegulars ++;
 		}
+		}
+
 		return regulars;
 	}
 
+		
 
-
-	public static void viewIndividualBalance() {
-		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "â‚¬");
+	public void viewIndividualBalance() {
+		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "€");
 	}
 
 
@@ -111,7 +113,7 @@ public class RegularAccount extends UserAccount{
 		settleList();
 	}
 
-	public static void addExpenseToList() {
+	public void addExpenseToList() {
 		System.out.println("How many expenses do you want to add? ");
 		int counter = my_scanINT.nextInt();
 		for (int i = 0; i < counter; i++) {
@@ -136,7 +138,7 @@ public class RegularAccount extends UserAccount{
 		}
 	}
 
-	public static void viewExpenseHistory() {
+	public void viewExpenseHistory() {
 		int lineNumber = 0;
 		String[] c1 = new String[100];
 		String[] c2 = new String[100];
@@ -178,9 +180,7 @@ public class RegularAccount extends UserAccount{
 		}
 	}
 
-	public static void writeExpenseHistory() {
+	public void writeExpenseHistory() {
 		writeExpenseHistory();
 	}
 }
-
-
