@@ -5,13 +5,65 @@ import java.util.*;
 public class UserAccount {
 	String userName;
 	String password;
-	static String typeOfAccount;
+	String role;
 	static int noOfUsers;
 	int userID = 0;
 	private String sCurrentLine;
-	static Scanner my_scan = new Scanner(System.in);
-	static Scanner my_scanINT = new Scanner(System.in); 
+	static Scanner userInput1 = new Scanner(System.in); //for int
+	static Scanner userInput2 = new Scanner(System.in); // for string
+	static Scanner userInput3 = new Scanner(System.in); // for double
 	int userChoice;
+	
+	public UserAccount(String nameC, String passwordC, int uID ) {
+		userName = nameC;
+		password = passwordC;
+		userID = uID;
+	}
+	
+	public static UserAccount [] createAllUsers() {
+		int NumUser = 0;
+		String[] LocalUserName = new String[100];
+		String[] LocalPassword= new String[100];
+		String[] LocalTypeAccount = new String[100];
+		int[] LocalID = new int[100];
+		
+		UserAccount [] allUsers = new UserAccount [100];
+
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
+
+				LocalUserName[NumUser] = uCurrent[0];
+				LocalPassword[NumUser] = uCurrent[1];
+				LocalTypeAccount[NumUser] = uCurrent[2];
+				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
+
+				NumUser++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not existlol5");
+		}
+		
+		String[] FinalLocalUserName = new String[NumUser];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+		String[] FinalLocalPassword = new String[NumUser];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+		String[] FinalLocalTypeAccount = new String[NumUser];
+		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
+		int[] FinalLocalID = new int[NumUser];
+		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
+		
+		
+		for (int i = 0; i < NumUser; i++) {
+			allUsers [i]  = new UserAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalID[i]);
+		}
+
+		return allUsers;
+	}
 	
 	
 	public UserAccount(int userChoicec) {
@@ -22,19 +74,22 @@ public class UserAccount {
 		break;
 	}
 	}
+	public UserAccount() {
+		
+	}
 
 	protected static void Register() {
 
 		noOfUsers = readfile1();
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t Please Register User");
+		System.out.println("\t\t Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
-		String typeOfAccount = my_scan.nextLine();
+		String typeOfAccount = userInput2.nextLine();
 		System.out.println("Please choose a username:");
-		String Un = my_scan.nextLine();
+		String Un = userInput2.nextLine();
 		System.out.println("Please choose a password:");
-		String Pw = my_scan.nextLine();
+		String Pw = userInput2.nextLine();
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t Thank you for registering to PayUp!");
 		System.out.println("--------------------------------------------------------");
@@ -58,15 +113,15 @@ public class UserAccount {
 		int loggedID = 0;
 		String Un;
 		String Pw;
-		String role = "";
+		String role = "bla";
 
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t Please Login User");
+		System.out.println("\t\t Please Login User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Please input your username:");
-		Un = my_scan.nextLine();
+		Un = userInput2.nextLine();
 		System.out.println("Please input your password:");
-		Pw = my_scan.nextLine();
+		Pw = userInput2.nextLine();
 
 		try {
 			String sCurrentLine;
@@ -83,7 +138,7 @@ public class UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not exist");
+			System.out.println("This file does not existlol1");
 		}
 
 		String[] FinalLocalUserName = new String[NumUser];
@@ -96,14 +151,15 @@ public class UserAccount {
 				role = LocalRole[i];
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
-			}	
+			}
 		}
 		return role;
+
 	}
 
 	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\tThank you for visiting PayUp!\t");
+		System.out.println("\tYou are successfully logged out\t");
 	}
 
 	private static int readfile1() {
@@ -116,7 +172,7 @@ public class UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not exist");
+			System.out.println("This file does not existlol2");
 		}
 		return NumUser;
 	}
