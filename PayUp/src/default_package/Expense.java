@@ -9,17 +9,17 @@ public class Expense {
 	String expenseName;
 	String expenseDate;
 	double amount;
-	UserAccount[] temp = UserAccount.readFile();
 	int expenseId;
 	int listId;
 	String dummyName;
 	RegularAccount[] temp1 = RegularAccount.createRegulars();
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins();
 	
-	public Expense(int listId, String name, double amount, String date, String whoPaid, int expId) {
-		this.listId = listId;
+	
+	public Expense(int listIdc, String name, double amountc, String date, String whoPaid, int expId) {
+		listId = listIdc;
 		expenseName = name;
-		this.amount = amount;
+		amount = amountc;
 		expenseDate = date;
 		dummyName = whoPaid;
 		expenseId = expId;
@@ -111,25 +111,25 @@ public class Expense {
 	}
 	
 	
-	public static double splitExpense(int loggedID) {
-		double tempSum = 0;
-		
-		// correct reading code shoud come here
-		
-		// calcualtion colde below
-		double[] amount = new double[Finalc3.length];
-		for (int i = 0; i < Finalc3.length; i++) {
-			amount[i] = Double.parseDouble(Finalc3[i]);
-		}
-
-		for (int i = 0; i < Finalc1.length; i++) {
-			if (UserAccount.userName.equals(Finalc5[i])) {
-				tempSum += amount [i]/2;
-			}
-			else {
-				tempSum -= amount [i]/2;
-			}
-		}
-		return tempSum;
-	}
+//	public static double splitExpense() {
+//		double tempSum = 0;
+//		
+//		// correct reading code shoud come here
+//		
+//		// calcualtion colde below
+//		double[] amount = new double[Finalc3.length];
+//		for (int i = 0; i < Finalc3.length; i++) {
+//			amount[i] = Double.parseDouble(Finalc3[i]);
+//		}
+//
+//		for (int i = 0; i < Finalc1.length; i++) {
+//			if (UserAccount.userName.equals(Finalc5[i])) {
+//				tempSum += amount [i]/2;
+//			}
+//			else {
+//				tempSum -= amount [i]/2;
+//			}
+//		}
+//		return tempSum;
+//	}
 }
