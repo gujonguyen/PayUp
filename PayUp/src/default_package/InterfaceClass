@@ -22,12 +22,11 @@ public class InterfaceClass {
 
 		case 2:
 			String typeOfAccountl = UserAccount.Login();
-			System.out.println(typeOfAccountl);
-			if (typeOfAccountl.equals("R") || typeOfAccountl.equals("r")) {
-				RegularAccount(typeOfAccountl);
+			if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("reguular")){
+				RegularAccount(typeOfAccount);
 				}
-			else if (typeOfAccountl.equals("A") || typeOfAccountl.equals("a")) {
-				AdministratorAccount(typeOfAccountl);
+			else if (typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")) {
+				AdministratorAccount(typeOfAccount);
 			}
 			else {
 				System.out.println("Invalid login credentials");
