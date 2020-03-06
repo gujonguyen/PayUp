@@ -26,10 +26,12 @@ public class InterfaceClass {
 			if (typeOfAccountl.equals("R") || typeOfAccountl.equals("r")) {
 				RegularAccount(typeOfAccountl);
 				}
-			else {
+			else if (typeOfAccountl.equals("A") || typeOfAccountl.equals("a")) {
 				AdministratorAccount(typeOfAccountl);
 			}
-
+			else {
+				System.out.println("Invalid login credentials");
+			}
 		case 3:
 			UserAccount.Exit();
 			break;
