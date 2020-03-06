@@ -6,6 +6,8 @@ public class InterfaceClass {
 	static Scanner my_scan = new Scanner(System.in);
 	static Scanner my_scanINT = new Scanner(System.in); 
 	String typeOfAccount;
+	static int loggedUserID;
+	String[] passedUserData;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,12 +21,15 @@ public class InterfaceClass {
 			UserAccount.Register();
 
 		case 2:
-			String typeOfAccount = UserAccount.Login();
+			String[] arrayofLoggedUser = UserAccount.Login();
+			typeOfAccount = arrayofLoggedUser[1];
+			int loggeduserIDl;
+			loggeduserIDl = Integer.parseInt(arrayofLoggedUser[0]);
 			if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular")){
-				RegularAccount(typeOfAccount);
+				RegularAccount(typeOfAccount, loggeduserIDl);
 				}
 			else if (typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")) {
-				AdministratorAccount(typeOfAccount);
+				AdministratorAccount(typeOfAccount, loggeduserIDl);
 			}
 			else {
 				System.out.println("Invalid login credentials, please try again!");
@@ -49,14 +54,17 @@ public class InterfaceClass {
 		return my_scanINT.nextInt();
 	}
 
-	public void RegularAccount(String typeOfAccountc) {
+	public void RegularAccount(String typeOfAccountc, int loggedUserIDc) {
+		
 		typeOfAccount = typeOfAccountc;
+		
+		int loggedUserIDl = loggedUserIDc;
 		int userChoice = regularUserInterface();
-
+		
 		if (userChoice < 4) {
-			new List(userChoice);
+			new List(userChoice, loggedUserIDl);
 		}else {
-			new RegularAccount(userChoice);
+			new RegularAccount(userChoice, loggedUserIDl);
 		}
 
 	}
@@ -81,13 +89,14 @@ public class InterfaceClass {
 		return my_scanINT.nextInt();	//getting user choice 
 	}
 
-	public void AdministratorAccount(String typeOfAccountc){
+	public void AdministratorAccount(String typeOfAccountc, int loggedUserIDc){
 		typeOfAccount = typeOfAccountc;
+		int loggedUserIDl = loggedUserIDc;
 		int userChoice = AdminInterface();
 		if (userChoice < 3) {
-			new AdministratorAccount(userChoice);
+			new AdministratorAccount(userChoice, loggedUserIDl);
 		}else {
-			new UserAccount(userChoice);
+			new UserAccount(userChoice, loggedUserIDl);
 		}
 	}
 
