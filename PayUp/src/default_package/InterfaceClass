@@ -7,8 +7,6 @@ public class InterfaceClass {
 	static Scanner my_scanINT = new Scanner(System.in); 
 	String typeOfAccount;
 
-
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new InterfaceClass();
@@ -21,15 +19,15 @@ public class InterfaceClass {
 			UserAccount.Register();
 
 		case 2:
-			String typeOfAccountl = UserAccount.Login();
-			if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("reguular")){
+			String typeOfAccount = UserAccount.Login();
+			if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular")){
 				RegularAccount(typeOfAccount);
 				}
 			else if (typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")) {
 				AdministratorAccount(typeOfAccount);
 			}
 			else {
-				System.out.println("Invalid login credentials");
+				System.out.println("Invalid login credentials, please try again!");
 				new InterfaceClass();
 			}
 		case 3:
