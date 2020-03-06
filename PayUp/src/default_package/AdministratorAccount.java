@@ -13,6 +13,7 @@ public class AdministratorAccount extends UserAccount {
 	String typeOfAccount;
 	List[] temp1 = List.readFile();
 	int userChoice;
+	int loggedUserID;
 	
 	public AdministratorAccount(String nameC, String passwordC, int uID, String roleC ) {
 		super(nameC, passwordC, uID);
@@ -20,9 +21,10 @@ public class AdministratorAccount extends UserAccount {
 
 	}
 	
-	public AdministratorAccount(int userChoicec) {
+	public AdministratorAccount(int userChoicec, int loggedUserIDc) {
 		super();
 		userChoice = userChoicec;
+		loggedUserID = loggedUserIDc;
 		switch (userChoice) {
 		case 1:
 			removeUser();
