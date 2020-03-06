@@ -3,7 +3,9 @@ import java.io.*;
 import java.util.Scanner;
 
 public class AdministratorAccount extends UserAccount {
-	static Scanner userInput1 = new Scanner(System.in);
+	static Scanner userInput1 = new Scanner(System.in); //for int
+	static Scanner userInput2 = new Scanner(System.in); // for string
+	static Scanner userInput3 = new Scanner(System.in); // for double
 	String userName;
 	String password;
 	static String role;
@@ -12,15 +14,14 @@ public class AdministratorAccount extends UserAccount {
 	List[] temp1 = List.readFile();
 	int userChoice;
 	
-	public AdministratorAccount(String nameC, String passwordC, String roleC, int uID ) {
-			userName = nameC;
-			password = passwordC;
-			role = roleC;
-			id = uID;
+	public AdministratorAccount(String nameC, String passwordC, int uID, String roleC ) {
+		super(nameC, passwordC, uID);
+		role = roleC;
 
 	}
 	
 	public AdministratorAccount(int userChoicec) {
+		super();
 		userChoice = userChoicec;
 		switch (userChoice) {
 		case 1:
@@ -72,8 +73,8 @@ public class AdministratorAccount extends UserAccount {
 		int counterAdmins = 0;
 		
 		for (int i = 0; i < NumUser; i++) {
-		if (FinalLocalTypeAccount[i].equals("R") || FinalLocalTypeAccount[i].equals("r")) {
-			admins [counterAdmins]  = new AdministratorAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalTypeAccount[i], FinalLocalID[i]);
+		if (FinalLocalTypeAccount[i].equals("R")) {
+			admins [counterAdmins]  = new AdministratorAccount(FinalLocalUserName[i], FinalLocalPassword[i],  FinalLocalID[i], FinalLocalTypeAccount[i]);
 			counterAdmins ++;
 		}
 		}
@@ -81,7 +82,7 @@ public class AdministratorAccount extends UserAccount {
 		return admins;
 	}
 	
-	public static void removeUser() {
+	public void removeUser() {
 		int lineNumber = 0;
 		boolean localBoolean = false;
 		String[] aAxis = new String[100];
@@ -150,7 +151,7 @@ public class AdministratorAccount extends UserAccount {
 		}
 	}
 
-	public static void removeList() {
+	public void removeList() {
 		List.viewList();
 	}
 }
