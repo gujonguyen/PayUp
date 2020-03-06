@@ -25,11 +25,11 @@ public class List {
 	}
 
 	public List(int userChoicec, int loggedUserIDc){
-		loggedUserID = loggedUserIDc;
+		int loggedUserIDl = loggedUserIDc;
 		userChoice = userChoicec;
 		switch (userChoice) {
 		case 1:
-			createList(loggedUserID);
+			createList(loggedUserIDl);
 			break;
 		case 2:
 			viewList();
@@ -82,7 +82,8 @@ public class List {
 
 	public void createList(int loggedUserIDc) {
 
-		loggedUserID = loggedUserIDc;
+		int loggedUserIDl = loggedUserIDc;
+		
 
 		int [] aUser = new int[100];
 		Boolean localBoolean = false;
@@ -93,25 +94,26 @@ public class List {
 
 		System.out.println("How many users do you want to add?");
 		int amountOfUser = userInput1.nextInt();
-		aUser [0] = loggedUserID;
+		aUser [0] = loggedUserIDl;
 
 		for(int n = 1; n < amountOfUser + 1; n++) {
 			System.out.println("What is the userID of the user that you want to add to your list? ");
 			aUser[n] = userInput1.nextInt();
 		}
 		
-		for (int j = 1; j < amountOfUser; j++) {
-			for (int i = 0; i < temp3.length; i++ ) {
+		int length = UserAccount.readfile1(); // This returns the amount of registered user for the for-loop below
+		
+		for (int j = 1; j < amountOfUser + 1 ; j++) {
+			for (int i = 0; i < length; i++ ) {
 				if (aUser[j] == temp3[i].userID) {
 					localBoolean = true;
-					System.out.println("Correct!");
 				}else {
-					System.out.println("do I get here?1");
+					
 				}
-			}System.out.println("do I get here?2");
+			}
+		}
 
-
-		while (localBoolean == true) {
+		if (localBoolean == true) {
 			try {
 				String sCurrentLine;
 				BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
@@ -120,18 +122,15 @@ public class List {
 				}
 				myFile.close(); 
 			}catch (IOException e) {
-				System.out.println("This file does not existlol8");
+				System.out.println("This file does not exist");
 			}
 			
-
-			String [] FinalaUser = new String[amountOfUser];
-			System.arraycopy(aUser, 0, FinalaUser, 0, amountOfUser);
-
-			StringBuffer sb = new StringBuffer();
-			for(int i = 0; i < FinalaUser.length; i++) {
-				sb.append(FinalaUser[i] + ", ");
+			String str = "";
+			for (int i = 0; i < amountOfUser + 1; i++) {
+				 str = "," + aUser[i];	
 			}
-			String str = sb.toString();
+			
+			
 
 
 			try { 
@@ -139,10 +138,11 @@ public class List {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
 				wr.println(listName + "\t" + str + "\t" + lineNumber);
 				wr.close();
+				
 
-			} catch (IOException e) {
+		} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
-			}	
+			}
 		}
 	}
 
