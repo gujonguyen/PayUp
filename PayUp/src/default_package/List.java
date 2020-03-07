@@ -44,7 +44,6 @@ public class List {
 		int lineNumber = 0;
 		int [] idAxis = new int[100];
 		String [] nameAxis = new String[100];
-		String [] participantAxis = new String[100];
 		String[] nonsplittedString = new String[100];
 
 		try {
@@ -63,28 +62,30 @@ public class List {
 		}catch (IOException e) {
 			System.out.println("This file does not existlol7");
 		}
-
+		
 
 		int [] FinalIDAxis = new int[lineNumber];
 		System.arraycopy(idAxis, 0, FinalIDAxis, 0, lineNumber);
+		String [] FinalParticipantAxis = new String[lineNumber];
+		System.arraycopy(nonsplittedString, 0, FinalParticipantAxis, 0, lineNumber);
 		String [] FinalNameAxis = new String[lineNumber];
 		System.arraycopy(nameAxis, 0, FinalNameAxis, 0, lineNumber);
-		String [] FinalParticipantAxis = new String[lineNumber];
-		System.arraycopy(participantAxis, 0, FinalParticipantAxis, 0, lineNumber);
-
+		
+		
+		
 		List listArray[] = new List[FinalIDAxis.length];
 
 		for (int i = 0; i < FinalIDAxis.length; i++) {
 			listArray[i] = new List(FinalNameAxis[i], FinalParticipantAxis[i], FinalIDAxis[i]);
 		}		
+		
 		return listArray;
 	}
 
-	public void createList(int loggedUserIDc) {
+	public void createList(int loggeduserIDc) {
 
-		int loggedUserIDl = loggedUserIDc;
+		int loggedUserIDl = loggeduserIDc;
 		
-
 		int [] aUser = new int[100];
 		Boolean localBoolean = false;
 		int lineNumber = 0;
@@ -187,27 +188,27 @@ public class List {
 		}	
 	}
 	public static void deleteList() {
-			int lineNumber = 0;
-		String [] ListName = new String[100];
-		String[] Participants = new String[100];
-		int [] ListID = new int[100];
+		int lineNumber = 0;
+		String [] c1 = new String[100];
+		String[] c2 = new String[100];
+		int [] c3 = new int[100];
 
-		System.out.println("Enter the list ID you wish to remove admin:");
-		int removeListID = userInput2.nextInt();
-		System.out.println("Are you sure? Deleting lists is permanent (Y/N)");
+		System.out.println("Enter the list ID of the list you want to delete.");
+		int viewList = userInput2.nextInt();
+		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
 		String confirm = userInput1.nextLine();
 
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [3];
 			BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
-
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				ListName[lineNumber] = uCurrent[0];
-				Participants[lineNumber] = uCurrent[1];
-				ListID[lineNumber] = Integer.parseInt(uCurrent[2]);
+				c1[lineNumber] = uCurrent[0];
+				c2[lineNumber] = uCurrent[1];
+				c3[lineNumber] = Integer.parseInt(uCurrent[2]);
+
 				lineNumber++;
 			}
 			myFile.close(); 
@@ -215,29 +216,42 @@ public class List {
 			System.out.println("This file does not existlol10");
 		}
 
-		String[] FinalListName = new String[lineNumber];
-		System.arraycopy(ListName, 0, FinalListName, 0, lineNumber);
-		String[] FinalParticipants = new String[lineNumber];
-		System.arraycopy(Participants, 0, FinalParticipants, 0, lineNumber);
-		int[] FinalListID = new int[lineNumber];
-		System.arraycopy(ListID, 0, FinalListID, 0, lineNumber);
+		String[] Finalc1 = new String[lineNumber];
+		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
+		String[] Finalc2 = new String[lineNumber];
+		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
+		int[] Finalc3 = new int[lineNumber];
+		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
 
 		if(confirm.equals("Y")) {
 			try {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
 				for (int i = 0; i < lineNumber; i++) {
-					if (i == removeListID) {
-						wr.println("N/A" + "\t" + "N/A" + "\t" + FinalListID[i]);
-						System.out.println("You have successfully deleted the list ID: " + removeListID);
+					if (i == viewList) {
+					wr.println("N/A" + "\t" + "N/A" + "\t" + Finalc3[i]);
 					} else {
-						wr.println(FinalListName[i] + "\t" + FinalParticipants[i] + "\t" + FinalListID[i]);
+					wr.println(Finalc1[i] + "\t" + Finalc2[i] + "\t" + Finalc3[i]);
 					}
 				}
 				wr.close();
-
+						
 			}catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}	
 		}
+	}
+	public static int readfile1() {
+		int numLists = 0;
+		try {
+			String sCurrentLine;
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				numLists++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not existlol2");
+		}
+		return numLists;
 	}
 }
