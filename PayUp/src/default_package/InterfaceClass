@@ -38,12 +38,6 @@ public class InterfaceClass {
 		case 3:
 			UserAccount.Exit();
 			break;
-		
-		default: 
-			System.out.println("--------------------------------------------------------");
-			System.out.println("CAUTION: Please only enter number 1, 2 or 3"); 
-			new InterfaceClass();
-
 		}
 	}
 
@@ -70,7 +64,7 @@ public class InterfaceClass {
 		if (userChoice < 4) {
 			new List(userChoice, loggedUserIDl);
 		}else {
-			new RegularAccount(userChoice, loggedUserIDl);
+			new Expense(userChoice, loggedUserIDl);
 		}
 
 	}
