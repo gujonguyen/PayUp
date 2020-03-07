@@ -87,7 +87,7 @@ public class UserAccount {
 		System.out.println("\t Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
-		String typeOfAccount = userInput2.nextLine()
+		String typeOfAccount = userInput2.nextLine();
 		System.out.println("Please choose a username: ");
 		String Un = userInput2.nextLine();
 		System.out.println("Please choose a password: ");
