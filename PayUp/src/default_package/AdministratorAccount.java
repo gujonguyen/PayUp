@@ -81,6 +81,7 @@ public class AdministratorAccount extends UserAccount {
 	}
 
 	public void removeUser() {
+		//listing all the users of PayUp
 		boolean localBoolean = false;
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
@@ -119,34 +120,31 @@ public class AdministratorAccount extends UserAccount {
 		String[] FinalLocalID = new String[NumUser];
 		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 
+		System.out.println("User ID" + "\t Type Account" + "\t UserName");
 		for(int k = 0; k < NumUser; k++) {
-			System.out.println(LocalUserName[k]);
+			System.out.println(LocalID[k] + "\t" + "\t" + LocalUserName[k]);
 		}
 
-		System.out.println("Which user do you wish to remove?");
+		//removing the user from PayUp
+		System.out.println("");
+		System.out.println("Enter the User ID you wish to remove admin:");
 		String localRemovedUser = userInput1.nextLine() ;
 
-		for (int v = 0; 0 < NumUser; v++) {
-			if (localRemovedUser.equals(FinalLocalUserName[v])) {
-				FinalLocalUserName[v] = "";
-				FinalLocalPassword[v] = "";
-				FinalLocalTypeAccount[v] = "";
-				FinalLocalID[v] = "";
-				localBoolean = true;
-			}
-		}
-
-		while (localBoolean = true) {
-			try { 
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database",false)));
-				for (int b = 0; b < NumUser; b++) {
-					wr.println(FinalLocalUserName[b] + "\t" + FinalLocalPassword[b] + "\t" + FinalLocalTypeAccount[b] + "\t" + FinalLocalID[b]);	
+		try {
+			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",false)));
+			for (int i = 0; i < NumUser; i++) {
+				if (localRemovedUser.equals(FinalLocalID[i])) {
+					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + FinalLocalID[i]);
+					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
+				} else {
+					wr.println(FinalLocalUserName[i] + "\t" + FinalLocalPassword[i] + "\t" + FinalLocalTypeAccount[i] + "\t" + FinalLocalID[i]);	
 				}
-				wr.close();
-			}catch (IOException e) {
-				System.out.println("I/O error when writing on file");
 			}
-		}
+			wr.close();
+
+		}catch (IOException e) {
+			System.out.println("I/O error when writing on file");
+		}	
 	}
 
 	public void removeList() {   
