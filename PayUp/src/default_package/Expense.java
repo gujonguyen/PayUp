@@ -14,6 +14,7 @@ public class Expense {
 	RegularAccount[] temp1 = RegularAccount.createRegulars();
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins();
 	UserAccount[] temp3 = UserAccount.createAllUsers();
+	
 
 	static int fileCount;
 	String participants;
@@ -109,11 +110,14 @@ public class Expense {
 	}
 
 	public void viewIndividualBalance(int loggedUserIDc) {
+		
+		
 
 		int loggedUserIDl = loggedUserIDc;
 		Expense [] allExpenses = readFile();
-		Expense [] myExpesnes = new Expense [100]; //finds only the expenses the logged in user is a part of
+		Expense [] myExpenses = new Expense [100]; //finds only the expenses the logged in user is a part of
 		String [] temp = new String [allExpenses.length];
+		
 		
 		for (int i = 0; i < allExpenses.length; i++) {
 			temp = allExpenses[i].participants.split (",");
@@ -132,6 +136,22 @@ public class Expense {
 
 	public void addExpenseToList(int loggedUserIDc) {
 
+		List [] temp4 = List.readFile();
+		int amountOfLists = List.readfile1();
+		
+		String sCurrentLine;
+		String[] uCurrent = new String [4];
+		String[] participantsInList = new String[100];
+		
+		
+		
+		sCurrentLine = temp4[0].participants;
+		uCurrent = sCurrentLine.split(",");
+		
+		participantsInList[0] = uCurrent[0];
+		
+		System.out.println(participantsInList[0]);
+		
 		int loggedUserIDl = loggedUserIDc;
 
 
@@ -139,7 +159,7 @@ public class Expense {
 		Boolean localBoolean = false;
 		int lineNumber = 0;
 
-		System.out.println("What is the list ID to which this expesne belongs?");
+		System.out.println("What is the list ID to which this expense belongs?");
 		int listId = userInput1.nextInt();
 
 		System.out.println("What is the name of this expense?");
@@ -151,7 +171,7 @@ public class Expense {
 		System.out.println("What is the date of this expense?");
 		String date = userInput2.nextLine();
 
-		System.out.println("How many users do you want to add (not counting yourself)?");
+		System.out.println("Among how many users do you want to devide the amount (not counting yourself)?");
 		int amountOfUser = userInput1.nextInt();
 		aUser [0] = loggedUserIDl;
 
@@ -174,9 +194,9 @@ public class Expense {
 
 		if (localBoolean == true) {
 			try {
-				String sCurrentLine;
+				String sCurrentLine1;
 				BufferedReader myFile = new BufferedReader (new FileReader("Expense_database.txt")); 
-				while ((sCurrentLine = myFile.readLine()) != null) {
+				while ((sCurrentLine1 = myFile.readLine()) != null) {
 					lineNumber++;
 				}
 				myFile.close(); 
