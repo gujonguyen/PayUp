@@ -191,7 +191,8 @@ public class UserAccount {
 		return arrayofLoggedUser;
 
 	}
-
+	
+	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\tThanks for visiting PayUp!");
 		System.out.println("");
