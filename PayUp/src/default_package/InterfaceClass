@@ -42,8 +42,17 @@ public class InterfaceClass {
 			break;
 		}
 	}
-
+	
 	private static int getUserChoice1(){
+		
+// try {	//		With this try and catch statement, I 
+			//		tried to display an error message in case the user inputs a String.
+			//		However, how to link back to the regularUserInterface method after displaying the 
+			//		error message is still vague to me.
+		
+			// At this point it does recognize integers >3 as errors. 
+			// That is already fixed in the InterfaceClass above.
+							
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\t Welcome to PayUp! ");
 		System.out.println("\n What do you wish to?");   
@@ -54,7 +63,19 @@ public class InterfaceClass {
 		System.out.println("--------------------------------------------------------");
 		System.out.print("Enter your option: ");
 		return my_scanINT.nextInt();
+
 	}
+	
+//	//	} catch(InputMismatchException e) {
+//		//	System.out.println("--------------------------------------------------------"); 
+//		//	System.out.println("------------------------CAUTION!------------------------"); 
+//		//	System.out.println("            Please only enter integer values!           "); 
+//		//	System.out.println("------------------------CAUTION!------------------------"); 
+//		//	new InterfaceClass();
+//		}
+//
+//	// }
+
 
 	public void RegularAccount(String typeOfAccountc, int loggedUserIDc) {
 		
