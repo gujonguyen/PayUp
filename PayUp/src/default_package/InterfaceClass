@@ -38,6 +38,12 @@ public class InterfaceClass {
 		case 3:
 			UserAccount.Exit();
 			break;
+		
+		default: 
+			System.out.println("--------------------------------------------------------");
+			System.out.println("CAUTION: Please only enter number 1, 2 or 3"); 
+			new InterfaceClass();
+
 		}
 	}
 
