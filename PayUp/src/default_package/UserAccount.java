@@ -192,9 +192,28 @@ public class UserAccount {
 
 	}
 
-	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\tYou are successfully logged out\t");
+		System.out.println("\tThanks for visiting PayUp!");
+		System.out.println("");
+		System.out.println("--------------------------------------------------------");
+		System.out.println("--------------------------------------------------------");
+	}
+
+	protected static void Logout() {
+		System.out.println("--------------------------------------------------------");
+		System.out.println("\tYou are successfully logout!");
+		System.out.println("");
+		System.out.println("Do you wish stay on PayUp and go to main menu? (Y/N)");
+		String MainMenu = userInput2.nextLine();
+		if(MainMenu.equals("Y")) {
+			new InterfaceClass();
+		} else if (MainMenu.equals("N")) {
+			UserAccount.Exit();
+		}
+		else {
+			System.out.println("Please enter a valid choice");
+			Logout();
+		}
 	}
 
 	public static int readfile1() {
