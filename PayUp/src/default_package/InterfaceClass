@@ -77,7 +77,7 @@ public class InterfaceClass {
 		System.out.println("------------------------CAUTION!------------------------");
 		System.out.println("          Please only enter a number between 1-9!        "); 
 		System.out.println("------------------------CAUTION!------------------------");
-		RegularAccount(typeOfAccountc, loggedUserIDl);
+		RegularAccount(typeOfAccount, loggedUserIDl);
 
 	}
 	}
@@ -107,8 +107,14 @@ public class InterfaceClass {
 		int userChoice = AdminInterface();
 		if (userChoice < 3) {
 			new AdministratorAccount(userChoice, loggedUserIDl);
-		}else {
+		}else if(userChoice < 4){
 			new UserAccount(userChoice, loggedUserIDl);
+		}else{
+		System.out.println("--------------------------------------------------------");
+		System.out.println("------------------------CAUTION!------------------------");
+		System.out.println("          Please only enter a number between 1-9!        "); 
+		System.out.println("------------------------CAUTION!------------------------");
+		AdministratorAccount(typeOfAccount, loggedUserIDl);
 		}
 	}
 
