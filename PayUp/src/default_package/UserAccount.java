@@ -15,6 +15,7 @@ public class UserAccount {
 	int userChoice;
 	int loggedUserID;
 
+
 	public UserAccount(String nameC, String passwordC, int uID ) {
 		userName = nameC;
 		password = passwordC;
@@ -80,70 +81,73 @@ public class UserAccount {
 
 	}
 
-	protected static void Register() { //This method does the registration for new users
+	protected static void Register() {
 
+		Boolean localBoolean = true;
 		noOfUsers = readfile1();
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t Please Register User");
+		System.out.println("\t\t Please Register User");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
-		
-		for (int i = 0; i<1; i++)
-			if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")) {
-				continue;
-			}
-			else {System.out.println("Please enter a valid choice: (R/A)");
-			UserAccount.Register();
-			}
-		
-		System.out.println("Please choose a username: ");
+		System.out.println("Please choose a username:");
 		String Un = userInput2.nextLine();
-		System.out.println("Please choose a password: ");
+		System.out.println("Please choose a password:");
 		String Pw = userInput2.nextLine();
+		
+		int pw = Pw.length();
+		
+		if (pw > 4) {
+		
+		UserAccount[] temp3 = UserAccount.createAllUsers();
 
-		int length = Pw.length();
-		if (length < 4) {	//This disables new registrations with less than 4 characters
-			System.out.println("Your password must have 4 characters or more");
-			Register();	//User will be shown the register interface again for another attempt
-		}
-		else {	//When the user has entered a password that is more than 4 characters
-			try {	//This part tries to find whether the entered username already exists in the user database so duplicate names are avoided
-				int NumUser = 0;
-				String[] LocalUserName = new String[100];
-				String sCurrentLine;
-				String[] uCurrent = new String [4];
-				BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
-				while ((sCurrentLine = myFile.readLine()) != null) {
-					uCurrent = sCurrentLine.split("\t");
-					LocalUserName[NumUser] = uCurrent[0];
-					NumUser++;
-					if(Un.equals(uCurrent[0])){
-						System.out.println("Username already exists, please try another one");
-						 Register();
-					} else {	//If the entered username is unique a new row with user details will be written in the user database
-						try {
-							PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
-							wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + noOfUsers);
-							wr.close();
-							System.out.println("--------------------------------------------------------");
-							System.out.println("\t Thank you for registering to PayUp!");
-							System.out.println("--------------------------------------------------------");
-							wr.close();
-
-						}catch (IOException e) {
-						}
-					}
-					new InterfaceClass();
-				}
-			}
-			catch (IOException e) {
-
+		for (int k = 0; k < noOfUsers; k++) {
+			if(Un.equals(temp3[k].userName)) {
+				localBoolean = false;
+			}else {
 			}
 		}
+		System.out.println(localBoolean);
+		
+			if (localBoolean == true) {
+				writeUser(Un, Pw, typeOfAccount);	
+			}else {
+				System.out.println("--------------------------------------------------------");
+				System.out.println("This User Name is already taken, please Register again");
+				System.out.println("--------------------------------------------------------");
+				Register();
+			}
+		}else {
+			System.out.println("--------------------------------------------------------");
+			System.out.println("Please use a password of more than 4 characters");
+			System.out.println("--------------------------------------------------------");
+			Register();
+		}
+		
 	}
+	
 
+	private static void writeUser(String Unc, String Pwc, String typeOfAccountc) {
+		String Un = Unc;
+		String Pw = Pwc;
+		String typeOfAccount = typeOfAccountc;
+		
+		try { //This is for Registration of the users
 
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
+				wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + noOfUsers);
+				wr.close();	
+		}catch (IOException e) {
+			System.out.println("I/O error when writing on file");
+		}
+		
+		System.out.println("--------------------------------------------------------");
+		System.out.println("\t Thank you for registering to PayUp!");
+		System.out.println("--------------------------------------------------------");
+		new InterfaceClass();
+	}
+	
+	
 	protected static String[] Login() {
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
@@ -201,30 +205,10 @@ public class UserAccount {
 		return arrayofLoggedUser;
 
 	}
-	
-	rotected static void Exit() {
-		System.out.println("--------------------------------------------------------");
-		System.out.println("\tYou are now logged out.");
-		System.out.println("\tThanks for visiting PayUp!");
-		System.out.println("--------------------------------------------------------");
-		System.out.println("--------------------------------------------------------");
-	}
 
-	protected static void Logout() {
+	protected static void Exit() {
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\tYou are successfully logged out!");
-		System.out.println("");
-		System.out.println("Do you wish stay on PayUp and go to main menu? (Y/N)");
-		String MainMenu = userInput2.nextLine();
-		if(MainMenu.equals("Y")) {
-			new InterfaceClass();
-		} else if (MainMenu.equals("N")) {
-			UserAccount.Exit();
-		}
-		else {
-			System.out.println("Please enter a valid choice");
-			Logout();
-		}
+		System.out.println("\tYou are successfully logged out\t");
 	}
 
 	public static int readfile1() {
