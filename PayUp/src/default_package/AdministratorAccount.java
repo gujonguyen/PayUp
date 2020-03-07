@@ -81,7 +81,7 @@ public class AdministratorAccount extends UserAccount {
 	}
 
 	public void removeUser() {
-		//listing all the users of PayUp
+				//listing all the users of PayUp
 		boolean localBoolean = false;
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
@@ -120,7 +120,7 @@ public class AdministratorAccount extends UserAccount {
 		String[] FinalLocalID = new String[NumUser];
 		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 
-		System.out.println("User ID" + "\t Type Account" + "\t UserName");
+		System.out.println("User ID" + "\t\t UserName");
 		for(int k = 0; k < NumUser; k++) {
 			System.out.println(LocalID[k] + "\t" + "\t" + LocalUserName[k]);
 		}
@@ -146,6 +146,7 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("I/O error when writing on file");
 		}	
 	}
+
 
 	public void removeList() {   
 		//viewing the lists
