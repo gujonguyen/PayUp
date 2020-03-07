@@ -88,6 +88,15 @@ public class UserAccount {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
+		
+		for (int i = 0; i<1; i++)
+			if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")) {
+				continue;
+			}
+			else {System.out.println("Please enter a valid choice: (R/A)");
+			UserAccount.Register();
+			}
+		
 		System.out.println("Please choose a username: ");
 		String Un = userInput2.nextLine();
 		System.out.println("Please choose a password: ");
