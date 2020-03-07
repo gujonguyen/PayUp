@@ -11,7 +11,6 @@ public class AdministratorAccount extends UserAccount {
 	static String role;
 	int id;
 	String typeOfAccount;
-	List[] temp1 = List.readFile();
 	int userChoice;
 	int loggedUserID;
 	
