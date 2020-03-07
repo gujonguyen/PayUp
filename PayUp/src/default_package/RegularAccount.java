@@ -46,6 +46,14 @@ public class RegularAccount extends UserAccount{
 	case 9:
 		logout();
 		break;
+		
+	default: 
+		System.out.println("--------------------------------------------------------");
+		System.out.println("------------------------CAUTION!------------------------");
+		System.out.println("          Please only enter a number between 1-9!        "); 
+		System.out.println("------------------------CAUTION!------------------------");
+		new InterfaceClass();
+
 	}
 	}
 
