@@ -120,6 +120,7 @@ public class UserAccount {
 					NumUser++;
 					if(Un.equals(uCurrent[0])){
 						System.out.println("Username already exists, please try another one");
+						 Register();
 					} else {	//If the entered username is unique a new row with user details will be written in the user database
 						try {
 							PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
