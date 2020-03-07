@@ -127,7 +127,7 @@ public class List {
 			
 			String str = "";
 			for (int i = 0; i < amountOfUser + 1; i++) {
-				 str = "," + aUser[i];	
+				 str = str + aUser[i] + ",";	
 			}
 			
 			
@@ -149,12 +149,14 @@ public class List {
 	public static void viewList() {
 
 		int lineNumber = 0;
-		int [] c1 = new int[100];
+		String [] c1 = new String[100];
 		String[] c2 = new String[100];
-		String[] c3 = new String[100];
+		int [] c3 = new int[100];
 
 		System.out.println("What is the list ID of the list that you want to view? ");
-		int viewList = userInput2.nextInt();
+		int viewList = userInput1.nextInt();
+		
+		
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [3];
@@ -162,35 +164,32 @@ public class List {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				c1[lineNumber] = Integer.parseInt(uCurrent[0]);
+				c1[lineNumber] = uCurrent[0];
 				c2[lineNumber] = uCurrent[1];
-				c3[lineNumber] = uCurrent[2];
-
+				c3[lineNumber] = Integer.parseInt(uCurrent[2]);
 				lineNumber++;
 			}
-			myFile.close(); 
+			myFile.close(); 	
 		}catch (IOException e) {
 			System.out.println("This file does not existlol9");
 		}
 
-		int[] Finalc1 = new int[lineNumber];
+		String[] Finalc1 = new String[lineNumber];
 		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
 		String[] Finalc2 = new String[lineNumber];
 		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-		String[] Finalc3 = new String[lineNumber];
+		int [] Finalc3 = new int[lineNumber];
 		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
 
-		System.out.println("List ID: \t Particpants: \t\t List Name:");
+
+		System.out.println("List Name: \t Particpants: \t List ID: \t \t ");
 		for (int i = 0; i < lineNumber; i++) {
-			if(Finalc1[i] == viewList) {
-				System.out.println(Finalc1[i] + "\t" + Finalc2[i] + "\t" + Finalc3[i]);
+			if (viewList == Finalc3[i]) {
+				System.out.println(Finalc1[i] + "\t\t\t" + Finalc2[i] + "\t\t" + Finalc3[i]);
 				break;
-			}else {
-				System.out.println("");
 			}
 		}	
 	}
-
 	public static void deleteList() {
 		int lineNumber = 0;
 		int [] c1 = new int[100];
@@ -232,7 +231,7 @@ public class List {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
 				for (int i = 0; i < lineNumber; i++) {
 					if(i == viewList) continue;
-					wr.println(Finalc1[i] + "\t " + Finalc2[i]+ "\t " + Finalc3[i]);
+					wr.print(Finalc1[i] + "\t " + Finalc2[i]+ "\t " + Finalc3[i]);
 				}
 				wr.close();
 			}catch (IOException e) {
