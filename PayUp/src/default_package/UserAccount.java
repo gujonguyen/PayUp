@@ -202,17 +202,17 @@ public class UserAccount {
 
 	}
 	
-	protected static void Exit() {
+	rotected static void Exit() {
 		System.out.println("--------------------------------------------------------");
+		System.out.println("\tYou are now logged out.");
 		System.out.println("\tThanks for visiting PayUp!");
-		System.out.println("");
 		System.out.println("--------------------------------------------------------");
 		System.out.println("--------------------------------------------------------");
 	}
 
 	protected static void Logout() {
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\tYou are successfully logout!");
+		System.out.println("\tYou are successfully logged out!");
 		System.out.println("");
 		System.out.println("Do you wish stay on PayUp and go to main menu? (Y/N)");
 		String MainMenu = userInput2.nextLine();
