@@ -64,7 +64,7 @@ public class Expense {
 	String[] expenseName = new String[100];
 	double[] amount = new double[100];
 	String[] expenseDate = new String[100];
-	String[] dummyName = new String[100];
+	String[] userArray = new String[100];
 	int[] expenseID = new int[100];
 
 	try {
@@ -78,7 +78,7 @@ public class Expense {
 			expenseName[lineNumber] = uCurrent[1];
 			amount[lineNumber] = Double.parseDouble(uCurrent[2]);
 			expenseDate[lineNumber] = uCurrent[3];
-			dummyName[lineNumber] = uCurrent[4];
+			userArray[lineNumber] = uCurrent[4];
 			expenseID[lineNumber] = Integer.parseInt(uCurrent[5]);
 			lineNumber++;
 		}
@@ -95,15 +95,15 @@ public class Expense {
 	System.arraycopy(amount, 0, Finalamount, 0, lineNumber);
 	String[] FinalexpenseDate = new String[lineNumber];
 	System.arraycopy(expenseDate, 0, FinalexpenseDate, 0, lineNumber);
-	String[] FinaldummyName = new String[lineNumber];
-	System.arraycopy(dummyName, 0, FinaldummyName, 0, lineNumber);
+	String[] FinalUserArray = new String[lineNumber];
+	System.arraycopy(userArray, 0, FinalUserArray, 0, lineNumber);
 	int[] FinalexpenseID = new int[lineNumber];
 	System.arraycopy(expenseID, 0, FinalexpenseID, 0, lineNumber);
 	
 	Expense expense[] = new Expense[FinallistID.length];
 	
 	for (int i = 0; i < FinallistID.length; i++) {
-		expense[i] = new Expense(FinallistID[i], FinalexpenseName[i], Finalamount[i], FinalexpenseDate[i], FinaldummyName[i], FinalexpenseID[i]);
+		expense[i] = new Expense(FinallistID[i], FinalexpenseName[i], Finalamount[i], FinalexpenseDate[i], FinalUserArray[i], FinalexpenseID[i]);
 	}	
 		
 	return expense;
@@ -124,6 +124,12 @@ public class Expense {
 		
 		System.out.println("What is the name of this expense?");
 		String expenseName = userInput2.nextLine();
+		
+		System.out.println("What is the amount of this expense?");
+		Double amount = userInput3.nextDouble();
+		
+		System.out.println("What is the date of this expense?");
+		String date = userInput2.nextLine();
 
 		System.out.println("How many users do you want to add (not counting yourself)?");
 		int amountOfUser = userInput1.nextInt();
@@ -166,7 +172,7 @@ public class Expense {
 			try { 
 
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt",true)));
-				wr.println(listId + "\t" + expenseName + "\t" + str + "\t" + lineNumber);
+				wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + date + "\t" + str + "\t" + lineNumber);
 				wr.close();
 				
 		} catch (IOException e) {
