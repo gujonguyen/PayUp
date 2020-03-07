@@ -35,6 +35,8 @@ public class InterfaceClass {
 				System.out.println("Invalid login credentials, please try again!");
 				new InterfaceClass();
 			}
+			break;
+			
 		case 3:
 			UserAccount.Exit();
 			break;
