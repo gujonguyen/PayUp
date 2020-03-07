@@ -26,7 +26,7 @@ public class AdministratorAccount extends UserAccount {
 			removeUser();
 			break;
 		case 2:
-			removeList();
+			removeList();	
 			break;
 		}
 	}
@@ -81,7 +81,7 @@ public class AdministratorAccount extends UserAccount {
 	}
 
 	public void removeUser() {
-				//listing all the users of PayUp
+		//listing all the users of PayUp
 		boolean localBoolean = false;
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
@@ -127,7 +127,7 @@ public class AdministratorAccount extends UserAccount {
 
 		//removing the user from PayUp
 		System.out.println("");
-		System.out.println("Enter the User ID you wish to remove admin:");
+		System.out.println("Enter the User ID you wish to remove admin: ");
 		String localRemovedUser = userInput1.nextLine() ;
 
 		try {
@@ -146,7 +146,6 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("I/O error when writing on file");
 		}	
 	}
-
 
 	public void removeList() {   
 		//viewing the lists
@@ -189,58 +188,7 @@ public class AdministratorAccount extends UserAccount {
 		}		
 
 		//removing the lists 
-		String [] ListName = new String[100];
-		String[] Participants = new String[100];
-		int [] ListID = new int[100];
-
-		System.out.println("");
-		System.out.println("Enter the list ID you wish to remove admin:");
-		int removeListID = userInput2.nextInt();
-		System.out.println("Are you sure? Deleting lists is permanent (Y/N)");
-		String confirm = userInput1.nextLine();
-
-		try {
-			String sCurrentLine;
-			String[] uCurrent = new String [3];
-			BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
-
-			while ((sCurrentLine = myFile.readLine()) != null) {
-				uCurrent = sCurrentLine.split("\t");
-
-				ListName[lineNumber] = uCurrent[0];
-				Participants[lineNumber] = uCurrent[1];
-				ListID[lineNumber] = Integer.parseInt(uCurrent[2]);
-				lineNumber++;
-			}
-			myFile.close(); 
-		}catch (IOException e) {
-			System.out.println("This file does not existlol10");
-		}
-
-		String[] FinalListName = new String[lineNumber];
-		System.arraycopy(ListName, 0, FinalListName, 0, lineNumber);
-		String[] FinalParticipants = new String[lineNumber];
-		System.arraycopy(Participants, 0, FinalParticipants, 0, lineNumber);
-		int[] FinalListID = new int[lineNumber];
-		System.arraycopy(ListID, 0, FinalListID, 0, lineNumber);
-
-		if(confirm.equals("Y")) {
-			try {
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
-				for (int i = 0; i < lineNumber; i++) {
-					if (i == removeListID) {
-						wr.println("N/A" + "\t" + "N/A" + "\t" + FinalListID[i]);
-						System.out.println("You have successfully deleted the list ID:" + removeListID);
-					} else {
-						wr.println(FinalListName[i] + "\t" + FinalParticipants[i] + "\t" + FinalListID[i]);
-					}
-				}
-				wr.close();
-
-			}catch (IOException e) {
-				System.out.println("I/O error when writing on file");
-			}	
-		}
+		List.deleteList();
 
 	}
 }
