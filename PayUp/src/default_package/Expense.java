@@ -14,6 +14,12 @@ public class Expense {
 	String dummyName;
 	RegularAccount[] temp1 = RegularAccount.createRegulars();
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins();
+	UserAccount[] temp3 = UserAccount.createAllUsers();
+	
+	static int fileCount;
+	String participants;
+	int userChoice;
+	int loggedUserID;
 	
 	
 	public Expense(int listIdc, String name, double amountc, String date, String whoPaid, int expId) {
@@ -23,8 +29,34 @@ public class Expense {
 		expenseDate = date;
 		dummyName = whoPaid;
 		expenseId = expId;
-		
 	}
+	
+	public Expense(int userChoicec, int loggedUserIDc) {
+		super();
+		userChoice = userChoicec;
+		loggedUserID = loggedUserIDc;
+		
+		switch (userChoice) {
+		case 4:
+			//viewIndividualBalance();
+			break;
+		case 5:
+			//settleList();
+			break;
+		case 6:
+			addExpenseToList(loggedUserIDc);
+			break;
+		case 7:
+			//viewExpenseHistory();
+			break;
+		case 8:
+			//writeExpenseHistory();
+			break;
+		case 9:
+			//logout();
+			break;
+		}
+		}
 	
 	public static Expense[] readFile() {
 	int lineNumber = 0;
@@ -78,33 +110,66 @@ public class Expense {
 }
 
 
-	public static void createExpense() {
-		System.out.println("How many expenses do you want to add? ");
-		int counter = userInput1.nextInt();
-		for (int i = 0; i < counter; i++) {
-			System.out.println("Please choose the list ID of the list this expense belongs to: ");
-			String listId = userInput2.nextLine();
-			System.out.println("Please choose an expense name: ");
-			String expenseName = userInput2.nextLine();
-			System.out.println("Please choose the expense ammount: ");
-			Double amount = userInput3.nextDouble();
-			System.out.println("Please choose the expense date: ");
-			String expenseDate = userInput2.nextLine();
-			System.out.println("Who paid for this expense? ");
-			String userName = userInput2.nextLine();
-			
-			try {
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_" + listId + ".txt", true)));
-				wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + expenseDate + "\t" + userName);
-				wr.close();	
-			} catch (IOException e) {
-				System.out.println("I/O error when writing on file");
+	public void addExpenseToList(int loggedUserIDc) {
+
+		int loggedUserIDl = loggedUserIDc;
+		
+
+		int [] aUser = new int[100];
+		Boolean localBoolean = false;
+		int lineNumber = 0;
+
+		System.out.println("What is the list ID to which this expesne belongs?");
+		int listId = userInput1.nextInt();
+		
+		System.out.println("What is the name of this expense?");
+		String expenseName = userInput2.nextLine();
+
+		System.out.println("How many users do you want to add (not counting yourself)?");
+		int amountOfUser = userInput1.nextInt();
+		aUser [0] = loggedUserIDl;
+
+		for(int n = 1; n < amountOfUser + 1; n++) {
+			System.out.println("What is the userID of the user that you want to add to your list? ");
+			aUser[n] = userInput1.nextInt();
+		}
+		
+		int length = UserAccount.readfile1(); // This returns the amount of registered user for the for-loop below
+		
+		for (int j = 1; j < amountOfUser + 1 ; j++) {
+			for (int i = 0; i < length; i++ ) {
+				if (aUser[j] == temp3[i].userID) {
+					localBoolean = true;
+				}else {
+					
+				}
 			}
+		}
+
+		if (localBoolean == true) {
 			try {
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt", true)));
-				wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + expenseDate + "\t" + userName);
+				String sCurrentLine;
+				BufferedReader myFile = new BufferedReader (new FileReader("Expense_database.txt")); 
+				while ((sCurrentLine = myFile.readLine()) != null) {
+					lineNumber++;
+				}
+				myFile.close(); 
+			}catch (IOException e) {
+				System.out.println("This file does not exist");
+			}
+			
+			String str = "";
+			for (int i = 0; i < amountOfUser + 1; i++) {
+				 str = str + aUser[i] + ",";	
+			}				
+
+			try { 
+
+				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt",true)));
+				wr.println(listId + "\t" + expenseName + "\t" + str + "\t" + lineNumber);
 				wr.close();
-			} catch (IOException e) {
+				
+		} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
 		}
