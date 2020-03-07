@@ -44,7 +44,7 @@ public class RegularAccount extends UserAccount{
 		writeExpenseHistory();
 		break;
 	case 9:
-		logout();
+		UserAccount.Logout();
 		break;
 		
 	default: 
@@ -55,11 +55,6 @@ public class RegularAccount extends UserAccount{
 		new InterfaceClass();
 
 	}
-	}
-
-	public void logout() {
-		System.out.println("--------------------------------------------------------");
-		System.out.println("You are successfully logged out");
 	}
 
 	public static RegularAccount[] createRegulars() {
