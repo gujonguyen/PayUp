@@ -129,12 +129,8 @@ public class List {
 			for (int i = 0; i < amountOfUser + 1; i++) {
 				 str = str + aUser[i] + ",";	
 			}
-			
-			
-
 
 			try { 
-
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
 				wr.println(listName + "\t" + str + "\t" + lineNumber);
 				wr.close();
@@ -192,9 +188,9 @@ public class List {
 	}
 	public static void deleteList() {
 		int lineNumber = 0;
-		int [] c1 = new int[100];
+		String [] c1 = new String[100];
 		String[] c2 = new String[100];
-		String[] c3 = new String[100];
+		int [] c3 = new int[100];
 
 		System.out.println("Enter the list ID of the list you want to delete.");
 		int viewList = userInput2.nextInt();
@@ -208,9 +204,9 @@ public class List {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				c1[lineNumber] = Integer.parseInt(uCurrent[0]);
+				c1[lineNumber] = uCurrent[0];
 				c2[lineNumber] = uCurrent[1];
-				c3[lineNumber] = uCurrent[2];
+				c3[lineNumber] = Integer.parseInt(uCurrent[2]);
 
 				lineNumber++;
 			}
@@ -219,21 +215,25 @@ public class List {
 			System.out.println("This file does not existlol10");
 		}
 
-		int[] Finalc1 = new int[lineNumber];
+		String[] Finalc1 = new String[lineNumber];
 		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
 		String[] Finalc2 = new String[lineNumber];
 		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-		String[] Finalc3 = new String[lineNumber];
+		int[] Finalc3 = new int[lineNumber];
 		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
 
-		while(confirm.equals("Y")) {
+		if(confirm.equals("Y")) {
 			try {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
 				for (int i = 0; i < lineNumber; i++) {
-					if(i == viewList) continue;
-					wr.print(Finalc1[i] + "\t " + Finalc2[i]+ "\t " + Finalc3[i]);
+					if (i == viewList) {
+					wr.println("N/A" + "\t" + "N/A" + "\t" + Finalc3[i]);
+					} else {
+					wr.println(Finalc1[i] + "\t" + Finalc2[i] + "\t" + Finalc3[i]);
+					}
 				}
 				wr.close();
+						
 			}catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}	
