@@ -43,14 +43,14 @@ public class RegularAccount extends UserAccount{
 	case 8:
 		writeExpenseHistory();
 		break;
-	case 9:
+	case 0:
 		UserAccount.Logout();
 		break;
 		
 	default: 
 		System.out.println("--------------------------------------------------------");
 		System.out.println("------------------------CAUTION!------------------------");
-		System.out.println("          Please only enter a number between 1-9!        "); 
+		System.out.println("          Please only enter a number between 0-8!        "); 
 		System.out.println("------------------------CAUTION!------------------------");
 		new InterfaceClass();
 
