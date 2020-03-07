@@ -85,7 +85,7 @@ public class InterfaceClass {
 		System.out.println("(6) Add Expense To List");
 		System.out.println("(7) View Expense History");
 		System.out.println("(8) Write Expense History");
-		System.out.println("(9) Logout");
+		System.out.println("(0) Logout");
 		System.out.println("--------------------------------------------------------");
 		System.out.print("You want to: ");
 		return my_scanINT.nextInt();	//getting user choice 
@@ -111,7 +111,7 @@ public class InterfaceClass {
 		System.out.println("What do you wish to do?");
 		System.out.println("(1) Remove a User from PayUp");
 		System.out.println("(2) Remove List");
-		System.out.println("(3) Logout");
+		System.out.println("(0) Logout");
 		System.out.println("--------------------------------------------------------");
 		System.out.print("Please enter your choice: ");
 		return  my_scanINT.nextInt();
