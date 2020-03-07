@@ -28,6 +28,16 @@ public class AdministratorAccount extends UserAccount {
 		case 2:
 			removeList();	
 			break;
+		case 3:
+			UserAccount.Logout();
+			break;
+			
+		default: 
+			System.out.println("--------------------------------------------------------");
+			System.out.println("------------------------CAUTION!------------------------");
+			System.out.println("          Please only enter a number between 1-3!        "); 
+			System.out.println("------------------------CAUTION!------------------------");
+			new InterfaceClass();
 		}
 	}
 
