@@ -2,8 +2,8 @@ package default_package;
 import java.util.*;
 import java.io.*;
 
-public class RegularAccount extends UserAccount{
-	static Scanner userInput1 = new Scanner(System.in); //for int
+public class RegularAccount extends UserAccount{	//This is a subclass of the superclass UserAccount
+	static Scanner userInput1 = new Scanner(System.in); // for int
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	static Scanner userInput3 = new Scanner(System.in); // for double
 	String userName;
@@ -14,7 +14,6 @@ public class RegularAccount extends UserAccount{
 	int userChoice;
 	int loggedUserID;
 
-	
 
 	public RegularAccount(String nameC, String passwordC, int uID, String roleC ) {
 		super(nameC, passwordC, uID);
@@ -22,12 +21,13 @@ public class RegularAccount extends UserAccount{
 
 	}
 	
-	public RegularAccount(int userChoicec, int loggedUserIDc) {
+	public RegularAccount(int userChoicec, int loggedUserIDc) {	//This constructor contains a switch statement to 
+		//guide users to the right method after entering their preferred choice within the regularUserInterface method 
 	super();
 	userChoice = userChoicec;
 	loggedUserID = loggedUserIDc;
 	
-	switch (userChoice) {
+	switch (userChoice) { 
 	case 4:
 		viewIndividualBalance();
 		break;
@@ -37,14 +37,8 @@ public class RegularAccount extends UserAccount{
 	case 6:
 		addExpenseToList();
 		break;
-	case 7:
-		viewExpenseHistory();
-		break;
-	case 8:
-		writeExpenseHistory();
-		break;
-	case 0:
-		UserAccount.Logout();
+	case 9:
+		UserAccount.Exit();
 		break;
 		
 	default: 
@@ -57,7 +51,12 @@ public class RegularAccount extends UserAccount{
 	}
 	}
 
-	public static RegularAccount[] createRegulars() {
+	public static RegularAccount[] createRegulars() {	
+		// This method reads the user database and searches for regular users specifically
+		// This method then creates an array of regular user objects containing their user name, 
+		// password, type off account, and user ID
+		// The regular account details are stored into separate arrays and then stored into 
+		// one regulars array containing all regular accounts, which is what this method returns
 
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
@@ -107,7 +106,7 @@ public class RegularAccount extends UserAccount{
 
 		
 
-	public void viewIndividualBalance() {
+	public void viewIndividualBalance() {	// This method prints out the user's individual balance 
 		System.out.println("Your invidivual balance is: " + Expense.splitExpense() + "€");
 	}
 
@@ -116,9 +115,12 @@ public class RegularAccount extends UserAccount{
 		settleList();
 	}
 
-	public void addExpenseToList() {
+	public void addExpenseToList() { 
+		//This method will write a new line onto the expense database every time users add an expense to their list
+		//This new line will contain the following user input: user's list ID, the name of the expense, 
+		//the expense amount, the expense date, and the user name of the person who paid for the expense. 
 		System.out.println("How many expenses do you want to add? ");
-		int counter = my_scanINT.nextInt();
+		int counter = userInput1.nextInt();
 		for (int i = 0; i < counter; i++) {
 			System.out.println("Please choose the list ID of the list this expense belongs to: ");
 			List.listId = userInput1.nextInt();
@@ -141,7 +143,8 @@ public class RegularAccount extends UserAccount{
 		}
 	}
 
-	public void viewExpenseHistory() {
+	public void viewExpenseHistory() { 
+		//This method prints out parts of the expense database that, together, represent the expense history of a user
 		int lineNumber = 0;
 		String[] c1 = new String[100];
 		String[] c2 = new String[100];
