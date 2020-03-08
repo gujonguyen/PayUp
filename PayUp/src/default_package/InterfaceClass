@@ -5,8 +5,7 @@ import java.util.*;
 import java.util.Scanner;
 
 public class InterfaceClass {
-	static Scanner my_scan = new Scanner(System.in);
-	static Scanner my_scanINT = new Scanner(System.in); 
+	static Scanner userInput = new Scanner(System.in);
 	String typeOfAccount;
 	static int loggedUserID;
 	String[] passedUserData;
@@ -66,7 +65,7 @@ public class InterfaceClass {
 		// That is already fixed in the InterfaceClass above.
 
 		System.out.println("--------------------------------------------------------");
-		System.out.println("\t Welcome to PayUp! ");
+		System.out.println("\tWelcome to PayUp!\t");
 		System.out.println("\n What do you wish to?");   
 		System.out.println("--------------------------------------------------------");
 		System.out.println("(1) Register your account");
@@ -74,7 +73,7 @@ public class InterfaceClass {
 		System.out.println("(3) Exit");
 		System.out.println("--------------------------------------------------------");
 		System.out.print("Enter your option: ");
-		return my_scanINT.nextInt();
+		return userInput.nextInt();
 
 	}
 
@@ -131,7 +130,7 @@ typeOfAccount = typeOfAccountc;
 		System.out.println("(9) Logout");
 		System.out.println("--------------------------------------------------------");
 		System.out.print("You want to: ");
-		return my_scanINT.nextInt();	//getting user choice 
+		return userInput.nextInt();	//getting user choice 
 	}
 
 	public void AdministratorAccount(String typeOfAccountc, int loggedUserIDc){
@@ -164,7 +163,7 @@ typeOfAccount = typeOfAccountc;
 		System.out.println("(3) Logout");
 		System.out.println("--------------------------------------------------------");
 		System.out.print("Please enter your choice: ");
-		return  my_scanINT.nextInt();
+		return  userInput.nextInt();
 	}
 
 }
