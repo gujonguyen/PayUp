@@ -108,7 +108,7 @@ public class InterfaceClass {
 //
 //		}
 //	}
-
+	}
 	}
 
 	public static int regularUserInterface() {
