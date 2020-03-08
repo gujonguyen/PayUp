@@ -34,7 +34,7 @@ public class InterfaceClass {
 				AdministratorAccount(typeOfAccount, loggeduserIDl);
 			}
 			else {
-				System.out.println("Invalid login credentials, please try again!");
+				System.out.println("Invalid login credentials, please try again!");	//user name and password do not match or not found in user database
 				new InterfaceClass();
 			}
 			break;
