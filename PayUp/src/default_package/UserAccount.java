@@ -10,7 +10,6 @@ public class UserAccount {
 	int userID = 0;
 	static Scanner userInput1 = new Scanner(System.in); //for int
 	static Scanner userInput2 = new Scanner(System.in); // for string
-	static Scanner userInput3 = new Scanner(System.in); // for double
 	int userChoice;
 	int loggedUserID;
 
