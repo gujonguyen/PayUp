@@ -39,7 +39,7 @@ public class InterfaceClass {
 			}
 			break;
 		case 3:
-			System.out.println("You are LOGGED OUT");
+			System.out.println("\n\tThank you for visiting PayUp!\t");
 			break;
 
 		default: 
