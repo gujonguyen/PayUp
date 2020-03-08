@@ -28,6 +28,11 @@ public class List {
 		int loggedUserIDl = loggedUserIDc;
 		userChoice = userChoicec;
 		switch (userChoice) {
+		case 0:
+			System.out.println("Please enter a value between 1-9");
+			System.out.println("We still have to redirect people who enter 0 to the regularUserInterface again!");
+			// We still have to redirect people who enter 0 to the regularUserInterface again here!! And not log them out!!
+			break;
 		case 1:
 			createList(loggedUserIDl);
 			break;
