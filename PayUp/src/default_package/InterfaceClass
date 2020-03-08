@@ -1,7 +1,5 @@
 package default_package;
 
-import java.io.*;
-import java.util.*;
 import java.util.Scanner;
 
 public class InterfaceClass {
