@@ -110,7 +110,6 @@ public class UserAccount {
 				}else {
 				}
 			}
-			System.out.println(localBoolean);
 
 			if (localBoolean == true) {	//If user name is unique a new line with the user's credentials will be written in the file
 				writeUser(Un, Pw, typeOfAccount);	
