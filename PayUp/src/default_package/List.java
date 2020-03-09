@@ -75,14 +75,11 @@ public class List {
 		String [] FinalNameAxis = new String[lineNumber];
 		System.arraycopy(nameAxis, 0, FinalNameAxis, 0, lineNumber);
 		
-		
-		
 		List listArray[] = new List[FinalIDAxis.length];
 
 		for (int i = 0; i < FinalIDAxis.length; i++) {
 			listArray[i] = new List(FinalNameAxis[i], FinalParticipantAxis[i], FinalIDAxis[i]);
-		}		
-		
+		}
 		return listArray;
 	}
 
@@ -172,7 +169,7 @@ public class List {
 			}
 			myFile.close(); 	
 		}catch (IOException e) {
-			System.out.println("This file does not existlol9");
+			System.out.println("This file does not exist");
 		}
 
 		String[] Finalc1 = new String[lineNumber];
