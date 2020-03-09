@@ -29,7 +29,7 @@ public class AdministratorAccount extends UserAccount {
 			removeList();	
 			break;
 		case 0:
-			UserAccount.Logout();
+			UserAccount.Exit();
 			break;
 			
 		default: 
