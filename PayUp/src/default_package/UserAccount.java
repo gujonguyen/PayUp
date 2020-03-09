@@ -87,6 +87,22 @@ public class UserAccount {
 		//This if-else statement will redirect the user to the register interface if the user tries to register as a invalid type of account
 		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin") 
 				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("administrator")) {
+			//if a user is registering as an admin, it needs to input special admin access code in order to register as an admin
+			if (typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")){
+				System.out.println("Enter a unique admin code in order to register as an Admin: ");
+				String input_admincode = userInput2.nextLine();
+				if (input_admincode.equals(admincode)) {
+					System.out.println("Valid admin code!");
+					System.out.println("");
+
+				}
+				else if (!input_admincode.equals(admincode)) {
+					System.out.println("");
+					System.out.println("Enter a valid admin code! (Hint: professor ....)");
+					Register();
+				}
+			}
+		}
 			
 			System.out.println("Please choose a username:");
 			String Un = userInput2.nextLine();
