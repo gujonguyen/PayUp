@@ -70,19 +70,8 @@ public class UserAccount {
 
 		return allUsers;
 	}
-
-
-	public UserAccount(int userChoicec, int loggedIDc) {
-		userChoice = userChoicec;
-		loggedUserID = loggedIDc;
-		switch (userChoice){
-		case 3:
-			Exit();
-			break;
-		}
-	}
 	public UserAccount() {
-
+	// This empty constructor is recalled using the super() method in the extended constructors
 	}
 
 	protected static void Register() {	
@@ -96,14 +85,7 @@ public class UserAccount {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
-		//This if-else statement will redirect the user to the register interface if the user tries to register as a invalid type of account
-		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular")){
-		}
-		else if (typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")) {
-		}
-		else {
-			System.out.println("Please enter a valid choice.");
-			Register();
+		
 			System.out.println("Please choose a username:");
 			String Un = userInput2.nextLine();
 			System.out.println("Please choose a password:");
