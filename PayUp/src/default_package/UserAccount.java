@@ -84,7 +84,9 @@ public class UserAccount {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
-		
+		//This if-else statement will redirect the user to the register interface if the user tries to register as a invalid type of account
+		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin") 
+				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("administrator")) {
 			
 			System.out.println("Please choose a username:");
 			String Un = userInput2.nextLine();
