@@ -22,22 +22,15 @@ public class AdministratorAccount extends UserAccount {
 		super();
 		userChoice = userChoicec;
 		switch (userChoice) {
+		case 0:
+			UserAccount.Exit();
+			break;
 		case 1:
 			removeUser();
 			break;
 		case 2:
-			removeList();	
+			List.deleteList();	
 			break;
-		case 0:
-			UserAccount.Exit();
-			break;
-			
-		default: 
-			System.out.println("--------------------------------------------------------");
-			System.out.println("------------------------CAUTION!------------------------");
-			System.out.println("          Please only enter a number between 0-2!        "); 
-			System.out.println("------------------------CAUTION!------------------------");
-			new InterfaceClass();
 		}
 	}
 
@@ -130,7 +123,7 @@ public class AdministratorAccount extends UserAccount {
 		String[] FinalLocalID = new String[NumUser];
 		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 
-		System.out.println("User ID" + "\t\t UserName");
+		System.out.println("UserName" + "\t\t UserList");
 		for(int k = 0; k < NumUser; k++) {
 			System.out.println(LocalID[k] + "\t" + "\t" + LocalUserName[k]);
 		}
@@ -138,12 +131,15 @@ public class AdministratorAccount extends UserAccount {
 		//removing the user from PayUp
 		System.out.println("");
 		System.out.println("Enter the User ID you wish to remove admin: ");
-		String localRemovedUser = userInput1.nextLine() ;
+		int localRemovedUser = userInput1.nextInt() ;
+		System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
+		String confirm = userInput2.nextLine();
 
+		if(confirm.equals("Y")) {
 		try {
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",false)));
 			for (int i = 0; i < NumUser; i++) {
-				if (localRemovedUser.equals(FinalLocalID[i])) {
+				if (i == localRemovedUser) {
 					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + FinalLocalID[i]);
 					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
 				} else {
@@ -154,52 +150,8 @@ public class AdministratorAccount extends UserAccount {
 
 		}catch (IOException e) {
 			System.out.println("I/O error when writing on file");
-		}	
-	}
-
-	public void removeList() {   
-		//viewing the lists
-		int lineNumber = 0;
-		String [] ListIDAxis = new String[100];
-		String [] ListNameAxis = new String[100];
-		String [] ListParticipantAxis = new String[100];
-		System.out.println("");
-		System.out.println("All lists on PayUp are as follows");
-		System.out.println("----------------------------------------------------------------");
-
-		try {
-			String sCurrentLine;
-			String[] uCurrent = new String [3];
-			BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
-
-			while ((sCurrentLine = myFile.readLine()) != null) {
-				uCurrent = sCurrentLine.split("\t");
-
-				ListNameAxis[lineNumber] = uCurrent[0];
-				ListParticipantAxis[lineNumber] = uCurrent[1];
-				ListIDAxis[lineNumber] = uCurrent[2];
-				lineNumber++;
-			}
-			myFile.close(); 
-		}catch (IOException e) {
-			System.out.println("This file does not existlol7");
 		}
-
-		String [] FinalIDAxis = new String [lineNumber];
-		System.arraycopy(ListIDAxis, 0, FinalIDAxis, 0, lineNumber);
-		String [] FinalNameAxis = new String[lineNumber];
-		System.arraycopy(ListNameAxis, 0, FinalNameAxis, 0, lineNumber);
-		String [] FinalParticipantAxis = new String[lineNumber];
-		System.arraycopy(ListParticipantAxis, 0, FinalParticipantAxis, 0, lineNumber);
-		System.out.println("List ID" + "\t\t" + "List Names"  +  "\t\t" + "Participants IDs");
-
-		for (int i = 0; i < lineNumber; i++) {
-			System.out.println(ListIDAxis[i] + "\t\t" + ListNameAxis[i] + "\t\t\t" + ListParticipantAxis[i]);
-		}		
-
-		//removing the lists 
-		List.deleteList();
-
+		}
 	}
 }
 
