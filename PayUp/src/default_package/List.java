@@ -186,7 +186,36 @@ public class List {
 				System.out.println(Finalc1[i] + "\t\t\t" + Finalc2[i] + "\t\t" + Finalc3[i]);
 				break;
 			}
-		}	
+		}
+		Expense[] expenses = Expense.createExpenseObject();
+		System.out.println("\n Expense Name: \t Expense Amount: \t");
+		for (int i = 0; i < lineNumber; i++) {
+			if (expenses[i].listID == viewList) {
+				System.out.println(expenses[i].expenseName + "\t\t" + expenses[i].amount);
+			}
+		}
+	}
+	
+	public static void getUserName (String ids) {
+		String userIdString = ids;
+		String [] split = new String [100];
+		int [] userIds = new int [100];
+		split = userIdString.split(",");
+		int counter = 0;
+		for (int k = 0; k < userIds.length; k++) {
+			userIds[k] = Integer.parseInt(split[k]);
+			counter++;
+		}
+		int finalUserIds [] = new int[counter];
+		System.arraycopy(userIds, 0, finalUserIds, 0, counter);
+
+		UserAccount [] allUsers = UserAccount.createAllUsers();
+		for (int i = 0; i < allUsers.length; i++) {
+			if (finalUserIds[i] == allUsers[i].userID) {
+				System.out.println("User ID: " + finalUserIds[i] + " belongs to username: " + allUsers[i].userName);
+			}
+		}
+
 	}
 	public static void deleteList() {
 		int lineNumber = 0;
