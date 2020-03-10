@@ -229,7 +229,7 @@ public class UserAccount {
 
 	}
 
-	protected static void Exit() {	
+	public static void Exit() {	
 		//This method will let the user exit PayUp
 		System.out.println("\n\tYou are successfully logged out\t");
 		System.out.println("\tThank you for visiting PayUp!\t");
