@@ -103,7 +103,7 @@ public class UserAccount {
 					Register();
 				}
 			}
-		}
+		
 			
 			System.out.println("Please choose a username:");
 			String Un = userInput2.nextLine();
@@ -131,6 +131,7 @@ public class UserAccount {
 					System.out.println("--------------------------------------------------------");
 					Register();	
 				}
+				
 			}else {	//The user will be redirected to the register interface due to an invalid password
 				System.out.println("--------------------------------------------------------");
 				System.out.println("Please use a password of more than 4 characters");
@@ -145,6 +146,7 @@ public class UserAccount {
 		}
 
 	}
+
 
 
 	private static void writeUser(String Unc, String Pwc, String typeOfAccountc) {	
