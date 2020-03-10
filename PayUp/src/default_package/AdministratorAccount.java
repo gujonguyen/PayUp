@@ -108,7 +108,7 @@ public class AdministratorAccount extends UserAccount {
 
 		System.out.println("User ID \t\t User Name");
 		for(int k = 0; k < numUser; k++) {
-			System.out.println(tempUserObjects[k].userID + "\t\t" + tempUserObjects[k].userName);
+			System.out.println(tempUserObjects[k].userID + "\t\t\t" + tempUserObjects[k].userName);
 		}
 		try {
 			String sCurrentLine;
