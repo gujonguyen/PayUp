@@ -33,11 +33,11 @@ public class RegularAccount extends UserAccount{
 		 * one regulars array containing all regular accounts, which is what this
 		 * method returns
 		 */
-		int NumUser = 0;
-		String[] LocalUserName = new String[100];
-		String[] LocalPassword= new String[100];
-		String[] LocalTypeAccount = new String[100];
-		int[] LocalID = new int[100];
+		int numUser = 0;
+		String[] localUserName = new String[100];
+		String[] localPassword= new String[100];
+		String[] localTypeAccount = new String[100];
+		int[] localID = new int[100];
 		
 		RegularAccount [] regulars = new RegularAccount [100];
 
@@ -48,30 +48,30 @@ public class RegularAccount extends UserAccount{
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				LocalUserName[NumUser] = uCurrent[0];
-				LocalPassword[NumUser] = uCurrent[1];
-				LocalTypeAccount[NumUser] = uCurrent[2];
-				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
+				localUserName[numUser] = uCurrent[0];
+				localPassword[numUser] = uCurrent[1];
+				localTypeAccount[numUser] = uCurrent[2];
+				localID[numUser] = Integer.parseInt(uCurrent[3]);
 
-				NumUser++;
+				numUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not existlol3");
 		}
 		
-		String[] FinalLocalUserName = new String[NumUser];
-		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
-		String[] FinalLocalPassword = new String[NumUser];
-		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
-		String[] FinalLocalTypeAccount = new String[NumUser];
-		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
-		int[] FinalLocalID = new int[NumUser];
-		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
+		String[] finalLocalUserName = new String[NumUser];
+		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
+		String[] finalLocalPassword = new String[NumUser];
+		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
+		String[] finalLocalTypeAccount = new String[NumUser];
+		System.arraycopy(localTypeAccount, 0, finalLocalTypeAccount, 0, numUser);
+		int[] finalLocalID = new int[numUser];
+		System.arraycopy(localID, 0, finalLocalID, 0, numUser);
 		int counterRegulars = 0;
-		for (int i = 0; i < NumUser; i++) {
-		if (FinalLocalTypeAccount[i].equals("R")) {
-			regulars [counterRegulars]  = new RegularAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalID[i], FinalLocalTypeAccount[i] );
+		for (int i = 0; i < numUser; i++) {
+		if (finalLocalTypeAccount[i].equals("R")) {
+			regulars [counterRegulars]  = new RegularAccount(finalLocalUserName[i], finalLocalPassword[i], finalLocalID[i], finalLocalTypeAccount[i] );
 			counterRegulars ++;
 		}
 		}
