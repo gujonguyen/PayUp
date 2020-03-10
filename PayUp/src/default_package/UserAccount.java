@@ -109,7 +109,7 @@ public class UserAccount {
 				System.out.println("Please choose a password:");
 				String pw = userInput2.nextLine();
 
-				int pw = Pw.length();
+				int pw = pw.length();
 
 				//This is to prevent passwords with less than 5 characters
 				if (pw > 4) { 
