@@ -60,11 +60,11 @@ public class RegularAccount extends UserAccount{
 			System.out.println("This file does not existlol3");
 		}
 		
-		String[] finalLocalUserName = new String[NumUser];
+		String[] finalLocalUserName = new String[numUser];
 		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
-		String[] finalLocalPassword = new String[NumUser];
+		String[] finalLocalPassword = new String[numUser];
 		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
-		String[] finalLocalTypeAccount = new String[NumUser];
+		String[] finalLocalTypeAccount = new String[numUser];
 		System.arraycopy(localTypeAccount, 0, finalLocalTypeAccount, 0, numUser);
 		int[] finalLocalID = new int[numUser];
 		System.arraycopy(localID, 0, finalLocalID, 0, numUser);
