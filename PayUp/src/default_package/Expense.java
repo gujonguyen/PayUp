@@ -18,13 +18,13 @@ public class Expense {
 	double individualBalance;
 	int userID;
 	static int fileCount;
-	String debitors;
+	int debitor;
 	int userChoice;
 	int loggedUserID;
 	int creditor;
 
 
-	public Expense(int listIdc, String name, double amountc, String date, int creditorsc, String participants, int expId) {
+	public Expense(int listIdc, String name, double amountc, String date, int creditorsc, int debitorc, int expId) {
 		/*
 		This is the main Constructor for the Expense objects
 		 */
@@ -33,9 +33,9 @@ public class Expense {
 		amount = amountc;
 		expenseDate = date;
 		creditor = creditorsc;
-		this.debitors = participants;
+		debitor = debitorc;
 		expenseId = expId;
-	}
+	}}
 
 	public Expense(int userChoicec, int loggedUserIDc) {
 		/*
@@ -70,7 +70,7 @@ public class Expense {
 		double[] amount = new double[100];
 		String[] expenseDate = new String[100];
 		int[] creditors = new int[100];
-		String[] userArray = new String[100];
+		int[] debitors = new int[100];
 		int[] expenseID = new int[100];
 
 		try {
@@ -85,7 +85,7 @@ public class Expense {
 				amount[lineNumber] = Double.parseDouble(uCurrent[2]);
 				expenseDate[lineNumber] = uCurrent[3];
 				creditors[lineNumber] = Integer.parseInt(uCurrent[4]);
-				userArray[lineNumber] = uCurrent[5];
+				debitors[lineNumber] = Integer.parseInt(uCurrent[5]);
 				expenseID[lineNumber] = Integer.parseInt(uCurrent[6]);
 				lineNumber++;
 			}
@@ -104,22 +104,21 @@ public class Expense {
 		System.arraycopy(expenseDate, 0, FinalexpenseDate, 0, lineNumber);
 		int[] Finalcreditors = new int[lineNumber];
 		System.arraycopy(creditors, 0, Finalcreditors, 0, lineNumber);
-		String[] FinalUserArray = new String[lineNumber];
-		System.arraycopy(userArray, 0, FinalUserArray, 0, lineNumber);
+		int[] FinalDebitors = new int[lineNumber];
+		System.arraycopy(debitors, 0, FinalDebitors, 0, lineNumber);
 		int[] FinalexpenseID = new int[lineNumber];
 		System.arraycopy(expenseID, 0, FinalexpenseID, 0, lineNumber);
 
 		Expense expense[] = new Expense[FinallistID.length];
-		
-		
+
+
 
 		for (int i = 0; i < FinallistID.length; i++) {
-			expense[i] = new Expense(FinallistID[i], FinalexpenseName[i], Finalamount[i], FinalexpenseDate[i], Finalcreditors[i], FinalUserArray[i], FinalexpenseID[i]);
+			expense[i] = new Expense(FinallistID[i], FinalexpenseName[i], Finalamount[i], FinalexpenseDate[i], Finalcreditors[i], FinalDebitors[i], FinalexpenseID[i]);
 		}	
 
 		return expense;
 	}
-
 
 	public void addExpenseToList(int loggedUserIDc) {
 		/*
@@ -142,7 +141,7 @@ public class Expense {
 		System.out.println("What is the list ID to which this expense belongs?");
 		int listId = userInput1.nextInt();
 
-		//This creates an array of all people that eare part of a list
+		//This creates an array of all people that are part of a list
 		sCurrentLine = temp4[listId].participants;
 		uCurrent = sCurrentLine.split(",");
 		for (int k = 0; k < 2; k++) {
@@ -170,23 +169,7 @@ public class Expense {
 			Double amount = userInput3.nextDouble();
 			System.out.println("What is the date of this expense?");
 			String date = userInput2.nextLine();
-			System.out.println("Among how many users do you want to devide the amount (not counting yourself)?");
-			int amountOfUser = userInput1.nextInt();
-
-			//This prevents you from inputting a userID that is not part of the list
-			for(int n = 0; n < amountOfUser; n++) {
-				System.out.println("What is the userID of the user that you want to add to your expense?");
-				aUser[n] = userInput1.nextInt();
-				for (int j = 0; j < 2; j++) {
-					if (aUser[n] == finalParticipantsInList[j]) {
-						localBoolean = true;
-					}else {
-					}
-				}
-			}
 			
-			//If the userID that you want to add to your expense is indeed part of the list then the following block of code is executed
-			if (localBoolean == true) {
 				try {
 					String sCurrentLine1;
 					BufferedReader myFile = new BufferedReader (new FileReader("Expense_database.txt")); 
@@ -196,38 +179,28 @@ public class Expense {
 					myFile.close(); 
 				}catch (IOException e) {
 					System.out.println("This file does not exist");
-				}
-
-				String str = "";
-				for (int i = 0; i < amountOfUser; i++) {
-					str = str + aUser[i] + ",";	
-				}				
+				}			
 
 				try { 
 
 					PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("Expense_database.txt",true)));
-					wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + date + "\t" + loggedUserIDl + "\t" + str + "\t" + lineNumber);
+					wr.println(listId + "\t" + expenseName + "\t" + amount + "\t" + date + "\t" + loggedUserIDl + "\t" + aUser[0] + "\t" + lineNumber);
 					wr.close();
 
 				} catch (IOException e) {
 					System.out.println("I/O error when writing on file");
 				}
-			}else {
-				System.out.println("---------------------------------------------");	
-				System.out.println("One or more users that you wanted to add to your expense");
-				System.out.println("are not part of the specific list");
-				System.out.println("---------------------------------------------");
-				
-			}
-		System.out.println("---------------------------------------------");	
-		System.out.println("The expense is succesfully added to your list");
-		System.out.println("---------------------------------------------");
-		/*	
+			System.out.println("---------------------------------------------");	
+			System.out.println("The expense is succesfully added to your list");
+			System.out.println("---------------------------------------------");
+			/*	
 		If the logged in user is not part of the list then the following lines of code gets executed
 		And you are sent back to this method again	
-		*/
+			 */
 		}else {
+			System.out.println("---------------------------------------------");
 			System.out.println("You do not have acces to this list, please input a different List ID");
+			System.out.println("---------------------------------------------");	
 			addExpenseToList(loggedUserIDl);
 		}
 	}
@@ -255,7 +228,7 @@ public class Expense {
 		}
 		int finalParticipantsInList [] = new int[2];
 		System.arraycopy(participantsInList, 0, finalParticipantsInList, 0, 2);
-		
+
 		//Creates Expense objects.
 		Expense[] temp5 = Expense.createExpenseObject(); 
 
@@ -274,12 +247,12 @@ public class Expense {
 		 */
 		if (localBoolean2 == true) {
 
-			
+
 			//Splitting the debitors of a certain expense based on comma
-			sCurrentLine = temp5[individualBalanceOfList].debitors;
-			uCurrent = sCurrentLine.split(",");
+			int sCurrentInt = temp5[individualBalanceOfList].debitor;
+			
 			for (int k = 0; k < 1; k++) {
-				participantsInExpense[k] = Integer.parseInt(uCurrent[k]);
+				participantsInExpense[k] = sCurrentInt;
 			}
 			int finalParticipantsInExpense [] = new int[1];
 			System.arraycopy(participantsInExpense, 0, finalParticipantsInExpense, 0, 1);
@@ -306,14 +279,12 @@ public class Expense {
 			//This calculates the individual balance of a logged-in User in a specific list
 			//If the creditor is equal to the loggedUser then the amount is equally divided and added to his/her balance
 			//If this is not the case then the amount is equally divided and subtracted from his/her balance
-			
-			
 			for(int j = 0; j < counter; j++) {
 				if (loggedUserIDl == finalCreditors[j]) {
 					tempBalance = tempBalance + (finalAmount[j]/2);
 				}else {
 					tempBalance = tempBalance - (finalAmount[j]/2);
-					
+
 				}
 			}
 
@@ -323,9 +294,9 @@ public class Expense {
 			System.out.println(tempBalance);
 			System.out.println("-----------------------------------------------");
 
-		/*
+			/*
 		If the user is not part if the specific list he or she get redirected to this method again
-		*/
+			 */
 		}else {
 			System.out.println("--------------------------------------------------------------------");
 			System.out.println("You do not have acces to this list, please input a different List ID");
