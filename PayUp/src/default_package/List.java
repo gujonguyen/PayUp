@@ -265,7 +265,7 @@ public class List {
 		//If the User doesn't have access to the list the following lines of code get executed	
 		}else {
 			System.out.println("--------------------------------------------------------------------");
-			System.out.println("You do not have acces to this list, please input a different List ID");
+			System.out.println("You do not have access to this list, please input a different List ID");
 			System.out.println("--------------------------------------------------------------------");
 			viewList(loggedUserIDl);
 		}
