@@ -3,17 +3,16 @@ import java.io.*;
 import java.util.*;
 
 public class UserAccount {
-	String userName; // These variables are created for the main constructor 
-	String password; //
-	int userID = 0; //
-
+	String userName;
+	String password;
 	String role;
 	static int noOfUsers;
-	static Scanner userInput1 = new Scanner(System.in); // for int
+	int userID = 0;
+	static Scanner userInput1 = new Scanner(System.in); //for int
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	int userChoice;
 	int loggedUserID;
-	protected static String admincode = "Yashar";
+	protected static String adminCode = "Yashar";
 
 
 	public UserAccount(String nameC, String passwordC, int uID ) {
@@ -27,9 +26,9 @@ public class UserAccount {
 
 	public static UserAccount [] createAllUsers() {	
 		/*
-		 * // This method reads the user database, creates an array of user objects
-		 * containing user name, // password, type off account, and user ID // The user
-		 * account details are stored into separate arrays and then stored into // one
+		 * This method reads the user database, creates an array of user objects
+		 * containing user name, password, type off account, and user ID. The user
+		 * account details are stored into separate arrays and then stored into one
 		 * all user array, which is what this method returns
 		 */		
 		int NumUser = 0;
@@ -40,6 +39,7 @@ public class UserAccount {
 
 		UserAccount [] allUsers = new UserAccount [100];
 
+		//The database is read in the following lines of code
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [4];
@@ -76,12 +76,16 @@ public class UserAccount {
 		return allUsers;
 	}
 	public UserAccount() {
-	// This empty constructor is recalled using the super() method in the extended constructors
+		// This empty constructor is recalled using the super() method in the extended constructors
 	}
 
 	protected static void Register() {	
-		//This method gets the user name and password from the user for the registration of a new user
-
+		/*
+		 * This method gets the user name and password from the user for the
+		 * registration of a new user
+		 * 
+		 * 
+		 */
 		Boolean localBoolean = true;
 		noOfUsers = readfile1();
 		System.out.println("--------------------------------------------------------");
@@ -89,72 +93,108 @@ public class UserAccount {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
-		//This if-else statement will redirect the user to the register interface if the user tries to register as a invalid type of account
-		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin") 
-				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("administrator")) {
-			//if a user is registering as an admin, it needs to input special admin access code in order to register as an admin
-			if (typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin")){
-				System.out.println("Enter a unique admin code in order to register as an Admin: ");
-				String input_admincode = userInput2.nextLine();
-				if (input_admincode.equals(admincode)) {
-					System.out.println("Valid admin code!");
-					System.out.println("");
+
+		// If the role of the user is equal to A, a, Admin etc., then the user will create an Admin account using the 
+		// secret Admin code
+		if (typeOfAccount.equals("A") || typeOfAccount.equals("a") || typeOfAccount.equals("Adminstrator") 
+				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("admin") || typeOfAccount.equals("Admin")) {
+			System.out.println("Enter a unique admin code in order to register as an Admin: ");
+			String input_admincode = userInput2.nextLine();
+			if (input_admincode.equals(adminCode)) {
+				System.out.println("Valid admin code!");
+				System.out.println("");
+
+				System.out.println("Please choose a username:");
+				String Un = userInput2.nextLine();
+				System.out.println("Please choose a password:");
+				String Pw = userInput2.nextLine();
+
+				int pw = Pw.length();
+
+				//This is to prevent passwords with less than 5 characters
+				if (pw > 4) { 
+
+					UserAccount[] temp3 = UserAccount.createAllUsers();
+
+					//This is to check the uniqueness of entered user name within the user database
+					for (int k = 0; k < noOfUsers; k++) {	
+						if(Un.equals(temp3[k].userName)) {
+							localBoolean = false;
+						}else {
+						}
+					}
+
+					//If user name is unique a new line with the user's credentials will be written in the file
+					if (localBoolean == true) {	
+						writeUser(Un, Pw, typeOfAccount);	
+						//The user will be redirected to the register interface due to a duplicate user name
+					}else {
+						System.out.println("--------------------------------------------------------");
+						System.out.println("This User Name is already taken, please Register again");
+						System.out.println("--------------------------------------------------------");
+						Register();	
+					}
+					//The user will be redirected to the register interface due to an invalid password
+				}else {	
+					System.out.println("--------------------------------------------------------");
+					System.out.println("Please use a password of more than 4 characters");
+					System.out.println("--------------------------------------------------------");
+					Register();	
 				}
-				else if (!input_admincode.equals(admincode)) {
-					System.out.println("");
-					System.out.println("Enter a valid admin code! (Hint: professor ....)");
-					Register();
-				}
-			}
-		}
-		
-		//input credentials for registration
-		System.out.println("Please choose a username:");
-		String UserName = userInput2.nextLine();
-		System.out.println("Please choose a password:");
-		String Pw = userInput2.nextLine();
-
-		int pw = Pw.length();
-
-		if (pw > 4) {
-
-			UserAccount[] temp3 = UserAccount.createAllUsers();
-
-			for (int k = 0; k < noOfUsers; k++) {
-				if(UserName.equals(temp3[k].userName)) {
-					localBoolean = false;
-				}else {
-				}
-			}
-			System.out.println(localBoolean);
-
-			if (localBoolean == true) {
-				writeUser(UserName, Pw, typeOfAccount);	
-			}else {
-				System.out.println("--------------------------------------------------------");
-				System.out.println("This User Name is already taken, please Register again");
-				System.out.println("--------------------------------------------------------");
+			}else { 
+				System.out.println("");
+				System.out.println("Enter a valid admin code! (Hint: professor ....)");
 				Register();
 			}
+			// If the user registers as an Regular then the following lines of code are executed	
 		}else {
-			System.out.println("--------------------------------------------------------");
-			System.out.println("Please use a password of more than 4 characters");
-			System.out.println("--------------------------------------------------------");
-			Register();
+			System.out.println("Please choose a username:");
+			String Un = userInput2.nextLine();
+			System.out.println("Please choose a password:");
+			String Pw = userInput2.nextLine();
+
+			int pw = Pw.length();
+
+			//This is to prevent passwords with less than 5 characters
+			if (pw > 4) { 
+
+				UserAccount[] temp3 = UserAccount.createAllUsers();
+
+				//This is to check the uniqueness of entered user name within the user database
+				for (int k = 0; k < noOfUsers; k++) {	
+					if(Un.equals(temp3[k].userName)) {
+						localBoolean = false;
+					}else {
+					}
+				}
+
+				//If user name is unique a new line with the user's credentials will be written in the file
+				if (localBoolean == true) {	
+					writeUser(Un, Pw, typeOfAccount);	
+					//The user will be redirected to the register interface due to a duplicate user name
+				}else {	
+					System.out.println("--------------------------------------------------------");
+					System.out.println("This User Name is already taken, please Register again");
+					System.out.println("--------------------------------------------------------");
+					Register();	
+				}
+				//The user will be redirected to the register interface due to an invalid password
+			}else {	
+				System.out.println("--------------------------------------------------------");
+				System.out.println("Please use a password of more than 4 characters");
+				System.out.println("--------------------------------------------------------");
+				Register();	
+			}
+
 		}
 	}
-
-		else {
-			System.out.println("Please enter a valid choice.");
-			Register();
-		}
-
-	}
-
-
 
 	private static void writeUser(String Unc, String Pwc, String typeOfAccountc) {	
-		//This method writes a new line with the user's credentials in the user database txt file
+		/*
+		 * This method writes a new line with the user's credentials in the user
+		 * database txt file
+		 * 
+		 */
 		String Un = Unc;
 		String Pw = Pwc;
 		String typeOfAccount = typeOfAccountc;
@@ -174,8 +214,11 @@ public class UserAccount {
 	}
 
 
-	protected static String[] Login() {	
-		//This method is for the login of users and returns the user's loggedID and role
+	protected static String[] login(){	
+		/*
+		 * This method is for the login of users and returns the user's loggedID and
+		 * role
+		 */
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword = new String[100];
@@ -184,14 +227,8 @@ public class UserAccount {
 		int loggedID = 0;
 		String Un;
 		String Pw;
-
-// ????
-// ?????? What should happen with the following role variable? When the line is deleted, the code below breaks.. 
-// ????
 		String role = "bla";
-		
-		
-		//The login interface where the user enters his/her username and password
+		//The login interface where the user enters his/her User Name and Password
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\tPlease Login User\t");
 		System.out.println("--------------------------------------------------------");
@@ -200,7 +237,8 @@ public class UserAccount {
 		System.out.println("Please input your password:");
 		Pw = userInput2.nextLine();
 
-		try {	//This is for reading the user database file, sorting the data with user attributes, and storing the data into local arrays
+		//This is for reading the user database file, sorting the data with user attributes, and storing the data into local arrays
+		try {	
 			String sCurrentLine;
 			String[] uCurrent = new String [4];
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
@@ -240,13 +278,20 @@ public class UserAccount {
 	}
 
 	public static void Exit() {	
-		//This method will let the user exit PayUp
+		/*
+		 * This method will let the user exit PayUp
+		 *  
+		 */
 		System.out.println("\n\tYou are successfully logged out\t");
 		System.out.println("\tThank you for visiting PayUp!\t");
 	}
 
 	public static int readfile1() {	
-		// This method reads the user database file and returns all existing rows within the user database
+		/*
+		 * This method reads the user database file and returns all existing rows
+		 * within the user database
+		 * 
+		 */
 		int NumUser = 0;
 		try {
 			String sCurrentLine;
