@@ -169,26 +169,6 @@ public class InterfaceClass {
 			}
 		}
 	}
-	
-	public static String GetAString() {
-		/*
-		 * //This method checks whether the user input is of the type String and returns
-		 * the user input
-		 */		
-		while (true)
-		{
-			try
-			{
-				return userInput2.nextLine();
-			}
-			catch (InputMismatchException e)
-			{
-				userInput2.nextLine();
-				System.out.print("Please enter a String. Try again: ");
-			}
-		}
-	}
-
 
 	public static double GetADouble() {
 		/*
