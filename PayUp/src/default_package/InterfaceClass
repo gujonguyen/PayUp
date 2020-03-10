@@ -150,6 +150,26 @@ public class InterfaceClass {
 		System.out.print("Please enter your choice: ");
 		return  GetAnInteger();
 	}
+	
+	public static int GetAnInteger() {	
+		/*
+		 * //This method checks whether the user input is of the type Integer and returns
+		 * the user input
+		 */		
+		while (true)
+		{
+			try
+			{
+				return userInput1.nextInt();
+			}
+			catch (InputMismatchException e)
+			{
+				userInput1.next();
+				System.out.print("Please enter an integer value. Try again: ");
+			}
+		}
+	}
+	
 	public static String GetAString() {
 		/*
 		 * //This method checks whether the user input is of the type String and returns
