@@ -61,7 +61,7 @@ public class InterfaceClass {
 		System.out.println("(3) Exit");
 		System.out.println("----------------------------------------------------------------");
 		System.out.print("Enter your option: ");
-		return GetAnInteger();
+		return getAnInteger();
 	}
 
 	public void RegularAccount(String typeOfAccountc, int loggedUserIDc) {
@@ -116,7 +116,7 @@ public class InterfaceClass {
 		System.out.println("(7) Logout");
 		System.out.println("----------------------------------------------------------------");
 		System.out.print("You want to: ");
-		return GetAnInteger();	//getting user choice 
+		return getAnInteger();	//getting user choice 
 	}
 
 	public void AdministratorAccount(String typeOfAccountc, int loggedUserIDc){
@@ -139,7 +139,7 @@ public class InterfaceClass {
 		}else if (userChoice < 3) {
 			new AdministratorAccount(userChoice, loggedUserIDl);
 		}else if(userChoice < 4){
-			UserAccount.Exit();
+			UserAccount.exit();
 		}else{
 			System.out.println("--------------------------------------------------------");
 			System.out.println("------------------------CAUTION!------------------------");
@@ -162,10 +162,10 @@ public class InterfaceClass {
 		System.out.println("(3) Logout");
 		System.out.println("----------------------------------------------------------------");
 		System.out.print("Please enter your choice: ");
-		return  GetAnInteger();
+		return  getAnInteger();
 	}
 	
-	public static int GetAnInteger() {	
+	public static int getAnInteger() {	
 		/*
 		 * //This method checks whether the user input is of the type Integer and returns
 		 * the user input
@@ -184,7 +184,7 @@ public class InterfaceClass {
 		}
 	}
 
-	public static double GetADouble() {
+	public static double getADouble() {
 		/*
 		 * //This method checks whether the user input is of the type Double and returns
 		 * the user input
