@@ -2,9 +2,10 @@ package default_package;
 import java.io.*;
 
 public class RegularAccount extends UserAccount{	//This is a subclass of the superclass UserAccount
+	static String role; // This variable is created for the main constructor 
+
 	String userName;
 	String password;
-	static String role;
 	int id;
 	String typeOfaccount;
 	int userChoice;
@@ -12,6 +13,9 @@ public class RegularAccount extends UserAccount{	//This is a subclass of the sup
 
 
 	public RegularAccount(String nameC, String passwordC, int uID, String roleC ) {
+		/*
+		This is the main constructor for the Regular account objects
+		 */
 		super(nameC, passwordC, uID);
 		role = roleC;
 
