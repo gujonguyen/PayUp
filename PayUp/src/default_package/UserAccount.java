@@ -3,12 +3,13 @@ import java.io.*;
 import java.util.*;
 
 public class UserAccount {
-	String userName;
-	String password;
+	String userName; // These variables are created for the main constructor 
+	String password; //
+	int userID = 0; //
+
 	String role;
 	static int noOfUsers;
-	int userID = 0;
-	static Scanner userInput1 = new Scanner(System.in); //for int
+	static Scanner userInput1 = new Scanner(System.in); // for int
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	int userChoice;
 	int loggedUserID;
@@ -16,6 +17,9 @@ public class UserAccount {
 
 
 	public UserAccount(String nameC, String passwordC, int uID ) {
+		/*
+		This is the main constructor for the User account objects
+		 */
 		userName = nameC;
 		password = passwordC;
 		userID = uID;
@@ -180,7 +184,13 @@ public class UserAccount {
 		int loggedID = 0;
 		String Un;
 		String Pw;
+
+// ????
+// ?????? What should happen with the following role variable? When the line is deleted, the code below breaks.. 
+// ????
 		String role = "bla";
+		
+		
 		//The login interface where the user enters his/her username and password
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\tPlease Login User\t");
