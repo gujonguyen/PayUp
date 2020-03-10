@@ -141,7 +141,7 @@ public class AdministratorAccount extends UserAccount {
 		//removing the user from PayUp
 		System.out.println("");
 		System.out.println("Enter the User ID you wish to remove admin: ");
-		int localRemovedUser = userInput1.nextInt() ;
+		int localRemovedUser = InterfaceClass.GetAnInteger();
 		System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
 		String confirm = userInput2.nextLine();
 		System.out.println(confirm);
