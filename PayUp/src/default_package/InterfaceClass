@@ -3,13 +3,13 @@ package default_package;
 import java.util.Scanner;
 
 public class InterfaceClass {
-	static Scanner userInput = new Scanner(System.in); // for int
+	static Scanner userInput = new Scanner(System.in);
 	String typeOfAccount;
 	static int loggedUserID;
 	String[] passedUserData;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// The applicatcation starts at the line below
 		new InterfaceClass();
 	}
 
@@ -20,10 +20,10 @@ public class InterfaceClass {
 		int userChoice = mainInterface();
 		switch (userChoice) {
 		case 1:
-			UserAccount.Register(); // user is directed to the Register method in the userAccount Class
+			UserAccount.Register();
 
 		case 2:
-			String[] arrayofLoggedUser = UserAccount.Login(); // user is directed to the Login method in the userAccount Class
+			String[] arrayofLoggedUser = UserAccount.login();
 			typeOfAccount = arrayofLoggedUser[1];
 			int loggeduserIDl;
 			loggeduserIDl = Integer.parseInt(arrayofLoggedUser[0]);
@@ -41,7 +41,7 @@ public class InterfaceClass {
 		case 3:
 			System.out.println("\n\tThank you for visiting PayUp!\t");
 			break;
-
+		//If any other integer than 1, 2 or 3 is inputted, the following default is printed
 		default: 
 			System.out.println("--------------------------------------------------------");
 			System.out.println("------------------------CAUTION!------------------------");
@@ -53,7 +53,11 @@ public class InterfaceClass {
 	}
 
 	private static int mainInterface(){
-		// This method displays the main interface to the user and asks for user input
+		/*
+		 * This method displays the main interface to the user and asks for user
+		 * input
+		 * 
+		 */
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\tWelcome to PayUp!\t");
 		System.out.println("\n What do you wish to?");   
@@ -81,7 +85,7 @@ public class InterfaceClass {
 		typeOfAccount = typeOfAccountc;
 
 		int loggedUserIDl = loggedUserIDc;
-		int userChoice = regularUserInterface();
+		int userChoice = regularUserInterface(loggedUserIDl);
 
 
 		if (userChoice <4) {
@@ -91,8 +95,8 @@ public class InterfaceClass {
 		}else if (userChoice<8) {
 			new Expense(userChoice, loggedUserIDl);
 
+			//If any other integer than 1, 2 or 3 is inputted, the following lines of code are printed
 		}else {
-
 			System.out.println("--------------------------------------------------------");
 			System.out.println("------------------------CAUTION!------------------------");
 			System.out.println("         Please only enter a number between 1-9!        "); 
@@ -102,9 +106,13 @@ public class InterfaceClass {
 		}
 	}
 
-	public static int regularUserInterface() {
-		// This method shows the user interface for regular users and gets the user choice from the regular users
-
+	public static int regularUserInterface(int loggedUserIDc) {
+		/*
+		 * This method shows the user interface for regular users and gets the user
+		 * choice from the regular users
+		 * 
+		 */
+		int loggedUserIDl = loggedUserIDc;
 		System.out.println("--------------------------------------------------------");//user interface for regular users
 		System.out.println("You are logged in as a Regular user!");
 		System.out.println("What do you want to do?");
@@ -151,8 +159,11 @@ public class InterfaceClass {
 
 
 	static int AdminInterface() {
-		// This method shows the user interface for admin users and gets the user choice from the admin users
-
+		/*
+		 * This method shows the user interface for admin users and gets the user
+		 * choice from the admin users
+		 * 
+		 */
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Welcome Admin of PayUp!");
 		System.out.println("You are logged in to the Administrator Account!");
