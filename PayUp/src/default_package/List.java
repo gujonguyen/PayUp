@@ -9,9 +9,9 @@ public class List {
 	String listName;
 	int listID;
 	String date;
-	RegularAccount[] temp1 = RegularAccount.createRegulars();
-	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins();
-	UserAccount[] temp3 = UserAccount.createAllUsers();
+	RegularAccount[] temp1 = RegularAccount.createRegulars(); // Creates Regular User Objects
+	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins(); //  Creates Admin User Objects
+	UserAccount[] temp3 = UserAccount.createAllUsers(); // Creates All Users objects
 
 	static int fileCount;
 	String participants;
@@ -19,12 +19,18 @@ public class List {
 	int loggedUserID;
 
 	public List(String listNamec, String participant, int listIDc) {
+		/*
+		This is the main Constructor for the List objects
+		 */
 		listName = listNamec;
 		participants = participant;
 		listID = listIDc;
 	}
 
 	public List(int userChoicec, int loggedUserIDc){
+		/*
+		This Constructor directs the Regular User to the right method based on a passed-on User Choice	
+		 */
 		int loggedUserIDl = loggedUserIDc;
 		userChoice = userChoicec;
 		switch (userChoice) {
@@ -45,11 +51,17 @@ public class List {
 	}
 
 	public static List[] readFile(){
+		/*
+		This method reads the List_database text file
+		 */
+		
+		// Declaring all necessary variables
 		int lineNumber = 0;
 		int [] idAxis = new int[100];
 		String [] nameAxis = new String[100];
 		String[] nonsplittedString = new String[100];
 
+		// Reading the List_database text file
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [3];
@@ -84,13 +96,18 @@ public class List {
 	}
 
 	public void createList(int loggeduserIDc) {
-
-		int loggedUserIDl = loggeduserIDc;
+		/*
+		This method allows the users to create Lists
+		 */
 		
+		// Declaring all necessary variables
+		int loggedUserIDl = loggeduserIDc;
+
 		int [] aUser = new int[100];
 		Boolean localBoolean = false;
 		int lineNumber = 0;
-
+		
+		// User input is asked for in order to create the list
 		System.out.println("How do you want to name the list? ");
 		String listName = userInput2.nextLine();
 
@@ -141,7 +158,11 @@ public class List {
 	}
 
 	public static void viewList() {
-
+		/*
+		This method allows the users to view Lists
+		 */
+		
+		// Declaring all necessary variables
 		int lineNumber = 0;
 		String [] c1 = new String[100];
 		String[] c2 = new String[100];
@@ -193,6 +214,8 @@ public class List {
 	}
 	
 	public static void getUserName (String ids) {
+		
+		// Declaring all necessary variables
 		String userIdString = ids;
 		String [] split = new String [100];
 		int [] userIds = new int [100];
@@ -214,6 +237,11 @@ public class List {
 
 	}
 	public static void deleteList() {
+		/*
+		This method allows the users to delete Lists
+		 */
+		
+		// Declaring all necessary variables
 		int lineNumber = 0;
 		String [] c1 = new String[100];
 		String[] c2 = new String[100];
