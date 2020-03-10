@@ -92,11 +92,11 @@ public class AdministratorAccount extends UserAccount {
 		/* 
 		 * This method removes a certain user from Pay-Up
 		 */		
-		int NumUser = 0;
-		String[] LocalUserName = new String[100];
-		String[] LocalPassword= new String[100];
-		String[] LocalTypeAccount = new String[100];
-		int[] LocalID = new int[100];
+		int numUser = 0;
+		String[] localUserName = new String[100];
+		String[] localPassword= new String[100];
+		String[] localTypeAccount = new String[100];
+		int[] localID = new int[100];
 		
 		System.out.println("");
 		System.out.println("The list of users on PayUp");
@@ -117,12 +117,12 @@ public class AdministratorAccount extends UserAccount {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				LocalUserName[NumUser] = uCurrent[0];
-				LocalPassword[NumUser] = uCurrent[1];
-				LocalTypeAccount[NumUser] = uCurrent[2];
-				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
+				localUserName[numUser] = uCurrent[0];
+				localPassword[numUser] = uCurrent[1];
+				localTypeAccount[numUser] = uCurrent[2];
+				localID[numUser] = Integer.parseInt(uCurrent[3]);
 
-				NumUser++;
+				numUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
@@ -160,10 +160,10 @@ public class AdministratorAccount extends UserAccount {
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",false)));
 			for (int i = 0; i < numUser; i++) {
 				if (i == localRemovedUser) {
-					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + FinalLocalID[i]);
+					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + finalLocalID[i]);
 					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
 				} else {
-					wr.println(FinalLocalUserName[i] + "\t" + FinalLocalPassword[i] + "\t" +  FinalLocalTypeAccount[i] + "\t" + FinalLocalID[i]);	
+					wr.println(finalLocalUserName[i] + "\t" + finalLocalPassword[i] + "\t" +  finalLocalTypeAccount[i] + "\t" + finalLocalID[i]);	
 					break;	
 				}
 				
