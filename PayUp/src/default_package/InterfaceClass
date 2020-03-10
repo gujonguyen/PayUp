@@ -124,7 +124,7 @@ public class InterfaceClass {
 		if (userChoice < 3) {
 			new AdministratorAccount(userChoice, loggedUserIDl);
 		}else if(userChoice < 4){
-			new UserAccount(userChoice, loggedUserIDl);
+			UserAccount.Exit();
 		}else{
 			System.out.println("--------------------------------------------------------");
 			System.out.println("------------------------CAUTION!------------------------");
