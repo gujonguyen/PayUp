@@ -7,7 +7,6 @@ public class InterfaceClass {
 	static Scanner userInput1 = new Scanner(System.in); // for integer
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	static Scanner userInput3 = new Scanner(System.in); // for double
-	static Scanner userInput = new Scanner(System.in);
 	String typeOfAccount;
 	static int loggedUserID;
 	String[] passedUserData;
