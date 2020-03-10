@@ -210,7 +210,7 @@ public class UserAccount {
 		System.out.println("--------------------------------------------------------------------");;
 		System.out.println("\tThank you for registering to PayUp!\t");
 		System.out.println("--------------------------------------------------------------------");
-		new InterfaceClass();---
+		new InterfaceClass();
 	}
 
 
