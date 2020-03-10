@@ -140,7 +140,7 @@ public class Expense {
 
 		//Asks the user which list he/she wants to view
 		System.out.println("What is the list ID to which this expense belongs?");
-		int listId = userInput1.nextInt();
+		int listId = InterfaceClass.GetAnInteger();
 
 		//This creates an array of all people that are part of a list
 		sCurrentLine = temp4[listId].participants;
@@ -167,7 +167,7 @@ public class Expense {
 			System.out.println("What is the name of this expense?");
 			String expenseName = userInput2.nextLine();
 			System.out.println("What is the amount of this expense?");
-			Double amount = userInput3.nextDouble();
+			Double amount = InterfaceClass.GetADouble();
 			System.out.println("What is the date of this expense?");
 			System.out.println("Please use the following Syntax: (day/month/year)");
 			String date = userInput2.nextLine();
@@ -230,7 +230,7 @@ public class Expense {
 
 			//Asking the user which list he or she wants to know the individual balance for
 			System.out.println("For which ListID do you want to view your individual expense");
-			int individualBalanceOfList = userInput1.nextInt();
+			int individualBalanceOfList = InterfaceClass.GetAnInteger();
 
 			//Splitting the participants of a certain list based on comma
 			//The first User ID is always the one who created that list
@@ -328,7 +328,7 @@ public class Expense {
 		System.out.println("--------------------------------------------------------------------");
 		System.out.println("What is the list ID of the list that you want to settle:");
 		System.out.println("--------------------------------------------------------------------");
-		int settledList = userInput1.nextInt();
+		int settledList = InterfaceClass.GetAnInteger();
 
 
 		//Splitting the participants of a certain list based on comma
