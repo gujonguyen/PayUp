@@ -3,7 +3,7 @@ package default_package;
 import java.util.Scanner;
 
 public class InterfaceClass {
-	static Scanner userInput = new Scanner(System.in);
+	static Scanner userInput = new Scanner(System.in); // for int
 	String typeOfAccount;
 	static int loggedUserID;
 	String[] passedUserData;
@@ -14,13 +14,16 @@ public class InterfaceClass {
 	}
 
 	public InterfaceClass() {
+		/*
+		This Constructor directs the user to the right method based on user input given in the mainInterface Method	
+		 */
 		int userChoice = mainInterface();
 		switch (userChoice) {
 		case 1:
-			UserAccount.Register();
+			UserAccount.Register(); // user is directed to the Register method in the userAccount Class
 
 		case 2:
-			String[] arrayofLoggedUser = UserAccount.Login();
+			String[] arrayofLoggedUser = UserAccount.Login(); // user is directed to the Login method in the userAccount Class
 			typeOfAccount = arrayofLoggedUser[1];
 			int loggeduserIDl;
 			loggeduserIDl = Integer.parseInt(arrayofLoggedUser[0]);
@@ -50,6 +53,7 @@ public class InterfaceClass {
 	}
 
 	private static int mainInterface(){
+		// This method displays the main interface to the user and asks for user input
 		System.out.println("--------------------------------------------------------");
 		System.out.println("\tWelcome to PayUp!\t");
 		System.out.println("\n What do you wish to?");   
@@ -63,6 +67,10 @@ public class InterfaceClass {
 	}
 	
 	public void RegularAccount(String typeOfAccountc, int loggedUserIDc) {
+		/*
+		This method directs users to different methods based on their user input and only lets
+		users perform actions while there are at least 2 users registered in the system 
+		 */
 		int amountOfUsers = UserAccount.readfile1();
 		if (amountOfUsers == 1) {
 			System.out.println("For PayUp to work correctly, you need atleast two users");
@@ -95,6 +103,8 @@ public class InterfaceClass {
 	}
 
 	public static int regularUserInterface() {
+		// This method shows the user interface for regular users and gets the user choice from the regular users
+
 		System.out.println("--------------------------------------------------------");//user interface for regular users
 		System.out.println("You are logged in as a Regular user!");
 		System.out.println("What do you want to do?");
@@ -112,6 +122,10 @@ public class InterfaceClass {
 	}
 
 	public void AdministratorAccount(String typeOfAccountc, int loggedUserIDc){
+		/*
+		This method directs users to different methods based on their user input and only lets
+		users perform actions while there are at least 2 users registered in the system 
+		 */
 		int amountOfUsers = UserAccount.readfile1();
 		if (amountOfUsers == 1) {
 			System.out.println("For PayUp to work correctly, you need atleast two users");
@@ -137,6 +151,7 @@ public class InterfaceClass {
 
 
 	static int AdminInterface() {
+		// This method shows the user interface for admin users and gets the user choice from the admin users
 
 		System.out.println("--------------------------------------------------------");
 		System.out.println("Welcome Admin of PayUp!");
