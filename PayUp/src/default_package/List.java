@@ -121,7 +121,7 @@ public class List {
 		aUser [0] = loggedUserIDl;
 
 		System.out.println("What is the userID of the user that you want to add to your list? ");
-		aUser[1] = userInput1.nextInt();
+		aUser[1] = InterfaceClass.GetAnInteger();
 
 		int length = UserAccount.readfile1(); // This returns the amount of registered user for the for-loop below
 
@@ -189,7 +189,7 @@ public class List {
 		boolean localBoolean2 = false;
 
 		System.out.println("What is the list ID of the list that you want to view? ");
-		int viewList = userInput1.nextInt();
+		int viewList = InterfaceClass.GetAnInteger();
 
 		List[] tempListObject = List.readFile();
 
@@ -285,9 +285,9 @@ public class List {
 		
 		// Asking for user input
 		System.out.println("Enter the list ID of the list you want to delete.");
-		int viewList = userInput2.nextInt();
+		int viewList = InterfaceClass.GetAnInteger();
 		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
-		String confirm = userInput1.nextLine();
+		String confirm = userInput2.nextLine();
 		
 		
 		// Reading the List_database file
