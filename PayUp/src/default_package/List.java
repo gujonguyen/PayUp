@@ -261,7 +261,7 @@ public class List {
 		}
 	}
 	
-	public void deleteList() {
+	public static void deleteList() {
 		int lineNumber = 0;
 		String [] c1 = new String[100];
 		String[] c2 = new String[100];
