@@ -164,6 +164,9 @@ public class AdministratorAccount extends UserAccount {
 					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
 				} else {
 					wr.println(FinalLocalUserName[i] + "\t" + FinalLocalPassword[i] + "\t" +  FinalLocalTypeAccount[i] + "\t" + FinalLocalID[i]);	
+					System.out.println("Enter a valid userID");
+					new InterfaceClass();
+					break;	
 				}
 				
 		}
