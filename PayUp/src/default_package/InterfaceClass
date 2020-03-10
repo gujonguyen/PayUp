@@ -59,7 +59,7 @@ public class InterfaceClass {
 		System.out.println("(3) Exit");
 		System.out.println("----------------------------------------------------------------");
 		System.out.print("Enter your option: ");
-		return userInput.nextInt();
+		return GetAnInteger();
 	}
 
 	public void RegularAccount(String typeOfAccountc, int loggedUserIDc) {
@@ -107,7 +107,7 @@ public class InterfaceClass {
 		System.out.println("(7) Logout");
 		System.out.println("----------------------------------------------------------------");
 		System.out.print("You want to: ");
-		return userInput.nextInt();	//getting user choice 
+		return GetAnInteger();	//getting user choice 
 	}
 
 	public void AdministratorAccount(String typeOfAccountc, int loggedUserIDc){
@@ -145,7 +145,7 @@ public class InterfaceClass {
 		System.out.println("(3) Logout");
 		System.out.println("----------------------------------------------------------------");
 		System.out.print("Please enter your choice: ");
-		return  userInput.nextInt();
+		return  GetAnInteger();
 	}
 	public static String GetAString() {
 		/*
