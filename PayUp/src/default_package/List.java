@@ -6,20 +6,28 @@ public class List {
 	static Scanner userInput1 = new Scanner(System.in); //for int
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	static Scanner userInput3 = new Scanner(System.in); // for double
-	String listName;
-	int listID;
-	String date;
-	String status;
+	
+	String listName;// These variables are created for the main constructor 
+	int listID; // 
+	String status;//
+	String participants;//
+
+	
 	RegularAccount[] temp1 = RegularAccount.createRegulars(); // Creates Regular User Objects
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins(); //  Creates Admin User Objects
 	UserAccount[] temp3 = UserAccount.createAllUsers(); // Creates All Users objects
 	Expense [] temp4 = Expense.createExpenseObject();
+	
 	static int fileCount;
-	String participants;
 	int userChoice;
 	int loggedUserID;
+	String date;
+
 	
 	public List(String listNamec, String participant, int listIDc, String statusc) {
+		/*
+		This is the main Constructor for the List objects
+		 */
 		listName = listNamec;
 		participants = participant;
 		listID = listIDc;
@@ -123,6 +131,10 @@ public class List {
 		
 		int length = UserAccount.readfile1(); // This returns the amount of registered user for the for-loop below
 		
+		/*
+		  This for loop checks if the user that needs to be added to the list is actually registered
+		  by checking the user ID
+		 */
 		for (int i = 0; i < length; i++ ) {
 			if (aUser[1] == temp3[i].userID) {
 				localBoolean = true;
@@ -130,7 +142,11 @@ public class List {
 
 			}
 		}
-
+		/* 
+		   If the localBoolean is true, a List_database file gets created and the 
+		   newly created list gets added, or the existing List_database text file 
+		   gets appended with the new list
+		 */
 		if (localBoolean == true) {
 			try {
 				String sCurrentLine;
@@ -166,7 +182,11 @@ public class List {
 	}
 
 	public void viewList(int loggedUserc) {
+		/*
+		This method allows the users to view Lists 
+		 */
 
+		// Declaring all necessary variables
 		int loggedUserIDl = loggedUserc;
 		// viewing lists by recalling the username based on the userID in User DB and
 		// searching in the array of participants in the List Database
@@ -227,7 +247,8 @@ public class List {
 			}catch (IOException e) {
 				System.out.println("This file does not existlol9");
 			}
-
+			
+ 			//This creates an array of the List Database file
 			String[] FinalListName = new String[lineNumber];
 			System.arraycopy(ListName, 0, FinalListName, 0, lineNumber);
 			String[] FinalParticipants = new String[lineNumber];
@@ -265,17 +286,24 @@ public class List {
 	}
 	
 	public static void deleteList() {
+		/*
+		This method allows the users to delete existing Lists 
+		 */
+
+		// Declaring all necessary variables
 		int lineNumber = 0;
 		String [] c1 = new String[100];
 		String[] c2 = new String[100];
 		int [] c3 = new int[100];
 		String[] status = new String[100];
 
+		// Asking for user input
 		System.out.println("Enter the list ID of the list you want to delete.");
 		int viewList = userInput2.nextInt();
 		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
 		String confirm = userInput1.nextLine();
-
+		
+		// Reading the List_database file
 		try {
 			String sCurrentLine;
 			String[] uCurrent = new String [4];
@@ -304,6 +332,9 @@ public class List {
 		String[] finalStatus = new String[lineNumber];
 		System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
+		/* When the user confirms that he wants to delete the list, the list with the 
+		   list ID that was previously indicated gets deleted
+		 */
 		if(confirm.equals("Y")) {
 			try {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
@@ -321,6 +352,9 @@ public class List {
 			}	
 		}
 	}
+	/*
+	this method returns how many expenses have been logged.
+	 */
 	public static int readfile1() {
 		int numLists = 0;
 		try {
