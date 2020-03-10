@@ -13,11 +13,12 @@ public class List {
 	RegularAccount[] temp1 = RegularAccount.createRegulars(); // Creates Regular User Objects
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins(); //  Creates Admin User Objects
 	UserAccount[] temp3 = UserAccount.createAllUsers(); // Creates All Users objects
-
+	Expense [] temp4 = Expense.createExpenseObject();
 	static int fileCount;
 	String participants;
 	int userChoice;
 	int loggedUserID;
+	String status;
 	
 	public List(String listNamec, String participant, int listIDc, String statusc) {
 		listName = listNamec;
