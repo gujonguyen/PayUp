@@ -88,9 +88,9 @@ public class UserAccount {
 		 */
 		Boolean localBoolean = true;
 		noOfUsers = readfile1();
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");
 		System.out.println("\tPlease Register User\t");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
 
@@ -129,16 +129,16 @@ public class UserAccount {
 						writeUser(Un, Pw, typeOfAccount);	
 						//The user will be redirected to the register interface due to a duplicate user name
 					}else {
-						System.out.println("----------------------------------------------------------------");
+						System.out.println("--------------------------------------------------------------------");
 						System.out.println("This User Name is already taken, please Register again");
-						System.out.println("----------------------------------------------------------------");
+						System.out.println("--------------------------------------------------------------------");
 						Register();	
 					}
 					//The user will be redirected to the register interface due to an invalid password
 				}else {	
-					System.out.println("----------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------");
 					System.out.println("Please use a password of more than 4 characters");
-					System.out.println("----------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------");
 					Register();	
 				}
 			}else { 
@@ -173,16 +173,16 @@ public class UserAccount {
 					writeUser(Un, Pw, typeOfAccount);	
 					//The user will be redirected to the register interface due to a duplicate user name
 				}else {	
-					System.out.println("----------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------");
 					System.out.println("This User Name is already taken, please Register again");
-					System.out.println("----------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------");
 					Register();	
 				}
 				//The user will be redirected to the register interface due to an invalid password
 			}else {	
-				System.out.println("----------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
 				System.out.println("Please use a password of more than 4 characters");
-				System.out.println("----------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
 				Register();	
 			}
 
@@ -207,10 +207,10 @@ public class UserAccount {
 			System.out.println("I/O error when writing on file");
 		}
 		//The user will be redirected to the first menu after a successful registration
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");;
 		System.out.println("\tThank you for registering to PayUp!\t");
-		System.out.println("----------------------------------------------------------------");
-		new InterfaceClass();
+		System.out.println("--------------------------------------------------------------------");
+		new InterfaceClass();---
 	}
 
 
@@ -229,9 +229,9 @@ public class UserAccount {
 		String Pw;
 		String role = "bla";
 		//The login interface where the user enters his/her User Name and Password
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");
 		System.out.println("\tPlease Login User\t");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");
 		System.out.println("Please input your username:");
 		Un = userInput2.nextLine();
 		System.out.println("Please input your password:");
@@ -264,7 +264,7 @@ public class UserAccount {
 			if (Un.equals(FinalLocalUserName[i]) && Pw.equals(FinalLocalPassword[i])) {	
 				loggedID = LocalID[i];
 				role = LocalRole[i];
-			System.out.println("----------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
 			}
 
