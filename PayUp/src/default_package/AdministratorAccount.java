@@ -152,7 +152,7 @@ public class AdministratorAccount extends UserAccount {
 			for (int i = 0; i < NumUser; i++) {
 				if (i == localRemovedUser) {
 					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + FinalLocalID[i]);
-					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
+					System.out.println("You have successfully deleted the User with ID:" + localRemovedUser);
 				} else {
 					wr.println(FinalLocalUserName[i] + "\t" + FinalLocalPassword[i] + "\t" +  FinalLocalTypeAccount[i] + "\t" + FinalLocalID[i]);	
 				}
