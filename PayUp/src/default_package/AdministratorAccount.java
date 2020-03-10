@@ -163,8 +163,14 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("I/O error when writing on file");
 		}
 		}else {
-			System.out.println("You will be redirected to the User Interface");
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("You are now redirected to the main menu.");
+			System.out.println("--------------------------------------------------------------------");
 			new InterfaceClass();
 		}
+		System.out.println("--------------------------------------------------------------------");
+		System.out.println("You are now redirected to the main menu.");
+		System.out.println("--------------------------------------------------------------------");
+		new InterfaceClass();
 	}
 }
