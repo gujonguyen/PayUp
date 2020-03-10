@@ -16,7 +16,6 @@ public class List {
 	RegularAccount[] temp1 = RegularAccount.createRegulars(); // Creates Regular User Objects
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins(); //  Creates Admin User Objects
 	UserAccount[] temp3 = UserAccount.createAllUsers(); // Creates All Users objects
-	Expense [] temp4 = Expense.createExpenseObject();
 	
 	static int fileCount;
 	int userChoice;
