@@ -8,9 +8,11 @@ public class Expense {
 	static Scanner userInput3 = new Scanner(System.in); // for double
 	String expenseName; //
 	String expenseDate; // 
-	double amount; // These variables are created for the main constructor
-	int expenseId; //
+	double amount; // 
+	int expenseId; //These variables are created for the main constructor
 	int listID; //
+	int debitor; //
+	int creditor;//
 	RegularAccount[] temp1 = RegularAccount.createRegulars(); // Creates Regular User Objects
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins(); //  Creates Admin User Objects
 	UserAccount[] temp3 = UserAccount.createAllUsers(); // Creates All Users objects
@@ -18,10 +20,8 @@ public class Expense {
 	double individualBalance;
 	int userID;
 	static int fileCount;
-	int debitor;
 	int userChoice;
 	int loggedUserID;
-	int creditor;
 
 
 	public Expense(int listIdc, String name, double amountc, String date, int creditorsc, int debitorc, int expId) {
