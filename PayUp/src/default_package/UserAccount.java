@@ -12,6 +12,7 @@ public class UserAccount {
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	int userChoice;
 	int loggedUserID;
+	protected static String admincode = "Yashar";
 
 
 	public UserAccount(String nameC, String passwordC, int uID ) {
