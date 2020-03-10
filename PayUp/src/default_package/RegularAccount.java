@@ -3,6 +3,8 @@ import java.util.*;
 import java.io.*;
 
 public class RegularAccount extends UserAccount{	//This is a subclass of the superclass UserAccount
+	static Scanner userInput1 = new Scanner(System.in); // for int
+	static Scanner userInput2 = new Scanner(System.in); // for string
 	static Scanner userInput3 = new Scanner(System.in); // for double
 	String userName;
 	String password;
