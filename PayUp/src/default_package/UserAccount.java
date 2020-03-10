@@ -79,7 +79,7 @@ public class UserAccount {
 		// This empty constructor is recalled using the super() method in the extended constructors
 	}
 
-	protected static void Register() {	
+	protected static void register() {	
 		/*
 		 * This method gets the user name and password from the user for the
 		 * registration of a new user
@@ -132,19 +132,19 @@ public class UserAccount {
 						System.out.println("--------------------------------------------------------------------");
 						System.out.println("This User Name is already taken, please Register again");
 						System.out.println("--------------------------------------------------------------------");
-						Register();	
+						register();	
 					}
 					//The user will be redirected to the register interface due to an invalid password
 				}else {	
 					System.out.println("--------------------------------------------------------------------");
 					System.out.println("Please use a password of more than 4 characters");
 					System.out.println("--------------------------------------------------------------------");
-					Register();	
+					register();	
 				}
 			}else { 
 				System.out.println("");
 				System.out.println("Enter a valid admin code! (Hint: professor ....)");
-				Register();
+				register();
 			}
 			// If the user registers as an Regular then the following lines of code are executed	
 		}else {
@@ -176,14 +176,14 @@ public class UserAccount {
 					System.out.println("--------------------------------------------------------------------");
 					System.out.println("This User Name is already taken, please Register again");
 					System.out.println("--------------------------------------------------------------------");
-					Register();	
+					register();	
 				}
 				//The user will be redirected to the register interface due to an invalid password
 			}else {	
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println("Please use a password of more than 4 characters");
 				System.out.println("--------------------------------------------------------------------");
-				Register();	
+				register();	
 			}
 
 		}
@@ -277,7 +277,7 @@ public class UserAccount {
 
 	}
 
-	public static void Exit() {	
+	public static void exit() {	
 		/*
 		 * This method will let the user exit PayUp
 		 *  
