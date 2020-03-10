@@ -98,20 +98,16 @@ public class List {
 		int amountOfUser = userInput1.nextInt();
 		aUser [0] = loggedUserIDl;
 
-		for(int n = 1; n < amountOfUser + 1; n++) {
-			System.out.println("What is the userID of the user that you want to add to your list? ");
-			aUser[n] = userInput1.nextInt();
-		}
+		System.out.println("What is the userID of the user that you want to add to your list? ");
+		aUser[1] = userInput1.nextInt();
 		
 		int length = UserAccount.readfile1(); // This returns the amount of registered user for the for-loop below
 		
-		for (int j = 1; j < amountOfUser + 1 ; j++) {
-			for (int i = 0; i < length; i++ ) {
-				if (aUser[j] == temp3[i].userID) {
-					localBoolean = true;
-				}else {
-					
-				}
+		for (int i = 0; i < length; i++ ) {
+			if (aUser[1] == temp3[i].userID) {
+				localBoolean = true;
+			}else {
+
 			}
 		}
 
