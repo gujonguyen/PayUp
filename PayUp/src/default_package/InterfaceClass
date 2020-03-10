@@ -23,7 +23,7 @@ public class InterfaceClass {
 			UserAccount.register();
 
 		case 2:
-			String[] arrayofLoggedUser = UserAccount.Login();
+			String[] arrayofLoggedUser = UserAccount.login();
 			typeOfAccount = arrayofLoggedUser[1];
 			int loggeduserIDl;
 			loggeduserIDl = Integer.parseInt(arrayofLoggedUser[0]);
