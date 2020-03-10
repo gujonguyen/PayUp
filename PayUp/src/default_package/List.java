@@ -194,13 +194,14 @@ public class List {
 		String[] Participants = new String[100];
 		int[] ListID = new int[100];
 		String[] status = new String[100];
-	
+	String sCurrentLine;
+	String[] uCurrent = new String [4];
 		
 		int[] participantsInList = new int [100];
 		boolean localBoolean2 = false;
 
 		System.out.print("These are all your lists "); // implement username later once the userID works
-		readUserName(loggedUserIDc, username);
+		getUserName(loggedUserIDl);
 		System.out.println("--------------------------------------------------------");
 
 		List[] tempListObject = List.readFile();
@@ -260,7 +261,7 @@ public class List {
 			System.out.println("List Name: \t Particpants: \t List ID: \t \t Status: ");
 			for (int i = 0; i < lineNumber; i++) {
 				if (viewList == Finalc3[i]) {
-					System.out.println(FinalListName[i] + "\t\t\t" +getUserName(participants) + "\t\t" + FinalListID[i] + "\t\t" + finalStatus[i]);
+					System.out.println(FinalListName[i] + "\t\t\t" +getUserName(loggedUserIDl) + "\t\t" + FinalListID[i] + "\t\t" + finalStatus[i]);
 					break;
 				}
 
