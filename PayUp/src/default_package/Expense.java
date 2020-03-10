@@ -55,7 +55,7 @@ public class Expense {
 			addExpenseToList(loggedUserIDl);
 			break;
 		case 7:
-			UserAccount.Exit();
+			UserAccount.exit();
 			break;
 		}
 	}
@@ -140,7 +140,7 @@ public class Expense {
 
 		//Asks the user which list he/she wants to view
 		System.out.println("What is the list ID to which this expense belongs?");
-		int listId = InterfaceClass.GetAnInteger();
+		int listId = InterfaceClass.getAnInteger();
 
 		//This creates an array of all people that are part of a list
 		sCurrentLine = temp4[listId].participants;
@@ -232,7 +232,7 @@ public class Expense {
 
 			//Asking the user which list he or she wants to know the individual balance for
 			System.out.println("For which ListID do you want to view your individual expense");
-			int individualBalanceOfList = InterfaceClass.GetAnInteger();
+			int individualBalanceOfList = InterfaceClass.getAnInteger();
 
 			//Splitting the participants of a certain list based on comma
 			//The first User ID is always the one who created that list
@@ -332,7 +332,7 @@ public class Expense {
 		System.out.println("--------------------------------------------------------------------");
 		System.out.println("What is the list ID of the list that you want to settle:");
 		System.out.println("--------------------------------------------------------------------");
-		int settledList = InterfaceClass.GetAnInteger();
+		int settledList = InterfaceClass.getAnInteger();
 
 
 		//Splitting the participants of a certain list based on comma
