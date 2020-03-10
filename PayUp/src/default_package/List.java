@@ -83,21 +83,21 @@ public class List {
 		}
 
 
-		int [] FinalIDAxis = new int[lineNumber];
-		System.arraycopy(idAxis, 0, FinalIDAxis, 0, lineNumber);
-		String [] FinalParticipantAxis = new String[lineNumber];
-		System.arraycopy(nonsplittedString, 0, FinalParticipantAxis, 0, lineNumber);
-		String [] FinalNameAxis = new String[lineNumber];
-		System.arraycopy(nameAxis, 0, FinalNameAxis, 0, lineNumber);
+		int [] finalIDAxis = new int[lineNumber];
+		System.arraycopy(idAxis, 0, finalIDAxis, 0, lineNumber);
+		String [] finalParticipantAxis = new String[lineNumber];
+		System.arraycopy(nonsplittedString, 0, finalParticipantAxis, 0, lineNumber);
+		String [] finalNameAxis = new String[lineNumber];
+		System.arraycopy(nameAxis, 0, finalNameAxis, 0, lineNumber);
 		String [] finalStatusAxis = new String [lineNumber];
 		System.arraycopy(statusAxis, 0, finalStatusAxis, 0, lineNumber);
 
 
 
-		List listArray[] = new List[FinalIDAxis.length];
+		List listArray[] = new List[finalIDAxis.length];
 
-		for (int i = 0; i < FinalIDAxis.length; i++) {
-			listArray[i] = new List(FinalNameAxis[i], FinalParticipantAxis[i], FinalIDAxis[i], finalStatusAxis[i]);
+		for (int i = 0; i < finalIDAxis.length; i++) {
+			listArray[i] = new List(finalNameAxis[i], finalParticipantAxis[i], finalIDAxis[i], finalStatusAxis[i]);
 		}		
 
 		return listArray;
@@ -128,7 +128,7 @@ public class List {
 		}
 
 		System.out.println("What is the userID of the user that you want to add to your list? ");
-		aUser[1] = InterfaceClass.GetAnInteger();
+		aUser[1] = InterfaceClass.getAnInteger();
 
 		int length = UserAccount.readfile1(); // This returns the amount of registered user for the for-loop below
 
@@ -196,7 +196,7 @@ public class List {
 		boolean localBoolean2 = false;
 
 		System.out.println("What is the list ID of the list that you want to view? ");
-		int viewList = InterfaceClass.GetAnInteger();
+		int viewList = InterfaceClass.getAnInteger();
 
 		List[] tempListObject = List.readFile();
 
@@ -240,22 +240,22 @@ public class List {
 				System.out.println("This file does not existlol9");
 			}
 
-			String[] Finalc1 = new String[lineNumber];
-			System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
-			String[] Finalc2 = new String[lineNumber];
-			System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-			int [] Finalc3 = new int[lineNumber];
-			System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
+			String[] finalc1 = new String[lineNumber];
+			System.arraycopy(c1, 0, finalc1, 0, lineNumber);
+			String[] finalc2 = new String[lineNumber];
+			System.arraycopy(c2, 0, finalc2, 0, lineNumber);
+			int [] finalc3 = new int[lineNumber];
+			System.arraycopy(c3, 0, finalc3, 0, lineNumber);
 			String[] finalStatus = new String[lineNumber];
 			System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
-			String userName1 = getUserName(Finalc3[0]); 
-			String userName2 = getUserName(Finalc3[1]);
+			String userName1 = getUserName(finalc3[0]); 
+			String userName2 = getUserName(finalc3[1]);
 
 			System.out.println("List Name: \t Particpants: \t List ID: \t \t Status: ");
 			for (int i = 0; i < lineNumber; i++) {
-				if (viewList == Finalc3[i]) {
-					System.out.println(Finalc1[i] + "\t\t" + userName1 + "\t" + userName2 + "\t\t" + Finalc3[i] + "\t\t\t" + finalStatus[i]);
+				if (viewList == finalc3[i]) {
+					System.out.println(finalc1[i] + "\t\t" + userName1 + "\t" + userName2 + "\t\t" + finalc3[i] + "\t\t\t" + finalStatus[i]);
 					break;
 				}
 
@@ -297,7 +297,7 @@ public class List {
 		
 		// Asking for user input
 		System.out.println("Enter the list ID of the list you want to delete.");
-		int viewList = InterfaceClass.GetAnInteger();
+		int viewList = InterfaceClass.getAnInteger();
 		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
 		String confirm = userInput2.nextLine();
 		
@@ -322,12 +322,12 @@ public class List {
 			System.out.println("This file does not existlol10");
 		}
 
-		String[] Finalc1 = new String[lineNumber];
-		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
-		String[] Finalc2 = new String[lineNumber];
-		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-		int[] Finalc3 = new int[lineNumber];
-		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
+		String[] finalc1 = new String[lineNumber];
+		System.arraycopy(c1, 0, finalc1, 0, lineNumber);
+		String[] finalc2 = new String[lineNumber];
+		System.arraycopy(c2, 0, finalc2, 0, lineNumber);
+		int[] finalc3 = new int[lineNumber];
+		System.arraycopy(c3, 0, finalc3, 0, lineNumber);
 		String[] finalStatus = new String[lineNumber];
 		System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
@@ -338,9 +338,9 @@ public class List {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
 				for (int i = 0; i < lineNumber; i++) {
 					if (i == viewList) {
-						wr.println("N/A" + "\t" + "N/A" + "\t" + Finalc3[i] + "\t" + "N/A");
+						wr.println("N/A" + "\t" + "N/A" + "\t" + finalc3[i] + "\t" + "N/A");
 					} else {
-						wr.println(Finalc1[i] + "\t" + Finalc2[i] + "\t" + Finalc3[i] + "\t" + finalStatus[i]);
+						wr.println(finalc1[i] + "\t" + finalc2[i] + "\t" + finalc3[i] + "\t" + finalStatus[i]);
 					}
 				}
 				wr.close();
