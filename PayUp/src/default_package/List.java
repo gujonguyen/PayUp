@@ -167,13 +167,12 @@ public class List {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
 				wr.println(listName + "\t" + str + "\t" + lineNumber + "\t" + status);
 				System.out.println("--------------------------------------------------------------------");
-				System.out.println("The List is succesfully created.");
+				System.out.println("The List" + listName + "is succesfully created.");
 				System.out.println("You are now redirected to the main menu.");
 				System.out.println("--------------------------------------------------------------------");
 				new InterfaceClass();
 				wr.close();
 				
-
 		} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
