@@ -1,11 +1,14 @@
 package default_package;
+import java.util.*;
 import java.io.*;
 
-public class RegularAccount extends UserAccount{	//This is a subclass of the superclass UserAccount
-	static String role; // This variable is created for the main constructor 
-
+public class RegularAccount extends UserAccount{	
+	/*
+	 * This is a subclass of the superclass UserAccount
+	 */
 	String userName;
 	String password;
+	static String role;
 	int id;
 	String typeOfaccount;
 	int userChoice;
@@ -23,14 +26,13 @@ public class RegularAccount extends UserAccount{	//This is a subclass of the sup
 
 	public static RegularAccount[] createRegulars() {	
 		/*
-		 * // This method reads the user database and searches for regular users
-		 * specifically // This method then creates an array of regular user objects
-		 * containing their user name, // password, type off account, and user ID // The
+		 * This method reads the user database and searches for regular users
+		 * specifically. This method then creates an array of regular user objects
+		 * containing their user name,password, type off account, and user ID. The
 		 * regular account details are stored into separate arrays and then stored into
-		 * // one regulars array containing all regular accounts, which is what this
+		 * one regulars array containing all regular accounts, which is what this
 		 * method returns
 		 */
-
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword= new String[100];
