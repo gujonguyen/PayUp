@@ -168,19 +168,21 @@ public class List {
 	public void viewList(int loggedUserc) {
 
 		int loggedUserIDl = loggedUserc;
-
+		// viewing lists by recalling the username based on the userID in User DB and
+		// searching in the array of participants in the List Database
 		int lineNumber = 0;
-		String [] c1 = new String[100];
-		String[] c2 = new String[100];
-		int [] c3 = new int[100];
+		String[] ListName = new String[100];
+		String[] Participants = new String[100];
+		int[] ListID = new int[100];
 		String[] status = new String[100];
-		String sCurrentLine;
-		String[] uCurrent = new String[3];
+	
+		
 		int[] participantsInList = new int [100];
 		boolean localBoolean2 = false;
 
-		System.out.println("What is the list ID of the list that you want to view? ");
-		int viewList = userInput1.nextInt();
+		System.out.print("These are all your lists "); // implement username later once the userID works
+		readUserName(loggedUserIDc, username);
+		System.out.println("--------------------------------------------------------");
 
 		List[] tempListObject = List.readFile();
 
@@ -207,15 +209,16 @@ public class List {
 		if (localBoolean2 == true) {
 
 			try {
-				String sCurrentLine2;
-				String[] uCurrent2 = new String [4];
-				BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
-				while ((sCurrentLine2 = myFile.readLine()) != null) {
-					uCurrent2 = sCurrentLine2.split("\t");
+				String sCurrentLine;
+				String[] uCurrent = new String[4];
+				BufferedReader myFile = new BufferedReader(new FileReader("List_database.txt"));
+				while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
 
-					c1[lineNumber] = uCurrent2[0];
-					c2[lineNumber] = uCurrent2[1];
-					c3[lineNumber] = Integer.parseInt(uCurrent2[2]);
+					// the database based on first lines ordered as ListName, Participants, ListID
+					ListName[lineNumber] = uCurrent[0];
+					Participants[lineNumber] = uCurrent[1]; // In Participants there is yet another array of multiple
+					ListID[lineNumber] = Integer.parseInt(uCurrent[2]);
 					status[lineNumber] = uCurrent[3];
 					
 					lineNumber++;
@@ -225,19 +228,19 @@ public class List {
 				System.out.println("This file does not existlol9");
 			}
 
-			String[] Finalc1 = new String[lineNumber];
-			System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
-			String[] Finalc2 = new String[lineNumber];
-			System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
-			int [] Finalc3 = new int[lineNumber];
-			System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
+			String[] FinalListName = new String[lineNumber];
+			System.arraycopy(ListName, 0, FinalListName, 0, lineNumber);
+			String[] FinalParticipants = new String[lineNumber];
+			System.arraycopy(Participants, 0, FinalParticipants, 0, lineNumber);
+			int[] FinalListID = new int[lineNumber];
+			System.arraycopy(ListID, 0, FinalListID, 0, lineNumber);
 			String[] finalStatus = new String[lineNumber];
 			System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
 			System.out.println("List Name: \t Particpants: \t List ID: \t \t Status: ");
 			for (int i = 0; i < lineNumber; i++) {
 				if (viewList == Finalc3[i]) {
-					System.out.println(Finalc1[i] + "\t\t\t" + Finalc2[i] + "\t\t" + Finalc3[i] + "\t" + finalStatus[i]);
+					System.out.println(FinalListName[i] + "\t\t\t" +getUserName(participants) + "\t\t" + FinalListID[i] + "\t\t" + finalStatus[i]);
 					break;
 				}
 
