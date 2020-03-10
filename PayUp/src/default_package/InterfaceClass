@@ -53,7 +53,7 @@ public class InterfaceClass {
 
 	private static int mainInterface(){
 		System.out.println("----------------------------------------------------------------");
-		System.out.println("\tWelcome to PayUp!\t");
+		System.out.println("\t\t\tWelcome to PayUp!\t");
 		System.out.println("\n What do you wish to?");   
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("(1) Register your account");
