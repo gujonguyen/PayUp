@@ -126,7 +126,7 @@ public class AdministratorAccount extends UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not existlol5");
+			System.out.println("This file does not exist");
 		}
 
 		String[] FinalLocalUserName = new String[NumUser];
@@ -140,8 +140,13 @@ public class AdministratorAccount extends UserAccount {
 
 		//removing the user from PayUp
 		System.out.println("");
-		System.out.println("Enter the User ID you wish to remove admin: ");
+		System.out.println("Enter the User ID you wish to remove: ");
 		int localRemovedUser = InterfaceClass.GetAnInteger();
+		
+		
+		if (localRemovedUser > NumUser) {
+		System.out.println("This User does not exist");	
+		}else {
 		System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
 		String confirm = userInput2.nextLine();
 		System.out.println(confirm);
@@ -152,7 +157,7 @@ public class AdministratorAccount extends UserAccount {
 			for (int i = 0; i < NumUser; i++) {
 				if (i == localRemovedUser) {
 					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + FinalLocalID[i]);
-					System.out.println("You have successfully deleted the User with ID:" + localRemovedUser);
+					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
 				} else {
 					wr.println(FinalLocalUserName[i] + "\t" + FinalLocalPassword[i] + "\t" +  FinalLocalTypeAccount[i] + "\t" + FinalLocalID[i]);	
 				}
@@ -163,14 +168,9 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("I/O error when writing on file");
 		}
 		}else {
-			System.out.println("--------------------------------------------------------------------");
-			System.out.println("You are now redirected to the main menu.");
-			System.out.println("--------------------------------------------------------------------");
+			System.out.println("You will be redirected to the User Interface");
 			new InterfaceClass();
 		}
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("You are now redirected to the main menu.");
-		System.out.println("--------------------------------------------------------------------");
-		new InterfaceClass();
+	}
 	}
 }
