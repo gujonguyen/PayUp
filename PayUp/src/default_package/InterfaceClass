@@ -1,5 +1,6 @@
 package default_package;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InterfaceClass {
@@ -146,4 +147,43 @@ public class InterfaceClass {
 		System.out.print("Please enter your choice: ");
 		return  userInput.nextInt();
 	}
+	public static String GetAString() {
+		/*
+		 * //This method checks whether the user input is of the type String and returns
+		 * the user input
+		 */		
+		while (true)
+		{
+			try
+			{
+				return userInput2.nextLine();
+			}
+			catch (InputMismatchException e)
+			{
+				userInput2.nextLine();
+				System.out.print("Please enter a String. Try again: ");
+			}
+		}
+	}
+
+
+	public static double GetADouble() {
+		/*
+		 * //This method checks whether the user input is of the type Double and returns
+		 * the user input
+		 */		
+		while (true)
+		{
+			try
+			{
+				return userInput3.nextDouble();
+			}
+			catch (InputMismatchException e)
+			{
+				userInput3.nextDouble();
+				System.out.print("Please enter a double. Try again: ");
+			}
+		}
+	}
 }
+
