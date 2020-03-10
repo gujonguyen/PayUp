@@ -8,11 +8,9 @@ public class Expense {
 	static Scanner userInput3 = new Scanner(System.in); // for double
 	String expenseName; //
 	String expenseDate; // 
-	double amount; // 
-	int expenseId; //These variables are created for the main constructor
+	double amount; // These variables are created for the main constructor
+	int expenseId; //
 	int listID; //
-	int debitor; //
-	int creditor;//
 	RegularAccount[] temp1 = RegularAccount.createRegulars(); // Creates Regular User Objects
 	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins(); //  Creates Admin User Objects
 	UserAccount[] temp3 = UserAccount.createAllUsers(); // Creates All Users objects
@@ -20,8 +18,10 @@ public class Expense {
 	double individualBalance;
 	int userID;
 	static int fileCount;
+	int debitor;
 	int userChoice;
 	int loggedUserID;
+	int creditor;
 
 
 	public Expense(int listIdc, String name, double amountc, String date, int creditorsc, int debitorc, int expId) {
@@ -254,10 +254,10 @@ public class Expense {
 
 				}
 			}
-			/*
-			 * If the logged in user is part of the list then the following block of code
-			 * is executed
-			 */
+			
+			 //If the logged in user is part of the list then the following block of code
+			 //is executed
+			 
 			if (localBoolean2 == true) {
 
 				//Creates local variables for the expense splitting
@@ -297,9 +297,9 @@ public class Expense {
 				System.out.printf("%.2f", tempBalance);
 				System.out.println("-----------------------------------------------");
 
-			/*
-			If the user is not part if the specific list he or she get redirected to this method again
-			*/
+			
+			//If the user is not part if the specific list he or she get redirected to this method again
+			
 			}else {
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println("You do not have acces to this list, please input a different List ID");
@@ -349,10 +349,10 @@ public class Expense {
 
 			}
 		}
-		/*
-		 * If the logged in user is part of the list then the following block of code
-		 * is executed
-		 */
+		
+		 // If the logged in user is part of the list then the following block of code
+		 // is executed
+		 
 		if (localBoolean == true) {
 
 			//this checks if the list is already settled and sends you back to this method when that is the case
@@ -362,15 +362,15 @@ public class Expense {
 				System.out.println("--------------------------------------------------------------------");
 				createIndividualBalance(loggedUserIDl);
 
-				/*
-				 * If the list is not yet settled the following lines of code are executed
-				 */			
+				
+				// If the list is not yet settled the following lines of code are executed
+				 			
 			}else {
 
-				/*
-				In order to overwrite the List database we first need to read the database and parse
-				it to arrays
-				 */
+				
+				//In order to overwrite the List database we first need to read the database and parse
+				//it to arrays
+				 
 				try {
 
 					BufferedReader br = new BufferedReader (new FileReader ("List_database.txt"));
@@ -426,7 +426,7 @@ public class Expense {
 						System.out.printf("You are owed: " + "%.2f \n", amount);
 					}
 					System.out.println("--------------------------------------------------------------------");
-
+				//if user chooses N then the following lines of code are executed
 				}else {
 					System.out.println("--------------------------------------------------------------------");
 					System.out.println("You will now be redirected to the main menu");
@@ -436,6 +436,7 @@ public class Expense {
 				}
 
 			}
+		//If a user has not got acces to the list the following lines are executed
 		}else {
 			System.out.println("--------------------------------------------------------------------");
 			System.out.println("You do not have acces to this list, please input a different List ID");
