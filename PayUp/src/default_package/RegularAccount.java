@@ -22,11 +22,14 @@ public class RegularAccount extends UserAccount{	//This is a subclass of the sup
 	}
 
 	public static RegularAccount[] createRegulars() {	
-		// This method reads the user database and searches for regular users specifically
-		// This method then creates an array of regular user objects containing their user name, 
-		// password, type off account, and user ID
-		// The regular account details are stored into separate arrays and then stored into 
-		// one regulars array containing all regular accounts, which is what this method returns
+		/*
+		 * // This method reads the user database and searches for regular users
+		 * specifically // This method then creates an array of regular user objects
+		 * containing their user name, // password, type off account, and user ID // The
+		 * regular account details are stored into separate arrays and then stored into
+		 * // one regulars array containing all regular accounts, which is what this
+		 * method returns
+		 */
 
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
