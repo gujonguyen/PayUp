@@ -31,11 +31,11 @@ public class UserAccount {
 		 * account details are stored into separate arrays and then stored into one
 		 * all user array, which is what this method returns
 		 */		
-		int NumUser = 0;
-		String[] LocalUserName = new String[100];
-		String[] LocalPassword= new String[100];
-		String[] LocalTypeAccount = new String[100];
-		int[] LocalID = new int[100];
+		int numUser = 0;
+		String[] localUserName = new String[100];
+		String[] localPassword= new String[100];
+		String[] localTypeAccount = new String[100];
+		int[] localID = new int[100];
 
 		UserAccount [] allUsers = new UserAccount [100];
 
@@ -47,30 +47,30 @@ public class UserAccount {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				LocalUserName[NumUser] = uCurrent[0];
-				LocalPassword[NumUser] = uCurrent[1];
-				LocalTypeAccount[NumUser] = uCurrent[2];
-				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
+				localUserName[numUser] = uCurrent[0];
+				localPassword[numUser] = uCurrent[1];
+				localTypeAccount[numUser] = uCurrent[2];
+				localID[numUser] = Integer.parseInt(uCurrent[3]);
 
-				NumUser++;
+				numUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not existlol5");
 		}
 
-		String[] FinalLocalUserName = new String[NumUser];
-		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
-		String[] FinalLocalPassword = new String[NumUser];
-		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
-		String[] FinalLocalTypeAccount = new String[NumUser];
-		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
-		int[] FinalLocalID = new int[NumUser];
-		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
+		String[] finalLocalUserName = new String[numUser];
+		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
+		String[] finalLocalPassword = new String[numUser];
+		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
+		String[] finalLocalTypeAccount = new String[numUser];
+		System.arraycopy(localTypeAccount, 0, finalLocalTypeAccount, 0, numUser);
+		int[] finalLocalID = new int[numUser];
+		System.arraycopy(localID, 0, finalLocalID, 0, numUser);
 
 
-		for (int i = 0; i < NumUser; i++) {
-			allUsers [i]  = new UserAccount(FinalLocalUserName[i], FinalLocalPassword[i], FinalLocalID[i]);
+		for (int i = 0; i < numUser; i++) {
+			allUsers [i]  = new UserAccount(finalLocalUserName[i], finalLocalPassword[i], finalLocalID[i]);
 		}
 
 		return allUsers;
@@ -105,9 +105,9 @@ public class UserAccount {
 				System.out.println("");
 
 				System.out.println("Please choose a username:");
-				String Un = userInput2.nextLine();
+				String un = userInput2.nextLine();
 				System.out.println("Please choose a password:");
-				String Pw = userInput2.nextLine();
+				String pw = userInput2.nextLine();
 
 				int pw = Pw.length();
 
@@ -118,7 +118,7 @@ public class UserAccount {
 
 					//This is to check the uniqueness of entered user name within the user database
 					for (int k = 0; k < noOfUsers; k++) {	
-						if(Un.equals(temp3[k].userName)) {
+						if(un.equals(temp3[k].userName)) {
 							localBoolean = false;
 						}else {
 						}
@@ -126,7 +126,7 @@ public class UserAccount {
 
 					//If user name is unique a new line with the user's credentials will be written in the file
 					if (localBoolean == true) {	
-						writeUser(Un, Pw, typeOfAccount);	
+						writeUser(un, pw, typeOfAccount);	
 						//The user will be redirected to the register interface due to a duplicate user name
 					}else {
 						System.out.println("--------------------------------------------------------------------");
@@ -149,11 +149,11 @@ public class UserAccount {
 			// If the user registers as an Regular then the following lines of code are executed	
 		}else {
 			System.out.println("Please choose a username:");
-			String Un = userInput2.nextLine();
+			String un = userInput2.nextLine();
 			System.out.println("Please choose a password:");
-			String Pw = userInput2.nextLine();
+			String pw = userInput2.nextLine();
 
-			int pw = Pw.length();
+			int pw = pw.length();
 
 			//This is to prevent passwords with less than 5 characters
 			if (pw > 4) { 
@@ -162,7 +162,7 @@ public class UserAccount {
 
 				//This is to check the uniqueness of entered user name within the user database
 				for (int k = 0; k < noOfUsers; k++) {	
-					if(Un.equals(temp3[k].userName)) {
+					if(un.equals(temp3[k].userName)) {
 						localBoolean = false;
 					}else {
 					}
@@ -170,7 +170,7 @@ public class UserAccount {
 
 				//If user name is unique a new line with the user's credentials will be written in the file
 				if (localBoolean == true) {	
-					writeUser(Un, Pw, typeOfAccount);	
+					writeUser(un, pw, typeOfAccount);	
 					//The user will be redirected to the register interface due to a duplicate user name
 				}else {	
 					System.out.println("--------------------------------------------------------------------");
@@ -189,19 +189,19 @@ public class UserAccount {
 		}
 	}
 
-	private static void writeUser(String Unc, String Pwc, String typeOfAccountc) {	
+	private static void writeUser(String unc, String pwc, String typeOfAccountc) {	
 		/*
 		 * This method writes a new line with the user's credentials in the user
 		 * database txt file
 		 * 
 		 */
-		String Un = Unc;
-		String Pw = Pwc;
+		String un = unc;
+		String pw = pwc;
 		String typeOfAccount = typeOfAccountc;
 
 		try {
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",true)));
-			wr.println(Un + "\t" + Pw + "\t" + typeOfAccount + "\t" + noOfUsers);
+			PrintWriter wr = new PrintWriter(new BufferedWriter(new FileWriter("User_database.txt",true)));
+			wr.println(un + "\t" + pw + "\t" + typeOfAccount + "\t" + noOfUsers);
 			wr.close();	
 		}catch (IOException e) {
 			System.out.println("I/O error when writing on file");
@@ -219,23 +219,23 @@ public class UserAccount {
 		 * This method is for the login of users and returns the user's loggedID and
 		 * role
 		 */
-		int NumUser = 0;
-		String[] LocalUserName = new String[100];
-		String[] LocalPassword = new String[100];
-		String[] LocalRole = new String[100];
-		int[] LocalID = new int[100];
+		int numUser = 0;
+		String[] localUserName = new String[100];
+		String[] localPassword = new String[100];
+		String[] localRole = new String[100];
+		int[] localID = new int[100];
 		int loggedID = 0;
-		String Un;
-		String Pw;
+		String un;
+		String pw;
 		String role = "bla";
 		//The login interface where the user enters his/her User Name and Password
 		System.out.println("--------------------------------------------------------------------");
 		System.out.println("\tPlease Login User\t");
 		System.out.println("--------------------------------------------------------------------");
 		System.out.println("Please input your username:");
-		Un = userInput2.nextLine();
+		un = userInput2.nextLine();
 		System.out.println("Please input your password:");
-		Pw = userInput2.nextLine();
+		pw = userInput2.nextLine();
 
 		//This is for reading the user database file, sorting the data with user attributes, and storing the data into local arrays
 		try {	
@@ -245,25 +245,25 @@ public class UserAccount {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				LocalUserName[NumUser] = uCurrent[0];
-				LocalPassword[NumUser] = uCurrent[1];
-				LocalRole[NumUser] = uCurrent[2];
-				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
-				NumUser++;
+				localUserName[numUser] = uCurrent[0];
+				localPassword[numUser] = uCurrent[1];
+				localRole[numUser] = uCurrent[2];
+				localID[numUser] = Integer.parseInt(uCurrent[3]);
+				numUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not existlol1");
 		}
 
-		String[] FinalLocalUserName = new String[NumUser];
-		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
-		String[] FinalLocalPassword = new String[NumUser];
-		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
-		for (int i = 0; i < NumUser; i++) {	//checking for every line in the user database if entered user name and password match with a row
-			if (Un.equals(FinalLocalUserName[i]) && Pw.equals(FinalLocalPassword[i])) {	
-				loggedID = LocalID[i];
-				role = LocalRole[i];
+		String[] finalLocalUserName = new String[numUser];
+		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
+		String[] finalLocalPassword = new String[numUser];
+		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
+		for (int i = 0; i < numUser; i++) {	//checking for every line in the user database if entered user name and password match with a row
+			if (un.equals(finalLocalUserName[i]) && pw.equals(finalLocalPassword[i])) {	
+				loggedID = localID[i];
+				role = localRole[i];
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println("Login successful, welcome " + Un +"!");
 			}
@@ -292,18 +292,18 @@ public class UserAccount {
 		 * within the user database
 		 * 
 		 */
-		int NumUser = 0;
+		int numUser = 0;
 		try {
 			String sCurrentLine;
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
-				NumUser++;
+				numUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
 			System.out.println("This file does not existlol2");
 		}
-		return NumUser;
+		return numUser;
 	}
 
 }
