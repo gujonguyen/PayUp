@@ -119,6 +119,13 @@ public class List {
 		String listName = userInput2.nextLine();
 
 		aUser [0] = loggedUserIDl;
+		
+		int numUsers = UserAccount.readfile1();
+		
+		System.out.println("UserID: \t userName");
+		for (int i = 0; i < numUsers; i++) {
+			System.out.println(temp3[i].userID + "\t" + temp3[i].userName);
+		}
 
 		System.out.println("What is the userID of the user that you want to add to your list? ");
 		aUser[1] = InterfaceClass.GetAnInteger();
