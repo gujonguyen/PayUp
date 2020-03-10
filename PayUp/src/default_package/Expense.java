@@ -94,27 +94,27 @@ public class Expense {
 			System.out.println("This file does not exist");
 		}
 
-		int[] FinallistID = new int[lineNumber];
-		System.arraycopy(listID, 0, FinallistID, 0, lineNumber);
-		String[] FinalexpenseName = new String[lineNumber];
-		System.arraycopy(expenseName, 0, FinalexpenseName, 0, lineNumber);
-		double[] Finalamount = new double[lineNumber];
-		System.arraycopy(amount, 0, Finalamount, 0, lineNumber);
-		String[] FinalexpenseDate = new String[lineNumber];
-		System.arraycopy(expenseDate, 0, FinalexpenseDate, 0, lineNumber);
-		int[] Finalcreditors = new int[lineNumber];
-		System.arraycopy(creditors, 0, Finalcreditors, 0, lineNumber);
-		int[] FinalDebitors = new int[lineNumber];
-		System.arraycopy(debitors, 0, FinalDebitors, 0, lineNumber);
-		int[] FinalexpenseID = new int[lineNumber];
-		System.arraycopy(expenseID, 0, FinalexpenseID, 0, lineNumber);
+		int[] finallistID = new int[lineNumber];
+		System.arraycopy(listID, 0, finallistID, 0, lineNumber);
+		String[] finalexpenseName = new String[lineNumber];
+		System.arraycopy(expenseName, 0, finalexpenseName, 0, lineNumber);
+		double[] finalamount = new double[lineNumber];
+		System.arraycopy(amount, 0, finalamount, 0, lineNumber);
+		String[] finalexpenseDate = new String[lineNumber];
+		System.arraycopy(expenseDate, 0, finalexpenseDate, 0, lineNumber);
+		int[] finalcreditors = new int[lineNumber];
+		System.arraycopy(creditors, 0, finalcreditors, 0, lineNumber);
+		int[] finalDebitors = new int[lineNumber];
+		System.arraycopy(debitors, 0, finalDebitors, 0, lineNumber);
+		int[] finalexpenseID = new int[lineNumber];
+		System.arraycopy(expenseID, 0, finalexpenseID, 0, lineNumber);
 
-		Expense expense[] = new Expense[FinallistID.length];
+		Expense expense[] = new Expense[finallistID.length];
 
 
 
-		for (int i = 0; i < FinallistID.length; i++) {
-			expense[i] = new Expense(FinallistID[i], FinalexpenseName[i], Finalamount[i], FinalexpenseDate[i], Finalcreditors[i], FinalDebitors[i], FinalexpenseID[i]);
+		for (int i = 0; i < finallistID.length; i++) {
+			expense[i] = new Expense(finallistID[i], finalexpenseName[i], finalamount[i], finalexpenseDate[i], finalcreditors[i], finalDebitors[i], finalexpenseID[i]);
 		}	
 
 		return expense;
