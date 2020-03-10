@@ -43,23 +43,23 @@ public class InterfaceClass {
 			break;
 
 		default: 
-			System.out.println("----------------------------------------------------------------");
-			System.out.println("----------------------------CAUTION!----------------------------");
-			System.out.println("         		 Please only enter a number between 1-3!        "); 
-			System.out.println("----------------------------CAUTION!----------------------------");
+			System.out.println("--------------------------------------------------------------------");	
+			System.out.println("------------------------------CAUTION!------------------------------");
+			System.out.println("        		  Please only enter a number between 1-3!       	"); 
+			System.out.println("------------------------------CAUTION!------------------------------");
 			new InterfaceClass();
 		}
 	}
 
 	private static int mainInterface(){
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.println("\t\t\tWelcome to PayUp!\t");
 		System.out.println("\n What do you wish to?");   
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.println("(1) Register your account");
 		System.out.println("(2) Login into account");
 		System.out.println("(3) Exit");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.print("Enter your option: ");
 		return getAnInteger();
 	}
@@ -79,11 +79,11 @@ public class InterfaceClass {
 
 
 			if(userChoice < 1) {
-			System.out.println("--------------------------------------------------------");
-			System.out.println("------------------------CAUTION!------------------------");
-			System.out.println("         Please only enter a number between 1-9!        "); 
-			System.out.println("------------------------CAUTION!------------------------");
-			RegularAccount(typeOfAccount, loggedUserIDl);
+				System.out.println("--------------------------------------------------------------------");	
+				System.out.println("------------------------------CAUTION!------------------------------");
+				System.out.println("        		  Please only enter a number between 1-9!       	"); 
+				System.out.println("------------------------------CAUTION!------------------------------");
+				RegularAccount(typeOfAccount, loggedUserIDl);
 		
 		}else if (userChoice <4) {
 			new List(userChoice, loggedUserIDl);
@@ -94,19 +94,19 @@ public class InterfaceClass {
 
 			//If any other integer than 1, 2 or 3 is inputted, the following lines of code are printed
 		}else {
-			System.out.println("--------------------------------------------------------");
-			System.out.println("------------------------CAUTION!------------------------");
-			System.out.println("         Please only enter a number between 1-9!        "); 
-			System.out.println("------------------------CAUTION!------------------------");
+			System.out.println("--------------------------------------------------------------------");	
+			System.out.println("------------------------------CAUTION!------------------------------");
+			System.out.println("        		  Please only enter a number between 1-9!       	"); 
+			System.out.println("------------------------------CAUTION!------------------------------");
 			RegularAccount(typeOfAccount, loggedUserIDl);
 		}
 		}
 	}
 	public static int regularUserInterface() {
-		System.out.println("----------------------------------------------------------------");//user interface for regular users
-		System.out.println("You are logged in as a Regular user!");
+		System.out.println("--------------------------------------------------------------------");	;//user interface for regular users
+		System.out.println("\tYou are logged in as a Regular user!");
 		System.out.println("What do you want to do?");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.println("(1) Create a new list");
 		System.out.println("(2) View a list");
 		System.out.println("(3) Delete a list");
@@ -114,7 +114,7 @@ public class InterfaceClass {
 		System.out.println("(5) Settle a list");
 		System.out.println("(6) Add Expense To List");
 		System.out.println("(7) Logout");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.print("You want to: ");
 		return getAnInteger();	//getting user choice 
 	}
@@ -130,10 +130,10 @@ public class InterfaceClass {
 			int loggedUserIDl = loggedUserIDc;
 			int userChoice = AdminInterface();
 			if(userChoice < 1) {
-			System.out.println("--------------------------------------------------------");
-			System.out.println("------------------------CAUTION!------------------------");
-			System.out.println("         Please only enter a number between 1-9!        "); 
-			System.out.println("------------------------CAUTION!------------------------");
+			System.out.println("--------------------------------------------------------------------");	
+			System.out.println("------------------------------CAUTION!------------------------------");
+			System.out.println("        		  Please only enter a number between 1-9!       	"); 
+			System.out.println("------------------------------CAUTION!------------------------------");
 			RegularAccount(typeOfAccount, loggedUserIDl);
 		
 		}else if (userChoice < 3) {
@@ -141,10 +141,10 @@ public class InterfaceClass {
 		}else if(userChoice < 4){
 			UserAccount.exit();
 		}else{
-			System.out.println("--------------------------------------------------------");
-			System.out.println("------------------------CAUTION!------------------------");
-			System.out.println("          Please only enter a number between 1-3!        "); 
-			System.out.println("------------------------CAUTION!------------------------");
+			System.out.println("--------------------------------------------------------------------");	
+			System.out.println("------------------------------CAUTION!------------------------------");
+			System.out.println("        		  Please only enter a number between 1-3!       	"); 
+			System.out.println("------------------------------CAUTION!------------------------------");
 			AdministratorAccount(typeOfAccount, loggedUserIDl);
 		}
 		}
@@ -152,15 +152,15 @@ public class InterfaceClass {
 
 
 	static int AdminInterface() {
-		System.out.println("----------------------------------------------------------------");
-		System.out.println("Welcome Admin of PayUp!");
+		System.out.println("--------------------------------------------------------------------");	
+		System.out.println("\t\t\t Welcome Admin of PayUp!");
 		System.out.println("You are logged in to the Administrator Account!");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.println("What do you wish to do?");
 		System.out.println("(1) Remove a User from PayUp");
 		System.out.println("(2) Delete a List");
 		System.out.println("(3) Logout");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.print("Please enter your choice: ");
 		return  getAnInteger();
 	}
