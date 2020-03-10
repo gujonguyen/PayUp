@@ -14,11 +14,17 @@ public class AdministratorAccount extends UserAccount {
 	int userChoice;
 
 	public AdministratorAccount(String nameC, String passwordC, int uID, String roleC ) {
+		/*
+		This is the main Constructor for the Administrator objects
+		 */
 		super(nameC, passwordC, uID);
 		role = roleC;
 	}
 
 	public AdministratorAccount(int userChoicec, int loggedUserIDl) {
+		/*
+		This Constructor directs the Admin User to the right method based on a passed-on Admin User Choice	
+		 */
 		super();
 		userChoice = userChoicec;
 		switch (userChoice) {
@@ -36,6 +42,9 @@ public class AdministratorAccount extends UserAccount {
 
 
 	public static AdministratorAccount [] createAdmins() {
+		/*
+		This method creates Admin Objects
+		 */
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
 		String[] LocalPassword= new String[100];
@@ -84,7 +93,12 @@ public class AdministratorAccount extends UserAccount {
 	}
 
 	public void removeUser() {
-		//listing all the users of PayUp
+		/*
+		This Method enables the Admin to view a list of all the Regular users on PayUp.
+		From this list, the Admin can then choose which Regular user he wants to delete.	
+		 */
+		
+		// Declaring all necessary variables
 		boolean localBoolean = false;
 		int NumUser = 0;
 		String[] LocalUserName = new String[100];
@@ -94,7 +108,8 @@ public class AdministratorAccount extends UserAccount {
 		System.out.println("");
 		System.out.println("The list of users on PayUp");
 		System.out.println("----------------------------------------------------------------");
-
+		
+		// Reading the User_database text file
 		try {
 			String sCurrentLine;
 			String[] uCurrentLine = new String[4];
@@ -113,7 +128,8 @@ public class AdministratorAccount extends UserAccount {
 		} catch (IOException e) {
 			System.out.println("The file does not existlol6");
 		}
-
+		
+		//This creates an array of all registered Regular users
 		String[] FinalLocalUserName = new String[NumUser];
 		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
 		String[] FinalLocalPassword = new String[NumUser];
@@ -123,15 +139,21 @@ public class AdministratorAccount extends UserAccount {
 		String[] FinalLocalID = new String[NumUser];
 		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 
+		// Printing out the arrays that were created of all user ID's and their corresponding user names
 		System.out.println("UserName" + "\t\t UserList");
 		for(int k = 0; k < NumUser; k++) {
 			System.out.println(LocalID[k] + "\t" + "\t" + LocalUserName[k]);
 		}
 
-		//removing the user from PayUp
+		// Asking the Admin which user he wants to remove
 		System.out.println("");
 		System.out.println("Enter the User ID you wish to remove admin: ");
 		int localRemovedUser = userInput1.nextInt() ;
+		
+		/*
+		Asking the Admin to confirm to delete the user and printing Not Available (N/A) 
+		in User_database text file for that particular user
+		 */
 		System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
 		String confirm = userInput2.nextLine();
 
