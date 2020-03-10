@@ -6,23 +6,22 @@ public class List {
 	static Scanner userInput1 = new Scanner(System.in); //for int
 	static Scanner userInput2 = new Scanner(System.in); // for string
 	static Scanner userInput3 = new Scanner(System.in); // for double
-	
-	String listName;// These variables are created for the main constructor 
-	int listID; // 
-	String status;//
-	String participants;//
+	// These variables are created for the main constructor 
+	String listName;
+	int listID;
+	String date;
+	String status;
 
-	
 	RegularAccount[] temp1 = RegularAccount.createRegulars(); // Creates Regular User Objects
-	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins(); //  Creates Admin User Objects
-	UserAccount[] temp3 = UserAccount.createAllUsers(); // Creates All Users objects
-	
+	AdministratorAccount[] temp2 = AdministratorAccount.createAdmins();
+	UserAccount[] temp3 = UserAccount.createAllUsers();
+
 	static int fileCount;
+	String participants;
 	int userChoice;
 	int loggedUserID;
-	String date;
 
-	
+
 	public List(String listNamec, String participant, int listIDc, String statusc) {
 		/*
 		This is the main Constructor for the List objects
@@ -40,10 +39,6 @@ public class List {
 		int loggedUserIDl = loggedUserIDc;
 		userChoice = userChoicec;
 		switch (userChoice) {
-		case 0:
-			System.out.println("Please enter a value between 1-9");
-			InterfaceClass.regularUserInterface();
-			break;
 		case 1:
 			createList(loggedUserIDl);
 			break;
@@ -60,8 +55,8 @@ public class List {
 		/*
 		This method reads the List_database text file
 		 */
-		
-		// Declaring all necessary variables
+
+		//Declaring all necessary variables
 		int lineNumber = 0;
 		int [] idAxis = new int[100];
 		String [] nameAxis = new String[100];
@@ -86,7 +81,7 @@ public class List {
 		}catch (IOException e) {
 			System.out.println("This file does not existlol7");
 		}
-		
+
 
 		int [] FinalIDAxis = new int[lineNumber];
 		System.arraycopy(idAxis, 0, FinalIDAxis, 0, lineNumber);
@@ -96,12 +91,15 @@ public class List {
 		System.arraycopy(nameAxis, 0, FinalNameAxis, 0, lineNumber);
 		String [] finalStatusAxis = new String [lineNumber];
 		System.arraycopy(statusAxis, 0, finalStatusAxis, 0, lineNumber);
-		
+
+
+
 		List listArray[] = new List[FinalIDAxis.length];
 
 		for (int i = 0; i < FinalIDAxis.length; i++) {
 			listArray[i] = new List(FinalNameAxis[i], FinalParticipantAxis[i], FinalIDAxis[i], finalStatusAxis[i]);
-		}
+		}		
+
 		return listArray;
 	}
 
@@ -109,31 +107,26 @@ public class List {
 		/*
 		This method allows the users to create Lists
 		 */
-		
-		// Declaring all necessary variables
+
 		int loggedUserIDl = loggeduserIDc;
-		String status = "Non-settled";
 		int [] aUser = new int[100];
 		Boolean localBoolean = false;
 		int lineNumber = 0;
-		
+		String status = "Non-settled";
+
 		// User input is asked for in order to create the list
 		System.out.println("How do you want to name the list? ");
 		String listName = userInput2.nextLine();
 
-		System.out.println("How many users do you want to add?");
-		int amountOfUser = userInput1.nextInt();
 		aUser [0] = loggedUserIDl;
 
 		System.out.println("What is the userID of the user that you want to add to your list? ");
 		aUser[1] = userInput1.nextInt();
-		
+
 		int length = UserAccount.readfile1(); // This returns the amount of registered user for the for-loop below
-		
-		/*
-		  This for loop checks if the user that needs to be added to the list is actually registered
-		  by checking the user ID
-		 */
+
+		//This for loop checks if the user that needs to be added to the list is actually registered
+		// by checking the user ID
 		for (int i = 0; i < length; i++ ) {
 			if (aUser[1] == temp3[i].userID) {
 				localBoolean = true;
@@ -141,11 +134,10 @@ public class List {
 
 			}
 		}
-		/* 
-		   If the localBoolean is true, a List_database file gets created and the 
-		   newly created list gets added, or the existing List_database text file 
-		   gets appended with the new list
-		 */
+
+		// If the localBoolean is true, a List_database file gets created and the 
+		//newly created list gets added, or the existing List_database text file 
+		//gets appended with the new list
 		if (localBoolean == true) {
 			try {
 				String sCurrentLine;
@@ -157,23 +149,23 @@ public class List {
 			}catch (IOException e) {
 				System.out.println("This file does not exist");
 			}
-			
+
 			String str = "";
-			for (int i = 0; i < 1; i++) {
-				 str = str + aUser[i] + ",";	
+			for (int i = 0; i < 1 + 1; i++) {
+				str = str + aUser[i] + ",";	
 			}
 
 			try { 
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",true)));
 				wr.println(listName + "\t" + str + "\t" + lineNumber + "\t" + status);
+				wr.close();
 				System.out.println("--------------------------------------------------------------------");
-				System.out.println("The List" + listName + "is succesfully created.");
+				System.out.println("The List is succesfully created.");
 				System.out.println("You are now redirected to the main menu.");
 				System.out.println("--------------------------------------------------------------------");
 				new InterfaceClass();
-				wr.close();
-				
-		} catch (IOException e) {
+
+			} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
 		}
@@ -183,25 +175,21 @@ public class List {
 		/*
 		This method allows the users to view Lists 
 		 */
-
+		
 		// Declaring all necessary variables
 		int loggedUserIDl = loggedUserc;
-		// viewing lists by recalling the username based on the userID in User DB and
-		// searching in the array of participants in the List Database
 		int lineNumber = 0;
-		String[] ListName = new String[100];
-		String[] Participants = new String[100];
-		int[] ListID = new int[100];
+		String [] c1 = new String[100];
+		String[] c2 = new String[100];
+		int [] c3 = new int[100];
 		String[] status = new String[100];
-	String sCurrentLine;
-	String[] uCurrent = new String [4];
-		
+		String sCurrentLine;
+		String[] uCurrent = new String[3];
 		int[] participantsInList = new int [100];
 		boolean localBoolean2 = false;
 
-		System.out.print("These are all your lists "); // implement username later once the userID works
-		getUserName(loggedUserIDl);
-		System.out.println("--------------------------------------------------------");
+		System.out.println("What is the list ID of the list that you want to view? ");
+		int viewList = userInput1.nextInt();
 
 		List[] tempListObject = List.readFile();
 
@@ -222,61 +210,59 @@ public class List {
 
 			}
 		}
-		/*
-		If the logged in user is part of the list then the following lines of code gets executed
-		 */
+		
+		//If the logged in user is part of the list then the following lines of code gets executed
 		if (localBoolean2 == true) {
 
 			try {
 				String sCurrentLine2;
-				String[] uCurrent2 = new String[4];
-				BufferedReader myFile = new BufferedReader(new FileReader("List_database.txt"));
-				while ((sCurrentLine = myFile.readLine()) != null) {
-				uCurrent = sCurrentLine.split("\t");
+				String[] uCurrent2 = new String [4];
+				BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
+				while ((sCurrentLine2 = myFile.readLine()) != null) {
+					uCurrent2 = sCurrentLine2.split("\t");
 
-					// the database based on first lines ordered as ListName, Participants, ListID
-					ListName[lineNumber] = uCurrent2[0];
-					Participants[lineNumber] = uCurrent2[1]; // In Participants there is yet another array of multiple
-					ListID[lineNumber] = Integer.parseInt(uCurrent2[2]);
+					c1[lineNumber] = uCurrent2[0];
+					c2[lineNumber] = uCurrent2[1];
+					c3[lineNumber] = Integer.parseInt(uCurrent2[2]);
 					status[lineNumber] = uCurrent2[3];
-					
+
 					lineNumber++;
 				}
 				myFile.close(); 	
 			}catch (IOException e) {
 				System.out.println("This file does not existlol9");
 			}
-			
- 			//This creates an array of the List Database file
-			String[] FinalListName = new String[lineNumber];
-			System.arraycopy(ListName, 0, FinalListName, 0, lineNumber);
-			String[] FinalParticipants = new String[lineNumber];
-			System.arraycopy(Participants, 0, FinalParticipants, 0, lineNumber);
-			int[] FinalListID = new int[lineNumber];
-			System.arraycopy(ListID, 0, FinalListID, 0, lineNumber);
+
+			String[] Finalc1 = new String[lineNumber];
+			System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
+			String[] Finalc2 = new String[lineNumber];
+			System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
+			int [] Finalc3 = new int[lineNumber];
+			System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
 			String[] finalStatus = new String[lineNumber];
 			System.arraycopy(status, 0, finalStatus, 0, lineNumber);
+
+			String userName1 = getUserName(Finalc3[0]); 
+			String userName2 = getUserName(Finalc3[1]);
 
 			System.out.println("List Name: \t Particpants: \t List ID: \t \t Status: ");
 			for (int i = 0; i < lineNumber; i++) {
 				if (viewList == Finalc3[i]) {
-					System.out.println(FinalListName[i] + "\t\t\t" +getUserName(loggedUserIDl) + "\t\t" + FinalListID[i] + "\t\t" + finalStatus[i]);
+					System.out.println(Finalc1[i] + "\t\t" + userName1 + "\t" + userName2 + "\t\t" + Finalc3[i] + "\t\t\t" + finalStatus[i]);
 					break;
 				}
 
 			}
-			Expense [] temp4 = Expense.createExpenseObject();
 			int amountOfExpenses = Expense.readfile1();
-			System.out.println("Expense Name: \t Amount: \t Expense Data: \t \t Creditor: \t Debitor:" );
+			Expense [] temp4 = Expense.createExpenseObject();
+			System.out.println("Expense Name: \tAmount: \tExpense Data: \t \t Creditor: \t Debitor:" );
 			for (int i = 0; i < amountOfExpenses; i++) {
 				if (viewList == temp4[i].listID) {
-					System.out.println(temp4[i].expenseName + "\t" + temp4[i].amount + "\t" + temp4[i].expenseDate + "\t" +  temp4[i].creditor + "\t" + temp4[i].debitor);
+					System.out.println(temp4[i].expenseName + "\t\t" + temp4[i].amount + "\t\t" + temp4[i].expenseDate + "\t\t " +  temp4[i].creditor + "\t\t " + temp4[i].debitor);
 				}
 
-			}
-		/*	
-		If the User doesn't have access to the list the following lines of code get executed	
-		*/
+			}	
+		//If the User doesn't have access to the list the following lines of code get executed	
 		}else {
 			System.out.println("---------------------------------------------");
 			System.out.println("You do not have acces to this list, please input a different List ID");
@@ -284,63 +270,65 @@ public class List {
 			viewList(loggedUserIDl);
 		}
 	}
-	
+
 	public static void deleteList() {
 		/*
 		This method allows the users to delete existing Lists 
 		 */
-
+		
 		// Declaring all necessary variables
 		int lineNumber = 0;
-		String[] ListName = new String[100];
-		String[] Participants = new String[100];
-		int[] ListID = new int[100];
-
+		String [] c1 = new String[100];
+		String[] c2 = new String[100];
+		int [] c3 = new int[100];
+		String[] status = new String[100];
+		
 		// Asking for user input
 		System.out.println("Enter the list ID of the list you want to delete.");
 		int viewList = userInput2.nextInt();
 		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
 		String confirm = userInput1.nextLine();
 		
+		
 		// Reading the List_database file
 		try {
 			String sCurrentLine;
-			String[] uCurrent = new String[3];
-			BufferedReader myFile = new BufferedReader(new FileReader("List_database.txt"));
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				ListName[lineNumber] = uCurrent[0];
-				Participants[lineNumber] = uCurrent[1]; // In Participants there is yet another array of multiple
-				ListID[lineNumber] = Integer.parseInt(uCurrent[2]);
-				lineNumber++;
-					
-			}
-			myFile.close();
-		} catch (IOException e) {
-			System.out.println("This file does not existlol10");
-			}
+				c1[lineNumber] = uCurrent[0];
+				c2[lineNumber] = uCurrent[1];
+				c3[lineNumber] = Integer.parseInt(uCurrent[2]);
+				status[lineNumber] = uCurrent[3];
 
-		String[] FinalListName = new String[lineNumber];
-		System.arraycopy(ListName, 0, FinalListName, 0, lineNumber);
-		String[] FinalParticipants = new String[lineNumber];
-		System.arraycopy(Participants, 0, FinalParticipants, 0, lineNumber);
-		int[] FinalListID = new int[lineNumber];
-		System.arraycopy(ListID, 0, FinalListID, 0, lineNumber);
+				lineNumber++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not existlol10");
+		}
+
+		String[] Finalc1 = new String[lineNumber];
+		System.arraycopy(c1, 0, Finalc1, 0, lineNumber);
+		String[] Finalc2 = new String[lineNumber];
+		System.arraycopy(c2, 0, Finalc2, 0, lineNumber);
+		int[] Finalc3 = new int[lineNumber];
+		System.arraycopy(c3, 0, Finalc3, 0, lineNumber);
 		String[] finalStatus = new String[lineNumber];
 		System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
-		/* When the user confirms that he wants to delete the list, the list with the 
-		   list ID that was previously indicated gets deleted
-		 */
+		//When the user confirms that he wants to delete the list, the list with the 
+		//list ID that was previously indicated gets deleted
 		if(confirm.equals("Y")) {
 			try {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
 				for (int i = 0; i < lineNumber; i++) {
 					if (i == viewList) {
-						wr.println("N/A" + "\t" + "N/A" + "\t" + FinalListID[i] + "\t" + "N/A");
+						wr.println("N/A" + "\t" + "N/A" + "\t" + Finalc3[i] + "\t" + "N/A");
 					} else {
-						wr.println(FinalListName[i] + "\t" + FinalParticipants[i] + "\t" + FinalListID[i] + "\t" + finalStatus[i]);
+						wr.println(Finalc1[i] + "\t" + Finalc2[i] + "\t" + Finalc3[i] + "\t" + finalStatus[i]);
 					}
 				}
 				wr.close();
@@ -350,10 +338,10 @@ public class List {
 			}	
 		}
 	}
-	/*
-	this method returns how many expenses have been logged.
-	 */
 	public static int readfile1() {
+		/*
+		this method returns how many expenses have been logged.
+		 */
 		int numLists = 0;
 		try {
 			String sCurrentLine;
@@ -368,16 +356,19 @@ public class List {
 		return numLists;
 	}
 	public String getUserName(int userIDc) {
+		/*
+		This method gets the User Name for a certain User ID
+		*/
 		int userIDl = userIDc;
 		String currentUser = "bla"; 
-			
+
 		int numUsers = UserAccount.readfile1();
 		for (int i = 0; i < numUsers; i++) {
-		if (temp3[i].userID == userIDl) {
-			currentUser = temp3[i].userName; 
+			if (temp3[i].userID == userIDl) {
+				currentUser = temp3[i].userName; 
+			}
 		}
-		}
-		
+
 		return currentUser;
 	}
 }
