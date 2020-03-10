@@ -167,7 +167,7 @@ public class Expense {
 			System.out.println("What is the name of this expense?");
 			String expenseName = userInput2.nextLine();
 			System.out.println("What is the amount of this expense?");
-			Double amount = InterfaceClass.GetADouble();
+			Double amount = InterfaceClass.getADouble();
 			System.out.println("What is the date of this expense?");
 			System.out.println("Please use the following Syntax: (day/month/year)");
 			String date = userInput2.nextLine();
