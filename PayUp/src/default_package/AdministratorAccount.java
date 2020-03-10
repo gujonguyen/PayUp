@@ -145,7 +145,11 @@ public class AdministratorAccount extends UserAccount {
 		
 		
 		if (localRemovedUser > NumUser) {
-		System.out.println("This User does not exist");	
+		System.out.println("--------------------------------------------------------------------");
+		System.out.println("This User does not exist");
+		System.out.println("You will be redirected to the User Interface");
+		System.out.println("--------------------------------------------------------------------");
+		new InterfaceClass();
 		}else {
 		System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
 		String confirm = userInput2.nextLine();
