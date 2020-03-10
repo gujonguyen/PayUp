@@ -228,17 +228,17 @@ public class List {
 		if (localBoolean2 == true) {
 
 			try {
-				String sCurrentLine;
-				String[] uCurrent = new String[4];
+				String sCurrentLine2;
+				String[] uCurrent2 = new String[4];
 				BufferedReader myFile = new BufferedReader(new FileReader("List_database.txt"));
 				while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
 					// the database based on first lines ordered as ListName, Participants, ListID
-					ListName[lineNumber] = uCurrent[0];
-					Participants[lineNumber] = uCurrent[1]; // In Participants there is yet another array of multiple
-					ListID[lineNumber] = Integer.parseInt(uCurrent[2]);
-					status[lineNumber] = uCurrent[3];
+					ListName[lineNumber] = uCurrent2[0];
+					Participants[lineNumber] = uCurrent2[1]; // In Participants there is yet another array of multiple
+					ListID[lineNumber] = Integer.parseInt(uCurrent2[2]);
+					status[lineNumber] = uCurrent2[3];
 					
 					lineNumber++;
 				}
@@ -265,6 +265,7 @@ public class List {
 				}
 
 			}
+			Expense [] temp4 = Expense.createExpenseObject();
 			int amountOfExpenses = Expense.readfile1();
 			System.out.println("Expense Name: \t Amount: \t Expense Data: \t \t Creditor: \t Debitor:" );
 			for (int i = 0; i < amountOfExpenses; i++) {
