@@ -25,7 +25,7 @@ public class AdministratorAccount extends UserAccount {
 		userChoice = userChoicec;
 		switch (userChoice) {
 		case 0:
-			UserAccount.Exit();
+			UserAccount.exit();
 			break;
 		case 1:
 			removeUser();
@@ -129,22 +129,22 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("This file does not exist");
 		}
 
-		String[] FinalLocalUserName = new String[NumUser];
-		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
-		String[] FinalLocalPassword = new String[NumUser];
-		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
-		String[] FinalLocalTypeAccount = new String[NumUser];
-		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
-		int[] FinalLocalID = new int[NumUser];
-		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
+		String[] finalLocalUserName = new String[numUser];
+		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
+		String[] finalLocalPassword = new String[numUser];
+		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
+		String[] finalLocalTypeAccount = new String[numUser];
+		System.arraycopy(localTypeAccount, 0, finalLocalTypeAccount, 0, numUser);
+		int[] finalLocalID = new int[numUser];
+		System.arraycopy(localID, 0, finalLocalID, 0, numUser);
 
 		//removing the user from PayUp
 		System.out.println("");
 		System.out.println("Enter the User ID you wish to remove: ");
-		int localRemovedUser = InterfaceClass.GetAnInteger();
+		int localRemovedUser = InterfaceClass.getAnInteger();
 		
 		
-		if (localRemovedUser > NumUser) {
+		if (localRemovedUser > numUser) {
 		System.out.println("--------------------------------------------------------------------");
 		System.out.println("This User does not exist");
 		System.out.println("You will be redirected to the User Interface");
@@ -158,7 +158,7 @@ public class AdministratorAccount extends UserAccount {
 		if(confirm.equals("Y")) {
 		try {
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",false)));
-			for (int i = 0; i < NumUser; i++) {
+			for (int i = 0; i < numUser; i++) {
 				if (i == localRemovedUser) {
 					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + FinalLocalID[i]);
 					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
