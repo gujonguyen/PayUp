@@ -100,7 +100,7 @@ public class AdministratorAccount extends UserAccount {
 		
 		System.out.println("");
 		System.out.println("The list of users on PayUp");
-		System.out.println("----------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");
 
 		int numUser = UserAccount.readfile1();
 		
