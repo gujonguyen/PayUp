@@ -18,7 +18,6 @@ public class List {
 	String participants;
 	int userChoice;
 	int loggedUserID;
-	String status;
 	
 	public List(String listNamec, String participant, int listIDc, String statusc) {
 		listName = listNamec;
