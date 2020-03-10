@@ -89,20 +89,54 @@ public class AdministratorAccount extends UserAccount {
 	}
 
 	public void removeUser() {
-		//listing all the users of PayUp
-		int numberOfUsers = 0;
+		/* 
+		 * This method removes a certain user from Pay-Up
+		 */		
+		int NumUser = 0;
+		String[] LocalUserName = new String[100];
+		String[] LocalPassword= new String[100];
+		String[] LocalTypeAccount = new String[100];
+		int[] LocalID = new int[100];
+		
 		System.out.println("");
 		System.out.println("The list of users on PayUp");
 		System.out.println("----------------------------------------------------------------");
 
-		int numberOfUsers1 = UserAccount.readfile1();
+		int numUser = UserAccount.readfile1();
 		
 		UserAccount[] tempUserObjects = UserAccount.createAllUsers(); 
 
 		System.out.println("User ID \t\t User Name");
-		for(int k = 0; k < numberOfUsers1; k++) {
-			System.out.println(tempUserObjects[k].userID + "\t\t\t" + tempUserObjects[k].userName);
+		for(int k = 0; k < numUser; k++) {
+			System.out.println(tempUserObjects[k].userID + "\t\t" + tempUserObjects[k].userName);
 		}
+		try {
+			String sCurrentLine;
+			String[] uCurrent = new String [4];
+			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
+			while ((sCurrentLine = myFile.readLine()) != null) {
+				uCurrent = sCurrentLine.split("\t");
+
+				LocalUserName[NumUser] = uCurrent[0];
+				LocalPassword[NumUser] = uCurrent[1];
+				LocalTypeAccount[NumUser] = uCurrent[2];
+				LocalID[NumUser] = Integer.parseInt(uCurrent[3]);
+
+				NumUser++;
+			}
+			myFile.close(); 
+		}catch (IOException e) {
+			System.out.println("This file does not existlol5");
+		}
+
+		String[] FinalLocalUserName = new String[NumUser];
+		System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+		String[] FinalLocalPassword = new String[NumUser];
+		System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+		String[] FinalLocalTypeAccount = new String[NumUser];
+		System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
+		int[] FinalLocalID = new int[NumUser];
+		System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
 
 		//removing the user from PayUp
 		System.out.println("");
@@ -110,23 +144,27 @@ public class AdministratorAccount extends UserAccount {
 		int localRemovedUser = userInput1.nextInt() ;
 		System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
 		String confirm = userInput2.nextLine();
-
+		System.out.println(confirm);
+		
 		if(confirm.equals("Y")) {
 		try {
 			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",false)));
-			for (int i = 0; i < numberOfUsers; i++) {
+			for (int i = 0; i < NumUser; i++) {
 				if (i == localRemovedUser) {
-					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + tempUserObjects[i].userID);
+					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + FinalLocalID[i]);
 					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
 				} else {
-					wr.println(tempUserObjects[i].userName + "\t" + tempUserObjects[i].password + "\t" + tempUserObjects[i].role + "\t" + tempUserObjects[i].userID);	
+					wr.println(FinalLocalUserName[i] + "\t" + FinalLocalPassword[i] + "\t" +  FinalLocalTypeAccount[i] + "\t" + FinalLocalID[i]);	
 				}
-			}
-			wr.close();
-
+				
+		}
+		wr.close();
 		}catch (IOException e) {
 			System.out.println("I/O error when writing on file");
 		}
+		}else {
+			System.out.println("You will be redirected to the User Interface");
+			new InterfaceClass();
 		}
 	}
 }
