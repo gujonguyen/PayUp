@@ -20,7 +20,7 @@ public class InterfaceClass {
 		int userChoice = mainInterface();
 		switch (userChoice) {
 		case 1:
-			UserAccount.Register();
+			UserAccount.register();
 
 		case 2:
 			String[] arrayofLoggedUser = UserAccount.Login();
