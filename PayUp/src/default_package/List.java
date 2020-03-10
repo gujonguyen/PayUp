@@ -261,7 +261,12 @@ public class List {
 					System.out.println(temp4[i].expenseName + "\t\t" + temp4[i].amount + "\t\t" + temp4[i].expenseDate + "\t\t " +  temp4[i].creditor + "\t\t " + temp4[i].debitor);
 				}
 
-			}	
+			}
+			System.out.println("--------------------------------------------------------------------");	
+			System.out.println("You are now redirected to the main menu.");
+			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
+			
 		//If the User doesn't have access to the list the following lines of code get executed	
 		}else {
 			System.out.println("--------------------------------------------------------------------");
@@ -336,7 +341,11 @@ public class List {
 			}catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}	
-		}
+		}System.out.println("--------------------------------------------------------------------");	
+		System.out.println("The list is deleted");
+		System.out.println("You are now redirected to the main menu.");
+		System.out.println("--------------------------------------------------------------------");
+		new InterfaceClass();
 	}
 	public static int readfile1() {
 		/*
