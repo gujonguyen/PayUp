@@ -88,7 +88,7 @@ public class UserAccount {
 		 */
 		Boolean localBoolean = true;
 		noOfUsers = readfile1();
-		System.out.println("--------------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------");	
 		System.out.println("\tPlease Register User\t");
 		System.out.println("--------------------------------------------------------------------");
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
