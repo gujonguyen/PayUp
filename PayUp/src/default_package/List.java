@@ -335,4 +335,48 @@ public class List {
 		}
 		return numLists;
 	}
+	public static String readUserName(int loggedUserIDc, String username) {
+			int loggedUser = loggedUserIDc;
+			int NumUser = 0;
+			String[] LocalUserName = new String[100];
+			String[] LocalPassword = new String[100];
+			String[] LocalTypeAccount = new String[100];
+			int[] LocalID = new int[100];
+
+			try {
+				String input_Line;
+				String[] current_line = new String[4];
+				BufferedReader myFile = new BufferedReader(new FileReader("User_database.txt"));
+				while ((input_Line = myFile.readLine()) != null) {
+					current_line = input_Line.split("\t");
+
+					LocalUserName[NumUser] = current_line[0];
+					LocalPassword[NumUser] = current_line[1];
+					LocalTypeAccount[NumUser] = current_line[2];
+					LocalID[NumUser] = Integer.parseInt(current_line[3]);
+
+					NumUser++;
+				}
+				myFile.close();
+			} catch (IOException e) {
+				System.out.println("This file does not existlol5");
+			}
+
+			String[] FinalLocalUserName = new String[NumUser];
+			System.arraycopy(LocalUserName, 0, FinalLocalUserName, 0, NumUser);
+			String[] FinalLocalPassword = new String[NumUser];
+			System.arraycopy(LocalPassword, 0, FinalLocalPassword, 0, NumUser);
+			String[] FinalLocalTypeAccount = new String[NumUser];
+			System.arraycopy(LocalTypeAccount, 0, FinalLocalTypeAccount, 0, NumUser);
+			int[] FinalLocalID = new int[NumUser];
+			System.arraycopy(LocalID, 0, FinalLocalID, 0, NumUser);
+
+			for (int i = 0; i < NumUser; i++) {
+				if (loggedUser == FinalLocalID[i]) {
+					System.out.println(FinalLocalUserName[i]);
+				}
+			}
+			return username;
+		}
+}
 }
