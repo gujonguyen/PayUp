@@ -194,7 +194,9 @@ public class Expense {
 			}
 			System.out.println("--------------------------------------------------------------------");
 			System.out.println("The expense is succesfully added to your list");
+			System.out.println("You are now directed to the main menu");
 			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
 			/*	
 		If the logged in user is not part of the list then the following lines of code gets executed
 		And you are sent back to this method again	
@@ -295,7 +297,9 @@ public class Expense {
 				System.out.println("--------------------------------------------------------------------");
 				System.out.print("Your total balance for List" + individualBalanceOfList + " is: ");
 				System.out.printf("%.2f", tempBalance);
+				System.out.println("You will be directed to the main menu");
 				System.out.println("--------------------------------------------------------------------");
+				new InterfaceClass();
 
 			
 			//If the user is not part if the specific list he or she get redirected to this method again
