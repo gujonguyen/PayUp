@@ -192,17 +192,17 @@ public class Expense {
 			} catch (IOException e) {
 				System.out.println("I/O error when writing on file");
 			}
-			System.out.println("---------------------------------------------");	
+			System.out.println("--------------------------------------------------------------------");
 			System.out.println("The expense is succesfully added to your list");
-			System.out.println("---------------------------------------------");
+			System.out.println("--------------------------------------------------------------------");
 			/*	
 		If the logged in user is not part of the list then the following lines of code gets executed
 		And you are sent back to this method again	
 			 */
 		}else {
-			System.out.println("---------------------------------------------");
-			System.out.println("You do not have acces to this list, please input a different List ID");
-			System.out.println("---------------------------------------------");	
+		System.out.println("--------------------------------------------------------------------");
+			System.out.println("You do not have access to this list, please input a different List ID");
+			System.out.println("--------------------------------------------------------------------");
 			addExpenseToList(loggedUserIDl);
 		}
 	}
@@ -292,10 +292,10 @@ public class Expense {
 				}
 
 				//This prints out your personal balance of the user
-				System.out.println("----------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
 				System.out.print("Your total balance for List" + individualBalanceOfList + " is: ");
 				System.out.printf("%.2f", tempBalance);
-				System.out.println("-----------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
 
 			
 			//If the user is not part if the specific list he or she get redirected to this method again
