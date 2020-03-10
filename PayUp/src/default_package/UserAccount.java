@@ -86,7 +86,6 @@ public class UserAccount {
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
 		//This if-else statement will redirect the user to the register interface if the user tries to register as a invalid type of account
-		//This if-else statement will redirect the user to the register interface if the user tries to register as a invalid type of account
 		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin") 
 				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("administrator")) {
 			//if a user is registering as an admin, it needs to input special admin access code in order to register as an admin
