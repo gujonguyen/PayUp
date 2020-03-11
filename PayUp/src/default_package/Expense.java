@@ -110,12 +110,9 @@ public class Expense {
 
 		Expense expense [] = new Expense [finallistID.length];
 
-
-
 		for (int i = 0; i < finallistID.length; i++) {
 			expense [i] = new Expense(finallistID [i], finalexpenseName [i], finalamount [i], finalexpenseDate [i], finalcreditors [i], finalDebitors [i], finalexpenseID [i]);
 		}	
-
 		return expense;
 	}
 
@@ -155,7 +152,6 @@ public class Expense {
 			if (loggedUserIDl == finalParticipantsInList [j]) {
 				localBoolean2 = true ;
 			}else {
-
 			}
 		}
 		/*
@@ -345,11 +341,8 @@ public class Expense {
 		for (int j = 0;  j < 2; j++ ) {
 			if (loggedUserIDl == finalParticipantsInList[j]) {
 				localBoolean = true ;
-			}else { 	
-			System.out.println("--------------------------------------------------------------------");
-			System.out.println("List was not settled. You will now be redirected to the main menu");
-			System.out.println("--------------------------------------------------------------------");
-			new InterfaceClass();
+			}else {
+
 			}
 		}
 
@@ -368,7 +361,6 @@ public class Expense {
 				// If the list is not yet settled the following lines of code are executed
 
 			}else {
-
 
 				//In order to overwrite the List database we first need to read the database and parse it to arrays
 
@@ -433,10 +425,9 @@ public class Expense {
 					System.out.println("You will now be redirected to the main menu");
 					System.out.println("--------------------------------------------------------------------");
 					new InterfaceClass();
-
 				}
-
 			}
+
 			//If a user has not got acces to the list the following lines are executed
 		}else {
 			System.out.println("--------------------------------------------------------------------");
@@ -444,7 +435,6 @@ public class Expense {
 			System.out.println("--------------------------------------------------------------------");
 			createIndividualBalance(loggedUserIDl);
 		}
-
 	}
 
 	public double individualBalanceForSettledLists(int loggedUserIDc, int settledListc ) {
@@ -474,6 +464,7 @@ public class Expense {
 				arrayForCreditors [counter] = temp5[j].creditor;
 				counter++; // This counter keeps track of how many expenses occurred in that specific list
 			}	
+
 		double finalAmount [] = new double[counter];
 		System.arraycopy(arrayOfAmount, 0, finalAmount, 0, counter);
 		int finalCreditors [] = new int[counter];
@@ -487,7 +478,6 @@ public class Expense {
 				tempBalance = tempBalance + (finalAmount[j]/2);
 			}else {
 				tempBalance = tempBalance - (finalAmount[j]/2);
-
 			}
 		}
 		return tempBalance;
@@ -510,6 +500,4 @@ public class Expense {
 		}
 		return numExpenses;
 	}
-
-
 }
