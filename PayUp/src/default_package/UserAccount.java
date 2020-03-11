@@ -14,7 +14,6 @@ public class UserAccount {
 	int loggedUserID;
 	protected static String adminCode = "Yashar";
 
-
 	public UserAccount(String nameC, String passwordC, int uID ) {
 		/*
 		This is the main constructor for the User account objects
@@ -32,62 +31,57 @@ public class UserAccount {
 		 * all user array, which is what this method returns
 		 */		
 		int numUser = 0;
-		String[] localUserName = new String[100];
-		String[] localPassword= new String[100];
-		String[] localTypeAccount = new String[100];
-		int[] localID = new int[100];
+		String [] localUserName = new String [100];
+		String [] localPassword= new String [100];
+		String [] localTypeAccount = new String [100];
+		int [] localID = new int [100];
 
 		UserAccount [] allUsers = new UserAccount [100];
 
 		//The database is read in the following lines of code
 		try {
 			String sCurrentLine;
-			String[] uCurrent = new String [4];
+			String [] uCurrent = new String [4];
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				localUserName[numUser] = uCurrent[0];
-				localPassword[numUser] = uCurrent[1];
-				localTypeAccount[numUser] = uCurrent[2];
-				localID[numUser] = Integer.parseInt(uCurrent[3]);
+				localUserName [numUser] = uCurrent [0];
+				localPassword [numUser] = uCurrent [1];
+				localTypeAccount[numUser] = uCurrent [2];
+				localID [numUser] = Integer.parseInt(uCurrent [3]);
 
 				numUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not existlol5");
+			System.out.println("This file does not exist");
 		}
 
-		String[] finalLocalUserName = new String[numUser];
+		String [] finalLocalUserName = new String [numUser];
 		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
-		String[] finalLocalPassword = new String[numUser];
+		String [] finalLocalPassword = new String [numUser];
 		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
-		String[] finalLocalTypeAccount = new String[numUser];
+		String [] finalLocalTypeAccount = new String [numUser];
 		System.arraycopy(localTypeAccount, 0, finalLocalTypeAccount, 0, numUser);
-		int[] finalLocalID = new int[numUser];
+		int [] finalLocalID = new int [numUser];
 		System.arraycopy(localID, 0, finalLocalID, 0, numUser);
 
-
 		for (int i = 0; i < numUser; i++) {
-			allUsers [i]  = new UserAccount(finalLocalUserName[i], finalLocalPassword[i], finalLocalID[i]);
+			allUsers [i]  = new UserAccount(finalLocalUserName [i], finalLocalPassword [i], finalLocalID [i]);
 		}
-
 		return allUsers;
 	}
+	
 	public UserAccount() {
 		// This empty constructor is recalled using the super() method in the extended constructors
 	}
 
 	protected static void register() {	
-		/*
-		 * This method gets the user name and password from the user for the
-		 * registration of a new user
-		 * 
-		 * 
-		 */
+		// This method gets the user name and password from the user for the registration of a new user
+
 		Boolean localBoolean = true;
-		noOfUsers = readfile1();
+		noOfUsers = readUserNumber();
 		System.out.println("--------------------------------------------------------------------");	
 		System.out.println("\tPlease Register User\t");
 		System.out.println("--------------------------------------------------------------------");
@@ -109,10 +103,10 @@ public class UserAccount {
 				System.out.println("Please choose a password:");
 				String pw = userInput2.nextLine();
 
-				int pw = pw.length();
+				int pwLenght = pw.length();
 
 				//This is to prevent passwords with less than 5 characters
-				if (pw > 4) { 
+				if (pwLenght > 4) { 
 
 					UserAccount[] temp3 = UserAccount.createAllUsers();
 
@@ -153,10 +147,10 @@ public class UserAccount {
 			System.out.println("Please choose a password:");
 			String pw = userInput2.nextLine();
 
-			int pw = pw.length();
+			int pwLenght = pw.length();
 
 			//This is to prevent passwords with less than 5 characters
-			if (pw > 4) { 
+			if (pwLenght > 4) { 
 
 				UserAccount[] temp3 = UserAccount.createAllUsers();
 
@@ -185,16 +179,12 @@ public class UserAccount {
 				System.out.println("--------------------------------------------------------------------");
 				register();	
 			}
-
 		}
 	}
 
 	private static void writeUser(String unc, String pwc, String typeOfAccountc) {	
-		/*
-		 * This method writes a new line with the user's credentials in the user
-		 * database txt file
-		 * 
-		 */
+		// This method writes a new line with the user's credentials in the user database txt file
+
 		String un = unc;
 		String pw = pwc;
 		String typeOfAccount = typeOfAccountc;
@@ -213,17 +203,16 @@ public class UserAccount {
 		new InterfaceClass();
 	}
 
-
 	protected static String[] login(){	
 		/*
 		 * This method is for the login of users and returns the user's loggedID and
 		 * role
 		 */
 		int numUser = 0;
-		String[] localUserName = new String[100];
-		String[] localPassword = new String[100];
-		String[] localRole = new String[100];
-		int[] localID = new int[100];
+		String [] localUserName = new String [100];
+		String [] localPassword = new String [100];
+		String [] localRole = new String [100];
+		int [] localID = new int [100];
 		int loggedID = 0;
 		String un;
 		String pw;
@@ -240,58 +229,51 @@ public class UserAccount {
 		//This is for reading the user database file, sorting the data with user attributes, and storing the data into local arrays
 		try {	
 			String sCurrentLine;
-			String[] uCurrent = new String [4];
+			String [] uCurrent = new String [4];
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				localUserName[numUser] = uCurrent[0];
-				localPassword[numUser] = uCurrent[1];
-				localRole[numUser] = uCurrent[2];
-				localID[numUser] = Integer.parseInt(uCurrent[3]);
+				localUserName [numUser] = uCurrent [0];
+				localPassword [numUser] = uCurrent [1];
+				localRole [numUser] = uCurrent [2];
+				localID [numUser] = Integer.parseInt(uCurrent [3]);
 				numUser++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not existlol1");
+			System.out.println("This file does not exist");
 		}
 
-		String[] finalLocalUserName = new String[numUser];
+		String [] finalLocalUserName = new String [numUser];
 		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
-		String[] finalLocalPassword = new String[numUser];
+		String [] finalLocalPassword = new String [numUser];
 		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
 		for (int i = 0; i < numUser; i++) {	//checking for every line in the user database if entered user name and password match with a row
-			if (un.equals(finalLocalUserName[i]) && pw.equals(finalLocalPassword[i])) {	
-				loggedID = localID[i];
-				role = localRole[i];
+			if (un.equals(finalLocalUserName [i]) && pw.equals(finalLocalPassword [i])) {	
+				loggedID = localID [i];
+				role = localRole [i];
 				System.out.println("--------------------------------------------------------------------");
-				System.out.println("Login successful, welcome " + Un +"!");
+				System.out.println("Login successful, welcome " + un +"!");
 			}
-
 		}
-		String arrayofLoggedUser[] = new String[2];
-		arrayofLoggedUser[0] = Integer.toString(loggedID);
-		arrayofLoggedUser[1] = role;
+		String arrayofLoggedUser [] = new String [2];
+		arrayofLoggedUser [0] = Integer.toString(loggedID);
+		arrayofLoggedUser [1] = role;
 
 		return arrayofLoggedUser;
-
 	}
 
 	public static void exit() {	
-		/*
-		 * This method will let the user exit PayUp
-		 *  
-		 */
+		// This method will let the user exit PayUp
+
 		System.out.println("\n\tYou are successfully logged out\t");
 		System.out.println("\tThank you for visiting PayUp!\t");
 	}
 
-	public static int readfile1() {	
-		/*
-		 * This method reads the user database file and returns all existing rows
-		 * within the user database
-		 * 
-		 */
+	public static int readUserNumber() {	
+		//This method reads the user database file and returns all existing rows within the user database
+
 		int numUser = 0;
 		try {
 			String sCurrentLine;
@@ -301,9 +283,8 @@ public class UserAccount {
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not existlol2");
+			System.out.println("This file does not exist");
 		}
 		return numUser;
 	}
-
 }
