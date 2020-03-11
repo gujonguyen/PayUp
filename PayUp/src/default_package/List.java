@@ -176,12 +176,12 @@ public class List {
 	}
 
 	public void viewList(int loggedUserc) {
-		/*
+				/*
 		This method allows the users to view Lists 
 		 */
 
 		// Declaring all necessary variables
-				int loggedUserIDl = loggedUserc;
+		int loggedUserIDl = loggedUserc;
 		int lineNumber = 0;
 		String[] listName = new String[100];
 		String[] participants = new String[100];
@@ -195,88 +195,96 @@ public class List {
 		System.out.println("What is the list ID of the list that you want to view? ");
 		int viewList = InterfaceClass.getAnInteger();
 
-		List [] tempListObject = List.createLists();
-
-		//This creates an array of all people that are part of a list
-		sCurrentLine = tempListObject[viewList].participants;
-		uCurrent = sCurrentLine.split(",");
-		for (int k = 0; k < 2; k++) {
-			participantsInList [k] = Integer.parseInt(uCurrent [k]);
-		}
-		int finalParticipantsInList [] = new int [2];
-		System.arraycopy(participantsInList, 0, finalParticipantsInList, 0, 2);
-
-		//This checks if a user has access to a certain List
-		for (int j = 0;  j < 2; j++ ) {
-			if (loggedUserIDl == finalParticipantsInList[j]) {
-				localBoolean2 = true ;
-			}else {
-
-			}
-		}
-
-		//If the logged in user is part of the list then the following lines of code gets executed
-		if (localBoolean2 == true) {
-
-			try {
-				String sCurrentLine2;
-				String [] uCurrent2 = new String [4];
-				BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
-				while ((sCurrentLine2 = myFile.readLine()) != null) {
-					uCurrent2 = sCurrentLine2.split("\t");
-
-					listName [lineNumber] = uCurrent2 [0];
-					participants [lineNumber] = uCurrent2 [1];
-					listID [lineNumber] = Integer.parseInt(uCurrent2 [2]);
-					status [lineNumber] = uCurrent2 [3];
-
-					lineNumber++;
-				}
-				myFile.close(); 	
-			}catch (IOException e) {
-				System.out.println("This file does not exist");
-			}
-
-			String [] finalListName = new String [lineNumber];
-			System.arraycopy(listName, 0, finalListName, 0, lineNumber);
-			String [] finalParticipants = new String [lineNumber];
-			System.arraycopy(participants, 0, finalParticipants, 0, lineNumber);
-			int [] finalListID = new int [lineNumber];
-			System.arraycopy(listID, 0, finalListID, 0, lineNumber);
-			String [] finalStatus = new String [lineNumber];
-			System.arraycopy(status, 0, finalStatus, 0, lineNumber);
-
-			String userName1 = getUserName(finalListID[0]); 
-			String userName2 = getUserName(finalListID[1]);
-
-			System.out.println("List Name: \t Particpants: \t List ID: \t \t Status: ");
-			for (int i = 0; i < lineNumber; i++) {
-				if (viewList == finalListID [i]) {
-					System.out.println(finalListName [i] + "\t\t" + userName1 + "\t" + userName2 + "\t\t" + finalListID [i] + "\t\t\t" + finalStatus [i]);
-					break;
-				}
-			}
-			
-			int amountOfExpenses = Expense.readExpenseNumber();
-			Expense [] temp4 = Expense.createExpenseObject();
-			System.out.println("Expense Name: \tAmount: \tExpense Data: \t \t Creditor: \t Debitor:" );
-			for (int i = 0; i < amountOfExpenses; i++) {
-				if (viewList == temp4[i].listID) {
-					System.out.println(temp4[i].expenseName + "\t\t" + temp4[i].amount + "\t\t" + temp4[i].expenseDate + "\t\t " +  temp4[i].creditor + "\t\t " + temp4[i].debitor);
-				}
-
-			}
-			System.out.println("--------------------------------------------------------------------");	
-			System.out.println("You are now redirected to the main menu.");
+		if (viewList > lineNumber) {
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("Invalid list ID");
+			System.out.println("You will be redirected to the User Interface");
 			System.out.println("--------------------------------------------------------------------");
 			new InterfaceClass();
 
-			//If the User doesn't have access to the list the following lines of code get executed	
-		}else {
-			System.out.println("--------------------------------------------------------------------");
-			System.out.println("You do not have access to this list, please input a different List ID");
-			System.out.println("--------------------------------------------------------------------");
-			viewList(loggedUserIDl);
+			List [] tempListObject = List.createLists();
+
+			//This creates an array of all people that are part of a list
+			sCurrentLine = tempListObject[viewList].participants;
+			uCurrent = sCurrentLine.split(",");
+			for (int k = 0; k < 2; k++) {
+				participantsInList [k] = Integer.parseInt(uCurrent [k]);
+			}
+			int finalParticipantsInList [] = new int [2];
+			System.arraycopy(participantsInList, 0, finalParticipantsInList, 0, 2);
+
+			//This checks if a user has access to a certain List
+			for (int j = 0;  j < 2; j++ ) {
+				if (loggedUserIDl == finalParticipantsInList[j]) {
+					localBoolean2 = true ;
+				}else {
+
+				}
+			}
+
+			//If the logged in user is part of the list then the following lines of code gets executed
+			if (localBoolean2 == true) {
+
+				try {
+					String sCurrentLine2;
+					String [] uCurrent2 = new String [4];
+					BufferedReader myFile = new BufferedReader (new FileReader("List_database.txt")); 
+					while ((sCurrentLine2 = myFile.readLine()) != null) {
+						uCurrent2 = sCurrentLine2.split("\t");
+
+						listName [lineNumber] = uCurrent2 [0];
+						participants [lineNumber] = uCurrent2 [1];
+						listID [lineNumber] = Integer.parseInt(uCurrent2 [2]);
+						status [lineNumber] = uCurrent2 [3];
+
+						lineNumber++;
+					}
+					myFile.close(); 	
+				}catch (IOException e) {
+					System.out.println("This file does not exist");
+				}
+
+				String [] finalListName = new String [lineNumber];
+				System.arraycopy(listName, 0, finalListName, 0, lineNumber);
+				String [] finalParticipants = new String [lineNumber];
+				System.arraycopy(participants, 0, finalParticipants, 0, lineNumber);
+				int [] finalListID = new int [lineNumber];
+				System.arraycopy(listID, 0, finalListID, 0, lineNumber);
+				String [] finalStatus = new String [lineNumber];
+				System.arraycopy(status, 0, finalStatus, 0, lineNumber);
+
+				String userName1 = getUserName(finalListID[0]); 
+				String userName2 = getUserName(finalListID[1]);
+
+				System.out.println("List Name: \t Particpants: \t List ID: \t \t Status: ");
+				for (int i = 0; i < lineNumber; i++) {
+					if (viewList == finalListID [i]) {
+						System.out.println(finalListName [i] + "\t\t" + userName1 + "\t" + userName2 + "\t\t" + finalListID [i] + "\t\t\t" + finalStatus [i]);
+						break;
+					}
+				}
+
+				int amountOfExpenses = Expense.readExpenseNumber();
+				Expense [] temp4 = Expense.createExpenseObject();
+				System.out.println("Expense Name: \tAmount: \tExpense Data: \t \t Creditor: \t Debitor:" );
+				for (int i = 0; i < amountOfExpenses; i++) {
+					if (viewList == temp4[i].listID) {
+						System.out.println(temp4[i].expenseName + "\t\t" + temp4[i].amount + "\t\t" + temp4[i].expenseDate + "\t\t " +  temp4[i].creditor + "\t\t " + temp4[i].debitor);
+					}
+				}
+
+				System.out.println("--------------------------------------------------------------------");	
+				System.out.println("You are now redirected to the main menu.");
+				System.out.println("--------------------------------------------------------------------");
+				new InterfaceClass();
+
+				//If the User doesn't have access to the list the following lines of code get executed	
+			}else {
+				System.out.println("--------------------------------------------------------------------");
+				System.out.println("You do not have access to this list, please input a different List ID");
+				System.out.println("--------------------------------------------------------------------");
+				viewList(loggedUserIDl);
+			}
 		}
 	}
 
