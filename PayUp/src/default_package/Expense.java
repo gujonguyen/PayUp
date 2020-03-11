@@ -327,13 +327,6 @@ public class Expense {
 		System.out.println("--------------------------------------------------------------------");
 		int settledList = InterfaceClass.getAnInteger();
 
-		if (settledList > numLists) {
-			System.out.println("--------------------------------------------------------------------");
-			System.out.println("Invalid list ID");
-			System.out.println("You will be redirected to the User Interface");
-			System.out.println("--------------------------------------------------------------------");
-			new InterfaceClass();
-
 			//Splitting the participants of a certain list based on comma
 			//The first User ID is always the one who created that list
 			sCurrentLine = temp4[settledList].participants;
@@ -443,7 +436,6 @@ public class Expense {
 				createIndividualBalance(loggedUserIDl);
 			}
 		}
-	}
 
 	public double individualBalanceForSettledLists(int loggedUserIDc, int settledListc ) {
 		/*
