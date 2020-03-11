@@ -344,12 +344,19 @@ public class List {
 
 			}catch (IOException e) {
 				System.out.println("I/O error when writing on file");
-			}	
-		}System.out.println("--------------------------------------------------------------------");	
-		System.out.println("The list is deleted");
-		System.out.println("You are now redirected to the main menu.");
-		System.out.println("--------------------------------------------------------------------");
-		new InterfaceClass();
+			}
+			System.out.println("--------------------------------------------------------------------");	
+			System.out.println("The list is deleted");
+			System.out.println("You are now redirected to the main menu.");
+			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
+		}
+		else {
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("List was not deleted. You will now be redirected to the main menu");
+			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
+		}
 	}
 	public static int readListNumber() {
 		/*
