@@ -1,5 +1,4 @@
 package default_package;
-import java.util.*;
 import java.io.*;
 
 public class RegularAccount extends UserAccount{	
