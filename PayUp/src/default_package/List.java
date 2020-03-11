@@ -181,11 +181,11 @@ public class List {
 		 */
 
 		// Declaring all necessary variables
-		int loggedUserIDl = loggedUserc;
+				int loggedUserIDl = loggedUserc;
 		int lineNumber = 0;
-		String [] c1 = new String [100];
-		String[] c2 = new String [100];
-		int [] c3 = new int [100];
+		String[] listName = new String[100];
+		String[] participants = new String[100];
+		int[] listID = new int[100];
 		String [] status = new String [100];
 		String sCurrentLine;
 		String [] uCurrent = new String [3];
@@ -225,9 +225,9 @@ public class List {
 				while ((sCurrentLine2 = myFile.readLine()) != null) {
 					uCurrent2 = sCurrentLine2.split("\t");
 
-					c1 [lineNumber] = uCurrent2 [0];
-					c2 [lineNumber] = uCurrent2 [1];
-					c3 [lineNumber] = Integer.parseInt(uCurrent2 [2]);
+					listName [lineNumber] = uCurrent2 [0];
+					participants [lineNumber] = uCurrent2 [1];
+					listID [lineNumber] = Integer.parseInt(uCurrent2 [2]);
 					status [lineNumber] = uCurrent2 [3];
 
 					lineNumber++;
@@ -237,26 +237,26 @@ public class List {
 				System.out.println("This file does not exist");
 			}
 
-			String [] finalc1 = new String [lineNumber];
-			System.arraycopy(c1, 0, finalc1, 0, lineNumber);
-			String [] finalc2 = new String [lineNumber];
-			System.arraycopy(c2, 0, finalc2, 0, lineNumber);
-			int [] finalc3 = new int [lineNumber];
-			System.arraycopy(c3, 0, finalc3, 0, lineNumber);
+			String [] finalListName = new String [lineNumber];
+			System.arraycopy(listName, 0, finalListName, 0, lineNumber);
+			String [] finalParticipants = new String [lineNumber];
+			System.arraycopy(participants, 0, finalParticipants, 0, lineNumber);
+			int [] finalListID = new int [lineNumber];
+			System.arraycopy(listID, 0, finalListID, 0, lineNumber);
 			String [] finalStatus = new String [lineNumber];
 			System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
-			String userName1 = getUserName(finalc3[0]); 
-			String userName2 = getUserName(finalc3[1]);
+			String userName1 = getUserName(finalListID[0]); 
+			String userName2 = getUserName(finalListID[1]);
 
 			System.out.println("List Name: \t Particpants: \t List ID: \t \t Status: ");
 			for (int i = 0; i < lineNumber; i++) {
-				if (viewList == finalc3 [i]) {
-					System.out.println(finalc1 [i] + "\t\t" + userName1 + "\t" + userName2 + "\t\t" + finalc3 [i] + "\t\t\t" + finalStatus [i]);
+				if (viewList == finalListID [i]) {
+					System.out.println(finalListName [i] + "\t\t" + userName1 + "\t" + userName2 + "\t\t" + finalListID [i] + "\t\t\t" + finalStatus [i]);
 					break;
 				}
-
 			}
+			
 			int amountOfExpenses = Expense.readExpenseNumber();
 			Expense [] temp4 = Expense.createExpenseObject();
 			System.out.println("Expense Name: \tAmount: \tExpense Data: \t \t Creditor: \t Debitor:" );
