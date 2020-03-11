@@ -72,7 +72,7 @@ public class UserAccount {
 		}
 		return allUsers;
 	}
-	
+
 	public UserAccount() {
 		// This empty constructor is recalled using the super() method in the extended constructors
 	}
@@ -90,17 +90,54 @@ public class UserAccount {
 
 		// If the role of the user is equal to A, a, Admin etc., then the user will create an Admin account using the 
 		// secret Admin code
-	
-		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin") 
-				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("administrator")) {
-			//if a user is registering as an admin, it needs to input special admin access code in order to register as an admin
+		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") 
+				|| typeOfAccount.equals("regular") || typeOfAccount.equals("Reg") || 
+				typeOfAccount.equals("reg")) {
+			System.out.println("Please choose a username:");
+			String un = userInput2.nextLine();
+			System.out.println("Please choose a password:");
+			String pw = userInput2.nextLine();
 
-		if (typeOfAccount.equals("A") || typeOfAccount.equals("a") || typeOfAccount.equals("Adminstrator") 
+			int pwLenght = pw.length();
+
+			//This is to prevent passwords with less than 5 characters
+			if (pwLenght > 4) { 
+
+				UserAccount[] temp3 = UserAccount.createAllUsers();
+
+				//This is to check the uniqueness of entered user name within the user database
+				for (int k = 0; k < noOfUsers; k++) {	
+					if(un.equals(temp3[k].userName)) {
+						localBoolean = false;
+					}else {
+					}
+				}
+
+				//If user name is unique a new line with the user's credentials will be written in the file
+				if (localBoolean == true) {	
+					writeUser(un, pw, typeOfAccount);	
+					//The user will be redirected to the register interface due to a duplicate user name
+				}else {	
+					System.out.println("--------------------------------------------------------------------");
+					System.out.println("This username is already taken. Please register again.");
+					System.out.println("--------------------------------------------------------------------");
+					register();	
+				}
+				//The user will be redirected to the register interface due to an invalid password
+			}else {	
+				System.out.println("--------------------------------------------------------------------");
+				System.out.println("Please use a password of more than 4 characters");
+				System.out.println("--------------------------------------------------------------------");
+				register();	
+			}
+		}
+
+		else if (typeOfAccount.equals("A") || typeOfAccount.equals("a") || typeOfAccount.equals("Adminstrator") 
 				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("admin") || typeOfAccount.equals("Admin")) {
 			System.out.println("Enter a unique admin code in order to register as an Admin: ");
 			String input_admincode = userInput2.nextLine();
 			if (input_admincode.equals(adminCode)) {
-				System.out.println("Valid admin code!");
+				System.out.println("Valid admin code! You may register as an admin now.");
 				System.out.println("");
 
 				System.out.println("Please choose a username:");
@@ -129,61 +166,28 @@ public class UserAccount {
 						//The user will be redirected to the register interface due to a duplicate user name
 					}else {
 						System.out.println("--------------------------------------------------------------------");
-						System.out.println("This User Name is already taken, please Register again");
+						System.out.println("This username is already taken. Please register again.");
 						System.out.println("--------------------------------------------------------------------");
 						register();	
 					}
 					//The user will be redirected to the register interface due to an invalid password
 				}else {	
 					System.out.println("--------------------------------------------------------------------");
-					System.out.println("Please use a password of more than 4 characters");
+					System.out.println("Please enter a password of more than 4 characters");
 					System.out.println("--------------------------------------------------------------------");
 					register();	
 				}
 			}else { 
 				System.out.println("");
-				System.out.println("Enter a valid admin code! (Hint: professor ....)");
+				System.out.println("Please enter a valid admin code. Try again. (Hint: professor ....)");
 				register();
 			}
-			// If the user registers as an Regular then the following lines of code are executed	
-		}else {
-			System.out.println("Please choose a username:");
-			String un = userInput2.nextLine();
-			System.out.println("Please choose a password:");
-			String pw = userInput2.nextLine();
-
-			int pwLenght = pw.length();
-
-			//This is to prevent passwords with less than 5 characters
-			if (pwLenght > 4) { 
-
-				UserAccount[] temp3 = UserAccount.createAllUsers();
-
-				//This is to check the uniqueness of entered user name within the user database
-				for (int k = 0; k < noOfUsers; k++) {	
-					if(un.equals(temp3[k].userName)) {
-						localBoolean = false;
-					}else {
-					}
-				}
-
-				//If user name is unique a new line with the user's credentials will be written in the file
-				if (localBoolean == true) {	
-					writeUser(un, pw, typeOfAccount);	
-					//The user will be redirected to the register interface due to a duplicate user name
-				}else {	
-					System.out.println("--------------------------------------------------------------------");
-					System.out.println("This User Name is already taken, please Register again");
-					System.out.println("--------------------------------------------------------------------");
-					register();	
-				}
-				//The user will be redirected to the register interface due to an invalid password
-			}else {	
-				System.out.println("--------------------------------------------------------------------");
-				System.out.println("Please use a password of more than 4 characters");
-				System.out.println("--------------------------------------------------------------------");
-				register();	
-			}
+		}
+		else { 
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("Please enter a valid type of account. Try again:");
+			System.out.println("--------------------------------------------------------------------");
+			register();
 		}
 	}
 
