@@ -36,55 +36,53 @@ public class AdministratorAccount extends UserAccount {
 		}
 	}
 
-
 	public static AdministratorAccount [] createAdmins() {
 		/*
 		This method creates Admin Objects
 		 */
 		int numberOfUsers = 0;
-		String[] localUserName = new String[100];
-		String[] localPassword= new String[100];
-		String[] localTypeAccount = new String[100];
-		int[] localID = new int[100];
+		String [] localUserName = new String [100];
+		String [] localPassword= new String [100];
+		String [] localTypeAccount = new String [100];
+		int [] localID = new int [100];
 
 		AdministratorAccount [] admins = new AdministratorAccount [100];
 
 		try {
 			String currentLine;
-			String[] currentUser = new String [4];
+			String [] currentUser = new String [4];
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((currentLine = myFile.readLine()) != null) {
 				currentUser = currentLine.split("\t");
 
-				localUserName[numberOfUsers] = currentUser[0];
-				localPassword[numberOfUsers] = currentUser[1];
-				localTypeAccount[numberOfUsers] = currentUser[2];
-				localID[numberOfUsers] = Integer.parseInt(currentUser[3]);
+				localUserName [numberOfUsers] = currentUser [0];
+				localPassword [numberOfUsers] = currentUser [1];
+				localTypeAccount[numberOfUsers] = currentUser [2];
+				localID [numberOfUsers] = Integer.parseInt(currentUser [3]);
 
 				numberOfUsers++;
 			}
 			myFile.close(); 
 		}catch (IOException e) {
-			System.out.println("This file does not existlol5");
+			System.out.println("This file does not exist");
 		}
 
-		String[] finalLocalUserName = new String[numberOfUsers];
+		String [] finalLocalUserName = new String [numberOfUsers];
 		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numberOfUsers);
-		String[] finalLocalPassword = new String[numberOfUsers];
+		String [] finalLocalPassword = new String [numberOfUsers];
 		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numberOfUsers);
-		String[] finalLocalTypeAccount = new String[numberOfUsers];
+		String [] finalLocalTypeAccount = new String [numberOfUsers];
 		System.arraycopy(localTypeAccount, 0, finalLocalTypeAccount, 0, numberOfUsers);
-		int[] finalLocalID = new int[numberOfUsers];
+		int [] finalLocalID = new int [numberOfUsers];
 		System.arraycopy(localID, 0, finalLocalID, 0, numberOfUsers);
 		int counterAdmins = 0;
 
 		for (int i = 0; i < numberOfUsers; i++) {
 			if (finalLocalTypeAccount[i].equals("R")) {
-				admins [counterAdmins]  = new AdministratorAccount(finalLocalUserName[i], finalLocalPassword[i],  finalLocalID[i], finalLocalTypeAccount[i]);
+				admins [counterAdmins]  = new AdministratorAccount(finalLocalUserName [i], finalLocalPassword [i],  finalLocalID [i], finalLocalTypeAccount [i]);
 				counterAdmins ++;
 			}
 		}
-
 		return admins;
 	}
 
@@ -93,18 +91,18 @@ public class AdministratorAccount extends UserAccount {
 		 * This method removes a certain user from Pay-Up
 		 */		
 		int numUser = 0;
-		String[] localUserName = new String[100];
-		String[] localPassword= new String[100];
-		String[] localTypeAccount = new String[100];
-		int[] localID = new int[100];
-		
+		String [] localUserName = new String [100];
+		String [] localPassword= new String [100];
+		String [] localTypeAccount = new String [100];
+		int [] localID = new int [100];
+
 		System.out.println("");
 		System.out.println("The list of users on PayUp");
 		System.out.println("--------------------------------------------------------------------");
 
-		int numUser = UserAccount.readfile1();
-		
-		UserAccount[] tempUserObjects = UserAccount.createAllUsers(); 
+		numUser = UserAccount.readUserNumber();
+
+		UserAccount [] tempUserObjects = UserAccount.createAllUsers(); 
 
 		System.out.println("User ID \t\t User Name");
 		for(int k = 0; k < numUser; k++) {
@@ -112,15 +110,15 @@ public class AdministratorAccount extends UserAccount {
 		}
 		try {
 			String sCurrentLine;
-			String[] uCurrent = new String [4];
+			String [] uCurrent = new String [4];
 			BufferedReader myFile = new BufferedReader (new FileReader("User_database.txt")); 
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				localUserName[numUser] = uCurrent[0];
-				localPassword[numUser] = uCurrent[1];
-				localTypeAccount[numUser] = uCurrent[2];
-				localID[numUser] = Integer.parseInt(uCurrent[3]);
+				localUserName [numUser] = uCurrent [0];
+				localPassword [numUser] = uCurrent [1];
+				localTypeAccount[numUser] = uCurrent [2];
+				localID [numUser] = Integer.parseInt(uCurrent [3]);
 
 				numUser++;
 			}
@@ -129,53 +127,51 @@ public class AdministratorAccount extends UserAccount {
 			System.out.println("This file does not exist");
 		}
 
-		String[] finalLocalUserName = new String[numUser];
+		String [] finalLocalUserName = new String [numUser];
 		System.arraycopy(localUserName, 0, finalLocalUserName, 0, numUser);
-		String[] finalLocalPassword = new String[numUser];
+		String [] finalLocalPassword = new String [numUser];
 		System.arraycopy(localPassword, 0, finalLocalPassword, 0, numUser);
-		String[] finalLocalTypeAccount = new String[numUser];
+		String [] finalLocalTypeAccount = new String [numUser];
 		System.arraycopy(localTypeAccount, 0, finalLocalTypeAccount, 0, numUser);
-		int[] finalLocalID = new int[numUser];
+		int [] finalLocalID = new int [numUser];
 		System.arraycopy(localID, 0, finalLocalID, 0, numUser);
 
 		//removing the user from PayUp
 		System.out.println("");
 		System.out.println("Enter the User ID you wish to remove: ");
 		int localRemovedUser = InterfaceClass.getAnInteger();
-		
-		
+
 		if (localRemovedUser > numUser) {
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("This User does not exist");
-		System.out.println("You will be redirected to the User Interface");
-		System.out.println("--------------------------------------------------------------------");
-		new InterfaceClass();
-		}else {
-		System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
-		String confirm = userInput2.nextLine();
-		System.out.println(confirm);
-		
-		if(confirm.equals("Y")) {
-		try {
-			PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",false)));
-			for (int i = 0; i < numUser; i++) {
-				if (i == localRemovedUser) {
-					wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + finalLocalID[i]);
-					System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
-				} else {
-					wr.println(finalLocalUserName[i] + "\t" + finalLocalPassword[i] + "\t" +  finalLocalTypeAccount[i] + "\t" + finalLocalID[i]);	
-					break;	
-				}
-				
-		}
-		wr.close();
-		}catch (IOException e) {
-			System.out.println("I/O error when writing on file");
-		}
-		}else {
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("This User does not exist");
 			System.out.println("You will be redirected to the User Interface");
+			System.out.println("--------------------------------------------------------------------");
 			new InterfaceClass();
+		}else {
+			System.out.println("Are you sure? Deleting users is permanent and the user will not be able to login anymore (Y/N)");
+			String confirm = userInput2.nextLine();
+			System.out.println(confirm);
+
+			if(confirm.equals("Y")) {
+				try {
+					PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("User_database.txt",false)));
+					for (int i = 0; i < numUser; i++) {
+						if (i == localRemovedUser) {
+							wr.println("N/A" + "\t" + "N/A" + "\t" + "N/A" + "\t" + finalLocalID[i]);
+							System.out.println("You have successfully deleted the User ID:" + localRemovedUser);
+						} else {
+							wr.println(finalLocalUserName [i] + "\t" + finalLocalPassword [i] + "\t" +  finalLocalTypeAccount [i] + "\t" + finalLocalID [i]);	
+							break;	
+						}
+					}
+					wr.close();
+				}catch (IOException e) {
+					System.out.println("I/O error when writing on file");
+				}
+			}else {
+				System.out.println("You will be redirected to the User Interface");
+				new InterfaceClass();
+			}
 		}
-	}
 	}
 }
