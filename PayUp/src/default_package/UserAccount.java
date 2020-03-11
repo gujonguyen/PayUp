@@ -90,6 +90,11 @@ public class UserAccount {
 
 		// If the role of the user is equal to A, a, Admin etc., then the user will create an Admin account using the 
 		// secret Admin code
+	
+		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") || typeOfAccount.equals("regular") || typeOfAccount.equals("A") || typeOfAccount.equals("a")|| typeOfAccount.equals("Admin")|| typeOfAccount.equals("admin") 
+				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("administrator")) {
+			//if a user is registering as an admin, it needs to input special admin access code in order to register as an admin
+
 		if (typeOfAccount.equals("A") || typeOfAccount.equals("a") || typeOfAccount.equals("Adminstrator") 
 				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("admin") || typeOfAccount.equals("Admin")) {
 			System.out.println("Enter a unique admin code in order to register as an Admin: ");
