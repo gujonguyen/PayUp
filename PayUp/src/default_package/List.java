@@ -281,15 +281,15 @@ public class List {
 	}
 
 	public static void deleteList() {
-		/*
+			/*
 		This method allows the users to delete existing Lists 
 		 */
 
 		// Declaring all necessary variables
 		int lineNumber = 0;
-		String [] c1 = new String [100];
-		String[] c2 = new String [100];
-		int [] c3 = new int [100];
+		String[] listName = new String[100];
+		String[] participants = new String[100];
+		int[] listID = new int[100];
 		String [] status = new String [100];
 
 		// Asking for user input
@@ -307,11 +307,11 @@ public class List {
 			while ((sCurrentLine = myFile.readLine()) != null) {
 				uCurrent = sCurrentLine.split("\t");
 
-				c1 [lineNumber] = uCurrent [0];
-				c2 [lineNumber] = uCurrent [1];
-				c3 [lineNumber] = Integer.parseInt(uCurrent [2]);
-				status[lineNumber] = uCurrent [3];
-
+				listName [lineNumber] = uCurrent [0];
+				participants [lineNumber] = uCurrent [1];
+				listID [lineNumber] = Integer.parseInt(uCurrent [2]);
+				status [lineNumber] = uCurrent [3];
+				
 				lineNumber++;
 			}
 			myFile.close(); 
@@ -319,12 +319,12 @@ public class List {
 			System.out.println("This file does not exist");
 		}
 
-		String [] finalc1 = new String [lineNumber];
-		System.arraycopy(c1, 0, finalc1, 0, lineNumber);
-		String [] finalc2 = new String [lineNumber];
-		System.arraycopy(c2, 0, finalc2, 0, lineNumber);
-		int [] finalc3 = new int [lineNumber];
-		System.arraycopy(c3, 0, finalc3, 0, lineNumber);
+		String [] finalListName = new String [lineNumber];
+		System.arraycopy(listName, 0, finalListName, 0, lineNumber);
+		String [] finalParticipants = new String [lineNumber];
+		System.arraycopy(participants, 0, finalParticipants, 0, lineNumber);
+		int [] finalListID = new int [lineNumber];
+		System.arraycopy(listID, 0, finalListID, 0, lineNumber);
 		String [] finalStatus = new String [lineNumber];
 		System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
@@ -335,29 +335,23 @@ public class List {
 				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
 				for (int i = 0; i < lineNumber; i++) {
 					if (i == viewList) {
-						wr.println("N/A" + "\t" + "N/A" + "\t" + finalc3[i] + "\t" + "N/A");
+						wr.println("N/A" + "\t" + "N/A" + "\t" + finalListID[i] + "\t" + "N/A");
 					} else {
-						wr.println(finalc1 [i] + "\t" + finalc2 [i] + "\t" + finalc3 [i] + "\t" + finalStatus [i]);
+						wr.println(finalListName [i] + "\t" + finalParticipants [i] + "\t" + finalListID [i] + "\t" + finalStatus [i]);
 					}
 				}
 				wr.close();
 
 			}catch (IOException e) {
 				System.out.println("I/O error when writing on file");
-			}
-			System.out.println("--------------------------------------------------------------------");	
-			System.out.println("The list is deleted");
-			System.out.println("You are now redirected to the main menu.");
-			System.out.println("--------------------------------------------------------------------");
-			new InterfaceClass();
-		}
-		else {
-			System.out.println("--------------------------------------------------------------------");
-			System.out.println("List was not deleted. You will now be redirected to the main menu");
-			System.out.println("--------------------------------------------------------------------");
-			new InterfaceClass();
-		}
+			}	
+		}System.out.println("--------------------------------------------------------------------");	
+		System.out.println("The list is deleted");
+		System.out.println("You are now redirected to the main menu.");
+		System.out.println("--------------------------------------------------------------------");
+		new InterfaceClass();
 	}
+	
 	public static int readListNumber() {
 		/*
 		this method returns how many expenses have been logged.
