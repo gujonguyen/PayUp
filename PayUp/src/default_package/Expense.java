@@ -327,113 +327,121 @@ public class Expense {
 		System.out.println("--------------------------------------------------------------------");
 		int settledList = InterfaceClass.getAnInteger();
 
-		//Splitting the participants of a certain list based on comma
-		//The first User ID is always the one who created that list
-		sCurrentLine = temp4[settledList].participants;
-		uCurrent = sCurrentLine.split(",");
-		for (int k = 0; k < 2; k++) {
-			participantsInList[k] = Integer.parseInt(uCurrent[k]);
-		}
-		int finalParticipantsInList [] = new int[2];
-		System.arraycopy(participantsInList, 0, finalParticipantsInList, 0, 2);
+		if (settledList > numLists) {
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("Invalid list ID");
+			System.out.println("You will be redirected to the User Interface");
+			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
 
-		// Checking if the Logged in User is indeed part of the list that he or she wants to settle
-		for (int j = 0;  j < 2; j++ ) {
-			if (loggedUserIDl == finalParticipantsInList[j]) {
-				localBoolean = true ;
-			}else {
-
+			//Splitting the participants of a certain list based on comma
+			//The first User ID is always the one who created that list
+			sCurrentLine = temp4[settledList].participants;
+			uCurrent = sCurrentLine.split(",");
+			for (int k = 0; k < 2; k++) {
+				participantsInList[k] = Integer.parseInt(uCurrent[k]);
 			}
-		}
+			int finalParticipantsInList [] = new int[2];
+			System.arraycopy(participantsInList, 0, finalParticipantsInList, 0, 2);
 
-		// If the logged in user is part of the list then the following block of code is executed
+			// Checking if the Logged in User is indeed part of the list that he or she wants to settle
+			for (int j = 0;  j < 2; j++ ) {
+				if (loggedUserIDl == finalParticipantsInList[j]) {
+					localBoolean = true ;
+				}else {
 
-		if (localBoolean == true) {
+				}
+			}
 
-			//this checks if the list is already settled and sends you back to this method when that is the case
-			if (temp4[settledList].status.equals("Settled")) {
+			// If the logged in user is part of the list then the following block of code is executed
+
+			if (localBoolean == true) {
+
+				//this checks if the list is already settled and sends you back to this method when that is the case
+				if (temp4[settledList].status.equals("Settled")) {
+					System.out.println("--------------------------------------------------------------------");
+					System.out.println("This list is already settled please choose a different ListID");
+					System.out.println("--------------------------------------------------------------------");
+					createIndividualBalance(loggedUserIDl);
+
+
+					// If the list is not yet settled the following lines of code are executed
+
+				}else {
+
+					//In order to overwrite the List database we first need to read the database and parse it to arrays
+
+					try {
+
+						BufferedReader br = new BufferedReader (new FileReader ("List_database.txt"));
+
+						while ((sCurrentLine2 = br.readLine()) != null) {
+							uCurrentLine = sCurrentLine2.split("\t");
+							listName[numLists] = uCurrentLine[0];
+							participants[numLists] = uCurrentLine[1];
+							listID[numLists] = Integer.parseInt(uCurrentLine[2]);
+							status[numLists] = uCurrentLine[3];
+							numLists++;
+						}
+
+						br.close();
+					} catch (IOException e) {
+						System.out.println("The file does not exist");
+					}
+
+					String [] finalListName = new String [numLists];
+					System.arraycopy(listName, 0, finalListName, 0, numLists);
+					String [] finalParticipants = new String [numLists];
+					System.arraycopy(participants, 0, finalParticipants, 0, numLists);
+					int [] finalListID = new int [numLists];
+					System.arraycopy(listID, 0, finalListID, 0, numLists);
+					String [] finalStatus = new String[numLists];
+					System.arraycopy(status, 0, finalStatus, 0, numLists);
+
+					System.out.println("Are you sure? Settling a List cannot be undone (Y/N)");
+					String confirm = userInput2.nextLine();
+
+					if(confirm.equals("Y")) {
+						try {
+							PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
+							for (int i = 0; i < numLists; i++) {
+								if (i == settledList) {
+									wr.println(finalListName[i] + "\t" + finalParticipants[i] + "\t" + finalListID[i] + "\t" + "Settled");
+								}else {
+									wr.println(finalListName[i] + "\t" + finalParticipants[i] + "\t" + finalListID[i] + "\t" + finalStatus[i]);	
+								}
+							}
+							wr.close();
+
+						}catch (IOException e) {
+							System.out.println("I/O error when writing on file");
+						}
+						double amount = individualBalanceForSettledLists(loggedUserIDl, settledList);
+
+						System.out.println("--------------------------------------------------------------------");
+						System.out.println("This List is succesfully Settled!");
+						if (amount < 0) {
+							System.out.printf("You owe:" + "%.2f \n", amount);
+						}else {
+							System.out.printf("You are owed: " + "%.2f \n", amount);
+						}
+						System.out.println("--------------------------------------------------------------------");
+						//if user chooses N then the following lines of code are executed
+					}else {
+						System.out.println("--------------------------------------------------------------------");
+						System.out.println("You will now be redirected to the main menu");
+						System.out.println("--------------------------------------------------------------------");
+						new InterfaceClass();
+					}
+				}
+
+				//If a user has not got acces to the list the following lines are executed
+			}else {
 				System.out.println("--------------------------------------------------------------------");
-				System.out.println("This list is already settled please choose a different ListID");
+				System.out.println("You do not have acces to this list, please input a different List ID");
 				System.out.println("--------------------------------------------------------------------");
 				createIndividualBalance(loggedUserIDl);
-
-
-				// If the list is not yet settled the following lines of code are executed
-
-			}else {
-
-				//In order to overwrite the List database we first need to read the database and parse it to arrays
-
-				try {
-
-					BufferedReader br = new BufferedReader (new FileReader ("List_database.txt"));
-
-					while ((sCurrentLine2 = br.readLine()) != null) {
-						uCurrentLine = sCurrentLine2.split("\t");
-						listName[numLists] = uCurrentLine[0];
-						participants[numLists] = uCurrentLine[1];
-						listID[numLists] = Integer.parseInt(uCurrentLine[2]);
-						status[numLists] = uCurrentLine[3];
-						numLists++;
-					}
-
-					br.close();
-				} catch (IOException e) {
-					System.out.println("The file does not exist");
-				}
-
-				String [] finalListName = new String [numLists];
-				System.arraycopy(listName, 0, finalListName, 0, numLists);
-				String [] finalParticipants = new String [numLists];
-				System.arraycopy(participants, 0, finalParticipants, 0, numLists);
-				int [] finalListID = new int [numLists];
-				System.arraycopy(listID, 0, finalListID, 0, numLists);
-				String [] finalStatus = new String[numLists];
-				System.arraycopy(status, 0, finalStatus, 0, numLists);
-
-				System.out.println("Are you sure? Settling a List cannot be undone (Y/N)");
-				String confirm = userInput2.nextLine();
-
-				if(confirm.equals("Y")) {
-					try {
-						PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
-						for (int i = 0; i < numLists; i++) {
-							if (i == settledList) {
-								wr.println(finalListName[i] + "\t" + finalParticipants[i] + "\t" + finalListID[i] + "\t" + "Settled");
-							}else {
-								wr.println(finalListName[i] + "\t" + finalParticipants[i] + "\t" + finalListID[i] + "\t" + finalStatus[i]);	
-							}
-						}
-						wr.close();
-
-					}catch (IOException e) {
-						System.out.println("I/O error when writing on file");
-					}
-					double amount = individualBalanceForSettledLists(loggedUserIDl, settledList);
-
-					System.out.println("--------------------------------------------------------------------");
-					System.out.println("This List is succesfully Settled!");
-					if (amount < 0) {
-						System.out.printf("You owe:" + "%.2f \n", amount);
-					}else {
-						System.out.printf("You are owed: " + "%.2f \n", amount);
-					}
-					System.out.println("--------------------------------------------------------------------");
-					//if user chooses N then the following lines of code are executed
-				}else {
-					System.out.println("--------------------------------------------------------------------");
-					System.out.println("You will now be redirected to the main menu");
-					System.out.println("--------------------------------------------------------------------");
-					new InterfaceClass();
-				}
 			}
-
-			//If a user has not got acces to the list the following lines are executed
-		}else {
-			System.out.println("--------------------------------------------------------------------");
-			System.out.println("You do not have acces to this list, please input a different List ID");
-			System.out.println("--------------------------------------------------------------------");
-			createIndividualBalance(loggedUserIDl);
 		}
 	}
 
