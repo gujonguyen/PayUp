@@ -345,8 +345,11 @@ public class Expense {
 		for (int j = 0;  j < 2; j++ ) {
 			if (loggedUserIDl == finalParticipantsInList[j]) {
 				localBoolean = true ;
-			}else {
-
+			}else { 	
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("List was not settled. You will now be redirected to the main menu");
+			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
 			}
 		}
 
@@ -507,4 +510,6 @@ public class Expense {
 		}
 		return numExpenses;
 	}
+
+
 }
