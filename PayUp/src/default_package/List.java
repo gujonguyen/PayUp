@@ -206,7 +206,7 @@ public class List {
 		int finalParticipantsInList [] = new int [2];
 		System.arraycopy(participantsInList, 0, finalParticipantsInList, 0, 2);
 
-		//This checks if a user has acces to a certain List
+		//This checks if a user has access to a certain List
 		for (int j = 0;  j < 2; j++ ) {
 			if (loggedUserIDl == finalParticipantsInList[j]) {
 				localBoolean2 = true ;
