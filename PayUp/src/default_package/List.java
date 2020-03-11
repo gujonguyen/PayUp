@@ -369,6 +369,7 @@ public class List {
 		}
 		return numLists;
 	}
+	
 	public String getUserName(int userIDc) {
 		/*
 		This method gets the User Name for a certain User ID
