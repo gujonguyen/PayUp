@@ -195,13 +195,6 @@ public class List {
 		System.out.println("What is the list ID of the list that you want to view? ");
 		int viewList = InterfaceClass.getAnInteger();
 
-		if (viewList > lineNumber) {
-			System.out.println("--------------------------------------------------------------------");
-			System.out.println("Invalid list ID");
-			System.out.println("You will be redirected to the User Interface");
-			System.out.println("--------------------------------------------------------------------");
-			new InterfaceClass();
-
 			List [] tempListObject = List.createLists();
 
 			//This creates an array of all people that are part of a list
@@ -286,7 +279,7 @@ public class List {
 				viewList(loggedUserIDl);
 			}
 		}
-	}
+	
 
 	public static void deleteList() {
 		/*
