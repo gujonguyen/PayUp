@@ -74,12 +74,18 @@ public class UserAccount {
 	}
 
 	public UserAccount() {
-		// This empty constructor is recalled using the super() method in the extended constructors
-	}
+	/*
+	 * This empty constructor is recalled using the super() method in the extended
+	 * constructors }
+	 */
 
 	protected static void register() {	
-		// This method gets the user name and password from the user for the registration of a new user
-
+		
+		/*
+		 * This method gets the user name and password from the user for the
+		 * registration of a new user
+		 */
+		
 		Boolean localBoolean = true;
 		noOfUsers = readUserNumber();
 		System.out.println("--------------------------------------------------------------------");	
@@ -88,8 +94,7 @@ public class UserAccount {
 		System.out.println("Are you registering as a (R) Regular or an (A) Administrator?");
 		String typeOfAccount = userInput2.nextLine();
 
-		// If the role of the user is equal to A, a, Admin etc., then the user will create an Admin account using the 
-		// secret Admin code
+		//This if-statement will do the registration for user that want to registers as a regular account
 		if (typeOfAccount.equals("R") || typeOfAccount.equals("r") || typeOfAccount.equals("Regular") 
 				|| typeOfAccount.equals("regular") || typeOfAccount.equals("Reg") || 
 				typeOfAccount.equals("reg")) {
@@ -131,7 +136,10 @@ public class UserAccount {
 				register();	
 			}
 		}
-
+		/*
+		 * This else if statement does the registrations for admins. The user will have
+		 * to enter an admin code to successfully do the registration
+		 */
 		else if (typeOfAccount.equals("A") || typeOfAccount.equals("a") || typeOfAccount.equals("Adminstrator") 
 				|| typeOfAccount.equals("Administrator") || typeOfAccount.equals("admin") || typeOfAccount.equals("Admin")) {
 			System.out.println("Enter a unique admin code in order to register as an Admin: ");
@@ -177,13 +185,13 @@ public class UserAccount {
 					System.out.println("--------------------------------------------------------------------");
 					register();	
 				}
-			}else { 
+			}else {	//The user gets directed to this else-statement if the admin code is invalid 
 				System.out.println("");
 				System.out.println("Please enter a valid admin code. Try again. (Hint: professor ....)");
 				register();
 			}
 		}
-		else { 
+		else {	//This is to prevent non-existing type of accounts  
 			System.out.println("--------------------------------------------------------------------");
 			System.out.println("Please enter a valid type of account. Try again:");
 			System.out.println("--------------------------------------------------------------------");
