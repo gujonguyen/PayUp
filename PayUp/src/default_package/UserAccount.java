@@ -76,8 +76,9 @@ public class UserAccount {
 	public UserAccount() {
 	/*
 	 * This empty constructor is recalled using the super() method in the extended
-	 * constructors }
+	 * constructors 
 	 */
+	}
 
 	protected static void register() {	
 		
