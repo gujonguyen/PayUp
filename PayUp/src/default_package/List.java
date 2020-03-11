@@ -281,7 +281,7 @@ public class List {
 	}
 
 	public static void deleteList() {
-			/*
+		/*
 		This method allows the users to delete existing Lists 
 		 */
 
@@ -291,13 +291,6 @@ public class List {
 		String[] participants = new String[100];
 		int[] listID = new int[100];
 		String [] status = new String [100];
-
-		// Asking for user input
-		System.out.println("Enter the list ID of the list you want to delete.");
-		int viewList = InterfaceClass.getAnInteger();
-		System.out.println("Are you sure? Deleting lists is permanent and you will no longer be able to add expenses to it? (Y/N)");
-		String confirm = userInput2.nextLine();
-
 
 		// Reading the List_database file
 		try {
@@ -311,7 +304,7 @@ public class List {
 				participants [lineNumber] = uCurrent [1];
 				listID [lineNumber] = Integer.parseInt(uCurrent [2]);
 				status [lineNumber] = uCurrent [3];
-				
+
 				lineNumber++;
 			}
 			myFile.close(); 
@@ -328,28 +321,46 @@ public class List {
 		String [] finalStatus = new String [lineNumber];
 		System.arraycopy(status, 0, finalStatus, 0, lineNumber);
 
-		//When the user confirms that he wants to delete the list, the list with the 
-		//list ID that was previously indicated gets deleted
-		if(confirm.equals("Y")) {
-			try {
-				PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
-				for (int i = 0; i < lineNumber; i++) {
-					if (i == viewList) {
-						wr.println("N/A" + "\t" + "N/A" + "\t" + finalListID[i] + "\t" + "N/A");
-					} else {
-						wr.println(finalListName [i] + "\t" + finalParticipants [i] + "\t" + finalListID [i] + "\t" + finalStatus [i]);
-					}
-				}
-				wr.close();
+		// Asking for user input to remove from the user lists
+		System.out.println("");
+		System.out.println("Enter the List ID you wish to remove: ");
+		int localRemovedList = InterfaceClass.getAnInteger();
 
-			}catch (IOException e) {
-				System.out.println("I/O error when writing on file");
-			}	
-		}System.out.println("--------------------------------------------------------------------");	
-		System.out.println("The list is deleted");
-		System.out.println("You are now redirected to the main menu.");
-		System.out.println("--------------------------------------------------------------------");
-		new InterfaceClass();
+		if (localRemovedList > lineNumber) {
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("This List does not exist");
+			System.out.println("You will be redirected to the User Interface");
+			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
+		}else {
+			System.out.println("Are you sure? Deleting the list is permanent (Y/N)");
+			String confirm = userInput2.nextLine();
+			System.out.println(confirm);
+
+
+			//When the user confirms that he wants to delete the list, the list with the 
+			//list ID that was previously indicated gets deleted
+			if(confirm.equals("Y")) {
+				try {
+					PrintWriter wr = new PrintWriter( new BufferedWriter(new FileWriter("List_database.txt",false)));
+					for (int i = 0; i < lineNumber; i++) {
+						if (i == localRemovedList) {
+							wr.println("N/A" + "\t" + "N/A" + "\t" + finalListID[i] + "\t" + "N/A");
+						} else {
+							wr.println(finalListName [i] + "\t" + finalParticipants [i] + "\t" + finalListID [i] + "\t" + finalStatus [i]);
+						}
+					}
+					wr.close();
+
+				}catch (IOException e) {
+					System.out.println("I/O error when writing on file");
+				}	
+			}System.out.println("--------------------------------------------------------------------");	
+			System.out.println("The list is deleted");
+			System.out.println("You are now redirected to the main menu.");
+			System.out.println("--------------------------------------------------------------------");
+			new InterfaceClass();
+		}
 	}
 	
 	public static int readListNumber() {
